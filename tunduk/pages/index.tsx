@@ -13,7 +13,7 @@ export default function Home() {
         />
       </Head>
       <Box>
-        <Text>helo</Text>
+        <Text>Home</Text>
       </Box>
     </>
   );
