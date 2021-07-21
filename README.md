@@ -1,7 +1,7 @@
 # It's Doggo Time
 
 <p align="center">
-  <strong>:dog2: Doggo </strong>
+  <strong>:dog2: :rocket: :full_moon:</strong>
 </p>
 
 ---
