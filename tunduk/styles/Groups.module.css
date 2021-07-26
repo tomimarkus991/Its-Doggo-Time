@@ -1,0 +1,4 @@
+.groups {
+  scrollbar-width: 'auto'; /* "auto" or "thin" */
+  scrollbar-color: dark; /* scroll thumb and track */
+}

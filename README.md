@@ -1,6 +1,6 @@
 # It's Doggo Time
 
-<p align="center">
+<p alignItems="center">
   <strong>:dog2: :rocket: :full_moon:</strong>
 </p>
 
@@ -10,7 +10,6 @@
 
 |     Codebase     | Description |
 | :--------------: | :---------: |
-| [hookus](hookus) | Graphql API |
 | [tunduk](tunduk) |   Web App   |
 
 ## Branches
