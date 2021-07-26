@@ -12,15 +12,17 @@ export const GroupCard: React.FC<Props> = ({ group }) => {
   return (
     <Box>
       <RouterLink to={`/group/${group.id}`}>
-        <Flex alignItems="center" flexDirection="column">
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Avatar
             src={group.avatar_url}
             size="xl"
-            icon={<GroupProfileIcon fontSize="5rem" />}
+            icon={<GroupProfileIcon fontSize="6.1rem" />}
           />
-          <Text fontSize={28} ml="2">
-            {group.group_name}
-          </Text>
+          <Text fontSize={28}>{group.group_name}</Text>
         </Flex>
       </RouterLink>
     </Box>
