@@ -38,8 +38,6 @@ export const Groups: React.FC<Props> = ({ userGroups }) => {
       justifyContent="center"
       mb="1em"
       overflow="hidden"
-      border="1px"
-      borderColor="black"
     >
       <Flex justifyContent="center" alignItems="center" overflow="hidden">
         {userGroups ? (
