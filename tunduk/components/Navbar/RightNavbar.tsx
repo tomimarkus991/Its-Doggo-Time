@@ -1,19 +1,17 @@
-import { Button, HStack, useColorMode } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Box } from '@chakra-ui/react';
+import { DoggoLight } from '../Icons/LightMode';
 
 export const RightNavbar: React.FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const { session } = useContext(AuthContext);
+
   return (
-    <HStack>
-      <Button colorScheme="teal">
-        <NextLink href="register">Register</NextLink>
-      </Button>
-      <Button colorScheme="teal">
-        <NextLink href="login">Login</NextLink>
-      </Button>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
-    </HStack>
+    <Box>
+      <DoggoLight />
+      {/* {session ? null : (
+        <RouterLink to="/login">
+          <Button colorScheme="teal">Login</Button>
+        </RouterLink>
+      )} */}
+    </Box>
   );
 };

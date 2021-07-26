@@ -1,14 +1,17 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const LeftNavbar: React.FC = () => {
+  const color = useColorModeValue('beez.800', 'white');
   return (
-    <Flex>
-      <Box cursor="pointer">
-        <NextLink href="/">
-          <Text>It's Doggo Time</Text>
-        </NextLink>
-      </Box>
-    </Flex>
+    <Box>
+      <RouterLink to="/">
+        <Box cursor="pointer">
+          <Text fontSize={70} color={color}>
+            It's Doggo Time
+          </Text>
+        </Box>
+      </RouterLink>
+    </Box>
   );
 };
