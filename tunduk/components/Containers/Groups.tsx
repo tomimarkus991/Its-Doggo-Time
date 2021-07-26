@@ -1,14 +1,31 @@
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
-import React from 'react';
-import styles from '../../styles/Groups.module.css';
+import React, { useEffect, useState } from 'react';
 import { GroupType } from '../../types';
 import { GroupCard } from '../Cards';
+import { DogPawn } from '../Icons/LightMode';
 
 interface Props {
   userGroups: GroupType[] | undefined;
 }
 
 export const Groups: React.FC<Props> = ({ userGroups }) => {
+  const [paws, setPaws] = useState<string[]>();
+  useEffect(() => {
+    let getPaws = () => {
+      let max = 6;
+      if (!userGroups) return;
+      const _paws = max - userGroups.length;
+
+      let dogPawns: string[] = [];
+
+      for (let i = 1; i <= _paws; i++) {
+        dogPawns.push('paw');
+      }
+      setPaws(dogPawns);
+    };
+    getPaws();
+  }, [userGroups]);
+
   return (
     <Flex
       boxShadow="lg"
@@ -22,7 +39,7 @@ export const Groups: React.FC<Props> = ({ userGroups }) => {
       mb="1em"
       overflow="hidden"
     >
-      <Box className={styles.groups} m="auto" h="81%">
+      <Flex justifyContent="center" alignItems="center" overflow="hidden">
         {userGroups ? (
           <SimpleGrid columns={3} spacing={10}>
             {userGroups.map((group: GroupType, index: number) => (
@@ -30,11 +47,23 @@ export const Groups: React.FC<Props> = ({ userGroups }) => {
                 <GroupCard group={group} />
               </Box>
             ))}
+            {paws?.map((_, index: number) => (
+              <Box key={index}>
+                <DogPawn />
+              </Box>
+            ))}
           </SimpleGrid>
         ) : (
-          <Text>You have no groups</Text>
+          <SimpleGrid columns={3} spacing={10}>
+            <DogPawn />
+            <DogPawn />
+            <DogPawn />
+            <DogPawn />
+            <DogPawn />
+            <DogPawn />
+          </SimpleGrid>
         )}
-      </Box>
+      </Flex>
     </Flex>
   );
 };
