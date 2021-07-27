@@ -13,10 +13,10 @@ interface Props {}
 const CreateGroup: React.FC<Props> = () => {
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
+  const [user] = useState<User | null>(supabase.auth.user());
   const history = useHistory();
 
   const createGroup = async () => {
-    const user: User | null = supabase.auth.user();
     try {
       const updates = {
         group_name,

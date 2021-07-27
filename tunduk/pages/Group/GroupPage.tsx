@@ -1,6 +1,5 @@
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import {
-  Button,
   ButtonGroup,
   Center,
   Flex,
@@ -9,30 +8,19 @@ import {
   HStack,
   IconButton,
   Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Spacer,
-  useColorMode,
-  useDisclosure,
 } from '@chakra-ui/react';
-import {
-  faMoon,
-  faSun,
-  faUser,
-  faUsers,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Avatar, AvatarUpload, Name } from '../../components/Account';
-import { Chats } from '../../components/Containers';
-import { GroupProfileIcon } from '../../components/Icons/Profile/GroupProfileIcon';
+import { useParams } from 'react-router-dom';
+import { Name } from '../../components/Account';
+import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
+import { ChatsContainer } from '../../components/Containers';
+import {
+  MembersLink,
+  MyGroupsLink,
+  ProfileLink,
+} from '../../components/Links';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -46,11 +34,10 @@ const GroupPage: React.FC = () => {
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
   const [creator_id, setCreatorId] = useState<StringOrUndefined>();
-
+  const [user] = useState<User | null>(supabase.auth.user());
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
 
-  const user: User | null = supabase.auth.user();
   const fetchGroupData = async () => {
     try {
       let { data, error } = await supabase
@@ -79,9 +66,6 @@ const GroupPage: React.FC = () => {
       alert(error.message);
     }
   };
-
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const cancelSave = () => {
     setGroupname(old_group_name);
@@ -156,7 +140,7 @@ const GroupPage: React.FC = () => {
     }
   };
   return (
-    <Center h="100%">
+    <Center>
       <Grid
         templateColumns="1fr"
         templateRows="0.2fr 1fr"
@@ -173,11 +157,7 @@ const GroupPage: React.FC = () => {
                 justifyContent="center"
                 mr="1em"
               >
-                <Avatar
-                  icon={<GroupProfileIcon fontSize="8rem" />}
-                  src={group_avatar_url}
-                  size="2xl"
-                />
+                <AvatarGroup src={group_avatar_url} />
                 {isEditable ? (
                   <AvatarUpload
                     onUpload={(url: string) => {
@@ -199,49 +179,24 @@ const GroupPage: React.FC = () => {
                 <Name title={group_name} textProps={{ ml: '10' }} />
               )}
               {user?.id === creator_id ? <EditableControls /> : null}
-              <Button>
-                <FontAwesomeIcon icon={faUsers} />
-              </Button>
             </HStack>
             <Spacer />
             <HStack alignItems="flex-start">
-              <>
-                <Button onClick={onOpen}>Invites</Button>
-
-                <Modal isOpen={isOpen} onClose={onClose}>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>Invites</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody></ModalBody>
-
-                    <ModalFooter>
-                      <Button colorScheme="blue" mr={3} onClick={onClose}>
-                        Close
-                      </Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </>
-              <Button onClick={toggleColorMode}>
+              {/* <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? (
                   <FontAwesomeIcon icon={faMoon} />
                 ) : (
                   <FontAwesomeIcon icon={faSun} />
                 )}
-              </Button>
-              <Link to="/profile">
-                <IconButton
-                  colorScheme="blue"
-                  aria-label="Profile"
-                  icon={<FontAwesomeIcon icon={faUser} />}
-                />
-              </Link>
+              </Button> */}
+              <MembersLink group_id={id} />
+              <ProfileLink />
+              <MyGroupsLink />
             </HStack>
           </Flex>
         </GridItem>
         <GridItem gridArea="groups" m="auto">
-          <Chats />
+          <ChatsContainer />
         </GridItem>
       </Grid>
     </Center>
