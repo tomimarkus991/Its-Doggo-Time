@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Flex, SimpleGrid } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { GroupType } from '../../types';
 import { GroupCard } from '../Cards';
@@ -8,8 +8,16 @@ interface Props {
   userGroups: GroupType[] | undefined;
 }
 
-export const Groups: React.FC<Props> = ({ userGroups }) => {
+export const GroupsContainer: React.FC<Props> = ({ userGroups }) => {
   const [paws, setPaws] = useState<string[]>();
+  const [defaultPaws] = useState<string[]>([
+    'paw',
+    'paw',
+    'paw',
+    'paw',
+    'paw',
+    'paw',
+  ]);
   useEffect(() => {
     let getPaws = () => {
       let max = 6;
@@ -49,18 +57,17 @@ export const Groups: React.FC<Props> = ({ userGroups }) => {
             ))}
             {paws?.map((_, index: number) => (
               <Box key={index}>
-                <DogPawn />
+                <DogPawn width="116" height="100" />
               </Box>
             ))}
           </SimpleGrid>
         ) : (
           <SimpleGrid columns={3} spacing={10}>
-            <DogPawn />
-            <DogPawn />
-            <DogPawn />
-            <DogPawn />
-            <DogPawn />
-            <DogPawn />
+            {defaultPaws?.map((_, index: number) => (
+              <Box key={index}>
+                <DogPawn width="116" height="100" />
+              </Box>
+            ))}
           </SimpleGrid>
         )}
       </Flex>
