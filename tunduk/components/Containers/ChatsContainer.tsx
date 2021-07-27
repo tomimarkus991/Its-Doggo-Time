@@ -3,7 +3,7 @@ import React from 'react';
 
 interface Props {}
 
-export const Chats: React.FC<Props> = ({}) => {
+export const ChatsContainer: React.FC<Props> = ({}) => {
   return (
     <Box
       boxShadow="lg"

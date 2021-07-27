@@ -15,33 +15,33 @@ import {
   ModalOverlay,
   Spacer,
   Text,
-  useColorMode,
   useColorModeValue,
   useDisclosure,
+  VStack,
 } from '@chakra-ui/react';
-import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
-import { Link, Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { InviteGroupsType, ProfileType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { Avatar, Name } from '../Account';
+import { Name } from '../Account';
+import { AvatarInvite, AvatarProfile } from '../Avatar';
 import { GradientButton } from '../Buttons';
-import { Groups } from '../Containers';
-import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
-import { UserProfileIcon } from '../Icons/Profile/UserProfileIcon';
+import { GroupsContainer } from '../Containers';
+import { EnvelopeIcon } from '../Icons/LightMode/EnvelopeIcon';
+import { ProfileLink } from '../Links';
 
 const LoggedIn: React.FC = () => {
   const [userInvites, setUserInvites] = useState<InviteGroupsType[]>();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [userData, setUserData] = useState<ProfileType>();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const borderColor = useColorModeValue('gray.800', 'white');
+  const [user] = useState<User | null>(supabase.auth.user());
 
   const fetchUserGroups = async () => {
     try {
-      const user: User | null = supabase.auth.user();
-
       let { data, error } = await supabase
         .from('profiles')
         .select(
@@ -86,7 +86,6 @@ const LoggedIn: React.FC = () => {
   };
 
   const acceptInvite = async (group_id: string, invite_id: string) => {
-    const user: User | null = supabase.auth.user();
     const memberUpdates = {
       profile_id: user?.id,
       group_id,
@@ -106,10 +105,10 @@ const LoggedIn: React.FC = () => {
 
   useEffect(() => {
     fetchUserGroups();
-    fetchInvites();
   }, []);
-
-  const borderColor = useColorModeValue('beez.800', 'white');
+  useEffect(() => {
+    fetchInvites();
+  }, [userData]);
 
   return (
     <Grid
@@ -122,11 +121,7 @@ const LoggedIn: React.FC = () => {
       <GridItem gridArea="main">
         <Flex flexDir="row">
           <Flex alignItems="center">
-            <Avatar
-              src={userData?.avatar_url}
-              size="2xl"
-              icon={<UserProfileIcon fontSize="8.2rem" />}
-            />
+            <AvatarProfile src={userData?.avatar_url as string} />
             <Name title={userData?.username} textProps={{ pl: '1em' }} />
           </Flex>
           <Spacer />
@@ -148,40 +143,89 @@ const LoggedIn: React.FC = () => {
           <Spacer />
           <HStack alignItems="flex-start">
             <Box>
-              <Button onClick={onOpen}>Invites</Button>
+              <IconButton
+                aria-label="Invites"
+                onClick={onOpen}
+                icon={<EnvelopeIcon width="12" height="12" />}
+              >
+                Invites
+              </IconButton>
 
-              <Modal isOpen={isOpen} onClose={onClose}>
+              <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                scrollBehavior="inside"
+              >
                 <ModalOverlay />
                 <ModalContent>
                   <ModalHeader>Invites</ModalHeader>
                   <ModalCloseButton />
-                  <ModalBody>
-                    {userInvites?.map(
-                      (invite: InviteGroupsType, index) => {
-                        return (
-                          <Box key={index}>
-                            <Text>{invite.groups.group_name}</Text>
-                            <Avatar
-                              src={invite.groups.avatar_url}
-                              icon={<GroupProfileIcon fontSize="2rem" />}
-                              size="sm"
-                            />
-                            <Button
-                              onClick={() =>
-                                acceptInvite(invite.groups.id, invite.id)
-                              }
+                  <ModalBody maxH="lg">
+                    {/* @todo make modal body scroll max 2 invites on screen
+                    rest is scrolling */}
+                    <VStack>
+                      {userInvites?.map(
+                        (invite: InviteGroupsType, index) => {
+                          return (
+                            <Box
+                              key={index}
+                              boxSizing="border-box"
+                              border="1px"
+                              borderColor="gray.300"
+                              borderRadius={20}
+                              py="4"
+                              w="full"
                             >
-                              Accept
-                            </Button>
-                            <Button
-                              onClick={() => declineInvite(invite.id)}
-                            >
-                              Decline
-                            </Button>
-                          </Box>
-                        );
-                      },
-                    )}
+                              <Flex
+                                flexDirection="column"
+                                alignItems="center"
+                              >
+                                <AvatarInvite
+                                  src={invite.groups.avatar_url}
+                                />
+                                <Text
+                                  maxW="10.5rem"
+                                  textAlign="center"
+                                  mb={3}
+                                >
+                                  <strong>{invite.sender}</strong> invites
+                                  you to <br /> join group called <br />
+                                  <strong>
+                                    {' '}
+                                    "{invite.groups.group_name}"
+                                  </strong>
+                                </Text>
+                                <HStack spacing="7">
+                                  <IconButton
+                                    aria-label="decline"
+                                    bgColor="red.500"
+                                    icon={
+                                      <FontAwesomeIcon icon={faTimes} />
+                                    }
+                                    onClick={() =>
+                                      declineInvite(invite.id)
+                                    }
+                                  />
+                                  <IconButton
+                                    aria-label="accept"
+                                    bgColor="green.400"
+                                    icon={
+                                      <FontAwesomeIcon icon={faCheck} />
+                                    }
+                                    onClick={() =>
+                                      acceptInvite(
+                                        invite.groups.id,
+                                        invite.id,
+                                      )
+                                    }
+                                  />
+                                </HStack>
+                              </Flex>
+                            </Box>
+                          );
+                        },
+                      )}
+                    </VStack>
                   </ModalBody>
 
                   <ModalFooter>
@@ -192,25 +236,19 @@ const LoggedIn: React.FC = () => {
                 </ModalContent>
               </Modal>
             </Box>
-            <Button onClick={toggleColorMode}>
+            {/* <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? (
                 <FontAwesomeIcon icon={faMoon} />
               ) : (
                 <FontAwesomeIcon icon={faSun} />
               )}
-            </Button>
-            <RouterLink to="/profile">
-              <IconButton
-                colorScheme="blue"
-                aria-label="Profile"
-                icon={<FontAwesomeIcon icon={faUser} />}
-              />
-            </RouterLink>
+            </Button> */}
+            <ProfileLink />
           </HStack>
         </Flex>
       </GridItem>
       <GridItem m="auto">
-        <Groups userGroups={userData?.groups} />
+        <GroupsContainer userGroups={userData?.groups} />
         <Flex justifyContent="flex-end">
           <Link to="/group/create-group">
             <GradientButton>New Doggo Group</GradientButton>

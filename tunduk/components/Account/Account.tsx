@@ -6,13 +6,15 @@ import {
   Button,
   Flex,
 } from '@chakra-ui/react';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
 import { StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { UserProfileIcon } from '../Icons/Profile/UserProfileIcon';
-import { Avatar } from './Avatar';
-import { AvatarUpload } from './AvatarUpload';
+import { AvatarProfile } from '../Avatar';
+import { Avatar } from '../Avatar/Avatar';
+import { AvatarUpload } from '../Avatar/AvatarUpload';
 
 interface Props {}
 
@@ -85,11 +87,7 @@ const Account: React.FC<Props> = () => {
   return (
     <Flex justifyContent="center" alignItems="center" flexDir="column">
       <Box>
-        <Avatar
-          src={avatar_url}
-          size={'2xl'}
-          icon={<UserProfileIcon fontSize="8.2rem" />}
-        />
+        <AvatarProfile src={avatar_url as string} />
         <AvatarUpload
           onUpload={(url: string) => {
             setAvatarUrl(url);

@@ -1,6 +1,6 @@
-import { Icon } from '@chakra-ui/react';
-export const DogPawn: React.FC = () => (
-  <Icon width="116" height="100" viewBox="0 0 116 100">
+import { Icon, IconProps } from '@chakra-ui/react';
+export const DogPawn = (props: IconProps): JSX.Element => (
+  <Icon viewBox="0 0 116 100" {...props}>
     <path
       d="M75.9081 0C83.2281 0 89.1621 7.55578 89.1621 16.8764C89.1621 26.1971 83.2271 33.7529 75.9081 33.7529C68.5891 33.7529 62.6541 26.1971 62.6541 16.8764C62.6541 7.55578 68.5881 0 75.9081 0Z"
       fill="#DDCDBF"

@@ -1,30 +1,30 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
-import { Avatar } from '../Account';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
 import { GroupType } from '../../types';
+import { AvatarCard } from '../Avatar';
 
 interface Props {
   group: GroupType;
 }
 export const GroupCard: React.FC<Props> = ({ group }) => {
+  const { id, group_name, avatar_url } = group;
   return (
     <Box>
-      <RouterLink to={`/group/${group.id}`}>
+      <Link to={`/group/${id}`}>
         <Flex
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >
-          <Avatar
-            src={group.avatar_url}
-            size="xl"
-            icon={<GroupProfileIcon fontSize="6.1rem" />}
+          <AvatarCard
+            src={avatar_url}
+            icon={<GroupProfileIcon fontSize="5rem" />}
           />
-          <Text fontSize={28}>{group.group_name}</Text>
+          <Text fontSize={28}>{group_name}</Text>
         </Flex>
-      </RouterLink>
+      </Link>
     </Box>
   );
 };

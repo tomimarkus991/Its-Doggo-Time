@@ -1,4 +1,9 @@
-import { Avatar as ChakraAvatar, Box, TextProps } from '@chakra-ui/react';
+import {
+  Avatar as ChakraAvatar,
+  Box,
+  TextProps,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import {
   AvatarIconType,
@@ -6,6 +11,7 @@ import {
   StringOrUndefined,
 } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
+import styles from '../../styles/AvatarGrad.module.css';
 
 interface Props {
   src: StringOrUndefined;
@@ -13,14 +19,15 @@ interface Props {
   icon: AvatarIconType;
   textProps?: TextProps;
 }
+
 export const Avatar: React.FC<Props> = ({
   src,
   size,
   icon,
   textProps,
 }) => {
-  const [avatarUrl, setAvatarUrl] = useState<StringOrUndefined>(null);
-
+  const [avatarUrl, setAvatarUrl] = useState<StringOrUndefined>();
+  const avatarBackgroundColor = useColorModeValue('white', 'gray.800');
   useEffect(() => {
     if (src) downloadImage(src);
   }, [src]);
@@ -42,9 +49,20 @@ export const Avatar: React.FC<Props> = ({
   return (
     <Box {...textProps}>
       {avatarUrl ? (
-        <ChakraAvatar icon={icon} size={size} src={avatarUrl} />
+        <ChakraAvatar
+          icon={icon}
+          size={size}
+          src={avatarUrl}
+          bgColor={avatarBackgroundColor}
+        />
       ) : (
-        <ChakraAvatar icon={icon} size={size} />
+        <ChakraAvatar
+          className={styles.avatarGrad}
+          icon={icon}
+          size={size}
+          bgColor={avatarBackgroundColor}
+          bgGradient="linear(to-l, #ddcdbf, #fbf0e5)"
+        />
       )}
     </Box>
   );

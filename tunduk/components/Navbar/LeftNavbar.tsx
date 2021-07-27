@@ -2,7 +2,7 @@ import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const LeftNavbar: React.FC = () => {
-  const color = useColorModeValue('beez.800', 'white');
+  const color = useColorModeValue('gray.800', 'white');
   return (
     <Box>
       <RouterLink to="/">
