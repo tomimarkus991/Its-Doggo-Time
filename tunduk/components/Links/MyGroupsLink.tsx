@@ -1,12 +1,16 @@
-import { IconButton } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DogPawn } from '../Icons/LightMode';
+import { LinkLabel } from './LinkLabel';
 
 export const MyGroupsLink: React.FC = () => {
   return (
     <Link to="/">
-      <IconButton aria-label="My Groups" icon={<DogPawn />} />
+      <VStack>
+        <DogPawn id="MyGroups" width="12" height="12" />
+        <LinkLabel htmlFor="MyGroups" label="My Groups" />
+      </VStack>
     </Link>
   );
 };

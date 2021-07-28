@@ -1,14 +1,19 @@
-import { Box, Flex, SimpleGrid } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import { GroupType, ProfileType } from '../../types';
-import { GroupCard, MemberCard } from '../Cards';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { ProfileType } from '../../types';
+import { MemberCard } from '../Cards';
 import { DogPawn } from '../Icons/LightMode';
+import MainContainer from '../Layouts/MainContainer';
 
 interface Props {
   members: ProfileType[];
+  AddNewMember: () => JSX.Element;
 }
 
-export const MembersContainer: React.FC<Props> = ({ members }) => {
+export const MembersContainer: React.FC<Props> = ({
+  members,
+  AddNewMember,
+}) => {
   const [paws, setPaws] = useState<string[]>();
   const [defaultPaws] = useState<string[]>([
     'paw',
@@ -35,42 +40,29 @@ export const MembersContainer: React.FC<Props> = ({ members }) => {
   }, [members]);
 
   return (
-    <Flex
-      boxShadow="lg"
-      h="sm"
-      w="3xl"
-      borderRadius={20}
-      boxSizing="border-box"
-      px="1.5em"
-      alignItems="center"
-      justifyContent="center"
-      mb="1em"
-      overflow="hidden"
-    >
-      <Flex justifyContent="center" alignItems="center" overflow="hidden">
-        {members ? (
-          <SimpleGrid columns={3} spacing={10}>
-            {members.map((member: ProfileType, index: number) => (
-              <Box key={index}>
-                <MemberCard member={member} />
-              </Box>
-            ))}
-            {paws?.map((_, index: number) => (
-              <Box key={index}>
-                <DogPawn width="116" height="100" />
-              </Box>
-            ))}
-          </SimpleGrid>
-        ) : (
-          <SimpleGrid columns={3} spacing={10}>
-            {defaultPaws?.map((_, index: number) => (
-              <Box key={index}>
-                <DogPawn width="116" height="100" />
-              </Box>
-            ))}
-          </SimpleGrid>
-        )}
-      </Flex>
-    </Flex>
+    <MainContainer button={<AddNewMember />}>
+      {members ? (
+        <SimpleGrid columns={3} spacing={10}>
+          {members.map((member: ProfileType, index: number) => (
+            <Box key={index}>
+              <MemberCard member={member} />
+            </Box>
+          ))}
+          {paws?.map((_, index: number) => (
+            <Box key={index}>
+              <DogPawn width="116" height="100" />
+            </Box>
+          ))}
+        </SimpleGrid>
+      ) : (
+        <SimpleGrid columns={3} spacing={10}>
+          {defaultPaws?.map((_, index: number) => (
+            <Box key={index}>
+              <DogPawn width="116" height="100" />
+            </Box>
+          ))}
+        </SimpleGrid>
+      )}
+    </MainContainer>
   );
 };

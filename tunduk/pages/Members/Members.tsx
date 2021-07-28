@@ -5,10 +5,7 @@ import {
   AlertTitle,
   Box,
   Button,
-  Center,
   Flex,
-  Grid,
-  GridItem,
   HStack,
   Input,
   Modal,
@@ -19,18 +16,22 @@ import {
   ModalHeader,
   ModalOverlay,
   Spacer,
-  Text,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Name } from '../../components/Account';
+import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
-import { ProfileLink } from '../../components/Links';
+import { Heading, Name } from '../../components/Headers';
+import { BackIcon } from '../../components/Icons/LightMode';
+import { TopMainBar } from '../../components/Layouts';
+import MainLayout from '../../components/Layouts/MainLayout';
+import { MyGroupsLink, ProfileLink } from '../../components/Links';
 import {
   GroupPageDataType,
   ProfileType,
@@ -53,6 +54,8 @@ const Members: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isInvalid, setIsInvalid] = useState(false);
   const [user] = useState<User | null>(supabase.auth.user());
+
+  const router = useHistory();
 
   const fetchGroupData = async () => {
     try {
@@ -119,118 +122,112 @@ const Members: React.FC = () => {
   useEffect(() => {
     fetchGroupData();
   }, []);
-  return (
-    <Center>
-      <Grid
-        templateRows="0.4fr"
-        templateAreas='"main"'
-        h="100%"
-        w="100%"
-        maxW="6xl"
-        id="membersGrid"
-      >
-        <GridItem gridArea="main">
-          <Flex flexDir="row">
-            <Flex alignItems="center">
-              <AvatarGroup src={group_avatar_url} />
-              <Name title={group_name} textProps={{ pl: '1em' }} />
-            </Flex>
-            <Spacer />
-            <Flex
-              alignItems="center"
-              justifyItems="center"
-              boxSizing="border-box"
-              pr={'3em'}
-              flexDirection="column"
-            >
-              <Text fontSize={50}>Members</Text>
-              <Box
-                w="125px"
-                borderBottom="2px"
-                borderColor={borderColor}
-              />
-            </Flex>
-            <Spacer />
-            <HStack alignItems="flex-start">
-              <ProfileLink />
-            </HStack>
-          </Flex>
-        </GridItem>
-        <GridItem m="auto">
-          <MembersContainer members={memberProfiles as ProfileType[]} />
-          <Flex justifyContent="flex-end">
-            <Box>
-              {creator_id === user?.id ? (
-                <GradientButton onClick={onOpen}>
-                  Add New Member
-                </GradientButton>
+
+  const AddNewMember = () => {
+    return (
+      <>
+        {creator_id === user?.id ? (
+          <GradientButton onClick={onOpen}>Add New Member</GradientButton>
+        ) : null}
+
+        <Modal
+          isOpen={isOpen}
+          onClose={() => {
+            onClose();
+            setIsInvalid(false);
+          }}
+          size="xs"
+        >
+          <ModalOverlay />
+          <ModalContent borderRadius={20}>
+            <ModalHeader textAlign="center">Add a member</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {isInvalid ? (
+                <Alert
+                  status="error"
+                  variant="subtle"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  textAlign="center"
+                  mb={4}
+                >
+                  <AlertIcon />
+                  <AlertTitle mt={4} mb={1} fontSize="lg">
+                    FRIEND REQUEST FAILED
+                  </AlertTitle>
+                  <AlertDescription maxWidth="sm">
+                    Hm, that didn't work. Double check that the
+                    capitalization, spelling, any spaces, and numbers are
+                    correct.
+                  </AlertDescription>
+                  <Button
+                    onClick={() => setIsInvalid(false)}
+                    colorScheme="blue"
+                    mt={2}
+                  >
+                    Okay
+                  </Button>
+                </Alert>
               ) : null}
 
-              <Modal
-                isOpen={isOpen}
-                onClose={() => {
-                  onClose();
-                  setIsInvalid(false);
-                }}
-                size="xs"
-              >
-                <ModalOverlay />
-                <ModalContent borderRadius={20}>
-                  <ModalHeader textAlign="center">
-                    Add a member
-                  </ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    {isInvalid ? (
-                      <Alert
-                        status="error"
-                        variant="subtle"
-                        flexDirection="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        textAlign="center"
-                        mb={4}
-                      >
-                        <AlertIcon />
-                        <AlertTitle mt={4} mb={1} fontSize="lg">
-                          FRIEND REQUEST FAILED
-                        </AlertTitle>
-                        <AlertDescription maxWidth="sm">
-                          Hm, that didn't work. Double check that the
-                          capitalization, spelling, any spaces, and numbers
-                          are correct.
-                        </AlertDescription>
-                        <Button
-                          onClick={() => setIsInvalid(false)}
-                          colorScheme="blue"
-                          mt={2}
-                        >
-                          Okay
-                        </Button>
-                      </Alert>
-                    ) : null}
+              <Input
+                isInvalid={isInvalid}
+                errorBorderColor="crimson"
+                borderColor="beez.900"
+                borderRadius={20}
+                onChange={e => setInviteReceiver(e.target.value)}
+              />
+            </ModalBody>
 
-                    <Input
-                      isInvalid={isInvalid}
-                      errorBorderColor="crimson"
-                      borderColor="beez.900"
-                      borderRadius={20}
-                      onChange={e => setInviteReceiver(e.target.value)}
-                    />
-                  </ModalBody>
+            <ModalFooter>
+              <GradientButton onClick={sendInvite}>Add</GradientButton>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  };
 
-                  <ModalFooter>
-                    <GradientButton onClick={sendInvite}>
-                      Add
-                    </GradientButton>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-            </Box>
-          </Flex>
-        </GridItem>
-      </Grid>
-    </Center>
+  return (
+    <MainLayout
+      leftSide={
+        <>
+          <AvatarGroup src={group_avatar_url} />
+          <Name title={group_name} />
+        </>
+      }
+      middle={
+        <Box mt="8">
+          <Box mb="8">
+            <HStack w="50%" m="auto">
+              <Box>
+                <BackIcon
+                  w="10"
+                  h="10"
+                  cursor="pointer"
+                  onClick={() => router.goBack()}
+                />
+              </Box>
+              <Box pl="24">
+                <Heading title="Members" />
+              </Box>
+            </HStack>
+          </Box>
+          <MembersContainer
+            members={memberProfiles as ProfileType[]}
+            AddNewMember={() => <AddNewMember />}
+          />
+        </Box>
+      }
+      rightSide={
+        <>
+          <MyGroupsLink />
+          <ProfileLink />
+        </>
+      }
+    />
   );
 };
 export default Members;

@@ -1,9 +1,10 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { StringOrUndefined } from '../../types';
 import { Avatar } from './Avatar';
 
 interface Props {
-  src: string;
+  src: StringOrUndefined;
 }
 
 export const AvatarProfile: React.FC<Props> = ({ src }) => {
