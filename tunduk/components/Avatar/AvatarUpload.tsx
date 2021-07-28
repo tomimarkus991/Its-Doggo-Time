@@ -42,15 +42,17 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload }) => {
     }
   };
   return (
-    <Flex justifyContent="center" mt={2}>
+    <>
       <Button
         as={FormLabel}
         htmlFor="uploadInput"
         cursor="pointer"
         m={0}
         disabled={uploading}
+        variant="ghost"
+        fontSize="2xl"
       >
-        {uploading ? 'Uploading...' : 'Upload'}
+        {uploading ? 'Uploading...' : 'Change Your Photo'}
       </Button>
       <input
         style={{
@@ -64,6 +66,6 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload }) => {
         onChange={uploadAvatar}
         disabled={uploading}
       />
-    </Flex>
+    </>
   );
 };

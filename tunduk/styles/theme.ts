@@ -1,5 +1,4 @@
-import { extendTheme } from '@chakra-ui/react';
-
+import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 const colors = {
   beez: {
     100: '#FBF0E5',
@@ -11,20 +10,13 @@ const colors = {
   },
 };
 
-function getSize(size: string) {
-  return {
-    container: {
-      width: size,
-      height: size,
-    },
-    excessLabel: {
-      width: size,
-      height: size,
-    },
-  };
-}
+const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
+};
 
 export const theme = extendTheme({
+  config,
   colors,
   components: {
     Avatar: {

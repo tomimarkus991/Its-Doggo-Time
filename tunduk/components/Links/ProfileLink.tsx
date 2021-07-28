@@ -1,16 +1,22 @@
-import { IconButton } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LinkLabel } from './LinkLabel';
 
 export const ProfileLink: React.FC = () => {
   return (
     <Link to="/profile">
-      <IconButton
-        aria-label="Profile"
-        icon={<FontAwesomeIcon icon={faUser} color="#DDCDBF" />}
-      />
+      <VStack>
+        <FontAwesomeIcon
+          id="Profile"
+          icon={faUser}
+          color="#DDCDBF"
+          size="3x"
+        />
+        <LinkLabel htmlFor="Profile" label="My Profile" />
+      </VStack>
     </Link>
   );
 };

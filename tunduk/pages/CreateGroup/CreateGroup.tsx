@@ -2,7 +2,7 @@ import { Box, Center, Flex, FormLabel, Input } from '@chakra-ui/react';
 import { User } from '@supabase/supabase-js';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Avatar, AvatarUpload } from '../../components/Account';
+import { Avatar, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { GroupProfileIcon } from '../../components/Icons/Profile/GroupProfileIcon';
 import { StringOrUndefined } from '../../types';
