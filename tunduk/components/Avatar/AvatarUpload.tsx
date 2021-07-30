@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { supabase } from '../../utils/supabaseClient';
 interface Props {
   onUpload: (url: string) => void;
+  title: string;
 }
-export const AvatarUpload: React.FC<Props> = ({ onUpload }) => {
+export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
   const [uploading, setUploading] = useState(false);
   const uploadAvatar = async (event: any) => {
     try {
@@ -48,11 +49,12 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload }) => {
         htmlFor="uploadInput"
         cursor="pointer"
         m={0}
-        disabled={uploading}
+        isLoading={uploading}
+        loadingText="Uploading"
         variant="ghost"
         fontSize="2xl"
       >
-        {uploading ? 'Uploading...' : 'Change Your Photo'}
+        {title}
       </Button>
       <input
         style={{

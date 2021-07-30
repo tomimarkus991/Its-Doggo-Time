@@ -1,13 +1,21 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 import styles from '../../styles/GradientButton.module.css';
 
-interface Props {
-  onClick?: any;
-}
-export const GradientButton: React.FC<Props> = ({ children, onClick }) => {
+export const GradientButton = (props: ButtonProps) => {
   return (
-    <Box as="button" className={styles.btnGrad} onClick={onClick}>
-      <Text fontSize={30}>{children}</Text>
-    </Box>
+    <Button
+      className={styles.btnGrad}
+      bgGradient="linear(to-r, beez.500, beez.900)"
+      py={7}
+      px={10}
+      borderRadius={100}
+      _hover={{
+        bgGradient: 'linear(to-l, beez.500, beez.900)',
+      }}
+      // _focus={{ borderColor: 'beez.900' }}
+      {...props}
+    >
+      {props.children}
+    </Button>
   );
 };

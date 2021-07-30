@@ -1,2 +1,2 @@
-export { default } from './Auth';
 export { OAuthButton } from './OAuthButton';
+export { PrivateRoute } from './PrivateRoute';

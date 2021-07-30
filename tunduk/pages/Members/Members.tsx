@@ -5,7 +5,6 @@ import {
   AlertTitle,
   Box,
   Button,
-  Flex,
   HStack,
   Input,
   Modal,
@@ -15,12 +14,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spacer,
-  useColorModeValue,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -29,9 +25,10 @@ import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
 import { Heading, Name } from '../../components/Headers';
 import { BackIcon } from '../../components/Icons/LightMode';
-import { TopMainBar } from '../../components/Layouts';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink, ProfileLink } from '../../components/Links';
+import Skeleton from '../../components/Skeleton';
+import { useAuth } from '../../context/authContext/AuthContext';
 import {
   GroupPageDataType,
   ProfileType,
@@ -43,7 +40,6 @@ interface RouteParams {
   id: string;
 }
 const Members: React.FC = () => {
-  const borderColor = useColorModeValue('gray.800', 'white');
   const { id } = useParams<RouteParams>();
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [group_avatar_url, setGroupAvatarUrl] =
@@ -53,12 +49,14 @@ const Members: React.FC = () => {
   const [inviteReceiver, setInviteReceiver] = useState<string | null>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isInvalid, setIsInvalid] = useState(false);
-  const [user] = useState<User | null>(supabase.auth.user());
+  const { user } = useAuth();
 
   const router = useHistory();
+  const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
 
   const fetchGroupData = async () => {
     try {
+      setIsGroupdataLoading(true);
       let { data, error } = await supabase
         .from('groups')
         .select(
@@ -70,9 +68,9 @@ const Members: React.FC = () => {
           profiles (id, username, avatar_url)
       `,
         )
-        .eq('id', id);
-      if (!data) throw error;
-      let _groupData: GroupPageDataType = data[0];
+        .eq('id', id)
+        .single();
+      let _groupData: GroupPageDataType = data;
       const { avatar_url, group_name, creator_id, profiles } = _groupData;
 
       setCreatorId(creator_id);
@@ -80,9 +78,11 @@ const Members: React.FC = () => {
       setGroupAvatarUrl(avatar_url);
       setMemberProfiles(profiles);
 
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       alert(error.message);
+    } finally {
+      setIsGroupdataLoading(false);
     }
   };
 
@@ -108,12 +108,12 @@ const Members: React.FC = () => {
           .from('invites')
           .insert(values, { returning: 'minimal' });
 
-        if (error) throw error;
+        if (error) throw error.message;
         setInviteReceiver(null);
         onClose();
       }
 
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       throw error;
     }
@@ -127,7 +127,11 @@ const Members: React.FC = () => {
     return (
       <>
         {creator_id === user?.id ? (
-          <GradientButton onClick={onOpen}>Add New Member</GradientButton>
+          <GradientButton onClick={onOpen}>
+            <Text fontSize={30} color="gray.800">
+              Add New Member
+            </Text>
+          </GradientButton>
         ) : null}
 
         <Modal
@@ -182,7 +186,11 @@ const Members: React.FC = () => {
             </ModalBody>
 
             <ModalFooter>
-              <GradientButton onClick={sendInvite}>Add</GradientButton>
+              <GradientButton onClick={sendInvite}>
+                <Text fontSize={30} color="gray.800">
+                  Add
+                </Text>
+              </GradientButton>
             </ModalFooter>
           </ModalContent>
         </Modal>
@@ -193,10 +201,13 @@ const Members: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <>
-          <AvatarGroup src={group_avatar_url} />
+        <Skeleton
+          isLoading={isGroupdataLoading}
+          props={{ borderRadius: 100 }}
+        >
+          <AvatarGroup src={group_avatar_url as string} />
           <Name title={group_name} />
-        </>
+        </Skeleton>
       }
       middle={
         <Box mt="8">

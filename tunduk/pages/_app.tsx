@@ -5,7 +5,7 @@ import AuthDetailsProvider from '../context/authContext';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
 
-function SafeHydrate({ children }: { children: any }) {
+function SafeHydrate({ children }: any) {
   return (
     <div suppressHydrationWarning>
       {typeof window === 'undefined' ? null : children}
