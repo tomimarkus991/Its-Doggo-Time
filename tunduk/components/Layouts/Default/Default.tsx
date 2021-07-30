@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from '../../Navbar';
 
-const Default = ({
+const DefaultLayout = ({
   children,
 }: {
   children: React.ReactNode;
@@ -32,4 +32,4 @@ const Default = ({
     </Grid>
   );
 };
-export default Default;
+export default DefaultLayout;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ProfileType } from '../../types';
 import { MemberCard } from '../Cards';
 import { DogPawn } from '../Icons/LightMode';
-import MainContainer from '../Layouts/MainContainer';
+import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
   members: ProfileType[];
@@ -40,7 +40,7 @@ export const MembersContainer: React.FC<Props> = ({
   }, [members]);
 
   return (
-    <MainContainer button={<AddNewMember />}>
+    <MainContainerLayout button={<AddNewMember />} isLoading={false}>
       {members ? (
         <SimpleGrid columns={3} spacing={10}>
           {members.map((member: ProfileType, index: number) => (
@@ -63,6 +63,6 @@ export const MembersContainer: React.FC<Props> = ({
           ))}
         </SimpleGrid>
       )}
-    </MainContainer>
+    </MainContainerLayout>
   );
 };

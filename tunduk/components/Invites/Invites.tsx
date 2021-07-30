@@ -1,26 +1,23 @@
 import {
   Box,
-  IconButton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  VStack,
-  ModalFooter,
   Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
-  FormLabel,
+  VStack,
 } from '@chakra-ui/react';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { User } from '@supabase/gotrue-js';
-import React, { useState } from 'react';
+import React from 'react';
+import { useAuth } from '../../context/authContext/AuthContext';
 import { InviteGroupsType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { InviteCard } from '../Cards';
-import { EnvelopeIcon } from '../Icons/LightMode/EnvelopeIcon';
 import { LinkLabel } from '../Links';
 
 interface Props {
@@ -29,7 +26,7 @@ interface Props {
 
 const Invites: React.FC<Props> = ({ userInvites }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [user] = useState<User | null>(supabase.auth.user());
+  const { user } = useAuth();
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
@@ -56,6 +53,7 @@ const Invites: React.FC<Props> = ({ userInvites }) => {
           icon={faEnvelope}
           color="#DDCDBF"
           size="3x"
+          onClick={onOpen}
         />
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>

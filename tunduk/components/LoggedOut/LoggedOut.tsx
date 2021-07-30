@@ -1,13 +1,18 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Center, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { GradientButton } from '../Buttons';
 
 const LoggedOut: React.FC = () => {
   return (
-    <Box>
+    <Center>
       <Link to="/login">
-        <Text>You are logged out</Text>
+        <GradientButton>
+          <Text fontSize={30} color="gray.800">
+            Log in
+          </Text>
+        </GradientButton>
       </Link>
-    </Box>
+    </Center>
   );
 };
 export default LoggedOut;

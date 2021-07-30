@@ -5,6 +5,7 @@ import {
   Flex,
   IconButton,
   Input,
+  useToast,
 } from '@chakra-ui/react';
 import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
@@ -18,6 +19,7 @@ import {
   MyGroupsLink,
   ProfileLink,
 } from '../../components/Links';
+import { useAuth } from '../../context/authContext/AuthContext';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -31,9 +33,10 @@ const Group: React.FC = () => {
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
   const [creator_id, setCreatorId] = useState<StringOrUndefined>();
-  const [user] = useState<User | null>(supabase.auth.user());
+  const { user } = useAuth();
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
+  const toast = useToast();
 
   const fetchGroupData = async () => {
     try {
@@ -48,9 +51,10 @@ const Group: React.FC = () => {
           profiles (id, username, avatar_url)
       `,
         )
-        .eq('id', id);
-      if (!data) throw error;
-      let _groupData: GroupPageDataType = data[0];
+        .eq('id', id)
+        .single();
+
+      let _groupData: GroupPageDataType = data;
       const { avatar_url, group_name, creator_id } = _groupData;
 
       setCreatorId(creator_id);
@@ -58,7 +62,7 @@ const Group: React.FC = () => {
       setGroupAvatarUrl(avatar_url);
       setOldGroupname(group_name);
 
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       alert(error.message);
     }
@@ -82,9 +86,18 @@ const Group: React.FC = () => {
         returning: 'minimal', // Don't return the value after inserting
       });
       setOldGroupname(group_name);
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       alert(error.message);
+    } finally {
+      toast({
+        title: 'Group Updated',
+        description: 'Your Group has been updated.',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
 
@@ -138,6 +151,15 @@ const Group: React.FC = () => {
       }
     } catch (error) {
       alert(error.message);
+    } finally {
+      toast({
+        title: 'Group Picture Updated',
+        description: 'Your Group Picture has been updated.',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
   return (
@@ -151,6 +173,7 @@ const Group: React.FC = () => {
                 setGroupAvatarUrl(url);
                 updateGroupPicture(url);
               }}
+              title={'Update Photo'}
             />
           ) : null}
 

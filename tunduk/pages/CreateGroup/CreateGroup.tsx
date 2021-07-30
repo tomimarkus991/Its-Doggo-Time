@@ -1,10 +1,9 @@
-import { Box, Center, Flex, FormLabel, Input } from '@chakra-ui/react';
-import { User } from '@supabase/supabase-js';
+import { Center, Input, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Avatar, AvatarUpload } from '../../components/Avatar';
+import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
-import { GroupProfileIcon } from '../../components/Icons/Profile/GroupProfileIcon';
+import { useAuth } from '../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -13,8 +12,9 @@ interface Props {}
 const CreateGroup: React.FC<Props> = () => {
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const [user] = useState<User | null>(supabase.auth.user());
+  const { user } = useAuth();
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
 
   const createGroup = async () => {
     try {
@@ -25,14 +25,17 @@ const CreateGroup: React.FC<Props> = () => {
         updated_at: new Date(),
       };
 
-      let { data, error } = await supabase.from('groups').insert(updates, {
-        returning: 'representation',
-      });
-      if (!data) throw error;
+      let { data, error } = await supabase
+        .from('groups')
+        .insert(updates, {
+          returning: 'representation',
+        })
+        .single();
       try {
+        setIsLoading(true);
         const memberUpdates = {
           profile_id: user?.id,
-          group_id: data[0].id,
+          group_id: data.id,
         };
 
         let { error } = await supabase
@@ -40,42 +43,52 @@ const CreateGroup: React.FC<Props> = () => {
           .insert(memberUpdates, {
             returning: 'minimal',
           });
-        if (error) throw error;
+        if (error) throw error.message;
       } catch (error) {
         alert(error.message);
       }
 
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       alert(error.message);
     } finally {
       history.push('/');
+      setIsLoading(false);
     }
   };
 
   return (
     <Center>
-      <Flex flexDir="column">
-        <Avatar
-          src={avatar_url}
-          size={'2xl'}
-          icon={<GroupProfileIcon fontSize="8rem" />}
-        />
+      <VStack minW="16rem">
+        <AvatarGroup src={avatar_url as string} />
         <AvatarUpload
           onUpload={(url: string) => {
             setAvatarUrl(url);
           }}
+          title="Add Photo"
         />
-        <Box mb="2">
-          <FormLabel htmlFor="group_name">Group Name</FormLabel>
-          <Input
-            id="group_name"
-            value={group_name || ''}
-            onChange={e => setGroupname(e.target.value)}
-          />
-        </Box>
-        <GradientButton onClick={createGroup}>Create</GradientButton>
-      </Flex>
+        <Input
+          value={group_name}
+          onChange={e => setGroupname(e.target.value)}
+          isRequired
+          size="lg"
+          fontSize="2xl"
+          borderRadius="25"
+          borderColor="beez.900"
+          _placeholder={{ color: 'gray.800' }}
+          placeholder="Group name"
+        />
+
+        <GradientButton
+          onClick={createGroup}
+          isLoading={isLoading}
+          loadingText="Creating"
+        >
+          <Text fontSize={30} color="gray.800">
+            Create
+          </Text>
+        </GradientButton>
+      </VStack>
     </Center>
   );
 };

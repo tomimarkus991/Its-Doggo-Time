@@ -1,1 +1,1 @@
-export { TopMainBar } from './TopMainBar';
+export { default } from './MainLayout';

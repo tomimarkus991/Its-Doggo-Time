@@ -1,13 +1,13 @@
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import React from 'react';
-import MainContainer from '../Layouts/MainContainer';
+import MainContainerLayout from '../Layouts/Containers';
 import { AddDutyLink } from '../Links';
 
 interface Props {}
 
 export const ChatsContainer: React.FC<Props> = ({}) => {
   return (
-    <MainContainer button={<AddDutyLink />}>
+    <MainContainerLayout button={<AddDutyLink />} isLoading={false}>
       {true ? (
         <SimpleGrid
           w="100%"
@@ -32,6 +32,6 @@ export const ChatsContainer: React.FC<Props> = ({}) => {
       ) : (
         <Text>Chat is Empty</Text>
       )}
-    </MainContainer>
+    </MainContainerLayout>
   );
 };

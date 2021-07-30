@@ -1,43 +1,49 @@
-import { Box, Flex, HStack, VStack } from '@chakra-ui/react';
-import { User } from '@supabase/supabase-js';
+import { Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { InviteGroupsType, ProfileType } from '../../types';
+import { useAuth } from '../../context/authContext/AuthContext';
+import {
+  InviteGroupsType,
+  ProfileType,
+  StringOrUndefined,
+} from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { AvatarProfile } from '../Avatar';
-import { GradientButton } from '../Buttons';
 import { GroupsContainer } from '../Containers';
 import { Heading, Name } from '../Headers';
 import Invites from '../Invites';
-import { TopMainBar } from '../Layouts';
 import MainLayout from '../Layouts/MainLayout';
 import { ProfileLink } from '../Links';
+import Skeleton from '../Skeleton';
 
 const LoggedIn: React.FC = () => {
   const [userInvites, setUserInvites] = useState<InviteGroupsType[]>();
-  const [userData, setUserData] = useState<ProfileType>();
+  const [userdata, setUserdata] = useState<ProfileType>();
+  const [username, setUsername] = useState<StringOrUndefined>();
+  const { user } = useAuth();
+  const [isUserdataLoading, setIsUserdataLoading] =
+    useState<boolean>(true);
 
-  const [user] = useState<User | null>(supabase.auth.user());
-
-  const fetchUserGroups = async () => {
+  const fetchUserdata = async () => {
     try {
-      let { data, error } = await supabase
+      setIsUserdataLoading(true);
+      let { data } = await supabase
         .from('profiles')
         .select(
           `
-          id,
-          username,
-          avatar_url,
-          groups (id, group_name, avatar_url, creator_id)
-      `,
+            id,
+            username,
+            avatar_url,
+            groups (id, group_name, avatar_url, creator_id)
+        `,
         )
-        .eq('id', user?.id);
-      if (!data) throw error;
-
-      setUserData(data[0]);
-      if (error) throw error;
-    } catch (error) {
-      alert(error.message);
+        .eq('id', user?.id)
+        .single();
+      if (data === null) return null;
+      setUserdata(data);
+      setUsername(data.username);
+      return null;
+    } finally {
+      setIsUserdataLoading(false);
     }
   };
 
@@ -54,37 +60,76 @@ const LoggedIn: React.FC = () => {
             groups (id, group_name, avatar_url)
           `,
         )
-        .eq('receiver', userData?.username);
+        .eq('receiver', username);
       if (!data) throw error;
       setUserInvites(data);
 
-      if (error) throw error;
+      if (error) throw error.message;
     } catch (error) {
       alert(error.message);
     }
   };
+  const updateOAuthData = async () => {
+    let { data, error } = await supabase
+      .from('profiles')
+      .select(
+        `
+      id,
+      username
+  `,
+      )
+      .eq('id', user?.id)
+      .single();
+    if (
+      data == null &&
+      error?.message.includes(
+        'JSON object requested, multiple (or no) rows returned',
+      )
+    ) {
+      const updates = {
+        id: user?.id,
+        username: user?.user_metadata.full_name,
+        updated_at: new Date(),
+      };
+      const { data: updatedData } = await supabase
+        .from('profiles')
+        .upsert(updates, {
+          returning: 'representation', // Don't return the value after inserting
+        })
+        .single();
+      setUsername(updatedData.username);
+    }
+  };
 
   useEffect(() => {
-    fetchUserGroups();
+    updateOAuthData();
+    fetchUserdata();
   }, []);
   useEffect(() => {
     fetchInvites();
-  }, [userData]);
+  }, [userdata]);
 
   return (
     <MainLayout
       leftSide={
-        <>
-          <AvatarProfile src={userData?.avatar_url} />
-          <Name title={userData?.username} />
-        </>
+        <Skeleton
+          isLoading={isUserdataLoading}
+          props={{ borderRadius: 100 }}
+        >
+          <AvatarProfile src={userdata?.avatar_url as string} />
+          <Name title={username} />
+        </Skeleton>
       }
       middle={
         <Box mt="8">
           <Box mb="8">
             <Heading title="Groups" />
           </Box>
-          <GroupsContainer userGroups={userData?.groups} />
+          <GroupsContainer
+            userGroups={userdata?.groups}
+            isLoading={isUserdataLoading}
+            username={username}
+          />
         </Box>
       }
       rightSide={

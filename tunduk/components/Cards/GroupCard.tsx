@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
 import { GroupType } from '../../types';
 import { AvatarCard } from '../Avatar';
+import Skeleton from '../Skeleton';
 
 interface Props {
   group: GroupType;
