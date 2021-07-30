@@ -123,81 +123,6 @@ const Members: React.FC = () => {
     fetchGroupData();
   }, []);
 
-  const AddNewMember = () => {
-    return (
-      <>
-        {creator_id === user?.id ? (
-          <GradientButton onClick={onOpen}>
-            <Text fontSize={30} color="gray.800">
-              Add New Member
-            </Text>
-          </GradientButton>
-        ) : null}
-
-        <Modal
-          isOpen={isOpen}
-          onClose={() => {
-            onClose();
-            setIsInvalid(false);
-          }}
-          size="xs"
-        >
-          <ModalOverlay />
-          <ModalContent borderRadius={20}>
-            <ModalHeader textAlign="center">Add a member</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {isInvalid ? (
-                <Alert
-                  status="error"
-                  variant="subtle"
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="center"
-                  textAlign="center"
-                  mb={4}
-                >
-                  <AlertIcon />
-                  <AlertTitle mt={4} mb={1} fontSize="lg">
-                    FRIEND REQUEST FAILED
-                  </AlertTitle>
-                  <AlertDescription maxWidth="sm">
-                    Hm, that didn't work. Double check that the
-                    capitalization, spelling, any spaces, and numbers are
-                    correct.
-                  </AlertDescription>
-                  <Button
-                    onClick={() => setIsInvalid(false)}
-                    colorScheme="blue"
-                    mt={2}
-                  >
-                    Okay
-                  </Button>
-                </Alert>
-              ) : null}
-
-              <Input
-                isInvalid={isInvalid}
-                errorBorderColor="crimson"
-                borderColor="beez.900"
-                borderRadius={20}
-                onChange={e => setInviteReceiver(e.target.value)}
-              />
-            </ModalBody>
-
-            <ModalFooter>
-              <GradientButton onClick={sendInvite}>
-                <Text fontSize={30} color="gray.800">
-                  Add
-                </Text>
-              </GradientButton>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </>
-    );
-  };
-
   return (
     <MainLayout
       leftSide={
@@ -228,7 +153,79 @@ const Members: React.FC = () => {
           </Box>
           <MembersContainer
             members={memberProfiles as ProfileType[]}
-            AddNewMember={() => <AddNewMember />}
+            AddNewMember={
+              <>
+                {creator_id === user?.id ? (
+                  <GradientButton onClick={onOpen}>
+                    <Text fontSize={30} color="gray.800">
+                      Add New Member
+                    </Text>
+                  </GradientButton>
+                ) : null}
+                <Modal
+                  isOpen={isOpen}
+                  onClose={() => {
+                    onClose();
+                    setIsInvalid(false);
+                  }}
+                  size="xs"
+                >
+                  <ModalOverlay />
+                  <ModalContent borderRadius={20}>
+                    <ModalHeader textAlign="center">
+                      Add a member
+                    </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      {isInvalid ? (
+                        <Alert
+                          status="error"
+                          variant="subtle"
+                          flexDirection="column"
+                          alignItems="center"
+                          justifyContent="center"
+                          textAlign="center"
+                          mb={4}
+                        >
+                          <AlertIcon />
+                          <AlertTitle mt={4} mb={1} fontSize="lg">
+                            FRIEND REQUEST FAILED
+                          </AlertTitle>
+                          <AlertDescription maxWidth="sm">
+                            Hm, that didn't work. Double check that the
+                            capitalization, spelling, any spaces, and
+                            numbers are correct.
+                          </AlertDescription>
+                          <Button
+                            onClick={() => setIsInvalid(false)}
+                            colorScheme="blue"
+                            mt={2}
+                          >
+                            Okay
+                          </Button>
+                        </Alert>
+                      ) : null}
+
+                      <Input
+                        isInvalid={isInvalid}
+                        errorBorderColor="crimson"
+                        borderColor="beez.900"
+                        borderRadius={20}
+                        onChange={e => setInviteReceiver(e.target.value)}
+                      />
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <GradientButton onClick={sendInvite}>
+                        <Text fontSize={30} color="gray.800">
+                          Add
+                        </Text>
+                      </GradientButton>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </>
+            }
           />
         </Box>
       }

@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
-  InviteGroupsType,
+  InviteDataType,
   ProfileType,
   StringOrUndefined,
 } from '../../types';
@@ -16,7 +16,9 @@ import { ProfileLink } from '../Links';
 import Skeleton from '../Skeleton';
 
 const LoggedIn: React.FC = () => {
-  const [userInvites, setUserInvites] = useState<InviteGroupsType[]>();
+  const [userInvites, setUserInvites] = useState<
+    InviteDataType[] | undefined
+  >();
   const [userdata, setUserdata] = useState<ProfileType>();
   const [username, setUsername] = useState<StringOrUndefined>();
   const { user } = useAuth();
@@ -47,28 +49,6 @@ const LoggedIn: React.FC = () => {
     }
   };
 
-  const fetchInvites = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('invites')
-        .select(
-          `
-            id,
-            receiver,
-            sender,
-            group_id,
-            groups (id, group_name, avatar_url)
-          `,
-        )
-        .eq('receiver', username);
-      if (!data) throw error;
-      setUserInvites(data);
-
-      if (error) throw error.message;
-    } catch (error) {
-      alert(error.message);
-    }
-  };
   const updateOAuthData = async () => {
     let { data, error } = await supabase
       .from('profiles')
@@ -105,9 +85,6 @@ const LoggedIn: React.FC = () => {
     updateOAuthData();
     fetchUserdata();
   }, []);
-  useEffect(() => {
-    fetchInvites();
-  }, [userdata]);
 
   return (
     <MainLayout
@@ -134,7 +111,11 @@ const LoggedIn: React.FC = () => {
       }
       rightSide={
         <>
-          <Invites userInvites={userInvites} />
+          <Invites
+            userInvites={userInvites}
+            setUserInvites={setUserInvites}
+            currentUsername={username}
+          />
           <ProfileLink />
         </>
       }

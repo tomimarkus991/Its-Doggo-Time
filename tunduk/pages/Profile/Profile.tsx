@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  Flex,
   HStack,
-  IconButton,
   Input,
   InputGroup,
   InputRightElement,
@@ -19,7 +17,6 @@ import {
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
@@ -31,7 +28,7 @@ import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
-  InviteGroupsType,
+  InviteDataType,
   ProfileType,
   StringOrUndefined,
 } from '../../types';
@@ -46,8 +43,7 @@ const Profile: React.FC = () => {
   const [username, setUsername] = useState<StringOrUndefined>();
   const [password, setPassword] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const [userInvites, setUserInvites] = useState<InviteGroupsType[]>();
-  const [userdata, setUserdata] = useState<ProfileType>();
+  const [userInvites, setUserInvites] = useState<InviteDataType[]>();
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isUserdataLoading, setIsUserdataLoading] =
@@ -71,7 +67,6 @@ const Profile: React.FC = () => {
         .eq('id', user?.id)
         .single();
 
-      setUserdata(data);
       setUsername(data.username);
       setAvatarUrl(data.avatar_url);
 
@@ -83,32 +78,7 @@ const Profile: React.FC = () => {
     }
   };
 
-  const fetchInvites = async () => {
-    try {
-      setAreInvitesLoading(true);
-      const { data, error } = await supabase
-        .from('invites')
-        .select(
-          `
-            id,
-            receiver,
-            sender,
-            group_id,
-            groups (id, group_name, avatar_url)
-          `,
-        )
-        .eq('receiver', userdata?.username);
-      if (error) throw error.message;
-
-      setUserInvites(data as InviteGroupsType[]);
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setAreInvitesLoading(false);
-    }
-  };
-
-  const updateProfile = async () => {
+  const updateProfile = async (username: StringOrUndefined) => {
     try {
       setIsLoading(true);
       const updates = {
@@ -173,10 +143,6 @@ const Profile: React.FC = () => {
       });
     }
   };
-
-  useEffect(() => {
-    fetchInvites();
-  }, [userdata]);
 
   useEffect(() => {
     fetchUserdata();
@@ -278,7 +244,7 @@ const Profile: React.FC = () => {
                 {/* Update & Sign out */}
                 <HStack pt="8">
                   <Button
-                    onClick={updateProfile}
+                    onClick={() => updateProfile(username)}
                     colorScheme="pink"
                     isLoading={isLoading}
                     borderRadius="20"
@@ -309,7 +275,11 @@ const Profile: React.FC = () => {
       }
       rightSide={
         <>
-          <Invites userInvites={userInvites} />
+          <Invites
+            userInvites={userInvites}
+            setUserInvites={setUserInvites}
+            currentUsername={username}
+          />
           <MyGroupsLink />
         </>
       }

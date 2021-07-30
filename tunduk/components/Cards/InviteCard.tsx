@@ -2,11 +2,11 @@ import { Box, Flex, HStack, IconButton, Text } from '@chakra-ui/react';
 import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { InviteGroupsType } from '../../types';
+import { InviteDataType } from '../../types';
 import { AvatarInvite } from '../Avatar';
 
 interface Props {
-  invite: InviteGroupsType;
+  invite: InviteDataType;
   declineInvite: (invite_id: string) => void;
   acceptInvite: (group_id: string, invite_id: string) => void;
 }
@@ -16,8 +16,8 @@ export const InviteCard: React.FC<Props> = ({
   declineInvite,
   acceptInvite,
 }) => {
-  const { id, groups, sender } = invite;
-  const { avatar_url, group_name } = groups;
+  const { id, group, sender } = invite;
+  const { avatar_url, group_name } = group;
   return (
     <Box
       boxSizing="border-box"
@@ -44,7 +44,7 @@ export const InviteCard: React.FC<Props> = ({
             aria-label="accept"
             bgColor="green.400"
             icon={<FontAwesomeIcon icon={faCheck} />}
-            onClick={() => acceptInvite(groups.id, id)}
+            onClick={() => acceptInvite(group.id, id)}
           />
         </HStack>
       </Flex>
