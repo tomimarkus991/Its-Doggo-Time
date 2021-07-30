@@ -24,12 +24,12 @@ export interface GroupType {
   creator_id?: string;
 }
 
-export interface InviteGroupsType {
+export interface InviteDataType {
   id: string;
   receiver: string;
   sender: string;
   group_id: string;
-  groups: GroupType;
+  group: GroupType;
 }
 
 export interface ProfileType {

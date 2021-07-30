@@ -13,20 +13,92 @@ import {
 } from '@chakra-ui/react';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
-import { InviteGroupsType } from '../../types';
+import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { InviteCard } from '../Cards';
 import { LinkLabel } from '../Links';
 
 interface Props {
-  userInvites: InviteGroupsType[] | undefined;
+  userInvites: InviteDataType[] | undefined;
+  setUserInvites: React.Dispatch<
+    React.SetStateAction<InviteDataType[] | undefined>
+  >;
+  currentUsername: StringOrUndefined;
 }
 
-const Invites: React.FC<Props> = ({ userInvites }) => {
+const Invites: React.FC<Props> = ({
+  userInvites,
+  setUserInvites,
+  currentUsername,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth();
+
+  const fetchInvites = async (_username: StringOrUndefined) => {
+    try {
+      const { data: invitesdata, error } = await supabase
+        .from('invites')
+        .select(
+          `
+            id,
+            receiver,
+            sender,
+            group_id,
+            groups (id, group_name, avatar_url)
+          `,
+        )
+        .eq('receiver', _username);
+
+      setUserInvites(invitesdata as InviteDataType[]);
+
+      if (error) throw error.message;
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const listenForInserts = (username: StringOrUndefined) => {
+    supabase
+      .from(`invites:receiver=eq.${username}`)
+      .on('INSERT', async payload => {
+        const { sender, receiver, id, group_id } = payload.new;
+        let { data: group } = await supabase
+          .from('groups')
+          .select(
+            `
+            id,
+            group_name,
+            avatar_url
+        `,
+          )
+          .eq('id', group_id)
+          .single();
+
+        const newInvite: InviteDataType = {
+          id,
+          group_id,
+          sender,
+          receiver,
+          group,
+        };
+        setUserInvites((oldData: any) => [...oldData, newInvite]);
+      })
+      .subscribe();
+  };
+  const listenForDeletes = () => {
+    supabase
+      .from(`invites`)
+      .on('DELETE', payload => {
+        console.log('payload', payload);
+
+        setUserInvites(oldData =>
+          oldData?.filter(data => data.id !== payload.old.id),
+        );
+      })
+      .subscribe();
+  };
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
@@ -45,15 +117,23 @@ const Invites: React.FC<Props> = ({ userInvites }) => {
     await supabase.from('invites').delete().eq('id', invite_id);
   };
 
+  useEffect(() => {
+    listenForDeletes();
+  }, []);
+
+  useEffect(() => {
+    listenForInserts(currentUsername);
+    fetchInvites(currentUsername);
+  }, [currentUsername]);
+
   return (
     <Box>
-      <VStack cursor="pointer">
+      <VStack cursor="pointer" onClick={onOpen}>
         <FontAwesomeIcon
           id="Invites"
           icon={faEnvelope}
           color="#DDCDBF"
           size="3x"
-          onClick={onOpen}
         />
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
@@ -65,7 +145,7 @@ const Invites: React.FC<Props> = ({ userInvites }) => {
           <ModalBody maxH="lg">
             <VStack>
               {userInvites?.map(
-                (invite: InviteGroupsType, index: number) => {
+                (invite: InviteDataType, index: number) => {
                   return (
                     <Box w="full" key={index}>
                       <InviteCard

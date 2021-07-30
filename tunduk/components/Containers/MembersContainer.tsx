@@ -7,7 +7,7 @@ import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
   members: ProfileType[];
-  AddNewMember: () => JSX.Element;
+  AddNewMember: any;
 }
 
 export const MembersContainer: React.FC<Props> = ({
@@ -40,7 +40,7 @@ export const MembersContainer: React.FC<Props> = ({
   }, [members]);
 
   return (
-    <MainContainerLayout button={<AddNewMember />} isLoading={false}>
+    <MainContainerLayout button={AddNewMember} isLoading={false}>
       {members ? (
         <SimpleGrid columns={3} spacing={10}>
           {members.map((member: ProfileType, index: number) => (

@@ -16,7 +16,6 @@ export const getCurrentUser = async () => {
       )
       .eq('id', id)
       .single();
-    console.log('getCurrentuser', data);
 
     if (data === null) {
       console.log('data is null');

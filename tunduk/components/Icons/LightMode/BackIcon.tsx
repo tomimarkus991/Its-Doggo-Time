@@ -4,14 +4,14 @@ export const BackIcon = (props: IconProps): JSX.Element => (
     <path
       d="M23.8809 2.12097L2.12106 23.8808"
       stroke="#2A2828"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
     <path
       d="M23.8809 45.641L2.12106 23.8812"
       stroke="#2A2828"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </Icon>
 );
