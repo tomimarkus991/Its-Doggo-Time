@@ -144,7 +144,7 @@ const RegisterAuth: React.FC = () => {
               isLoading={isLoading}
               loadingText="Loading"
             >
-              <GradientButtonText fontSize={30}>
+              <GradientButtonText fontSize={25}>
                 Sign up
               </GradientButtonText>
             </GradientButton>
@@ -157,11 +157,9 @@ const RegisterAuth: React.FC = () => {
               <OAuthButton provider="github" icon={faGithub} />
             </HStack>
             <HStack>
-              <Text fontSize="2xl">Already have an account?</Text>
+              <Text>Already have an account?</Text>
               <Link to="/login">
-                <Text fontSize="2xl" color="pink.500">
-                  Sign in
-                </Text>
+                <Text color="#c9ac95">Sign in</Text>
               </Link>
             </HStack>
           </VStack>

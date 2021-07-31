@@ -4,7 +4,7 @@ import { GradientButtonText } from '../Text';
 export const AddDutyLink: React.FC = () => {
   return (
     <GradientButton>
-      <GradientButtonText fontSize={30}>Add Duty</GradientButtonText>
+      <GradientButtonText fontSize={25}>Add Duty</GradientButtonText>
     </GradientButton>
   );
 };

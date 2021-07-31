@@ -8,7 +8,7 @@ const LoggedOut: React.FC = () => {
     <Center>
       <Link to="/login">
         <GradientButton>
-          <GradientButtonText fontSize={30}>Log in</GradientButtonText>
+          <GradientButtonText fontSize={25}>Log in</GradientButtonText>
         </GradientButton>
       </Link>
     </Center>

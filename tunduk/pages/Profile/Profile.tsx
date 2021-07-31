@@ -1,26 +1,20 @@
 import {
   Box,
-  Button,
   Flex,
   HStack,
   Input,
   InputGroup,
   InputRightElement,
-  useColorMode,
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import {
-  faEye,
-  faEyeSlash,
-  faMoon,
-  faSun,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
+import ColorMode from '../../components/ColorMode';
 import { Heading, Name } from '../../components/Headers';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
@@ -32,7 +26,6 @@ import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 const Profile: React.FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
   const { user, signOut } = useAuth();
   const toast = useToast();
   const router = useHistory();
@@ -232,36 +225,19 @@ const Profile: React.FC = () => {
                 </InputGroup>
                 {/* Toggle Color Mode */}
                 <Box pt="10">
-                  {colorMode === 'light' ? (
-                    <FontAwesomeIcon
-                      onClick={toggleColorMode}
-                      icon={faMoon}
-                      size="2x"
-                      cursor="pointer"
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      onClick={toggleColorMode}
-                      icon={faSun}
-                      color="#D69E2E"
-                      size="2x"
-                      cursor="pointer"
-                    />
-                  )}
+                  <ColorMode />
                 </Box>
                 {/* Update & Sign out */}
                 <HStack pt="8">
-                  <Button
+                  <GradientButton
                     onClick={() => updateProfile(username)}
-                    colorScheme="pink"
                     isLoading={isLoading}
-                    borderRadius="20"
-                    size="lg"
-                    fontSize="xl"
                     loadingText="Updating"
                   >
-                    Update
-                  </Button>
+                    <GradientButtonText fontSize={20}>
+                      Update
+                    </GradientButtonText>
+                  </GradientButton>
 
                   <GradientButton
                     onClick={async () => {
@@ -271,7 +247,7 @@ const Profile: React.FC = () => {
                     isLoading={isLoading}
                     loadingText="Signing out"
                   >
-                    <GradientButtonText fontSize={30}>
+                    <GradientButtonText fontSize={20}>
                       Sign Out
                     </GradientButtonText>
                   </GradientButton>

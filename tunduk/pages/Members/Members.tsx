@@ -164,7 +164,7 @@ const Members: React.FC = () => {
               <>
                 {creator_id === user?.id ? (
                   <GradientButton onClick={onOpen}>
-                    <GradientButtonText fontSize={30}>
+                    <GradientButtonText fontSize={25}>
                       Add new member
                     </GradientButtonText>
                   </GradientButton>
@@ -224,7 +224,7 @@ const Members: React.FC = () => {
 
                     <ModalFooter>
                       <GradientButton onClick={sendInvite}>
-                        <GradientButtonText fontSize={30}>
+                        <GradientButtonText fontSize={25}>
                           Add
                         </GradientButtonText>
                       </GradientButton>

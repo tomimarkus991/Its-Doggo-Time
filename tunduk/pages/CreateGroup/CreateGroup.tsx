@@ -85,7 +85,7 @@ const CreateGroup: React.FC<Props> = () => {
           isLoading={isLoading}
           loadingText="Creating"
         >
-          <GradientButtonText fontSize={30}>Create</GradientButtonText>
+          <GradientButtonText fontSize={25}>Create</GradientButtonText>
         </GradientButton>
       </VStack>
     </Center>

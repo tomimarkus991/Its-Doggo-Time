@@ -111,7 +111,7 @@ const ForgotPassword: React.FC = () => {
                     </Button>
                     <Link to="/login">
                       <GradientButton>
-                        <GradientButtonText fontSize={30}>
+                        <GradientButtonText fontSize={25}>
                           Go back
                         </GradientButtonText>
                       </GradientButton>

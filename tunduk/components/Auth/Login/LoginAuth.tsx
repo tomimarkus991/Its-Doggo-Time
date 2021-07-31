@@ -107,7 +107,7 @@ const LoginAuth: React.FC = () => {
             </InputRightElement>
           </InputGroup>
           <Link to="/forgot-password">
-            <Text color="pink.500">Forgot Password?</Text>
+            <Text color="#c9ac95">Forgot Password?</Text>
           </Link>
         </Box>
         <GradientButton
@@ -118,7 +118,7 @@ const LoginAuth: React.FC = () => {
           isLoading={isLoading}
           loadingText="Logging in"
         >
-          <GradientButtonText fontSize={30}>Sign in</GradientButtonText>
+          <GradientButtonText fontSize={25}>Sign in</GradientButtonText>
         </GradientButton>
         <Box>
           <Text>Or</Text>
@@ -129,11 +129,9 @@ const LoginAuth: React.FC = () => {
           <OAuthButton provider="github" icon={faGithub} />
         </HStack>
         <HStack>
-          <Text fontSize="2xl">New to Doggo time?</Text>
+          <Text>New to Doggo time?</Text>
           <Link to="/register">
-            <Text fontSize="2xl" color="pink.500">
-              Sign up
-            </Text>
+            <Text color="#c9ac95">Sign up</Text>
           </Link>
         </HStack>
       </VStack>

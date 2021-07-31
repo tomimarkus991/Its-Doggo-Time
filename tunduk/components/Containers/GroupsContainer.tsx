@@ -54,7 +54,7 @@ export const GroupsContainer: React.FC<Props> = ({
           {username === null ? (
             <Link to="/profile">
               <GradientButton>
-                <GradientButtonText fontSize={30}>
+                <GradientButtonText fontSize={25}>
                   Add username to create groups
                 </GradientButtonText>
               </GradientButton>
