@@ -5,6 +5,7 @@ import {
   AlertTitle,
   Box,
   Button,
+  Flex,
   HStack,
   Input,
   Modal,
@@ -28,6 +29,7 @@ import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink, ProfileLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
+import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
   GroupPageDataType,
@@ -130,8 +132,14 @@ const Members: React.FC = () => {
           isLoading={isGroupdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <AvatarGroup src={group_avatar_url as string} />
-          <Name title={group_name} />
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <AvatarGroup src={group_avatar_url as string} />
+            <Name title={group_name} />
+          </Flex>
         </Skeleton>
       }
       middle={
@@ -157,9 +165,9 @@ const Members: React.FC = () => {
               <>
                 {creator_id === user?.id ? (
                   <GradientButton onClick={onOpen}>
-                    <Text fontSize={30} color="gray.800">
-                      Add New Member
-                    </Text>
+                    <GradientButtonText fontSize={30}>
+                      Add new member
+                    </GradientButtonText>
                   </GradientButton>
                 ) : null}
                 <Modal
@@ -217,9 +225,9 @@ const Members: React.FC = () => {
 
                     <ModalFooter>
                       <GradientButton onClick={sendInvite}>
-                        <Text fontSize={30} color="gray.800">
+                        <GradientButtonText fontSize={30}>
                           Add
-                        </Text>
+                        </GradientButtonText>
                       </GradientButton>
                     </ModalFooter>
                   </ModalContent>

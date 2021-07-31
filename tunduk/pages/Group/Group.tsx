@@ -19,6 +19,7 @@ import {
   MyGroupsLink,
   ProfileLink,
 } from '../../components/Links';
+import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -37,9 +38,11 @@ const Group: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const toast = useToast();
+  const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
 
   const fetchGroupData = async () => {
     try {
+      setIsGroupdataLoading(true);
       let { data, error } = await supabase
         .from('groups')
         .select(
@@ -65,6 +68,8 @@ const Group: React.FC = () => {
       if (error) throw error.message;
     } catch (error) {
       alert(error.message);
+    } finally {
+      setIsGroupdataLoading(false);
     }
   };
 
@@ -165,31 +170,40 @@ const Group: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <>
-          <AvatarGroup src={group_avatar_url} />
-          {isEditable ? (
-            <AvatarUpload
-              onUpload={(url: string) => {
-                setGroupAvatarUrl(url);
-                updateGroupPicture(url);
-              }}
-              title={'Update Photo'}
-            />
-          ) : null}
+        <Skeleton
+          isLoading={isGroupdataLoading}
+          props={{ borderRadius: 100 }}
+        >
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <AvatarGroup src={group_avatar_url as string} />
+            {isEditable ? (
+              <AvatarUpload
+                onUpload={(url: string) => {
+                  setGroupAvatarUrl(url);
+                  updateGroupPicture(url);
+                }}
+                title={'Update Photo'}
+              />
+            ) : null}
 
-          {isEditable ? (
-            <Input
-              onChange={e => setGroupname(e.target.value)}
-              value={group_name as string}
-              isDisabled={!isEditable}
-              fontSize="4xl"
-              size="lg"
-            />
-          ) : (
-            <Name title={group_name} textProps={{ ml: '10' }} />
-          )}
-          {user?.id === creator_id ? <EditableControls /> : null}
-        </>
+            {isEditable ? (
+              <Input
+                onChange={e => setGroupname(e.target.value)}
+                value={group_name as string}
+                isDisabled={!isEditable}
+                fontSize="4xl"
+                size="lg"
+              />
+            ) : (
+              <Name title={group_name} textProps={{ ml: '10' }} />
+            )}
+            {user?.id === creator_id ? <EditableControls /> : null}
+          </Flex>
+        </Skeleton>
       }
       middle={
         <Box mt="8">

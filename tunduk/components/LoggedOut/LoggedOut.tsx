@@ -1,15 +1,14 @@
 import { Center, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { GradientButton } from '../Buttons';
+import { GradientButtonText } from '../Text';
 
 const LoggedOut: React.FC = () => {
   return (
     <Center>
       <Link to="/login">
         <GradientButton>
-          <Text fontSize={30} color="gray.800">
-            Log in
-          </Text>
+          <GradientButtonText fontSize={30}>Log in</GradientButtonText>
         </GradientButton>
       </Link>
     </Center>

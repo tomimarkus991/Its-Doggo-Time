@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
@@ -93,8 +93,14 @@ const LoggedIn: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <AvatarProfile src={userdata?.avatar_url as string} />
-          <Name title={username} />
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <AvatarProfile src={userdata?.avatar_url as string} />
+            <Name title={username} />
+          </Flex>
         </Skeleton>
       }
       middle={

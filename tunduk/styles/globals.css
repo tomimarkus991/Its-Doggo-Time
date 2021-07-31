@@ -2,9 +2,9 @@ html,
 body,
 #__next {
   height: 100%;
-  font-family: blakely, sans-serif;
+  /* font-family: blakely, sans-serif;
   font-weight: 300;
-  font-style: normal;
+  font-style: normal; */
   scrollbar-width: 'auto'; /* "auto" or "thin" */
   scrollbar-color: dark; /* scroll thumb and track */
 }

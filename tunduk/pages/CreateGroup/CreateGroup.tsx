@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
+import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -84,9 +85,7 @@ const CreateGroup: React.FC<Props> = () => {
           isLoading={isLoading}
           loadingText="Creating"
         >
-          <Text fontSize={30} color="gray.800">
-            Create
-          </Text>
+          <GradientButtonText fontSize={30}>Create</GradientButtonText>
         </GradientButton>
       </VStack>
     </Center>

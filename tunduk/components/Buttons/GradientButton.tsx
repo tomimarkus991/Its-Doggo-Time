@@ -5,9 +5,8 @@ export const GradientButton = (props: ButtonProps) => {
   return (
     <Button
       className={styles.btnGrad}
+      p={7}
       bgGradient="linear(to-r, beez.500, beez.900)"
-      py={7}
-      px={10}
       borderRadius={100}
       _hover={{
         bgGradient: 'linear(to-l, beez.500, beez.900)',

@@ -16,6 +16,7 @@ import {
 import React, { useState } from 'react';
 import { GradientButton } from '../../components/Buttons';
 import { Heading } from '../../components/Headers';
+import { GradientButtonText } from '../../components/Text';
 import { supabase } from '../../utils/supabaseClient';
 
 const ForgotPassword: React.FC = () => {
@@ -110,9 +111,9 @@ const ForgotPassword: React.FC = () => {
                     </Button>
                     <Link to="/login">
                       <GradientButton>
-                        <Text fontSize={30} color="gray.800">
+                        <GradientButtonText fontSize={30}>
                           Go back
-                        </Text>
+                        </GradientButtonText>
                       </GradientButton>
                     </Link>
                   </HStack>

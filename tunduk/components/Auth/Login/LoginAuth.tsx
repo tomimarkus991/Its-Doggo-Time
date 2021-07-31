@@ -20,6 +20,7 @@ import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../../types';
 import { GradientButton } from '../../Buttons';
+import { GradientButtonText } from '../../Text';
 
 const LoginAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -117,9 +118,7 @@ const LoginAuth: React.FC = () => {
           isLoading={isLoading}
           loadingText="Logging in"
         >
-          <Text fontSize={30} color="gray.800">
-            Sign in
-          </Text>
+          <GradientButtonText fontSize={30}>Sign in</GradientButtonText>
         </GradientButton>
         <Box>
           <Text>Or</Text>

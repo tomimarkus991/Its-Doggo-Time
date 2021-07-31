@@ -1,11 +1,11 @@
 import {
   Box,
   Button,
+  Flex,
   HStack,
   Input,
   InputGroup,
   InputRightElement,
-  Text,
   useColorMode,
   useToast,
   VStack,
@@ -26,12 +26,9 @@ import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
+import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
-import {
-  InviteDataType,
-  ProfileType,
-  StringOrUndefined,
-} from '../../types';
+import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 const Profile: React.FC = () => {
@@ -154,15 +151,21 @@ const Profile: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <AvatarProfile src={avatar_url as string} />
-          <AvatarUpload
-            onUpload={(url: string) => {
-              setAvatarUrl(url);
-              updateAvatar(url);
-            }}
-            title="Update photo"
-          />
-          <Name title={username} />
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <AvatarProfile src={avatar_url as string} />
+            <AvatarUpload
+              onUpload={(url: string) => {
+                setAvatarUrl(url);
+                updateAvatar(url);
+              }}
+              title="Update photo"
+            />
+            <Name title={username} />
+          </Flex>
         </Skeleton>
       }
       middle={
@@ -229,17 +232,22 @@ const Profile: React.FC = () => {
                 </InputGroup>
                 {/* Toggle Color Mode */}
                 <Box pt="10">
-                  <Button onClick={toggleColorMode} variant="ghost">
-                    {colorMode === 'light' ? (
-                      <FontAwesomeIcon icon={faMoon} size="2x" />
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faSun}
-                        color="#D69E2E"
-                        size="2x"
-                      />
-                    )}
-                  </Button>
+                  {colorMode === 'light' ? (
+                    <FontAwesomeIcon
+                      onClick={toggleColorMode}
+                      icon={faMoon}
+                      size="2x"
+                      cursor="pointer"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      onClick={toggleColorMode}
+                      icon={faSun}
+                      color="#D69E2E"
+                      size="2x"
+                      cursor="pointer"
+                    />
+                  )}
                 </Box>
                 {/* Update & Sign out */}
                 <HStack pt="8">
@@ -263,9 +271,9 @@ const Profile: React.FC = () => {
                     isLoading={isLoading}
                     loadingText="Signing out"
                   >
-                    <Text fontSize={30} color="gray.800">
+                    <GradientButtonText fontSize={30}>
                       Sign Out
-                    </Text>
+                    </GradientButtonText>
                   </GradientButton>
                 </HStack>
               </VStack>

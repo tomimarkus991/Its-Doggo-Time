@@ -4,6 +4,11 @@ import Head from 'next/head';
 import AuthDetailsProvider from '../context/authContext';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
+import '@fontsource/abel';
+import '@fontsource/marvel';
+import '@fontsource/salsa';
+import '@fontsource/acme';
+import '@fontsource/viga';
 
 function SafeHydrate({ children }: any) {
   return (

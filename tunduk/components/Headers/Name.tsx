@@ -1,4 +1,4 @@
-import { Text, TextProps } from '@chakra-ui/react';
+import { Heading, Text, TextProps } from '@chakra-ui/react';
 import { StringOrUndefined } from '../../types';
 
 interface Props {

@@ -1,0 +1,1 @@
+export { GradientButtonText } from './GradientButtonText';

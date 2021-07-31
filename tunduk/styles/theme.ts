@@ -18,6 +18,10 @@ const config: ThemeConfig = {
 export const theme = extendTheme({
   config,
   colors,
+  fonts: {
+    heading: 'Viga',
+    body: 'Viga',
+  },
   components: {
     Avatar: {
       sizes: {

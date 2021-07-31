@@ -7,6 +7,7 @@ import { GroupCard } from '../Cards';
 import { Heading } from '../Headers';
 import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
+import { GradientButtonText } from '../Text';
 
 interface Props {
   userGroups: GroupType[] | undefined;
@@ -50,17 +51,17 @@ export const GroupsContainer: React.FC<Props> = ({
           {username === null ? (
             <Link to="/profile">
               <GradientButton>
-                <Text fontSize={30} color="gray.800">
+                <GradientButtonText fontSize={30}>
                   Add username to create groups
-                </Text>
+                </GradientButtonText>
               </GradientButton>
             </Link>
           ) : (
             <Link to="/group/create-group">
               <GradientButton isDisabled={isAddDoggoGroupDisabled}>
-                <Text fontSize={30} color="gray.800">
+                <GradientButtonText fontSize={25}>
                   New Doggo Group
-                </Text>
+                </GradientButtonText>
               </GradientButton>
             </Link>
           )}
