@@ -9,7 +9,6 @@ import '@fontsource/marvel';
 import '@fontsource/salsa';
 import '@fontsource/acme';
 import '@fontsource/viga';
-import Image from 'next/image';
 
 function SafeHydrate({ children }: any) {
   return (
