@@ -9,9 +9,11 @@ export const GradientButton = (props: ButtonProps) => {
       bgGradient="linear(to-r, beez.500, beez.900)"
       borderRadius={100}
       _hover={{
-        bgGradient: 'linear(to-l, beez.500, beez.900)',
+        bgGradient: 'linear(to-r, beez.500, beez.900)',
       }}
-      // _focus={{ borderColor: 'beez.900' }}
+      // _focus={{
+      //   bgGradient: 'linear(to-r, beez.500, beez.900)',
+      // }}
       {...props}
     >
       {props.children}
