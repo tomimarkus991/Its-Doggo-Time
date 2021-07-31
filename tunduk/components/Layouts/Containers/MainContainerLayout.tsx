@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 import React from 'react';
 import Skeleton from '../../Skeleton';
 
@@ -13,33 +13,25 @@ const MainContainerLayout: React.FC<Props> = ({
   isLoading,
 }) => {
   return (
-    <Flex
-      h="md"
-      w="100%"
-      alignItems="center"
-      justifyContent="center"
-      flexDirection="column"
-    >
+    <VStack h="md">
       <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
         <Flex
           justifyContent="center"
           alignItems="center"
           h="sm"
-          w="3xl"
+          w="2xl"
           borderRadius={20}
           boxShadow="xl"
-          px="2em"
-          py="2em"
           overflow="hidden"
           mb="1em"
         >
           {children}
         </Flex>
       </Skeleton>
-      <Flex w="3xl" justifyContent="flex-end">
+      <Flex w="2xl" justifyContent="flex-end">
         {button}
       </Flex>
-    </Flex>
+    </VStack>
   );
 };
 export default MainContainerLayout;

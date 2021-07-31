@@ -199,7 +199,7 @@ const Group: React.FC = () => {
                 size="lg"
               />
             ) : (
-              <Name title={group_name} textProps={{ ml: '10' }} />
+              <Name title={group_name} />
             )}
             {user?.id === creator_id ? <EditableControls /> : null}
           </Flex>
