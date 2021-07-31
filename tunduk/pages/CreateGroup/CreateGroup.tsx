@@ -1,4 +1,4 @@
-import { Center, Input, Text, VStack } from '@chakra-ui/react';
+import { Center, Input, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';

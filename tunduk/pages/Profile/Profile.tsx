@@ -45,35 +45,8 @@ const Profile: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
-  const [areInvitesLoading, setAreInvitesLoading] =
-    useState<boolean>(true);
-
-  const fetchUserdata = async () => {
-    try {
-      setIsUserdataLoading(true);
-
-      let { data, error } = await supabase
-        .from('profiles')
-        .select(
-          `
-          id,
-          username,
-          avatar_url
-      `,
-        )
-        .eq('id', user?.id)
-        .single();
-
-      setUsername(data.username);
-      setAvatarUrl(data.avatar_url);
-
-      if (error) throw error.message;
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsUserdataLoading(false);
-    }
-  };
+  // const [areInvitesLoading, setAreInvitesLoading] =
+  //   useState<boolean>(true);
 
   const updateProfile = async (username: StringOrUndefined) => {
     try {
@@ -142,6 +115,33 @@ const Profile: React.FC = () => {
   };
 
   useEffect(() => {
+    const fetchUserdata = async () => {
+      try {
+        setIsUserdataLoading(true);
+
+        let { data, error } = await supabase
+          .from('profiles')
+          .select(
+            `
+            id,
+            username,
+            avatar_url
+        `,
+          )
+          .eq('id', user?.id)
+          .single();
+
+        setUsername(data.username);
+        setAvatarUrl(data.avatar_url);
+
+        if (error) throw error.message;
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        setIsUserdataLoading(false);
+      }
+    };
+
     fetchUserdata();
   }, []);
   return (

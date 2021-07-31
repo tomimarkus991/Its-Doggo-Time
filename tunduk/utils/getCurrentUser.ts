@@ -1,12 +1,9 @@
-import { User } from '@supabase/supabase-js';
-import { useContext } from 'react';
-import { AuthContext } from '../context/authContext';
 import { supabase } from './supabaseClient';
 
 export const getCurrentUser = async () => {
   try {
     const id = supabase?.auth?.user()?.id;
-    let { data, error } = await supabase
+    let { data } = await supabase
       .from('profiles')
       .select(
         `

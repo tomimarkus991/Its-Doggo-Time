@@ -7,7 +7,6 @@ import {
   Input,
   useToast,
 } from '@chakra-ui/react';
-import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
@@ -39,39 +38,6 @@ const Group: React.FC = () => {
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const toast = useToast();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
-
-  const fetchGroupData = async () => {
-    try {
-      setIsGroupdataLoading(true);
-      let { data, error } = await supabase
-        .from('groups')
-        .select(
-          `
-          id,
-          group_name,
-          avatar_url,
-          creator_id,
-          profiles (id, username, avatar_url)
-      `,
-        )
-        .eq('id', id)
-        .single();
-
-      let _groupData: GroupPageDataType = data;
-      const { avatar_url, group_name, creator_id } = _groupData;
-
-      setCreatorId(creator_id);
-      setGroupname(group_name);
-      setGroupAvatarUrl(avatar_url);
-      setOldGroupname(group_name);
-
-      if (error) throw error.message;
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsGroupdataLoading(false);
-    }
-  };
 
   const cancelSave = () => {
     setGroupname(old_group_name);
@@ -107,6 +73,39 @@ const Group: React.FC = () => {
   };
 
   useEffect(() => {
+    const fetchGroupData = async () => {
+      try {
+        setIsGroupdataLoading(true);
+        let { data, error } = await supabase
+          .from('groups')
+          .select(
+            `
+            id,
+            group_name,
+            avatar_url,
+            creator_id,
+            profiles (id, username, avatar_url)
+        `,
+          )
+          .eq('id', id)
+          .single();
+
+        let _groupData: GroupPageDataType = data;
+        const { avatar_url, group_name, creator_id } = _groupData;
+
+        setCreatorId(creator_id);
+        setGroupname(group_name);
+        setGroupAvatarUrl(avatar_url);
+        setOldGroupname(group_name);
+
+        if (error) throw error.message;
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        setIsGroupdataLoading(false);
+      }
+    };
+
     fetchGroupData();
   }, []);
 

@@ -1,4 +1,3 @@
-import { StringOrUndefined } from '../../types';
 import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
 import { Avatar } from './Avatar';
 

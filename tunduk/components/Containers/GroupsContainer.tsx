@@ -23,6 +23,7 @@ export const GroupsContainer: React.FC<Props> = ({
   const [paws, setPaws] = useState<string[]>();
   const [isAddDoggoGroupDisabled, setIsAddDoggoGroupDisabled] =
     useState<boolean>(false);
+
   const getPaws = () => {
     const max = 6;
     if (!userGroups) return;
@@ -34,11 +35,13 @@ export const GroupsContainer: React.FC<Props> = ({
     }
     setPaws(dogPawns);
   };
+
   const howManyGroupsUserHas = () => {
     if (userGroups?.length === 6) {
       setIsAddDoggoGroupDisabled(true);
     }
   };
+
   useEffect(() => {
     getPaws();
     howManyGroupsUserHas();

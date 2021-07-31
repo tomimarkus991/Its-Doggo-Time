@@ -1,4 +1,4 @@
-import { Button, Flex, FormLabel } from '@chakra-ui/react';
+import { Button, FormLabel } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { supabase } from '../../utils/supabaseClient';
 interface Props {

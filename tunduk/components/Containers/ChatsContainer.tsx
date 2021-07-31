@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid, Text } from '@chakra-ui/react';
 import React from 'react';
 import MainContainerLayout from '../Layouts/Containers';
 import { AddDutyLink } from '../Links';

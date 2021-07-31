@@ -8,7 +8,7 @@ export const LeftNavbar: React.FC = () => {
       <RouterLink to="/">
         <Box cursor="pointer">
           <Text fontSize={70} color={color} fontFamily="Salsa">
-            It's Doggo Time
+            It&#39;s Doggo Time
           </Text>
         </Box>
       </RouterLink>

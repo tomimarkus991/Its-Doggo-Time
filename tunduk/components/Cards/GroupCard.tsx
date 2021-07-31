@@ -1,10 +1,9 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
 import { GroupType } from '../../types';
 import { AvatarCard } from '../Avatar';
-import Skeleton from '../Skeleton';
+import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
 
 interface Props {
   group: GroupType;

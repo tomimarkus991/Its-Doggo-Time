@@ -1,4 +1,4 @@
-import { Box, FormLabel, IconButton, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';

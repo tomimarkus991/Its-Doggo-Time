@@ -31,7 +31,7 @@ export const InviteCard: React.FC<Props> = ({
         <Text maxW="10.5rem" textAlign="center" mb={3}>
           <strong>{sender}</strong> invites you to <br /> join group called{' '}
           <br />
-          <strong> "{group_name}"</strong>
+          <strong> &#34;{group_name}&#34;</strong>
         </Text>
         <HStack spacing="7">
           <IconButton

@@ -24,7 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ChakraProvider resetCSS theme={theme}>
         <AuthDetailsProvider>
           <Head>
-            <title>It's Doggo Time</title>
+            <title>It&#39;s Doggo Time</title>
             <meta
               name="viewport"
               content="initial-scale=1.0, width=device-width"

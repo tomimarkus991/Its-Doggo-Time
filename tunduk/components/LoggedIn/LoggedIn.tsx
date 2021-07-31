@@ -25,63 +25,63 @@ const LoggedIn: React.FC = () => {
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
 
-  const fetchUserdata = async () => {
-    try {
-      setIsUserdataLoading(true);
-      let { data } = await supabase
+  useEffect(() => {
+    const fetchUserdata = async () => {
+      try {
+        setIsUserdataLoading(true);
+        let { data } = await supabase
+          .from('profiles')
+          .select(
+            `
+              id,
+              username,
+              avatar_url,
+              groups (id, group_name, avatar_url, creator_id)
+          `,
+          )
+          .eq('id', user?.id)
+          .single();
+        if (data === null) return null;
+        setUserdata(data);
+        setUsername(data.username);
+        return null;
+      } finally {
+        setIsUserdataLoading(false);
+      }
+    };
+
+    const updateOAuthData = async () => {
+      let { data, error } = await supabase
         .from('profiles')
         .select(
           `
-            id,
-            username,
-            avatar_url,
-            groups (id, group_name, avatar_url, creator_id)
-        `,
+        id,
+        username
+    `,
         )
         .eq('id', user?.id)
         .single();
-      if (data === null) return null;
-      setUserdata(data);
-      setUsername(data.username);
-      return null;
-    } finally {
-      setIsUserdataLoading(false);
-    }
-  };
+      if (
+        data == null &&
+        error?.message.includes(
+          'JSON object requested, multiple (or no) rows returned',
+        )
+      ) {
+        const updates = {
+          id: user?.id,
+          username: user?.user_metadata.full_name,
+          updated_at: new Date(),
+        };
+        const { data: updatedData } = await supabase
+          .from('profiles')
+          .upsert(updates, {
+            returning: 'representation', // Don't return the value after inserting
+          })
+          .single();
+        setUsername(updatedData.username);
+      }
+    };
 
-  const updateOAuthData = async () => {
-    let { data, error } = await supabase
-      .from('profiles')
-      .select(
-        `
-      id,
-      username
-  `,
-      )
-      .eq('id', user?.id)
-      .single();
-    if (
-      data == null &&
-      error?.message.includes(
-        'JSON object requested, multiple (or no) rows returned',
-      )
-    ) {
-      const updates = {
-        id: user?.id,
-        username: user?.user_metadata.full_name,
-        updated_at: new Date(),
-      };
-      const { data: updatedData } = await supabase
-        .from('profiles')
-        .upsert(updates, {
-          returning: 'representation', // Don't return the value after inserting
-        })
-        .single();
-      setUsername(updatedData.username);
-    }
-  };
-
-  useEffect(() => {
     updateOAuthData();
     fetchUserdata();
   }, []);

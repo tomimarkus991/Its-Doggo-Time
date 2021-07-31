@@ -15,10 +15,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { User } from '@supabase/supabase-js';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup } from '../../components/Avatar';
@@ -56,38 +54,6 @@ const Members: React.FC = () => {
   const router = useHistory();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
 
-  const fetchGroupData = async () => {
-    try {
-      setIsGroupdataLoading(true);
-      let { data, error } = await supabase
-        .from('groups')
-        .select(
-          `
-          id,
-          group_name,
-          avatar_url,
-          creator_id,
-          profiles (id, username, avatar_url)
-      `,
-        )
-        .eq('id', id)
-        .single();
-      let _groupData: GroupPageDataType = data;
-      const { avatar_url, group_name, creator_id, profiles } = _groupData;
-
-      setCreatorId(creator_id);
-      setGroupname(group_name);
-      setGroupAvatarUrl(avatar_url);
-      setMemberProfiles(profiles);
-
-      if (error) throw error.message;
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsGroupdataLoading(false);
-    }
-  };
-
   const sendInvite = async () => {
     try {
       const { username } = await getCurrentUser();
@@ -122,6 +88,39 @@ const Members: React.FC = () => {
   };
 
   useEffect(() => {
+    const fetchGroupData = async () => {
+      try {
+        setIsGroupdataLoading(true);
+        let { data, error } = await supabase
+          .from('groups')
+          .select(
+            `
+            id,
+            group_name,
+            avatar_url,
+            creator_id,
+            profiles (id, username, avatar_url)
+        `,
+          )
+          .eq('id', id)
+          .single();
+        let _groupData: GroupPageDataType = data;
+        const { avatar_url, group_name, creator_id, profiles } =
+          _groupData;
+
+        setCreatorId(creator_id);
+        setGroupname(group_name);
+        setGroupAvatarUrl(avatar_url);
+        setMemberProfiles(profiles);
+
+        if (error) throw error.message;
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        setIsGroupdataLoading(false);
+      }
+    };
+
     fetchGroupData();
   }, []);
 
@@ -200,7 +199,7 @@ const Members: React.FC = () => {
                             FRIEND REQUEST FAILED
                           </AlertTitle>
                           <AlertDescription maxWidth="sm">
-                            Hm, that didn't work. Double check that the
+                            Hm, that didn&#39;t work. Double check that the
                             capitalization, spelling, any spaces, and
                             numbers are correct.
                           </AlertDescription>
