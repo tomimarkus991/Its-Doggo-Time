@@ -1,4 +1,3 @@
-import { Text } from '@chakra-ui/react';
 import { GradientButton } from '../Buttons';
 import { GradientButtonText } from '../Text';
 

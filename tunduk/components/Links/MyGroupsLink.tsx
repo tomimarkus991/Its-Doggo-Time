@@ -2,7 +2,7 @@ import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DogPawn } from '../Icons/LightMode';
-import { LinkLabel } from './LinkLabel';
+import { LinkLabel } from '../Text';
 
 export const MyGroupsLink: React.FC = () => {
   return (

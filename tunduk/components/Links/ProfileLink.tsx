@@ -3,7 +3,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LinkLabel } from './LinkLabel';
+import { LinkLabel } from '../Text';
 
 export const ProfileLink: React.FC = () => {
   return (

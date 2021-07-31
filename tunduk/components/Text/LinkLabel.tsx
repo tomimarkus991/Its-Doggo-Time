@@ -10,9 +10,10 @@ export const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
     <FormLabel
       htmlFor={htmlFor}
       textAlign="center"
-      fontSize="xl"
+      fontSize="md"
       m={0}
       cursor="pointer"
+      textTransform="uppercase"
     >
       {label}
     </FormLabel>

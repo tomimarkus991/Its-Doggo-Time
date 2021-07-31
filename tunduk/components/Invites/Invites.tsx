@@ -18,7 +18,7 @@ import { useAuth } from '../../context/authContext/AuthContext';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { InviteCard } from '../Cards';
-import { LinkLabel } from '../Links';
+import { LinkLabel } from '../Text';
 
 interface Props {
   userInvites: InviteDataType[] | undefined;
