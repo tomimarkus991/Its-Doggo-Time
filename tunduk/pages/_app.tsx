@@ -9,6 +9,7 @@ import '@fontsource/marvel';
 import '@fontsource/salsa';
 import '@fontsource/acme';
 import '@fontsource/viga';
+import Image from 'next/image';
 
 function SafeHydrate({ children }: any) {
   return (
@@ -25,6 +26,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <AuthDetailsProvider>
           <Head>
             <title>It&#39;s Doggo Time</title>
+            {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
+            <link rel="shortcut icon" href="/images/favicon.ico" />
             <meta
               name="viewport"
               content="initial-scale=1.0, width=device-width"
