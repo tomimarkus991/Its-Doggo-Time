@@ -84,7 +84,7 @@ export const GroupsContainer: React.FC<Props> = ({
           ))}
           {paws?.map((_, index: number) => (
             <Box key={index}>
-              <DogPawn width="116" height="100" />
+              <DogPawn width="115" height="115" />
             </Box>
           ))}
         </SimpleGrid>
