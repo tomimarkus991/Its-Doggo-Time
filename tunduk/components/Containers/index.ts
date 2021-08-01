@@ -1,3 +1,3 @@
 export { GroupsContainer } from './GroupsContainer';
-export { ChatsContainer } from './ChatsContainer';
+export { LogsContainer } from './LogsContainer';
 export { MembersContainer } from './MembersContainer';
