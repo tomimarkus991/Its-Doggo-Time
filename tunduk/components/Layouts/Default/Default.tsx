@@ -1,6 +1,6 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
-import Navbar from '../../Navbar';
+import Header from '../../Header';
 
 const DefaultLayout = ({
   children,
@@ -11,11 +11,11 @@ const DefaultLayout = ({
     <Grid
       templateColumns="1fr"
       templateRows="0.4fr 1fr"
-      templateAreas='"nav" "main"'
+      templateAreas='"header" "main"'
       h="100vh"
     >
-      <GridItem gridArea="nav">
-        <Navbar />
+      <GridItem gridArea="header">
+        <Header />
       </GridItem>
       <GridItem gridArea="main">
         <Grid
