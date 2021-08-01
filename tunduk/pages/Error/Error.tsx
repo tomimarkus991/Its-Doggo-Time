@@ -1,13 +1,15 @@
+import { Center, Heading, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-function Error(): JSX.Element {
-  // @TODO - Add some actual content here.
+const Error = (): JSX.Element => {
   return (
-    <div>
-      <h1>404 - Not Found</h1>
-      <Link to="/">Back to Home</Link>
-    </div>
+    <Center>
+      <VStack>
+        <Heading>404 - Not Found</Heading>
+        <Link to="/">Back to Home</Link>
+      </VStack>
+    </Center>
   );
-}
+};
 
 export default Error;

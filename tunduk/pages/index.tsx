@@ -12,31 +12,30 @@ import Register from './Register';
 import ForgotPassword from './ForgotPassword';
 import { PrivateRoute } from '../components/Auth';
 
-export default function Index() {
+const Index = () => {
   return (
-    <>
-      <Router>
-        <Default>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <PrivateRoute
-              path="/group/create-group"
-              component={CreateGroup}
-            />
-            <PrivateRoute exact path="/group/:id" component={GroupPage} />
-            <PrivateRoute
-              exact
-              path="/group/:id/members"
-              component={MembersPage}
-            />
-            <PrivateRoute component={Error} />
-          </Switch>
-        </Default>
-      </Router>
-    </>
+    <Router>
+      <Default>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute
+            path="/group/create-group"
+            component={CreateGroup}
+          />
+          <PrivateRoute exact path="/group/:id" component={GroupPage} />
+          <PrivateRoute
+            exact
+            path="/group/:id/members"
+            component={MembersPage}
+          />
+          <Route component={Error} />
+        </Switch>
+      </Default>
+    </Router>
   );
-}
+};
+export default Index;
