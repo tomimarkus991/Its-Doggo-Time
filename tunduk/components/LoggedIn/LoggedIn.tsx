@@ -20,7 +20,6 @@ const LoggedIn: React.FC = () => {
   const [userInvites, setUserInvites] = useState<
     InviteDataType[] | undefined
   >();
-  const [userdata, setUserdata] = useState<ProfileType>();
   const [username, setUsername] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
   const [groups, setGroups] = useState<GroupType[]>();

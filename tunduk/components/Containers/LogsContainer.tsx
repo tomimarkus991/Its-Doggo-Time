@@ -13,7 +13,6 @@ import { supabase } from '../../utils/supabaseClient';
 import { LogCard } from '../Cards';
 import { Heading } from '../Headers';
 import { AddDutyLink } from '../Links';
-import Skeleton from '../Skeleton';
 
 interface Props {}
 interface RouteParams {
@@ -26,8 +25,6 @@ export const LogsContainer: React.FC<Props> = ({}) => {
 
   useEffect(() => {
     const getLogsdata = async () => {
-      console.log(id);
-
       try {
         const { data } = await supabase
           .from('logs')
@@ -45,7 +42,10 @@ export const LogsContainer: React.FC<Props> = ({}) => {
 
         if (!data) return null;
         setLogsdata(data);
-      } catch (error) {}
+        return;
+      } catch (error) {
+        throw error;
+      }
     };
 
     getLogsdata();

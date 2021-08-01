@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  Flex,
-  HStack,
-  Spacer,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { GradientButton } from '../Buttons';
 import { DoggoIcon } from '../Icons/Doggo';
