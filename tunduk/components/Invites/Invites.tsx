@@ -13,12 +13,13 @@ import {
 } from '@chakra-ui/react';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
+import { GradientButton } from '../Buttons';
 import { InviteCard } from '../Cards';
-import { LinkLabel } from '../Text';
+import { GradientButtonText, LinkLabel } from '../Text';
 
 interface Props {
   userInvites: InviteDataType[] | undefined;
@@ -59,12 +60,12 @@ const Invites: React.FC<Props> = ({
     }
   };
 
-  const listenForInserts = (username: StringOrUndefined) => {
+  const listenForInviteInserts = (username: StringOrUndefined) => {
     supabase
       .from(`invites:receiver=eq.${username}`)
       .on('INSERT', async payload => {
         const { sender, receiver, id, group_id } = payload.new;
-        let { data: group } = await supabase
+        let { data: groups } = await supabase
           .from('groups')
           .select(
             `
@@ -81,18 +82,16 @@ const Invites: React.FC<Props> = ({
           group_id,
           sender,
           receiver,
-          group,
+          groups,
         };
         setUserInvites((oldData: any) => [...oldData, newInvite]);
       })
       .subscribe();
   };
-  const listenForDeletes = () => {
+  const listenForInviteDeletes = () => {
     supabase
       .from(`invites`)
       .on('DELETE', payload => {
-        console.log('payload', payload);
-
         setUserInvites(oldData =>
           oldData?.filter(data => data.id !== payload.old.id),
         );
@@ -109,7 +108,7 @@ const Invites: React.FC<Props> = ({
       profile_id: user?.id,
       group_id,
     };
-    await supabase.from('members').upsert(memberUpdates, {
+    await supabase.from('members').insert(memberUpdates, {
       returning: 'minimal',
     });
 
@@ -118,11 +117,11 @@ const Invites: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    listenForDeletes();
+    listenForInviteDeletes();
   }, []);
 
   useEffect(() => {
-    listenForInserts(currentUsername);
+    listenForInviteInserts(currentUsername);
     fetchInvites(currentUsername);
   }, [currentUsername]);
 
@@ -137,10 +136,11 @@ const Invites: React.FC<Props> = ({
         />
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
+
       <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Invites</ModalHeader>
+          <ModalHeader fontSize="3xl">Invites</ModalHeader>
           <ModalCloseButton />
           <ModalBody maxH="lg">
             <VStack>
@@ -165,9 +165,9 @@ const Invites: React.FC<Props> = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
+            <GradientButton mr={3} onClick={onClose}>
+              <GradientButtonText fontSize={20}>Close</GradientButtonText>
+            </GradientButton>
           </ModalFooter>
         </ModalContent>
       </Modal>

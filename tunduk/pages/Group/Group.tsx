@@ -6,11 +6,12 @@ import {
   IconButton,
   Input,
   useToast,
+  VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
-import { ChatsContainer } from '../../components/Containers';
+import { LogsContainer } from '../../components/Containers';
 import { Heading, Name } from '../../components/Headers';
 import MainLayout from '../../components/Layouts/MainLayout';
 import {
@@ -26,6 +27,7 @@ import { supabase } from '../../utils/supabaseClient';
 interface RouteParams {
   id: string;
 }
+
 const Group: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [group_name, setGroupname] = useState<StringOrUndefined>();
@@ -173,11 +175,7 @@ const Group: React.FC = () => {
           isLoading={isGroupdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <Flex
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
+          <VStack>
             <AvatarGroup src={group_avatar_url as string} />
             {isEditable ? (
               <AvatarUpload
@@ -196,12 +194,13 @@ const Group: React.FC = () => {
                 isDisabled={!isEditable}
                 fontSize="4xl"
                 size="lg"
+                width="2xs"
               />
             ) : (
               <Name title={group_name} />
             )}
             {user?.id === creator_id ? <EditableControls /> : null}
-          </Flex>
+          </VStack>
         </Skeleton>
       }
       middle={
@@ -209,7 +208,7 @@ const Group: React.FC = () => {
           <Box mb="8">
             <Heading title="Overview" />
           </Box>
-          <ChatsContainer />
+          <LogsContainer />
         </Box>
       }
       rightSide={

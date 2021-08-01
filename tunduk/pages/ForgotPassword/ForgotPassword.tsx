@@ -4,16 +4,15 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
-  Button,
   Center,
   Flex,
   HStack,
   Input,
-  Link,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { GradientButton } from '../../components/Buttons';
 import { Heading } from '../../components/Headers';
 import { GradientButtonText } from '../../components/Text';
@@ -98,24 +97,22 @@ const ForgotPassword: React.FC = () => {
                     isInvalid={isAuthError}
                   />
                   <HStack spacing="4">
-                    <Button
-                      onClick={sendResetPassword}
-                      colorScheme="pink"
-                      isLoading={isLoading}
-                      loadingText="Sending"
-                      borderRadius="20"
-                      size="lg"
-                      fontSize="xl"
-                    >
-                      Send
-                    </Button>
                     <Link to="/login">
                       <GradientButton>
                         <GradientButtonText fontSize={25}>
-                          Go back
+                          Back
                         </GradientButtonText>
                       </GradientButton>
                     </Link>
+                    <GradientButton
+                      onClick={sendResetPassword}
+                      isLoading={isLoading}
+                      loadingText="Sending"
+                    >
+                      <GradientButtonText fontSize={25}>
+                        Send
+                      </GradientButtonText>
+                    </GradientButton>
                   </HStack>
                 </VStack>
               </VStack>

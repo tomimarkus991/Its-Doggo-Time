@@ -1,11 +1,10 @@
-import { Session } from '@supabase/supabase-js';
 import React from 'react';
 import LoggedIn from '../../components/LoggedIn';
 import LoggedOut from '../../components/LoggedOut';
-import { supabase } from '../../utils/supabaseClient';
+import { useAuth } from '../../context/authContext/AuthContext';
 
 const Home: React.FC = () => {
-  const session: Session | null = supabase.auth.session();
-  return <>{session ? <LoggedIn /> : <LoggedOut />}</>;
+  const { user } = useAuth();
+  return <>{user ? <LoggedIn /> : <LoggedOut />}</>;
 };
 export default Home;

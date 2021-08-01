@@ -751,31 +751,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/abel@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/abel/-/abel-4.5.0.tgz#f1019c9c22aa813392f84ea2b6baefb48e8aa4cc"
-  integrity sha512-tEpBho/VZWSXB/sEKLSE1TMJA31zz7NbJCbxG0DODptXnRJ1T7WlarB9BMjjN0tApjOv3ZXIyYFucW5Dx4sJ3A==
-
-"@fontsource/acme@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/acme/-/acme-4.5.0.tgz#922a3b49b311e3095d1aaab58cdd92b5281ce9ed"
-  integrity sha512-gyN3/QA0+qGfCLbMnGojctbZOAOr5L50kBb9cyqS06CGCafCTwnoAZXse74tSpmfCEgWav3qUx9cECaBCy196A==
-
-"@fontsource/barlow-semi-condensed@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/barlow-semi-condensed/-/barlow-semi-condensed-4.5.0.tgz#5104edede8b9568f1c97c1fca923018d5f9d8680"
-  integrity sha512-Sr+9nNT4OdcxbQY56heKr0nLA0BMCGrQUHncNcL5LlVDbyqWMmW88osvsZrHGjEXVQ0MTxVixxwZdyI5nQFVOQ==
-
-"@fontsource/marvel@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/marvel/-/marvel-4.5.0.tgz#d7ffbbbcc32a67770ef68d7df39a08954b939fd9"
-  integrity sha512-7rdCZKNH8sxjuVj39NqZkXOwY6++hm6S97ml8YOGMcdnUw3I/OB25vFKTt5aPDQPARqLObU4W1862CZU/rF+1g==
-
-"@fontsource/salsa@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/salsa/-/salsa-4.5.0.tgz#e42fc26c46da8a16e74609ebedab0cfa1c8819a6"
-  integrity sha512-U9D3V+O/4+IQO0NtBms5bOXqGBGBLrjhgoGsbCgmFCN2viDUfeHdWSbwNODJlv5DFfxEWfLyg3SEhp3bLTWumQ==
-
 "@fontsource/viga@^4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@fontsource/viga/-/viga-4.5.0.tgz#1ab78ce737815ff090aae325567ff97ea4a015a8"
@@ -3027,6 +3002,11 @@ minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
 ms@2.0.0:
   version "2.0.0"

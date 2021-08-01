@@ -2,6 +2,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
+  GroupType,
   InviteDataType,
   ProfileType,
   StringOrUndefined,
@@ -21,11 +22,45 @@ const LoggedIn: React.FC = () => {
   >();
   const [userdata, setUserdata] = useState<ProfileType>();
   const [username, setUsername] = useState<StringOrUndefined>();
+  const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
+  const [groups, setGroups] = useState<GroupType[]>();
   const { user } = useAuth();
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
 
   useEffect(() => {
+    const listenForMemberInserts = () => {
+      // when a you are inserted to members
+      // (by accepting invite or directly from database)
+      supabase
+        .from(`members:profile_id=eq.${user?.id}`)
+        .on('INSERT', async payload => {
+          // you get the group_id from payload
+          // and get group_name and avatar_url
+          let { data: group } = await supabase
+            .from('groups')
+            .select(
+              `
+            id,
+            group_name,
+            avatar_url
+        `,
+            )
+            .eq('id', payload.new.group_id)
+            .single();
+          const { id, group_name, avatar_url } = group as GroupType;
+
+          const newGroup: GroupType = {
+            id,
+            group_name,
+            avatar_url,
+          };
+          // update frontend with new data
+          setGroups((oldData: any) => [...oldData, newGroup]);
+        })
+        .subscribe();
+    };
+
     const fetchUserdata = async () => {
       try {
         setIsUserdataLoading(true);
@@ -41,10 +76,18 @@ const LoggedIn: React.FC = () => {
           )
           .eq('id', user?.id)
           .single();
-        if (data === null) return null;
-        setUserdata(data);
-        setUsername(data.username);
-        return null;
+
+        const _userdata: ProfileType = data;
+
+        if (_userdata === null) return <Box>No data</Box>;
+
+        const { username, avatar_url, groups } = _userdata;
+
+        setUsername(username);
+        setAvatarUrl(avatar_url);
+        setGroups(groups);
+
+        return <Box>Error</Box>;
       } finally {
         setIsUserdataLoading(false);
       }
@@ -82,6 +125,7 @@ const LoggedIn: React.FC = () => {
       }
     };
 
+    listenForMemberInserts();
     updateOAuthData();
     fetchUserdata();
   }, []);
@@ -98,7 +142,7 @@ const LoggedIn: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <AvatarProfile src={userdata?.avatar_url as string} />
+            <AvatarProfile src={avatar_url as string} />
             <Name title={username} />
           </Flex>
         </Skeleton>
@@ -109,7 +153,7 @@ const LoggedIn: React.FC = () => {
             <Heading title="Groups" />
           </Box>
           <GroupsContainer
-            userGroups={userdata?.groups}
+            userGroups={groups}
             isLoading={isUserdataLoading}
             username={username}
           />

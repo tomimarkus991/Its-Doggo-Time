@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   HStack,
   Input,
   InputGroup,
@@ -144,11 +143,7 @@ const Profile: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <Flex
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
+          <VStack>
             <AvatarProfile src={avatar_url as string} />
             <AvatarUpload
               onUpload={(url: string) => {
@@ -158,7 +153,7 @@ const Profile: React.FC = () => {
               title="Update photo"
             />
             <Name title={username} />
-          </Flex>
+          </VStack>
         </Skeleton>
       }
       middle={
@@ -168,7 +163,7 @@ const Profile: React.FC = () => {
           </Box>
           <VStack h="md">
             <VStack h="sm" w="xl" borderRadius={20} boxShadow="lg">
-              <VStack w="2xs">
+              <VStack w="xs">
                 <Input
                   value={username || ''}
                   onChange={e => setUsername(e.target.value)}

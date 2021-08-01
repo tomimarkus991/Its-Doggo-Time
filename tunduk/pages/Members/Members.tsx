@@ -45,7 +45,7 @@ const Members: React.FC = () => {
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
   const [creator_id, setCreatorId] = useState<StringOrUndefined>();
-  const [memberProfiles, setMemberProfiles] = useState<ProfileType[]>();
+  const [profiles, setProfiles] = useState<ProfileType[]>();
   const [inviteReceiver, setInviteReceiver] = useState<string | null>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isInvalid, setIsInvalid] = useState(false);
@@ -88,6 +88,39 @@ const Members: React.FC = () => {
   };
 
   useEffect(() => {
+    const listenForMemberInserts = () => {
+      // when a you are inserted to members
+      // (by accepting invite or directly from database)
+      supabase
+        .from(`members:group_id=eq.${id}`)
+        .on('INSERT', async payload => {
+          let { data: profile } = await supabase
+            .from('profiles')
+            .select(
+              `
+            id,
+            username,
+            avatar_url
+        `,
+            )
+            .eq('id', payload.new.profile_id)
+            .single();
+
+          console.log('payload.new.profile_id', payload.new.profile_id);
+
+          const { id, username, avatar_url } = profile as ProfileType;
+
+          const newProfile: ProfileType = {
+            id,
+            username,
+            avatar_url,
+          };
+          // update frontend with new data
+          setProfiles((oldData: any) => [...oldData, newProfile]);
+        })
+        .subscribe();
+    };
+
     const fetchGroupData = async () => {
       try {
         setIsGroupdataLoading(true);
@@ -111,7 +144,7 @@ const Members: React.FC = () => {
         setCreatorId(creator_id);
         setGroupname(group_name);
         setGroupAvatarUrl(avatar_url);
-        setMemberProfiles(profiles);
+        setProfiles(profiles);
 
         if (error) throw error.message;
       } catch (error) {
@@ -120,7 +153,7 @@ const Members: React.FC = () => {
         setIsGroupdataLoading(false);
       }
     };
-
+    listenForMemberInserts();
     fetchGroupData();
   }, []);
 
@@ -159,7 +192,7 @@ const Members: React.FC = () => {
             </HStack>
           </Box>
           <MembersContainer
-            members={memberProfiles as ProfileType[]}
+            members={profiles}
             AddNewMember={
               <>
                 {creator_id === user?.id ? (
