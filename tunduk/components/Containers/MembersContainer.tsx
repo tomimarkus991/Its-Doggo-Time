@@ -6,7 +6,7 @@ import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
-  members: ProfileType[];
+  members: ProfileType[] | undefined;
   AddNewMember: any;
 }
 
@@ -40,7 +40,11 @@ export const MembersContainer: React.FC<Props> = ({
   }, [members]);
 
   return (
-    <MainContainerLayout button={AddNewMember} isLoading={false}>
+    <MainContainerLayout
+      button={AddNewMember}
+      isLoading={false}
+      containerProps={{ w: '2xl', h: 'sm' }}
+    >
       {members ? (
         <SimpleGrid columns={3} spacing={10}>
           {members.map((member: ProfileType, index: number) => (

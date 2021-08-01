@@ -50,31 +50,22 @@ export const GroupsContainer: React.FC<Props> = ({
   return (
     <MainContainerLayout
       button={
-        <>
-          {username === null ? (
-            <Link to="/profile">
-              <GradientButton>
-                <GradientButtonText fontSize={25}>
-                  Add username to create groups
-                </GradientButtonText>
-              </GradientButton>
-            </Link>
-          ) : (
-            <Link to="/group/create-group">
-              <GradientButton isDisabled={isAddDoggoGroupDisabled}>
-                <GradientButtonText fontSize={25}>
-                  New Doggo Group
-                </GradientButtonText>
-              </GradientButton>
-            </Link>
-          )}
-        </>
+        <Link to="/group/create-group">
+          <GradientButton
+            isDisabled={isAddDoggoGroupDisabled || username === null}
+          >
+            <GradientButtonText fontSize={25}>
+              New Doggo Group
+            </GradientButtonText>
+          </GradientButton>
+        </Link>
       }
       isLoading={isLoading}
+      containerProps={{ w: '2xl', h: 'sm' }}
     >
-      {userGroups?.length === 0 ||
-      userGroups === null ||
-      userGroups === undefined ? (
+      {userGroups === null ||
+      userGroups === undefined ||
+      userGroups.length === 0 ? (
         <Center>
           <VStack textAlign="center">
             <Heading title="No groups created yet" />
