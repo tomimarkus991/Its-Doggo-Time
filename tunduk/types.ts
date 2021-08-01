@@ -29,7 +29,7 @@ export interface InviteDataType {
   receiver: string;
   sender: string;
   group_id: string;
-  group: GroupType;
+  groups: GroupType;
 }
 
 export interface ProfileType {
@@ -45,4 +45,13 @@ export interface GroupPageDataType {
   avatar_url: string;
   creator_id: string;
   profiles: ProfileType[];
+}
+
+export interface LogsdataType {
+  id: string;
+  pee: boolean;
+  poop: boolean;
+  group_id: string;
+  creator_id: string;
+  created_at: Date;
 }
