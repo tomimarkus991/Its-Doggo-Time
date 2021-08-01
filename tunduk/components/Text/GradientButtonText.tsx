@@ -9,7 +9,7 @@ export const GradientButtonText: React.FC<Props> = ({
   fontSize,
 }) => {
   return (
-    <Text fontSize={fontSize} color="gray.800" textTransform="uppercase">
+    <Text fontSize={fontSize} color="gray.800" casing="uppercase">
       {children}
     </Text>
   );

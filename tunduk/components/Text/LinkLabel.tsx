@@ -13,7 +13,7 @@ export const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
       fontSize="md"
       m={0}
       cursor="pointer"
-      textTransform="uppercase"
+      casing="uppercase"
     >
       {label}
     </FormLabel>

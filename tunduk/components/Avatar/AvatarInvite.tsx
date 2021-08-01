@@ -9,7 +9,7 @@ export const AvatarInvite: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       src={src}
-      size="lg"
+      size="xl"
       icon={<GroupProfileIcon fontSize="4rem" />}
     />
   );

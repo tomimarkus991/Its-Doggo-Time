@@ -19,21 +19,20 @@ export const InviteCard: React.FC<Props> = ({
   const { id, groups, sender } = invite;
   const { avatar_url, group_name } = groups;
   return (
-    <Box
-      boxSizing="border-box"
-      border="1px"
-      borderColor="gray.300"
-      borderRadius={20}
-      py="4"
-    >
+    <Box boxSizing="border-box" boxShadow="2xl" borderRadius={20} py="4">
       <Flex flexDirection="column" alignItems="center">
         <AvatarInvite src={avatar_url} />
-        <Text maxW="10.5rem" textAlign="center" mb={3}>
-          <strong>{sender}</strong> invites you to <br /> join group called{' '}
-          <br />
-          <strong> &#34;{group_name}&#34;</strong>
-        </Text>
-        <HStack spacing="7">
+        <Box textAlign="center">
+          <Text fontSize={20}>
+            <strong>{sender}</strong> invites you
+          </Text>
+          <Text fontSize={18}>to join group called</Text>
+          <Text fontSize={28}>
+            <strong> &#34;{group_name}&#34;</strong>
+          </Text>
+        </Box>
+
+        <HStack mt="4" spacing="7">
           <IconButton
             aria-label="decline"
             borderRadius="100"

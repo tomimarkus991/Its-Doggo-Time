@@ -124,6 +124,12 @@ const Invites: React.FC<Props> = ({
     fetchInvites(currentUsername);
   }, [currentUsername]);
 
+  useEffect(() => {
+    if (userInvites?.length === 0) {
+      onClose();
+    }
+  }, [userInvites]);
+
   return (
     <Box>
       <VStack cursor="pointer" onClick={onOpen}>
@@ -142,7 +148,7 @@ const Invites: React.FC<Props> = ({
           <ModalHeader fontSize="3xl">Invites</ModalHeader>
           <ModalCloseButton />
           <ModalBody maxH="lg">
-            <VStack>
+            <VStack my="8" spacing="16">
               {userInvites?.map(
                 (invite: InviteDataType, index: number) => {
                   return (
@@ -163,8 +169,8 @@ const Invites: React.FC<Props> = ({
             </VStack>
           </ModalBody>
 
-          <ModalFooter>
-            <GradientButton mr={3} onClick={onClose}>
+          <ModalFooter py={2}>
+            <GradientButton onClick={onClose}>
               <GradientButtonText fontSize={20}>Close</GradientButtonText>
             </GradientButton>
           </ModalFooter>
