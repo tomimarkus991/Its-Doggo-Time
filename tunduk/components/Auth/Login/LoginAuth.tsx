@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   HStack,
   Input,
   InputGroup,
@@ -20,6 +21,7 @@ import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../../types';
 import { GradientButton } from '../../Buttons';
+import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
 
 const LoginAuth: React.FC = () => {
@@ -88,7 +90,7 @@ const LoginAuth: React.FC = () => {
               _placeholder={{ color: 'gray.800' }}
               isInvalid={isAuthError}
             />
-            <InputRightElement id="input roigs" width="3rem" h="100%">
+            <InputRightElement width="3rem" h="100%">
               {show ? (
                 <FontAwesomeIcon
                   icon={faEye}
@@ -106,9 +108,13 @@ const LoginAuth: React.FC = () => {
               )}
             </InputRightElement>
           </InputGroup>
-          <Link to="/forgot-password">
-            <Text color="#c9ac95">Forgot Password?</Text>
-          </Link>
+          <Flex justifyContent="flex-end" mt="2">
+            <Link to="/forgot-password">
+              <Text color="#c9ac95" textAlign="right">
+                Forgot Password?
+              </Text>
+            </Link>
+          </Flex>
         </Box>
         <GradientButton
           onClick={(e: any) => {
@@ -134,6 +140,7 @@ const LoginAuth: React.FC = () => {
             <Text color="#c9ac95">Sign up</Text>
           </Link>
         </HStack>
+        <ColorMode />
       </VStack>
     </Box>
   );

@@ -9,6 +9,7 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import {
@@ -23,7 +24,9 @@ import { Link } from 'react-router-dom';
 import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../../types';
+import { supabase } from '../../../utils/supabaseClient';
 import { GradientButton } from '../../Buttons';
+import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
 
 const RegisterAuth: React.FC = () => {
@@ -32,25 +35,68 @@ const RegisterAuth: React.FC = () => {
   const [isSignupSuccessful, setIsSignupSuccessful] =
     useState<boolean>(false);
 
+  const [username, setUsername] = useState<StringOrUndefined>();
   const [email, setEmail] = useState<StringOrUndefined>();
   const [password, setPassword] = useState<StringOrUndefined>();
 
   const [show, setShow] = useState(false);
 
   const { signUp } = useAuth();
+  const toast = useToast();
+
+  const updateProfile = async (userid: any) => {
+    try {
+      setIsLoading(true);
+      const updates = {
+        id: userid,
+        username,
+        updated_at: new Date(),
+      };
+
+      let { error } = await supabase.from('profiles').upsert(updates, {
+        returning: 'minimal',
+      });
+
+      if (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const signUserUp = async () => {
     let isError = false;
     try {
       setIsLoading(true);
-      let { error } = await signUp({
-        email,
-        password,
-      });
+      let { data, error }: { data: any; error: Error | null } =
+        await signUp({
+          email,
+          password,
+        });
 
       if (error) {
         isError = true;
         setIsAuthError(true);
+        toast({
+          title: 'Error',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top',
+        });
+      } else {
+        updateProfile(data?.id);
       }
     } catch (error) {
       alert(error.error_description || error.message);
@@ -82,16 +128,29 @@ const RegisterAuth: React.FC = () => {
         >
           <AlertIcon w="10" h="10" mb="4" />
           <AlertTitle mt={4} mb={6} fontSize="3xl">
-            <Text mb="2">Account Created Successfully</Text>
+            <Text mb="2">Account Created</Text>
+            <Text mb="2">Successfully</Text>
           </AlertTitle>
           <AlertDescription maxWidth="sm" fontSize="2xl">
-            <Text mb="4">Please confirm your email</Text>
+            <Text mb="8">Please confirm your email</Text>
             <Text>You can close this tab now</Text>
           </AlertDescription>
         </Alert>
       ) : (
         <Box w={300}>
           <VStack spacing="4">
+            <Input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              size="lg"
+              fontSize="xl"
+              borderRadius="25"
+              borderColor="beez.900"
+              _placeholder={{ color: 'gray.800' }}
+              // isInvalid={isAuthError}
+            />
             <Input
               type="email"
               placeholder="Email"
@@ -162,6 +221,7 @@ const RegisterAuth: React.FC = () => {
                 <Text color="#c9ac95">Sign in</Text>
               </Link>
             </HStack>
+            <ColorMode />
           </VStack>
         </Box>
       )}
