@@ -16,8 +16,8 @@ export const InviteCard: React.FC<Props> = ({
   declineInvite,
   acceptInvite,
 }) => {
-  const { id, group, sender } = invite;
-  const { avatar_url, group_name } = group;
+  const { id, groups, sender } = invite;
+  const { avatar_url, group_name } = groups;
   return (
     <Box
       boxSizing="border-box"
@@ -36,15 +36,17 @@ export const InviteCard: React.FC<Props> = ({
         <HStack spacing="7">
           <IconButton
             aria-label="decline"
+            borderRadius="100"
             bgColor="red.500"
             icon={<FontAwesomeIcon icon={faTimes} />}
             onClick={() => declineInvite(id)}
           />
           <IconButton
             aria-label="accept"
+            borderRadius="100"
             bgColor="green.400"
             icon={<FontAwesomeIcon icon={faCheck} />}
-            onClick={() => acceptInvite(group.id, id)}
+            onClick={() => acceptInvite(groups.id, id)}
           />
         </HStack>
       </Flex>
