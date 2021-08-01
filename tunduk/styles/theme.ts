@@ -39,5 +39,17 @@ export const theme = extendTheme({
         },
       },
     },
+    Button: {
+      baseStyle: {
+        _focus: {
+          boxShadow: 'none',
+        },
+        _active: {
+          bg: '#E5E0D5',
+          bgColor: '#E5E0D5',
+          borderColor: '#E5E0D5',
+        },
+      },
+    },
   },
 });
