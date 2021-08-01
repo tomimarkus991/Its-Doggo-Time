@@ -53,6 +53,8 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
         loadingText="Uploading"
         variant="ghost"
         fontSize="2xl"
+        textTransform="uppercase"
+        color="gray.800"
       >
         {title}
       </Button>

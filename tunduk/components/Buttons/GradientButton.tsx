@@ -12,8 +12,10 @@ export const GradientButton = (props: ButtonProps) => {
         bgGradient: 'linear(to-r, beez.500, beez.900)',
       }}
       // _focus={{
-      //   bgGradient: 'linear(to-r, beez.500, beez.900)',
+      //   // bgGradient: 'linear(to-r, beez.500, beez.900)',
+      //   boxShadow:""
       // }}
+
       {...props}
     >
       {props.children}
