@@ -69,7 +69,7 @@ const LoginAuth: React.FC = () => {
           value={email || ''}
           onChange={e => setEmail(e.target.value)}
           size="lg"
-          fontSize="xl"
+          fontSize="2xl"
           borderRadius="25"
           borderColor="beez.900"
           _placeholder={{ color: 'gray.800' }}
@@ -84,7 +84,7 @@ const LoginAuth: React.FC = () => {
               autoComplete="off"
               placeholder="Password"
               size="lg"
-              fontSize="xl"
+              fontSize="2xl"
               borderRadius="25"
               borderColor="beez.900"
               _placeholder={{ color: 'gray.800' }}
@@ -134,7 +134,7 @@ const LoginAuth: React.FC = () => {
           <OAuthButton provider="facebook" icon={faFacebook} />
           <OAuthButton provider="github" icon={faGithub} />
         </HStack>
-        <HStack>
+        <HStack spacing={1}>
           <Text>New to Doggo time?</Text>
           <Link to="/register">
             <Text color="#c9ac95">Sign up</Text>
