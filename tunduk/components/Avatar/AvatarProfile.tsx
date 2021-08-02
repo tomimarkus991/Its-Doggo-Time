@@ -1,5 +1,4 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { BlackProfileIcon } from '../Icons/Profile/BlackProfileIcon';
 import { Avatar } from './Avatar';
 
 interface Props {
@@ -11,7 +10,7 @@ export const AvatarProfile: React.FC<Props> = ({ src }) => {
     <Avatar
       src={src}
       size="3xl"
-      icon={<FontAwesomeIcon icon={faUser} size="6x" />}
+      icon={<BlackProfileIcon width="6rem" height="6rem" />}
     />
   );
 };
