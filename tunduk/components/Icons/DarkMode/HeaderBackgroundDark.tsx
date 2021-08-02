@@ -1,6 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 
-export const NavbarBackgroundDark = () => (
+export const HeaderBackgroundDark = () => (
   <Icon
     width="1920"
     height="351"

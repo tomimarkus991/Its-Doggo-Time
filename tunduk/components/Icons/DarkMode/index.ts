@@ -1,1 +1,1 @@
-export { NavbarBackgroundDark } from './NavbarBackgroundDark';
+export { HeaderBackgroundDark } from './HeaderBackgroundDark';

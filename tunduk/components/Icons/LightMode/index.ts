@@ -1,3 +1,3 @@
 export { DogPawn } from './DogPawn';
-export { NavbarBackgroundLight } from './NavbarBackgroundLight';
+export { HeaderBackgroundLight } from './HeaderBackgroundLight';
 export { BackIcon } from './BackIcon';
