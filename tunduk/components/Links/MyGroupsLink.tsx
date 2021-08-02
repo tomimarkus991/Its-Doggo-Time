@@ -1,14 +1,14 @@
 import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { DogPawn } from '../Icons/LightMode';
+import { PawIcon } from '../Icons/Navbar';
 import { LinkLabel } from '../Text';
 
 export const MyGroupsLink: React.FC = () => {
   return (
     <Link to="/">
       <VStack>
-        <DogPawn id="MyGroups" width="12" height="12" />
+        <PawIcon id="MyGroups" width="4.5rem" height="4rem" />
         <LinkLabel htmlFor="MyGroups" label="My Groups" />
       </VStack>
     </Link>

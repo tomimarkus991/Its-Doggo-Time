@@ -1,8 +1,7 @@
 import { VStack } from '@chakra-ui/react';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { MembersIcon } from '../Icons/Navbar';
 import { LinkLabel } from '../Text';
 
 interface Props {
@@ -13,12 +12,7 @@ export const MembersLink: React.FC<Props> = ({ group_id }) => {
   return (
     <Link to={`/group/${group_id}/members`}>
       <VStack>
-        <FontAwesomeIcon
-          id="Members"
-          icon={faUsers}
-          color="#DDCDBF"
-          size="3x"
-        />
+        <MembersIcon id="Members" width="6.5rem" height="4rem" />
         <LinkLabel htmlFor="Members" label="Members" />
       </VStack>
     </Link>
