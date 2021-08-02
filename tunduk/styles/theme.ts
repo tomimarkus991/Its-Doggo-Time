@@ -45,9 +45,9 @@ export const theme = extendTheme({
           boxShadow: 'none',
         },
         _active: {
-          bg: '#E5E0D5',
-          bgColor: '#E5E0D5',
-          borderColor: '#E5E0D5',
+          bg: '#FBF0E5',
+          bgColor: '#FBF0E5',
+          borderColor: '#FBF0E5',
         },
       },
     },
