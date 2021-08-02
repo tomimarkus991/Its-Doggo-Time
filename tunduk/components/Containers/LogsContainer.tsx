@@ -53,12 +53,13 @@ export const LogsContainer: React.FC<Props> = ({}) => {
   return (
     <VStack id="VStack">
       <Flex
+        position="relative"
+        style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
         h="md"
         w="3xl"
         justifyContent="center"
         alignItems="center"
         borderRadius={20}
-        boxShadow="xl"
         mb="1em"
         // py="4"
         flexDirection="column"
@@ -93,9 +94,9 @@ export const LogsContainer: React.FC<Props> = ({}) => {
           </SimpleGrid>
           // </Flex>
         )}
-      </Flex>
-      <Flex w="3xl" justifyContent="flex-end">
-        <AddDutyLink />
+        <Box position="absolute" right="-10" bottom="-10">
+          <AddDutyLink />
+        </Box>
       </Flex>
     </VStack>
   );

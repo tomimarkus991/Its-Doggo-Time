@@ -1,13 +1,19 @@
-import { Box, Center, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  IconButton,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GroupType, StringOrUndefined } from '../../types';
-import { GradientButton } from '../Buttons';
 import { GroupCard } from '../Cards';
 import { Heading } from '../Headers';
+import { AddGroupIcon } from '../Icons/Doggo';
 import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
-import { GradientButtonText } from '../Text';
 
 interface Props {
   userGroups: GroupType[] | undefined;
@@ -51,13 +57,18 @@ export const GroupsContainer: React.FC<Props> = ({
     <MainContainerLayout
       button={
         <Link to="/group/create-group">
-          <GradientButton
+          <IconButton
+            aria-label="Add new doggo group"
+            size="sm"
+            w="100%"
+            h="100%"
+            p={2}
+            borderRadius="100"
             isDisabled={isAddDoggoGroupDisabled || username === null}
-          >
-            <GradientButtonText fontSize={25}>
-              New Doggo Group
-            </GradientButtonText>
-          </GradientButton>
+            bgColor="transparent"
+            _hover={{ bgColor: 'transparent' }}
+            icon={<AddGroupIcon width="28" height="28" />}
+          />
         </Link>
       }
       isLoading={isLoading}

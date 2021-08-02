@@ -19,10 +19,15 @@ export const InviteCard: React.FC<Props> = ({
   const { id, groups, sender } = invite;
   const { avatar_url, group_name } = groups;
   return (
-    <Box boxSizing="border-box" boxShadow="2xl" borderRadius={20} py="4">
+    <Box
+      boxSizing="border-box"
+      style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+      borderRadius={20}
+      py="4"
+    >
       <Flex flexDirection="column" alignItems="center">
         <AvatarInvite src={avatar_url} />
-        <Box textAlign="center">
+        <Box my="4" textAlign="center">
           <Text fontSize={20}>
             <strong>{sender}</strong> invites you
           </Text>
@@ -32,7 +37,7 @@ export const InviteCard: React.FC<Props> = ({
           </Text>
         </Box>
 
-        <HStack mt="4" spacing="7">
+        <HStack spacing="7">
           <IconButton
             aria-label="decline"
             borderRadius="100"

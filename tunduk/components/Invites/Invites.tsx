@@ -10,14 +10,13 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { GradientButton } from '../Buttons';
 import { InviteCard } from '../Cards';
+import { InvitesIcon } from '../Icons/Navbar';
 import { GradientButtonText, LinkLabel } from '../Text';
 
 interface Props {
@@ -131,14 +130,9 @@ const Invites: React.FC<Props> = ({
   }, [userInvites]);
 
   return (
-    <Box>
+    <>
       <VStack cursor="pointer" onClick={onOpen}>
-        <FontAwesomeIcon
-          id="Invites"
-          icon={faEnvelope}
-          color="#DDCDBF"
-          size="3x"
-        />
+        <InvitesIcon id="Invites" width="5.5rem" height="4rem" />
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
 
@@ -176,7 +170,7 @@ const Invites: React.FC<Props> = ({
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </Box>
+    </>
   );
 };
 export default Invites;
