@@ -22,7 +22,9 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       </GridItem>
       <GridItem gridArea="middle">{middle}</GridItem>
       <GridItem gridArea="rightSide">
-        <HStack spacing="6">{rightSide}</HStack>
+        <HStack spacing="6" alignItems="flex-end">
+          {rightSide}
+        </HStack>
       </GridItem>
     </Grid>
   );

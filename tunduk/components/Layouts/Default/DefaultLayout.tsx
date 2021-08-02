@@ -18,16 +18,7 @@ const DefaultLayout = ({
         <Header />
       </GridItem>
       <GridItem gridArea="main">
-        <Grid
-          templateColumns="1fr"
-          templateRows="1fr"
-          templateAreas='"main-content"'
-          h="100%"
-        >
-          <GridItem gridArea="main-content">
-            <Box h="100%">{children}</Box>
-          </GridItem>
-        </Grid>
+        <Box h="100%">{children}</Box>
       </GridItem>
     </Grid>
   );
