@@ -4,9 +4,9 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
-  Button,
   Flex,
   HStack,
+  IconButton,
   Input,
   Modal,
   ModalBody,
@@ -23,6 +23,7 @@ import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
 import { Heading, Name } from '../../components/Headers';
+import { AddMemberIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink, ProfileLink } from '../../components/Links';
@@ -53,6 +54,8 @@ const Members: React.FC = () => {
 
   const router = useHistory();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
+  const [isAddMemberDisabled, setIsAddMemberDisabled] =
+    useState<boolean>(false);
 
   const sendInvite = async () => {
     try {
@@ -84,6 +87,12 @@ const Members: React.FC = () => {
       if (error) throw error.message;
     } catch (error) {
       throw error;
+    }
+  };
+
+  const howManyMembersGroupHas = () => {
+    if (profiles?.length === 9) {
+      setIsAddMemberDisabled(true);
     }
   };
 
@@ -157,6 +166,10 @@ const Members: React.FC = () => {
     fetchGroupData();
   }, []);
 
+  useEffect(() => {
+    howManyMembersGroupHas();
+  }, [profiles]);
+
   return (
     <MainLayout
       leftSide={
@@ -196,11 +209,19 @@ const Members: React.FC = () => {
             AddNewMember={
               <>
                 {creator_id === user?.id ? (
-                  <GradientButton onClick={onOpen}>
-                    <GradientButtonText fontSize={25}>
-                      Add new member
-                    </GradientButtonText>
-                  </GradientButton>
+                  <IconButton
+                    onClick={onOpen}
+                    aria-label="Add new doggo group"
+                    size="sm"
+                    w="100%"
+                    h="100%"
+                    p={2}
+                    borderRadius="100"
+                    isDisabled={isAddMemberDisabled}
+                    bgColor="transparent"
+                    _hover={{ bgColor: 'transparent' }}
+                    icon={<AddMemberIcon width="28" height="28" />}
+                  />
                 ) : null}
                 <Modal
                   isOpen={isOpen}
@@ -208,11 +229,14 @@ const Members: React.FC = () => {
                     onClose();
                     setIsInvalid(false);
                   }}
-                  size="xs"
+                  size="sm"
                 >
                   <ModalOverlay />
                   <ModalContent borderRadius={20}>
-                    <ModalHeader textAlign="center">
+                    <ModalHeader
+                      textTransform="uppercase"
+                      textAlign="center"
+                    >
                       Add a member
                     </ModalHeader>
                     <ModalCloseButton />
@@ -236,13 +260,14 @@ const Members: React.FC = () => {
                             capitalization, spelling, any spaces, and
                             numbers are correct.
                           </AlertDescription>
-                          <Button
+                          <GradientButton
                             onClick={() => setIsInvalid(false)}
-                            colorScheme="blue"
                             mt={2}
                           >
-                            Okay
-                          </Button>
+                            <GradientButtonText fontSize={20}>
+                              Okay
+                            </GradientButtonText>
+                          </GradientButton>
                         </Alert>
                       ) : null}
 
@@ -251,6 +276,8 @@ const Members: React.FC = () => {
                         errorBorderColor="crimson"
                         borderColor="beez.900"
                         borderRadius={20}
+                        size="lg"
+                        fontSize="2xl"
                         onChange={e => setInviteReceiver(e.target.value)}
                       />
                     </ModalBody>

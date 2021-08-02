@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Box,
   ButtonGroup,
@@ -8,6 +8,8 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
@@ -135,7 +137,14 @@ const Group: React.FC = () => {
           onClick={() => setIsEditable(true)}
           aria-label="Edit"
           size="sm"
-          icon={<EditIcon />}
+          w="100%"
+          h="100%"
+          p={2}
+          bgColor="transparent"
+          _hover={{ bgColor: 'transparent' }}
+          icon={
+            <FontAwesomeIcon icon={faPen} size={'2x'} color="#2A2828" />
+          }
         />
       </Flex>
     );
@@ -192,7 +201,7 @@ const Group: React.FC = () => {
                 onChange={e => setGroupname(e.target.value)}
                 value={group_name as string}
                 isDisabled={!isEditable}
-                fontSize="4xl"
+                fontSize="3xl"
                 size="lg"
                 width="2xs"
               />

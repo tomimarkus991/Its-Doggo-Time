@@ -161,14 +161,20 @@ const Profile: React.FC = () => {
           <Box mb="8">
             <Heading title="My Profile" />
           </Box>
-          <VStack h="md">
-            <VStack h="sm" w="xl" borderRadius={20} boxShadow="lg">
+          <VStack id="tere">
+            <VStack
+              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              h="sm"
+              w="xl"
+              borderRadius={20}
+              justifyContent="center"
+            >
               <VStack w="xs">
                 <Input
                   value={username || ''}
                   onChange={e => setUsername(e.target.value)}
                   size="lg"
-                  fontSize="3xl"
+                  fontSize="2xl"
                   borderRadius="25"
                   borderColor="beez.900"
                   maxLength={20}
@@ -179,7 +185,7 @@ const Profile: React.FC = () => {
                   value={user?.email}
                   disabled
                   size="lg"
-                  fontSize="xl"
+                  fontSize="2xl"
                   borderRadius="25"
                   borderColor="beez.900"
                 />
@@ -191,16 +197,12 @@ const Profile: React.FC = () => {
                     autoComplete="off"
                     placeholder="Password"
                     size="lg"
-                    fontSize="xl"
+                    fontSize="2xl"
                     borderRadius="25"
                     borderColor="beez.900"
                     _placeholder={{ color: 'gray.800' }}
                   />
-                  <InputRightElement
-                    id="input roigs"
-                    width="3rem"
-                    h="100%"
-                  >
+                  <InputRightElement width="3rem" h="100%">
                     {show ? (
                       <FontAwesomeIcon
                         icon={faEye}

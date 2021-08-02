@@ -1,4 +1,4 @@
-import { Center, Input, VStack } from '@chakra-ui/react';
+import { Center, HStack, Input, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
@@ -74,19 +74,24 @@ const CreateGroup: React.FC<Props> = () => {
           isRequired
           size="lg"
           fontSize="2xl"
+          maxW="2xs"
           borderRadius="25"
           borderColor="beez.900"
           _placeholder={{ color: 'gray.800' }}
           placeholder="Group name"
         />
-
-        <GradientButton
-          onClick={createGroup}
-          isLoading={isLoading}
-          loadingText="Creating"
-        >
-          <GradientButtonText fontSize={25}>Create</GradientButtonText>
-        </GradientButton>
+        <HStack>
+          <GradientButton>
+            <GradientButtonText fontSize={25}>Back</GradientButtonText>
+          </GradientButton>
+          <GradientButton
+            onClick={createGroup}
+            isLoading={isLoading}
+            loadingText="Creating"
+          >
+            <GradientButtonText fontSize={25}>Create</GradientButtonText>
+          </GradientButton>
+        </HStack>
       </VStack>
     </Center>
   );

@@ -3,9 +3,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Box,
   Center,
-  Flex,
   HStack,
   Input,
   Text,
@@ -74,50 +72,45 @@ const ForgotPassword: React.FC = () => {
       ) : (
         <VStack spacing="10">
           <Heading title="Reset Your Password" />
-          <Box mt="8">
-            <Flex
-              h="md"
-              w="100%"
-              alignItems="center"
-              justifyContent="center"
-              flexDirection="column"
-            >
-              <VStack h="xs" w="xl" borderRadius={20} boxShadow="xl">
-                <VStack w="2xs">
-                  <Input
-                    type="email"
-                    placeholder="Email"
-                    value={email || ''}
-                    onChange={e => setEmail(e.target.value)}
-                    size="lg"
-                    fontSize="xl"
-                    borderRadius="25"
-                    borderColor="beez.900"
-                    _placeholder={{ color: 'gray.800' }}
-                    isInvalid={isAuthError}
-                  />
-                  <HStack spacing="4">
-                    <Link to="/login">
-                      <GradientButton>
-                        <GradientButtonText fontSize={25}>
-                          Back
-                        </GradientButtonText>
-                      </GradientButton>
-                    </Link>
-                    <GradientButton
-                      onClick={sendResetPassword}
-                      isLoading={isLoading}
-                      loadingText="Sending"
-                    >
-                      <GradientButtonText fontSize={25}>
-                        Send
-                      </GradientButtonText>
-                    </GradientButton>
-                  </HStack>
-                </VStack>
-              </VStack>
-            </Flex>
-          </Box>
+          <Center
+            style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+            h="xs"
+            w="md"
+            borderRadius={20}
+          >
+            <VStack w="2xs">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email || ''}
+                onChange={e => setEmail(e.target.value)}
+                size="lg"
+                fontSize="2xl"
+                borderRadius="25"
+                borderColor="beez.900"
+                _placeholder={{ color: 'gray.800' }}
+                isInvalid={isAuthError}
+              />
+              <HStack spacing="4">
+                <Link to="/login">
+                  <GradientButton>
+                    <GradientButtonText fontSize={25}>
+                      Back
+                    </GradientButtonText>
+                  </GradientButton>
+                </Link>
+                <GradientButton
+                  onClick={sendResetPassword}
+                  isLoading={isLoading}
+                  loadingText="Sending"
+                >
+                  <GradientButtonText fontSize={25}>
+                    Send
+                  </GradientButtonText>
+                </GradientButton>
+              </HStack>
+            </VStack>
+          </Center>
         </VStack>
       )}
     </>
