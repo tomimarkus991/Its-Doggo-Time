@@ -4,7 +4,6 @@ import { ProfileType, StringOrUndefined } from '../../types';
 import { MemberCard } from '../Cards';
 import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
-import Skeleton from '../Skeleton';
 
 interface Props {
   members: ProfileType[] | undefined;
@@ -50,38 +49,38 @@ export const MembersContainer: React.FC<Props> = ({
 
   return (
     <MainContainerLayout
+      mainH="sm"
+      isLoading={isLoading}
       button={AddNewMember}
       containerProps={{ w: '2xl', h: 'sm' }}
     >
-      <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
-        {members ? (
-          <SimpleGrid columns={3} spacing={10}>
-            {members.map((member: ProfileType, index: number) => (
-              <Box key={index}>
-                <MemberCard
-                  member={member}
-                  isEditable={isEditable}
-                  group_id={group_id}
-                  creator_id={creator_id}
-                />
-              </Box>
-            ))}
-            {paws?.map((_, index: number) => (
-              <Box key={index}>
-                <DogPawn width="116" height="100" />
-              </Box>
-            ))}
-          </SimpleGrid>
-        ) : (
-          <SimpleGrid columns={3} spacing={10}>
-            {defaultPaws?.map((_, index: number) => (
-              <Box key={index}>
-                <DogPawn width="116" height="100" />
-              </Box>
-            ))}
-          </SimpleGrid>
-        )}
-      </Skeleton>
+      {members ? (
+        <SimpleGrid columns={3} spacing={10}>
+          {members.map((member: ProfileType, index: number) => (
+            <Box key={index}>
+              <MemberCard
+                member={member}
+                isEditable={isEditable}
+                group_id={group_id}
+                creator_id={creator_id}
+              />
+            </Box>
+          ))}
+          {paws?.map((_, index: number) => (
+            <Box key={index}>
+              <DogPawn width="116" height="100" />
+            </Box>
+          ))}
+        </SimpleGrid>
+      ) : (
+        <SimpleGrid columns={3} spacing={10}>
+          {defaultPaws?.map((_, index: number) => (
+            <Box key={index}>
+              <DogPawn width="116" height="100" />
+            </Box>
+          ))}
+        </SimpleGrid>
+      )}
     </MainContainerLayout>
   );
 };

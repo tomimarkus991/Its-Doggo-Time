@@ -66,26 +66,29 @@ const AddDuty: React.FC = () => {
         </Flex>
       }
       middle={
-        <Skeleton
-          isLoading={isGroupdataLoading}
-          props={{ borderRadius: 50 }}
-        >
-          <Box id="box" mt="8">
-            <Flex
-              justifyContent="center"
-              alignItems="center"
-              w="100%"
-              mb="4"
+        <Box id="box" mt="8">
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            w="100%"
+            mb="4"
+          >
+            <Skeleton
+              isLoading={isGroupdataLoading}
+              props={{ borderRadius: 50 }}
             >
               <Heading
                 title={`Add ${groupdata?.group_name}'s business`}
                 fontSize={36}
               />
-            </Flex>
+            </Skeleton>
+          </Flex>
 
-            <BusinessContainer groupdata={groupdata} />
-          </Box>
-        </Skeleton>
+          <BusinessContainer
+            groupdata={groupdata}
+            isLoading={isGroupdataLoading}
+          />
+        </Box>
       }
       rightSide={
         <>

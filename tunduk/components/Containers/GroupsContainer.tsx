@@ -7,7 +7,6 @@ import { Heading } from '../Headers';
 import { AddGroupIcon } from '../Icons/Doggo';
 import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
-import Skeleton from '../Skeleton';
 
 interface Props {
   userGroups: GroupType[] | undefined;
@@ -49,6 +48,8 @@ export const GroupsContainer: React.FC<Props> = ({
 
   return (
     <MainContainerLayout
+      mainH="sm"
+      isLoading={isLoading}
       button={
         <AddNewIconButton
           to="/group/create-group"
@@ -59,34 +60,32 @@ export const GroupsContainer: React.FC<Props> = ({
       }
       containerProps={{ w: '2xl', h: 'sm' }}
     >
-      <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
-        {userGroups === null ||
-        userGroups === undefined ||
-        userGroups.length === 0 ? (
-          <Center>
-            <VStack textAlign="center">
-              <Heading title="No groups created yet" fontSize={50} />
-              <Text fontSize="2xl" maxW="lg">
-                Create a new doggo group to connect with your family
-                members and have a look what your doggo has been up to.
-              </Text>
-            </VStack>
-          </Center>
-        ) : (
-          <SimpleGrid columns={3} spacing={10}>
-            {userGroups.map((group: GroupType, index: number) => (
-              <Box key={index}>
-                <GroupCard group={group} />
-              </Box>
-            ))}
-            {paws?.map((_, index: number) => (
-              <Box key={index}>
-                <DogPawn width="115" height="115" />
-              </Box>
-            ))}
-          </SimpleGrid>
-        )}
-      </Skeleton>
+      {userGroups === null ||
+      userGroups === undefined ||
+      userGroups.length === 0 ? (
+        <Center>
+          <VStack textAlign="center">
+            <Heading title="No groups created yet" fontSize={50} />
+            <Text fontSize="2xl" maxW="lg">
+              Create a new doggo group to connect with your family members
+              and have a look what your doggo has been up to.
+            </Text>
+          </VStack>
+        </Center>
+      ) : (
+        <SimpleGrid columns={3} spacing={10}>
+          {userGroups.map((group: GroupType, index: number) => (
+            <Box key={index}>
+              <GroupCard group={group} />
+            </Box>
+          ))}
+          {paws?.map((_, index: number) => (
+            <Box key={index}>
+              <DogPawn width="115" height="115" />
+            </Box>
+          ))}
+        </SimpleGrid>
+      )}
     </MainContainerLayout>
   );
 };
