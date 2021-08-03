@@ -1,8 +1,10 @@
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Box,
+  Button,
   ButtonGroup,
   Flex,
+  HStack,
   IconButton,
   Input,
   useToast,
@@ -11,7 +13,7 @@ import {
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { LogsContainer } from '../../components/Containers';
 import { Heading, Name } from '../../components/Headers';
@@ -74,6 +76,44 @@ const Group: React.FC = () => {
         isClosable: true,
         position: 'top',
       });
+    }
+  };
+
+  const deleteGroup = async () => {
+    // kustuta kõik grupi id-ga seostuvad invited
+    // kustuta kõik grupi id-ga seostuvad logid
+    // kustuta kõik grupi id-ga seostuvad memberid
+    // kustuta grupp
+    try {
+      await supabase
+        .from('invites')
+        .delete()
+        .eq('group_id', group_id)
+        .then(
+          async () =>
+            await supabase
+              .from('logs')
+              .delete()
+              .eq('group_id', group_id)
+              .then(
+                async () =>
+                  await supabase
+                    .from('members')
+                    .delete()
+                    .eq('group_id', group_id)
+                    .then(
+                      async () =>
+                        await supabase
+                          .from('groups')
+                          .delete()
+                          .eq('group_id', group_id),
+                    ),
+              ),
+        );
+    } catch (error) {
+      throw error;
+    } finally {
+      router.push('/');
     }
   };
 
@@ -147,47 +187,105 @@ const Group: React.FC = () => {
       leftSide={
         <Skeleton
           isLoading={isGroupdataLoading}
-          props={{ borderRadius: 100 }}
+          props={{ borderRadius: 100, h: '90%' }}
         >
-          <VStack>
-            <AvatarGroup src={group_avatar_url as string} />
-            {isEditable ? (
-              <AvatarUpload
-                onUpload={(url: string) => {
-                  setGroupAvatarUrl(url);
-                  updateGroupPicture(url);
-                }}
-                title={'Update Photo'}
-              />
-            ) : null}
+          <VStack h="90%">
+            <HStack>
+              <VStack>
+                <AvatarGroup src={group_avatar_url as string} />
+                {/* if edit button was pressed (isEditable === true)
+                then show us avatarUpload and input */}
+                {isEditable ? (
+                  <>
+                    <AvatarUpload
+                      onUpload={(url: string) => {
+                        setGroupAvatarUrl(url);
+                        updateGroupPicture(url);
+                      }}
+                      title={'Update Photo'}
+                    />
+                    <Input
+                      onChange={e => setGroupname(e.target.value)}
+                      value={group_name as string}
+                      isDisabled={!isEditable}
+                      color="gray.800"
+                      _placeholder={{ color: 'gray.800' }}
+                      borderColor="beez.700"
+                      borderRadius="50"
+                      fontSize="3xl"
+                      size="lg"
+                      width="2xs"
+                    />
+                  </>
+                ) : (
+                  <Name title={group_name} />
+                )}
 
-            {isEditable ? (
-              <Input
-                onChange={e => setGroupname(e.target.value)}
-                value={group_name as string}
-                isDisabled={!isEditable}
-                fontSize="3xl"
-                size="lg"
-                width="2xs"
-              />
-            ) : (
-              <Name title={group_name} />
-            )}
-            {user?.id === creator_id ? <EditableControls /> : null}
+                {user?.id === creator_id && isEditable ? (
+                  <ButtonGroup alignItems="center" size="sm">
+                    <IconButton
+                      borderRadius="50"
+                      onClick={() => cancelSave()}
+                      aria-label="Cancel"
+                      colorScheme="red"
+                      icon={<CloseIcon fontSize="xs" />}
+                    />
+                    <IconButton
+                      borderRadius="50"
+                      onClick={() => submitSave()}
+                      aria-label="Save"
+                      colorScheme="green"
+                      icon={<CheckIcon />}
+                    />
+                  </ButtonGroup>
+                ) : null}
+              </VStack>
+              {/* this is edit group info button */}
+              <>
+                {user?.id === creator_id && isEditable === false ? (
+                  <IconButton
+                    onClick={() => setIsEditable(true)}
+                    aria-label="Edit"
+                    bgColor="transparent"
+                    _hover={{ bgColor: 'transparent' }}
+                    icon={
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size={'lg'}
+                        color="#2A2828"
+                      />
+                    }
+                  />
+                ) : null}
+              </>
+            </HStack>
           </VStack>
+          {/* this is delete group button */}
+          <Flex alignSelf="flex-end" justifyContent="center">
+            {user?.id === creator_id && isEditable ? (
+              <Button
+                onClick={deleteGroup}
+                colorScheme="red"
+                textTransform="uppercase"
+                borderRadius="50"
+              >
+                Delete group
+              </Button>
+            ) : null}
+          </Flex>
         </Skeleton>
       }
       middle={
         <Box mt="8">
           <Box mb="8">
-            <Heading title="Overview" />
+            <Heading title="Overview" fontSize={50} />
           </Box>
           <LogsContainer />
         </Box>
       }
       rightSide={
         <>
-          <MembersLink group_id={id} />
+          <MembersLink group_id={group_id} />
           <MyGroupsLink />
           <ProfileLink />
         </>
