@@ -1,7 +1,6 @@
-import { FormLabel } from '@chakra-ui/react';
+import { Button, FormLabel } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { supabase } from '../../utils/supabaseClient';
-import { GradientButton } from '../Buttons';
 interface Props {
   onUpload: (url: string) => void;
   title: string;
@@ -45,9 +44,8 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
   };
   return (
     <>
-      <GradientButton
+      <Button
         as={FormLabel}
-        // @ts-ignore: HtmlFor can be accessed
         htmlFor="uploadInput"
         cursor="pointer"
         m={0}
@@ -59,7 +57,7 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
         color="gray.800"
       >
         {title}
-      </GradientButton>
+      </Button>
       <input
         style={{
           visibility: 'hidden',
