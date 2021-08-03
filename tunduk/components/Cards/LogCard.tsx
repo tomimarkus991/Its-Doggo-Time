@@ -27,7 +27,6 @@ export const LogCard: React.FC<Props> = ({ log }) => {
             sameElse: 'DD.MM.YY [at] HH:mm',
           })}
         </Text>
-        {/* <Text fontSize="2xl">{moment(created_at, 'MMMM dddd, h:mm')}</Text> */}
       </VStack>
     </Box>
   );
