@@ -30,6 +30,7 @@ const Profile: React.FC = () => {
   const router = useHistory();
 
   const [username, setUsername] = useState<StringOrUndefined>();
+  const [old_username, setOldUsername] = useState<StringOrUndefined>();
   const [password, setPassword] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
   const [userInvites, setUserInvites] = useState<InviteDataType[]>();
@@ -43,25 +44,54 @@ const Profile: React.FC = () => {
   const updateProfile = async (username: StringOrUndefined) => {
     try {
       setIsLoading(true);
-      const updates = {
+
+      const profile_updates = {
         id: user?.id,
         username,
         updated_at: new Date(),
       };
 
-      let { error } = await supabase.from('profiles').upsert(updates, {
+      // update username
+      await supabase.from('profiles').upsert(profile_updates, {
         returning: 'minimal',
       });
 
-      await supabase.auth.update({
-        password,
-      });
-
-      if (error) {
-        throw error;
+      // update password
+      if (password?.length) {
+        await supabase.auth.update({
+          password,
+        });
       }
+
+      // update all receivers usernames
+      await supabase
+        .from('invites')
+        .update(
+          { receiver: username },
+          {
+            returning: 'minimal',
+          },
+        )
+        .eq('receiver', old_username);
+
+      // update all senders usernames
+      await supabase
+        .from('invites')
+        .update(
+          { sender: username },
+          {
+            returning: 'minimal',
+          },
+        )
+        .eq('sender', old_username);
     } catch (error) {
-      alert(error.message);
+      if (
+        !error.message.includes(
+          'JSON.parse: unexpected end of data at line 1 column 1 of the JSON data',
+        )
+      ) {
+        alert(error);
+      }
     } finally {
       setIsLoading(false);
       toast({
@@ -123,6 +153,7 @@ const Profile: React.FC = () => {
           .eq('id', user?.id)
           .single();
 
+        setOldUsername(data.username);
         setUsername(data.username);
         setAvatarUrl(data.avatar_url);
 
