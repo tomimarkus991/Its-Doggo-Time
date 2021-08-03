@@ -93,25 +93,16 @@ export const LogsContainer: React.FC<Props> = ({}) => {
               </Box>
             ))}
           </SimpleGrid>
-          // </Flex>
         )}
         <Box position="absolute" right="-10" bottom="-10">
-          <Link to={`/group/${group_id}/add-duty`}>
-            <IconButton
-              aria-label="Add new doggo group"
-              size="sm"
-              w="100%"
-              h="100%"
-              p={2}
-              borderRadius="100"
-              isDisabled={false}
-              bgColor="transparent"
-              _hover={{ bgColor: 'transparent' }}
-              icon={<AddDutyIcon width="28" height="28" />}
-            />
-          </Link>
+          <AddNewIconButton
+            to={`/group/${group_id}/add-duty`}
+            icon={<AddDutyIcon width="28" height="28" />}
+            ariaLabel="Add new Duty"
+            isDisabled={false}
+          />
         </Box>
-      </Flex>
+      </VStack>
     </VStack>
   );
 };
