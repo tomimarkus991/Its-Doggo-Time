@@ -9,10 +9,7 @@ interface Props {
 
 export const LogCard: React.FC<Props> = ({ log }) => {
   const { pee, poop, created_at } = log;
-  // useEffect(() => {
-  //   moment.locale('en-gb');
-  //   console.log(moment.locale());
-  // }, []);
+
   return (
     <Box>
       <VStack>
@@ -21,7 +18,7 @@ export const LogCard: React.FC<Props> = ({ log }) => {
           {poop && <PoopIcon width="28" height="28" />}
         </Flex>
         <Text fontSize="2xl">
-          {moment(created_at).locale('en-gb').calendar(null, {
+          {moment(created_at).local().calendar(null, {
             lastDay: '[Yesterday at] HH:mm',
             sameDay: '[Today at] HH:mm',
             nextDay: '[Tomorrow at] HH:mm',
