@@ -1,4 +1,5 @@
 import {
+  Box,
   Checkbox,
   CheckboxGroup,
   HStack,
@@ -17,13 +18,17 @@ import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
   groupdata: GroupPageDataType | undefined;
+  isLoading: boolean;
 }
 
 interface RouteParams {
   group_id: string;
 }
 
-export const BusinessContainer: React.FC<Props> = ({ groupdata }) => {
+export const BusinessContainer: React.FC<Props> = ({
+  groupdata,
+  isLoading,
+}) => {
   const [dutys, setDutys] = useState<string[]>();
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
@@ -59,30 +64,41 @@ export const BusinessContainer: React.FC<Props> = ({ groupdata }) => {
       router.push(`/group/${group_id}`);
     }
   };
+
   return (
-    <MainContainerLayout containerProps={{ w: '2xl', h: 'md' }}>
-      <VStack spacing={0}>
+    <MainContainerLayout
+      mainH="lg"
+      isLoading={isLoading}
+      containerProps={{ w: '2xl', h: 'lg' }}
+    >
+      <VStack flex={1} spacing={0}>
         <AvatarInvite src={groupdata?.avatar_url as string} />
         <Name title={groupdata?.group_name} textProps={{ fontSize: 30 }} />
-        <CheckboxGroup onChange={(value: string[]) => setDutys(value)}>
-          <HStack>
-            <Checkbox value="pee">
-              <PeeIcon w="8rem" h="8rem" />
-            </Checkbox>
-            <Checkbox value="poop">
-              <PoopIcon w="8rem" h="8rem" />
-            </Checkbox>
-          </HStack>
-        </CheckboxGroup>
-        <IconButton
-          onClick={() => addDuty()}
-          w="100%"
-          h="100%"
-          aria-label="Remove User"
-          bgColor="transparent"
-          _hover={{ bgColor: 'transparent' }}
-          icon={<AddDutyInputIcon w="5rem" h="5rem" />}
-        />
+        <Box>
+          <VStack mt={4}>
+            <CheckboxGroup onChange={(value: string[]) => setDutys(value)}>
+              <HStack>
+                <Checkbox value="pee">
+                  <PeeIcon w="8rem" h="8rem" />
+                </Checkbox>
+                <Checkbox value="poop">
+                  <PoopIcon w="8rem" h="8rem" />
+                </Checkbox>
+              </HStack>
+            </CheckboxGroup>
+            <Box>
+              <IconButton
+                onClick={() => addDuty()}
+                mt={4}
+                h="100%"
+                aria-label="Remove User"
+                bgColor="transparent"
+                _hover={{ bgColor: 'transparent' }}
+                icon={<AddDutyInputIcon w="5rem" h="5rem" />}
+              />
+            </Box>
+          </VStack>
+        </Box>
       </VStack>
     </MainContainerLayout>
   );
