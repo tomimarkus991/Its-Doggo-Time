@@ -49,9 +49,11 @@ const Invites: React.FC<Props> = ({
           `,
         )
         .eq('receiver', _username);
-
-      setUserInvites(invitesdata as InviteDataType[]);
-
+      const _invitesdata = invitesdata as InviteDataType[];
+      setUserInvites(_invitesdata);
+      // _invitesdata.forEach(invite => {
+      // listenForInviteDeletes(invite);
+      // });
       if (error) throw error.message;
     } catch (error) {
       alert(error.message);
@@ -60,8 +62,11 @@ const Invites: React.FC<Props> = ({
 
   const listenForInviteInserts = (username: StringOrUndefined) => {
     supabase
+      // only listen to updates that have your username in it
       .from(`invites:receiver=eq.${username}`)
+      // when someone invites you to group
       .on('INSERT', async payload => {
+        // take the newly inserted data
         const { sender, receiver, id, group_id } = payload.new;
         let { data: groups } = await supabase
           .from('groups')
@@ -86,20 +91,13 @@ const Invites: React.FC<Props> = ({
       })
       .subscribe();
   };
-  const listenForInviteDeletes = () => {
-    supabase
-      .from(`invites`)
-      .on('DELETE', payload => {
-        setUserInvites(oldData =>
-          oldData?.filter(data => data.id !== payload.old.id),
-        );
-      })
-      .subscribe();
-  };
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
     await supabase.from('invites').delete().eq('id', invite_id);
+    setUserInvites(oldData =>
+      oldData?.filter(data => data.id !== invite_id),
+    );
   };
   const acceptInvite = async (group_id: string, invite_id: string) => {
     const memberUpdates = {
@@ -112,11 +110,10 @@ const Invites: React.FC<Props> = ({
 
     // delete invite with that id
     await supabase.from('invites').delete().eq('id', invite_id);
+    setUserInvites(oldData =>
+      oldData?.filter(data => data.id !== invite_id),
+    );
   };
-
-  useEffect(() => {
-    listenForInviteDeletes();
-  }, []);
 
   useEffect(() => {
     listenForInviteInserts(currentUsername);
