@@ -72,7 +72,7 @@ const Members: React.FC = () => {
         const values = {
           receiver: inviteReceiver,
           sender: username,
-          group_id: id,
+          group_id,
         };
 
         const { error } = await supabase

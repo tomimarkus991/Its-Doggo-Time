@@ -2,25 +2,26 @@ import {
   Box,
   Center,
   Flex,
+  IconButton,
   SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { LogCard } from '../Cards';
 import { Heading } from '../Headers';
-import { AddDutyLink } from '../Links';
+import { AddDutyIcon } from '../Icons/Doggo';
 
 interface Props {}
 interface RouteParams {
-  id: string;
+  group_id: string;
 }
 
 export const LogsContainer: React.FC<Props> = ({}) => {
-  const { id } = useParams<RouteParams>();
+  const { group_id } = useParams<RouteParams>();
   const [logsdata, setLogsdata] = useState<LogsdataType[]>();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
         created_at
         `,
           )
-          .eq('group_id', id)
+          .eq('group_id', group_id)
           .order('created_at', { ascending: true })
           .limit(12);
 
@@ -51,7 +52,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     getLogsdata();
   }, []);
   return (
-    <VStack id="VStack">
+    <VStack>
       <Flex
         position="relative"
         style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}

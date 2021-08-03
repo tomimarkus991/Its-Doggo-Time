@@ -27,20 +27,21 @@ import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 interface RouteParams {
-  id: string;
+  group_id: string;
 }
 
 const Group: React.FC = () => {
-  const { id } = useParams<RouteParams>();
+  const { group_id } = useParams<RouteParams>();
+  const { user } = useAuth();
+  const toast = useToast();
+  const router = useHistory();
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [old_group_name, setOldGroupname] = useState<StringOrUndefined>();
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
   const [creator_id, setCreatorId] = useState<StringOrUndefined>();
-  const { user } = useAuth();
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
-  const toast = useToast();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
 
   const cancelSave = () => {
@@ -50,7 +51,7 @@ const Group: React.FC = () => {
   const submitSave = async () => {
     setIsEditable(false);
     const updates = {
-      id,
+      id: group_id,
       group_name,
       avatar_url: group_avatar_url,
       updated_at: new Date(),
@@ -91,7 +92,7 @@ const Group: React.FC = () => {
             profiles (id, username, avatar_url)
         `,
           )
-          .eq('id', id)
+          .eq('id', group_id)
           .single();
 
         let _groupData: GroupPageDataType = data;
@@ -113,46 +114,10 @@ const Group: React.FC = () => {
     fetchGroupData();
   }, []);
 
-  const EditableControls = () => {
-    return isEditable ? (
-      <ButtonGroup alignItems="center" size="sm">
-        <IconButton
-          borderRadius="20"
-          onClick={() => cancelSave()}
-          aria-label="Cancel"
-          colorScheme="red"
-          icon={<CloseIcon />}
-        />
-        <IconButton
-          borderRadius="20"
-          onClick={() => submitSave()}
-          aria-label="Save"
-          colorScheme="green"
-          icon={<CheckIcon />}
-        />
-      </ButtonGroup>
-    ) : (
-      <Flex justifyContent="center">
-        <IconButton
-          onClick={() => setIsEditable(true)}
-          aria-label="Edit"
-          size="sm"
-          w="100%"
-          h="100%"
-          p={2}
-          bgColor="transparent"
-          _hover={{ bgColor: 'transparent' }}
-          icon={
-            <FontAwesomeIcon icon={faPen} size={'2x'} color="#2A2828" />
-          }
-        />
-      </Flex>
-    );
-  };
   const updateGroupPicture = async (avatar_url: StringOrUndefined) => {
     try {
       const updates = {
-        id,
+        id: group_id,
         avatar_url,
         updated_at: new Date(),
       };

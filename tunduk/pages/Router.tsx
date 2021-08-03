@@ -4,6 +4,7 @@ import {
   DefaultLayoutRoute,
   DefaultPrivateLayoutRoute,
 } from '../components/Routes';
+import AddDuty from './AddDuty';
 
 import CreateGroup from './CreateGroup/CreateGroup';
 import Error from './Error';
@@ -32,13 +33,18 @@ const Router: React.FC = () => {
       />
       <DefaultPrivateLayoutRoute
         exact
-        path="/group/:id"
+        path="/group/:group_id"
         component={GroupPage}
       />
       <DefaultPrivateLayoutRoute
         exact
-        path="/group/:id/members"
+        path="/group/:group_id/members"
         component={MembersPage}
+      />
+      <DefaultPrivateLayoutRoute
+        exact
+        path="/group/:group_id/add-duty"
+        component={AddDuty}
       />
       <DefaultLayoutRoute component={Error} />
     </Switch>
