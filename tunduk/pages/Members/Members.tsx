@@ -265,7 +265,7 @@ const Members: React.FC = () => {
                             mt={2}
                           >
                             <GradientButtonText fontSize={20}>
-                              Okay
+                              Ok
                             </GradientButtonText>
                           </GradientButton>
                         </Alert>
@@ -274,7 +274,10 @@ const Members: React.FC = () => {
                       <Input
                         isInvalid={isInvalid}
                         errorBorderColor="crimson"
-                        borderColor="beez.900"
+                        placeholder="Username"
+                        color="gray.800"
+                        _placeholder={{ color: 'gray.800' }}
+                        borderColor="beez.700"
                         borderRadius={20}
                         size="lg"
                         fontSize="2xl"
@@ -285,7 +288,7 @@ const Members: React.FC = () => {
                     <ModalFooter>
                       <GradientButton onClick={sendInvite}>
                         <GradientButtonText fontSize={25}>
-                          Add
+                          Invite
                         </GradientButtonText>
                       </GradientButton>
                     </ModalFooter>

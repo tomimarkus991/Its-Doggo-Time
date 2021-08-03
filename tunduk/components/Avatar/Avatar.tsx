@@ -64,7 +64,7 @@ export const Avatar: React.FC<Props> = ({
           <ChakraAvatar
             icon={icon}
             size={size}
-            bgGradient="linear(to-r, beez.100, beez.900)"
+            bgGradient="linear(to-r, beez.100, beez.700)"
           />
         )}
       </Box>

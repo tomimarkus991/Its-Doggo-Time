@@ -70,7 +70,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
         logsdata.length === 0 ? (
           <Center>
             <VStack textAlign="center">
-              <Heading title="Log is Empty" />
+              <Heading title="Log is Empty" fontSize={50} />
               <Text fontSize="2xl" maxW="lg">
                 Press the button in bottom right to add your dogs duty to
                 the log

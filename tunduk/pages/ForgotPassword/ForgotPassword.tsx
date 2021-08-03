@@ -71,7 +71,7 @@ const ForgotPassword: React.FC = () => {
         </Center>
       ) : (
         <VStack spacing="10">
-          <Heading title="Reset Your Password" />
+          <Heading title="Reset Your Password" fontSize={50} />
           <Center
             style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
             h="xs"
@@ -87,7 +87,7 @@ const ForgotPassword: React.FC = () => {
                 size="lg"
                 fontSize="2xl"
                 borderRadius="25"
-                borderColor="beez.900"
+                borderColor="beez.700"
                 _placeholder={{ color: 'gray.800' }}
                 isInvalid={isAuthError}
               />

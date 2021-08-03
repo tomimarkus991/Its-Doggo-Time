@@ -136,20 +136,16 @@ const LoggedIn: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <Flex
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
+          <VStack spacing={0}>
             <AvatarProfile src={avatar_url as string} />
             <Name title={username} />
-          </Flex>
+          </VStack>
         </Skeleton>
       }
       middle={
         <Box mt="8">
           <Box mb="8">
-            <Heading title="Groups" />
+            <Heading title="Groups" fontSize={50} />
           </Box>
           <GroupsContainer
             userGroups={groups}

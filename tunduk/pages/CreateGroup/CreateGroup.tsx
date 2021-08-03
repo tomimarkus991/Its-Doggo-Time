@@ -76,7 +76,7 @@ const CreateGroup: React.FC<Props> = () => {
           fontSize="2xl"
           maxW="2xs"
           borderRadius="25"
-          borderColor="beez.900"
+          borderColor="beez.700"
           _placeholder={{ color: 'gray.800' }}
           placeholder="Group name"
         />

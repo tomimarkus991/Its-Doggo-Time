@@ -6,7 +6,7 @@ import { Heading } from '../../components/Headers';
 const Login: React.FC = () => {
   return (
     <VStack spacing="10">
-      <Heading title="Sign in to your account" />
+      <Heading title="Sign in to your account" fontSize={50} />
       <LoginAuth />
     </VStack>
   );

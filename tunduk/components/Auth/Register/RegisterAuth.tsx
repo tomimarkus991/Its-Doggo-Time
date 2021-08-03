@@ -147,7 +147,7 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              borderColor="beez.900"
+              borderColor="beez.700"
               _placeholder={{ color: 'gray.800' }}
               // isInvalid={isAuthError}
             />
@@ -159,7 +159,7 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              borderColor="beez.900"
+              borderColor="beez.700"
               _placeholder={{ color: 'gray.800' }}
               isInvalid={isAuthError}
             />
@@ -173,7 +173,7 @@ const RegisterAuth: React.FC = () => {
                 size="lg"
                 fontSize="2xl"
                 borderRadius="25"
-                borderColor="beez.900"
+                borderColor="beez.700"
                 _placeholder={{ color: 'gray.800' }}
                 isInvalid={isAuthError}
               />

@@ -159,7 +159,7 @@ const Profile: React.FC = () => {
       middle={
         <Box mt="8">
           <Box mb="8">
-            <Heading title="My Profile" />
+            <Heading title="My Profile" fontSize={50} />
           </Box>
           <VStack id="tere">
             <VStack
@@ -176,7 +176,7 @@ const Profile: React.FC = () => {
                   size="lg"
                   fontSize="2xl"
                   borderRadius="25"
-                  borderColor="beez.900"
+                  borderColor="beez.700"
                   maxLength={20}
                   placeholder="Username"
                   _placeholder={{ color: 'gray.800' }}
@@ -187,7 +187,7 @@ const Profile: React.FC = () => {
                   size="lg"
                   fontSize="2xl"
                   borderRadius="25"
-                  borderColor="beez.900"
+                  borderColor="beez.700"
                 />
                 <InputGroup justifyContent="center" alignItems="center">
                   <Input
@@ -199,7 +199,7 @@ const Profile: React.FC = () => {
                     size="lg"
                     fontSize="2xl"
                     borderRadius="25"
-                    borderColor="beez.900"
+                    borderColor="beez.700"
                     _placeholder={{ color: 'gray.800' }}
                   />
                   <InputRightElement width="3rem" h="100%">

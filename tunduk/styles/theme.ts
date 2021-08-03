@@ -3,7 +3,8 @@ const colors = {
   beez: {
     100: '#FBF0E5',
     500: '#E5E0D5',
-    900: '#DDCDBF',
+    700: '#DDCDBF',
+    900: '#AD9480',
   },
   gray: {
     800: '#2A2828',
