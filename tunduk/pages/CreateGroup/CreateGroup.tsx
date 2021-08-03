@@ -14,7 +14,7 @@ const CreateGroup: React.FC<Props> = () => {
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
   const { user } = useAuth();
-  const history = useHistory();
+  const router = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
   const createGroup = async () => {
@@ -53,7 +53,7 @@ const CreateGroup: React.FC<Props> = () => {
     } catch (error) {
       alert(error.message);
     } finally {
-      history.push('/');
+      router.push('/');
       setIsLoading(false);
     }
   };
@@ -81,7 +81,7 @@ const CreateGroup: React.FC<Props> = () => {
           placeholder="Group name"
         />
         <HStack>
-          <GradientButton>
+          <GradientButton onClick={() => router.goBack()}>
             <GradientButtonText fontSize={25}>Back</GradientButtonText>
           </GradientButton>
           <GradientButton
