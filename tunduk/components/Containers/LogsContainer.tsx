@@ -1,16 +1,9 @@
-import {
-  Box,
-  Center,
-  Flex,
-  IconButton,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Center, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
+import { AddNewIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
 import { Heading } from '../Headers';
 import { AddDutyIcon } from '../Icons/Doggo';
@@ -33,7 +26,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             `
         id,
         pee,
-        boop,
+        poop,
         created_at
         `,
           )
@@ -49,22 +42,37 @@ export const LogsContainer: React.FC<Props> = ({}) => {
       }
     };
 
+    const subscribeToNewLogs = () => {
+      supabase
+        .from(`logs:group_id=eq.${group_id}`)
+        .on('INSERT', payload => {
+          const { created_at, creator_id, group_id, id, pee, poop } =
+            payload.new as LogsdataType;
+
+          const newLog: LogsdataType = {
+            created_at,
+            creator_id,
+            group_id,
+            id,
+            pee,
+            poop,
+          };
+          setLogsdata((oldData: any) => [...oldData, newLog]);
+        })
+        .subscribe();
+    };
+    subscribeToNewLogs();
     getLogsdata();
   }, []);
   return (
     <VStack>
-      <Flex
-        position="relative"
+      <VStack
         style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+        position="relative"
         h="md"
-        w="3xl"
-        justifyContent="center"
-        alignItems="center"
+        w="2xl"
+        py="4"
         borderRadius={20}
-        mb="1em"
-        // py="4"
-        flexDirection="column"
-        pb="4"
       >
         {logsdata === null ||
         logsdata === undefined ||
@@ -79,12 +87,12 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             </VStack>
           </Center>
         ) : (
-          // <Flex>
           <SimpleGrid
             overflowY="scroll"
             columns={2}
             spacing={10}
-            w="3xl"
+            w="2xl"
+            h="100%"
             px="16"
           >
             {logsdata.map((log: LogsdataType, index: number) => (
