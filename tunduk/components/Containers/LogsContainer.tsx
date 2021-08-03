@@ -57,19 +57,24 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     const subscribeToNewLogs = () => {
       supabase
         .from(`logs:group_id=eq.${group_id}`)
-        .on('INSERT', payload => {
-          const { created_at, creator_id, group_id, id, pee, poop } =
-            payload.new as LogsdataType;
+        .on('INSERT', _ => {
+          // const { created_at, creator_id, group_id, id, pee, poop } =
+          //   payload.new as LogsdataType;
 
-          const newLog: LogsdataType = {
-            created_at,
-            creator_id,
-            group_id,
-            id,
-            pee,
-            poop,
-          };
-          setLogsdata((oldData: any) => [...oldData, newLog]);
+          // const newLog: LogsdataType = {
+          //   created_at,
+          //   creator_id,
+          //   group_id,
+          //   id,
+          //   pee,
+          //   poop,
+          // };
+          getLogsdata();
+
+          // setLogsdata((oldData: any) => {
+          //   oldData.shift();
+          //   return [...oldData, newLog];
+          // });
         })
         .subscribe();
     };
