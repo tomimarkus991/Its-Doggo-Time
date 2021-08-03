@@ -55,3 +55,10 @@ export interface LogsdataType {
   creator_id: string;
   created_at: Date;
 }
+
+export interface CreateLogsdataType {
+  pee: boolean;
+  poop: boolean;
+  group_id: string;
+  creator_id: string;
+}
