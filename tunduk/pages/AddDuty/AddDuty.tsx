@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { BusinessContainer } from '../../components/Containers';
@@ -55,31 +55,34 @@ const AddDuty: React.FC = () => {
 
   return (
     <MainLayout
-      leftSide={null}
+      leftSide={
+        <Flex justifyContent="flex-end" mt="8">
+          <BackIcon
+            w="10"
+            h="10"
+            cursor="pointer"
+            onClick={() => router.goBack()}
+          />
+        </Flex>
+      }
       middle={
         <Skeleton
           isLoading={isGroupdataLoading}
           props={{ borderRadius: 50 }}
         >
-          <Box mt="8">
-            <Box mb="8">
-              <HStack w="60%" m="auto">
-                <Box>
-                  <BackIcon
-                    w="10"
-                    h="10"
-                    cursor="pointer"
-                    onClick={() => router.goBack()}
-                  />
-                </Box>
-                <Box w="100%">
-                  <Heading
-                    title={`Add ${groupdata?.group_name}'s business`}
-                    fontSize={36}
-                  />
-                </Box>
-              </HStack>
-            </Box>
+          <Box id="box" mt="8">
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              w="100%"
+              mb="4"
+            >
+              <Heading
+                title={`Add ${groupdata?.group_name}'s business`}
+                fontSize={36}
+              />
+            </Flex>
+
             <BusinessContainer groupdata={groupdata} />
           </Box>
         </Skeleton>

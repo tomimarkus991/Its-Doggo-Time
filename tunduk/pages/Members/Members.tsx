@@ -267,15 +267,14 @@ const Members: React.FC = () => {
             isEditable={isEditable}
             group_id={group_id}
             creator_id={creator_id}
+            isLoading={isGroupdataLoading}
             AddNewMember={
               <>
                 <IconButton
                   onClick={onOpen}
-                  aria-label="Add new doggo group"
-                  size="sm"
+                  aria-label="Add new member"
                   w="100%"
                   h="100%"
-                  p={2}
                   borderRadius="100"
                   isDisabled={isAddMemberDisabled}
                   bgColor="transparent"

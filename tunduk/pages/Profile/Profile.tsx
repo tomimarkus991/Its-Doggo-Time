@@ -192,7 +192,7 @@ const Profile: React.FC = () => {
           <Box mb="8">
             <Heading title="My Profile" fontSize={50} />
           </Box>
-          <VStack id="tere">
+          <VStack>
             <VStack
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
               h="sm"
@@ -201,56 +201,66 @@ const Profile: React.FC = () => {
               justifyContent="center"
             >
               <VStack w="xs">
-                <Input
-                  value={username || ''}
-                  onChange={e => setUsername(e.target.value)}
-                  size="lg"
-                  fontSize="2xl"
-                  borderRadius="25"
-                  borderColor="beez.700"
-                  maxLength={20}
-                  placeholder="Username"
-                  _placeholder={{ color: 'gray.800' }}
-                />
-                <Input
-                  value={user?.email}
-                  disabled
-                  size="lg"
-                  fontSize="2xl"
-                  borderRadius="25"
-                  borderColor="beez.700"
-                />
-                <InputGroup justifyContent="center" alignItems="center">
-                  <Input
-                    type={show ? 'text' : 'password'}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    autoComplete="off"
-                    placeholder="Password"
-                    size="lg"
-                    fontSize="2xl"
-                    borderRadius="25"
-                    borderColor="beez.700"
-                    _placeholder={{ color: 'gray.800' }}
-                  />
-                  <InputRightElement width="3rem" h="100%">
-                    {show ? (
-                      <FontAwesomeIcon
-                        icon={faEye}
-                        onClick={() => setShow(!show)}
-                        cursor="pointer"
-                        color="#2A2828"
+                <Skeleton
+                  isLoading={isUserdataLoading}
+                  props={{ borderRadius: 100 }}
+                >
+                  <VStack>
+                    <Input
+                      value={username || ''}
+                      onChange={e => setUsername(e.target.value)}
+                      size="lg"
+                      fontSize="2xl"
+                      borderRadius="25"
+                      borderColor="beez.700"
+                      maxLength={20}
+                      placeholder="Username"
+                      _placeholder={{ color: 'gray.800' }}
+                    />
+                    <Input
+                      value={user?.email}
+                      disabled
+                      size="lg"
+                      fontSize="2xl"
+                      borderRadius="25"
+                      borderColor="beez.700"
+                    />
+                    <InputGroup
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Input
+                        type={show ? 'text' : 'password'}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        autoComplete="off"
+                        placeholder="Password"
+                        size="lg"
+                        fontSize="2xl"
+                        borderRadius="25"
+                        borderColor="beez.700"
+                        _placeholder={{ color: 'gray.800' }}
                       />
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faEyeSlash}
-                        onClick={() => setShow(!show)}
-                        cursor="pointer"
-                        color="#2A2828"
-                      />
-                    )}
-                  </InputRightElement>
-                </InputGroup>
+                      <InputRightElement width="3rem" h="100%">
+                        {show ? (
+                          <FontAwesomeIcon
+                            icon={faEye}
+                            onClick={() => setShow(!show)}
+                            cursor="pointer"
+                            color="#2A2828"
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faEyeSlash}
+                            onClick={() => setShow(!show)}
+                            cursor="pointer"
+                            color="#2A2828"
+                          />
+                        )}
+                      </InputRightElement>
+                    </InputGroup>
+                  </VStack>
+                </Skeleton>
                 {/* Toggle Color Mode */}
                 <Box pt="10">
                   <ColorMode />
