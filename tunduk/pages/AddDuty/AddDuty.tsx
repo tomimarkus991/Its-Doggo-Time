@@ -56,7 +56,7 @@ const AddDuty: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Flex justifyContent="flex-end" mt="8">
+        <Flex justifyContent="flex-end" mt="10">
           <BackIcon
             w="10"
             h="10"
@@ -66,13 +66,8 @@ const AddDuty: React.FC = () => {
         </Flex>
       }
       middle={
-        <Box id="box" mt="8">
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            w="100%"
-            mb="4"
-          >
+        <Box mt="8">
+          <Flex justifyContent="center" alignItems="center" mb="4">
             <Skeleton
               isLoading={isGroupdataLoading}
               props={{ borderRadius: 50 }}
