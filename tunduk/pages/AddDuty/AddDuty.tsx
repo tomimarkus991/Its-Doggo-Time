@@ -1,8 +1,8 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Heading, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddDutyContainer } from '../../components/Containers';
-import { Heading } from '../../components/Headers';
+
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
 import { MyGroupsLink, ProfileLink } from '../../components/Links';
@@ -67,17 +67,16 @@ const AddDuty: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <Flex justifyContent="center" alignItems="center" mb="4">
+          <VStack mb="4">
             <Skeleton
               isLoading={isGroupdataLoading}
               props={{ borderRadius: 50 }}
             >
-              <Heading
-                title={`Add ${groupdata?.group_name}'s business`}
-                fontSize={36}
-              />
+              <Heading fontSize={40}>
+                Add {groupdata?.group_name}&#39;s business
+              </Heading>
             </Skeleton>
-          </Flex>
+          </VStack>
 
           <AddDutyContainer
             groupdata={groupdata}

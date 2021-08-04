@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   Flex,
+  Heading,
   HStack,
   IconButton,
   Input,
@@ -16,7 +17,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { LogsContainer } from '../../components/Containers';
-import { Heading, Name } from '../../components/Headers';
+import { Name } from '../../components/Headers';
 import MainLayout from '../../components/Layouts/MainLayout';
 import {
   MembersLink,
@@ -277,9 +278,9 @@ const Group: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <Box mb="8">
-            <Heading title="Overview" fontSize={50} />
-          </Box>
+          <VStack mb="8">
+            <Heading fontSize={50}>Overview</Heading>
+          </VStack>
           <LogsContainer />
         </Box>
       }

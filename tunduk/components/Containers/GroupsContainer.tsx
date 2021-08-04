@@ -1,9 +1,15 @@
-import { Box, Center, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { GroupType, StringOrUndefined } from '../../types';
 import { AddNewIconButton } from '../Buttons';
 import { GroupCard } from '../Cards';
-import { Heading } from '../Headers';
 import { AddGroupIcon } from '../Icons/Doggo';
 import { DogPawn } from '../Icons/LightMode';
 import MainContainerLayout from '../Layouts/Containers';
@@ -63,9 +69,9 @@ export const GroupsContainer: React.FC<Props> = ({
       {userGroups === null ||
       userGroups === undefined ||
       userGroups.length === 0 ? (
-        <Center>
+        <Center h="100%">
           <VStack textAlign="center">
-            <Heading title="No groups created yet" fontSize={50} />
+            <Heading fontSize={50}>No groups created yet</Heading>
             <Text fontSize="2xl" maxW="lg">
               Create a new doggo group to connect with your family members
               and have a look what your doggo has been up to.

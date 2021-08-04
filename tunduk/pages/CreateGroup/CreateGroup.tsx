@@ -1,9 +1,16 @@
-import { Box, Center, Flex, Input, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
-import { Heading } from '../../components/Headers';
+
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
@@ -75,9 +82,9 @@ const CreateGroup: React.FC<Props> = () => {
       }
       middle={
         <Box mt="8">
-          <Flex justifyContent="center" alignItems="center" mb="4">
-            <Heading title="Create Group" fontSize={50} />
-          </Flex>
+          <VStack mb="8">
+            <Heading fontSize={50}>Create Group</Heading>
+          </VStack>
           <Center
             style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
             h="sm"

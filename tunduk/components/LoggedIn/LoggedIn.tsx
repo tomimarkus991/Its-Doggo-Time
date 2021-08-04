@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Heading, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
@@ -10,7 +10,7 @@ import {
 import { supabase } from '../../utils/supabaseClient';
 import { AvatarProfile } from '../Avatar';
 import { GroupsContainer } from '../Containers';
-import { Heading, Name } from '../Headers';
+import { Name } from '../Headers';
 import Invites from '../Invites';
 import MainLayout from '../Layouts/MainLayout';
 import { ProfileLink } from '../Links';
@@ -145,7 +145,9 @@ const LoggedIn: React.FC = () => {
       middle={
         <Box mt="8">
           <Box mb="8">
-            <Heading title="Groups" fontSize={50} />
+            <VStack>
+              <Heading fontSize={50}>Groups</Heading>
+            </VStack>
           </Box>
           <GroupsContainer
             userGroups={groups}

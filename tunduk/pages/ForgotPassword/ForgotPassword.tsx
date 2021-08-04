@@ -6,6 +6,7 @@ import {
   Box,
   Center,
   Flex,
+  Heading,
   Input,
   Text,
   VStack,
@@ -13,7 +14,7 @@ import {
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { GradientButton } from '../../components/Buttons';
-import { Heading } from '../../components/Headers';
+
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
@@ -51,7 +52,7 @@ const ForgotPassword: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Flex justifyContent="flex-end" mt="12">
+        <Flex justifyContent="flex-end" mt="2.8rem">
           <BackIcon
             w="10"
             h="10"
@@ -62,9 +63,9 @@ const ForgotPassword: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <Flex justifyContent="center" alignItems="center" mb="4">
-            <Heading title="Reset Your Password" fontSize={50} />
-          </Flex>
+          <VStack mb="12">
+            <Heading fontSize={50}>Reset Your Password</Heading>
+          </VStack>
           {isEmailSent ? (
             <Center maxW="lg" m="auto">
               <Alert

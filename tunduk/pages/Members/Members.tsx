@@ -5,6 +5,7 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Heading,
   HStack,
   IconButton,
   Input,
@@ -25,7 +26,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
-import { Heading, Name } from '../../components/Headers';
+import { Name } from '../../components/Headers';
 import { AddMemberIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
@@ -258,7 +259,7 @@ const Members: React.FC = () => {
                 />
               </Box>
               <Box pl="24">
-                <Heading title="Members" fontSize={50} />
+                <Heading fontSize={50}>Members</Heading>
               </Box>
             </HStack>
           </Box>

@@ -1,5 +1,6 @@
 import {
   Box,
+  Heading,
   HStack,
   Input,
   InputGroup,
@@ -14,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import ColorMode from '../../components/ColorMode';
-import { Heading, Name } from '../../components/Headers';
+import { Name } from '../../components/Headers';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink } from '../../components/Links';
@@ -189,9 +190,9 @@ const Profile: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <Box mb="8">
-            <Heading title="My Profile" fontSize={50} />
-          </Box>
+          <VStack mb="8">
+            <Heading fontSize={50}>My Profile</Heading>
+          </VStack>
           <VStack>
             <VStack
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}

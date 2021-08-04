@@ -1,11 +1,17 @@
-import { Box, Center, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { AddNewIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
-import { Heading } from '../Headers';
 import { AddDutyIcon } from '../Icons/Doggo';
 
 interface Props {}
@@ -96,9 +102,9 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             {logsdata === null ||
             logsdata === undefined ||
             logsdata.length === 0 ? (
-              <Center>
+              <Center h="100%">
                 <VStack textAlign="center">
-                  <Heading title="Log is Empty" fontSize={50} />
+                  <Heading fontSize={50}>Log is Empty</Heading>
                   <Text fontSize="2xl" maxW="lg">
                     Press the button in bottom right to add your dogs duty
                     to the log
