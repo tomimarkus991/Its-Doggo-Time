@@ -1,8 +1,11 @@
-import { Center, HStack, Input, VStack } from '@chakra-ui/react';
+import { Box, Center, Flex, Input, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
+import { Heading } from '../../components/Headers';
+import { BackIcon } from '../../components/Icons/LightMode';
+import MainLayout from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../types';
@@ -59,41 +62,65 @@ const CreateGroup: React.FC<Props> = () => {
   };
 
   return (
-    <Center>
-      <VStack minW="16rem">
-        <AvatarGroup src={avatar_url as string} />
-        <AvatarUpload
-          onUpload={(url: string) => {
-            setAvatarUrl(url);
-          }}
-          title="Add Photo"
-        />
-        <Input
-          value={group_name}
-          onChange={e => setGroupname(e.target.value)}
-          isRequired
-          size="lg"
-          fontSize="2xl"
-          maxW="2xs"
-          borderRadius="25"
-          borderColor="beez.700"
-          _placeholder={{ color: 'gray.800' }}
-          placeholder="Group name"
-        />
-        <HStack>
-          <GradientButton onClick={() => router.goBack()}>
-            <GradientButtonText fontSize={25}>Back</GradientButtonText>
-          </GradientButton>
-          <GradientButton
-            onClick={createGroup}
-            isLoading={isLoading}
-            loadingText="Creating"
+    <MainLayout
+      leftSide={
+        <Flex justifyContent="flex-end" mt="12">
+          <BackIcon
+            w="10"
+            h="10"
+            cursor="pointer"
+            onClick={() => router.goBack()}
+          />
+        </Flex>
+      }
+      middle={
+        <Box mt="8">
+          <Flex justifyContent="center" alignItems="center" mb="4">
+            <Heading title="Create Group" fontSize={50} />
+          </Flex>
+          <Center
+            style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+            h="sm"
+            w="md"
+            borderRadius={20}
+            m="auto"
           >
-            <GradientButtonText fontSize={25}>Create</GradientButtonText>
-          </GradientButton>
-        </HStack>
-      </VStack>
-    </Center>
+            <VStack spacing={4} minW="16rem">
+              <AvatarGroup src={avatar_url as string} />
+              <AvatarUpload
+                onUpload={(url: string) => {
+                  setAvatarUrl(url);
+                }}
+                title="Add Photo"
+              />
+              <Input
+                value={group_name}
+                onChange={e => setGroupname(e.target.value)}
+                isRequired
+                size="lg"
+                fontSize="2xl"
+                maxW="2xs"
+                borderRadius="25"
+                borderColor="beez.700"
+                _placeholder={{ color: 'gray.800' }}
+                placeholder="Group name"
+              />
+
+              <GradientButton
+                onClick={createGroup}
+                isLoading={isLoading}
+                loadingText="Creating"
+              >
+                <GradientButtonText fontSize={25}>
+                  Create
+                </GradientButtonText>
+              </GradientButton>
+            </VStack>
+          </Center>
+        </Box>
+      }
+      rightSide={null}
+    />
   );
 };
 export default CreateGroup;

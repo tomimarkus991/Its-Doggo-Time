@@ -181,7 +181,7 @@ const Profile: React.FC = () => {
                 setAvatarUrl(url);
                 updateAvatar(url);
               }}
-              title="Update photo"
+              title="Change your photo"
             />
             <Name title={username} />
           </VStack>
@@ -266,7 +266,7 @@ const Profile: React.FC = () => {
                   <ColorMode />
                 </Box>
                 {/* Update & Sign out */}
-                <HStack pt="8">
+                <HStack spacing="8" pt="8">
                   <GradientButton
                     onClick={() => updateProfile(username)}
                     isLoading={isLoading}

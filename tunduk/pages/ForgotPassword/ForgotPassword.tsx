@@ -3,16 +3,19 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  Box,
   Center,
-  HStack,
+  Flex,
   Input,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { GradientButton } from '../../components/Buttons';
 import { Heading } from '../../components/Headers';
+import { BackIcon } from '../../components/Icons/LightMode';
+import MainLayout from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -21,6 +24,7 @@ const ForgotPassword: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
+  const router = useHistory();
 
   const sendResetPassword = async () => {
     let isError = false;
@@ -45,60 +49,69 @@ const ForgotPassword: React.FC = () => {
     }
   };
   return (
-    <>
-      {isEmailSent ? (
-        <Center maxW="lg" m="auto">
-          <Alert
-            status="success"
-            variant="subtle"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            textAlign="center"
-            mb={4}
-            py="10"
-            borderRadius="20"
-          >
-            <AlertIcon w="10" h="10" mb="4" />
-            <AlertTitle mt={4} mb={6} fontSize="3xl">
-              Email Sent
-            </AlertTitle>
-            <AlertDescription maxWidth="sm" fontSize="2xl">
-              <Text mb="4">Check your email for reset password link.</Text>
-              <Text>You can close this tab now</Text>
-            </AlertDescription>
-          </Alert>
-        </Center>
-      ) : (
-        <VStack spacing="10">
-          <Heading title="Reset Your Password" fontSize={50} />
-          <Center
-            style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-            h="xs"
-            w="md"
-            borderRadius={20}
-          >
-            <VStack w="2xs">
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email || ''}
-                onChange={e => setEmail(e.target.value)}
-                size="lg"
-                fontSize="2xl"
-                borderRadius="25"
-                borderColor="beez.700"
-                _placeholder={{ color: 'gray.800' }}
-                isInvalid={isAuthError}
-              />
-              <HStack spacing="4">
-                <Link to="/login">
-                  <GradientButton>
-                    <GradientButtonText fontSize={25}>
-                      Back
-                    </GradientButtonText>
-                  </GradientButton>
-                </Link>
+    <MainLayout
+      leftSide={
+        <Flex justifyContent="flex-end" mt="12">
+          <BackIcon
+            w="10"
+            h="10"
+            cursor="pointer"
+            onClick={() => router.goBack()}
+          />
+        </Flex>
+      }
+      middle={
+        <Box mt="8">
+          <Flex justifyContent="center" alignItems="center" mb="4">
+            <Heading title="Reset Your Password" fontSize={50} />
+          </Flex>
+          {isEmailSent ? (
+            <Center maxW="lg" m="auto">
+              <Alert
+                status="success"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                mb={4}
+                py="20"
+                borderRadius="20"
+              >
+                <AlertIcon w="10" h="10" mb="4" />
+                <AlertTitle mt={4} mb={6} fontSize="3xl">
+                  Email Sent
+                </AlertTitle>
+                <AlertDescription maxWidth="sm" fontSize="2xl">
+                  <Text mb="4">
+                    Check your email for reset password link.
+                  </Text>
+                  <Text>You can close this tab now.</Text>
+                </AlertDescription>
+              </Alert>
+            </Center>
+          ) : (
+            <Center
+              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              h="xs"
+              w="md"
+              borderRadius={20}
+              m="auto"
+            >
+              <VStack spacing={5} w="xs">
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  size="lg"
+                  fontSize="2xl"
+                  borderRadius="25"
+                  borderColor="beez.700"
+                  _placeholder={{ color: 'gray.800' }}
+                  isInvalid={isAuthError}
+                />
+
                 <GradientButton
                   onClick={sendResetPassword}
                   isLoading={isLoading}
@@ -108,12 +121,13 @@ const ForgotPassword: React.FC = () => {
                     Send
                   </GradientButtonText>
                 </GradientButton>
-              </HStack>
-            </VStack>
-          </Center>
-        </VStack>
-      )}
-    </>
+              </VStack>
+            </Center>
+          )}
+        </Box>
+      }
+      rightSide={null}
+    />
   );
 };
 export default ForgotPassword;
