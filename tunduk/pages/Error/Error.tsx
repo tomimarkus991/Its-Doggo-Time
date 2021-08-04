@@ -1,12 +1,16 @@
-import { Center, Heading, VStack } from '@chakra-ui/react';
+import { Center, Heading, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const Error = (): JSX.Element => {
   return (
     <Center w="100%" h="60%">
       <VStack>
-        <Heading>404 - Not Found</Heading>
-        <Link to="/">Back to Home</Link>
+        <Heading size={'2xl'} mb="4">
+          404 - Not Found
+        </Heading>
+        <Link to="/">
+          <Text fontSize="xl">Back to Home</Text>
+        </Link>
       </VStack>
     </Center>
   );

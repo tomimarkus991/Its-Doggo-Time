@@ -64,7 +64,7 @@ const ForgotPassword: React.FC = () => {
       middle={
         <Box mt="8">
           <VStack mb="12">
-            <Heading fontSize={50}>Reset Your Password</Heading>
+            <Heading size={'2xl'}>Reset Your Password</Heading>
           </VStack>
           {isEmailSent ? (
             <Center maxW="lg" m="auto">

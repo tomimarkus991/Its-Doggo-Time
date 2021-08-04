@@ -279,7 +279,7 @@ const Group: React.FC = () => {
       middle={
         <Box mt="8">
           <VStack mb="8">
-            <Heading fontSize={50}>Overview</Heading>
+            <Heading size={'2xl'}>Overview</Heading>
           </VStack>
           <LogsContainer />
         </Box>

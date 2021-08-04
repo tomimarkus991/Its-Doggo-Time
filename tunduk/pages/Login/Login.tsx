@@ -5,7 +5,7 @@ import LoginAuth from '../../components/Auth/Login';
 const Login: React.FC = () => {
   return (
     <VStack spacing="10">
-      <Heading fontSize={50}>Sign in to your account</Heading>
+      <Heading size={'2xl'}>Sign in to your account</Heading>
       <LoginAuth />
     </VStack>
   );

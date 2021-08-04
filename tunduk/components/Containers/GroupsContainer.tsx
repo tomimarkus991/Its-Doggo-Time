@@ -71,7 +71,7 @@ export const GroupsContainer: React.FC<Props> = ({
       userGroups.length === 0 ? (
         <Center h="100%">
           <VStack textAlign="center">
-            <Heading fontSize={50}>No groups created yet</Heading>
+            <Heading size={'2xl'}>No groups created yet</Heading>
             <Text fontSize="2xl" maxW="lg">
               Create a new doggo group to connect with your family members
               and have a look what your doggo has been up to.

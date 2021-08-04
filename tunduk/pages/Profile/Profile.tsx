@@ -191,7 +191,7 @@ const Profile: React.FC = () => {
       middle={
         <Box mt="8">
           <VStack mb="8">
-            <Heading fontSize={50}>My Profile</Heading>
+            <Heading size={'2xl'}>My Profile</Heading>
           </VStack>
           <VStack>
             <VStack

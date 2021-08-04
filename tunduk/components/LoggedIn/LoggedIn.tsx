@@ -146,7 +146,7 @@ const LoggedIn: React.FC = () => {
         <Box mt="8">
           <Box mb="8">
             <VStack>
-              <Heading fontSize={50}>Groups</Heading>
+              <Heading size={'2xl'}>Groups</Heading>
             </VStack>
           </Box>
           <GroupsContainer

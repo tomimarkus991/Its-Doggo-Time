@@ -83,7 +83,7 @@ const CreateGroup: React.FC<Props> = () => {
       middle={
         <Box mt="8">
           <VStack mb="8">
-            <Heading fontSize={50}>Create Group</Heading>
+            <Heading size={'2xl'}>Create Group</Heading>
           </VStack>
           <Center
             style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}

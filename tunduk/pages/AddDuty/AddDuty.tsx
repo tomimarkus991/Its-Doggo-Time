@@ -67,12 +67,12 @@ const AddDuty: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <VStack mb="4">
+          <VStack mb="8">
             <Skeleton
               isLoading={isGroupdataLoading}
               props={{ borderRadius: 50 }}
             >
-              <Heading fontSize={40}>
+              <Heading size={'xl'}>
                 Add {groupdata?.group_name}&#39;s business
               </Heading>
             </Skeleton>

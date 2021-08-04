@@ -259,7 +259,7 @@ const Members: React.FC = () => {
                 />
               </Box>
               <Box pl="24">
-                <Heading fontSize={50}>Members</Heading>
+                <Heading size={'2xl'}>Members</Heading>
               </Box>
             </HStack>
           </Box>
