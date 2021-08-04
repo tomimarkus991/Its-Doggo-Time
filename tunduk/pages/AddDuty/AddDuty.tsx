@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { BusinessContainer } from '../../components/Containers';
+import { AddDutyContainer } from '../../components/Containers';
 import { Heading } from '../../components/Headers';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
@@ -84,7 +84,7 @@ const AddDuty: React.FC = () => {
             </Skeleton>
           </Flex>
 
-          <BusinessContainer
+          <AddDutyContainer
             groupdata={groupdata}
             isLoading={isGroupdataLoading}
           />

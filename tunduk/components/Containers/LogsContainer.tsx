@@ -7,7 +7,6 @@ import { AddNewIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
 import { Heading } from '../Headers';
 import { AddDutyIcon } from '../Icons/Doggo';
-import Skeleton from '../Skeleton';
 
 interface Props {}
 interface RouteParams {
@@ -57,24 +56,23 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     const subscribeToNewLogs = () => {
       supabase
         .from(`logs:group_id=eq.${group_id}`)
-        .on('INSERT', _ => {
-          // const { created_at, creator_id, group_id, id, pee, poop } =
-          //   payload.new as LogsdataType;
+        .on('INSERT', payload => {
+          const { created_at, creator_id, group_id, id, pee, poop } =
+            payload.new as LogsdataType;
 
-          // const newLog: LogsdataType = {
-          //   created_at,
-          //   creator_id,
-          //   group_id,
-          //   id,
-          //   pee,
-          //   poop,
-          // };
-          getLogsdata();
+          const newLog: LogsdataType = {
+            created_at,
+            creator_id,
+            group_id,
+            id,
+            pee,
+            poop,
+          };
 
-          // setLogsdata((oldData: any) => {
-          //   oldData.shift();
-          //   return [...oldData, newLog];
-          // });
+          setLogsdata((oldData: any) => {
+            const newData = oldData.slice(1);
+            return [...newData, newLog];
+          });
         })
         .subscribe();
     };
@@ -84,53 +82,57 @@ export const LogsContainer: React.FC<Props> = ({}) => {
   }, []);
   return (
     <VStack>
-      <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
-        <VStack
-          style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-          position="relative"
-          h="md"
-          w="2xl"
-          py="4"
-          borderRadius={20}
-        >
-          {logsdata === null ||
-          logsdata === undefined ||
-          logsdata.length === 0 ? (
-            <Center>
-              <VStack textAlign="center">
-                <Heading title="Log is Empty" fontSize={50} />
-                <Text fontSize="2xl" maxW="lg">
-                  Press the button in bottom right to add your dogs duty to
-                  the log
-                </Text>
-              </VStack>
-            </Center>
-          ) : (
-            <SimpleGrid
-              columns={2}
-              spacing={10}
-              w="2xl"
-              h="100%"
-              px="16"
-              flexDirection="row-reverse"
-            >
-              {logsdata.map((log: LogsdataType, index: number) => (
-                <Box key={index}>
-                  <LogCard log={log} />
-                </Box>
-              ))}
-            </SimpleGrid>
-          )}
-          <Box position="absolute" right="-10" bottom="-10">
-            <AddNewIconButton
-              to={`/group/${group_id}/add-duty`}
-              icon={<AddDutyIcon width="28" height="28" />}
-              ariaLabel="Add new Duty"
-              isDisabled={false}
-            />
-          </Box>
-        </VStack>
-      </Skeleton>
+      {/* <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}> */}
+      <VStack
+        style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+        position="relative"
+        h="md"
+        w="2xl"
+        py="4"
+        borderRadius={20}
+      >
+        {isLoading === true ? null : (
+          <>
+            {logsdata === null ||
+            logsdata === undefined ||
+            logsdata.length === 0 ? (
+              <Center>
+                <VStack textAlign="center">
+                  <Heading title="Log is Empty" fontSize={50} />
+                  <Text fontSize="2xl" maxW="lg">
+                    Press the button in bottom right to add your dogs duty
+                    to the log
+                  </Text>
+                </VStack>
+              </Center>
+            ) : (
+              <SimpleGrid
+                columns={2}
+                spacing={10}
+                w="2xl"
+                h="100%"
+                px="16"
+                flexDirection="row-reverse"
+              >
+                {logsdata.map((log: LogsdataType, index: number) => (
+                  <Box key={index}>
+                    <LogCard log={log} />
+                  </Box>
+                ))}
+              </SimpleGrid>
+            )}
+            <Box position="absolute" right="-10" bottom="-10">
+              <AddNewIconButton
+                to={`/group/${group_id}/add-duty`}
+                icon={<AddDutyIcon width="28" height="28" />}
+                ariaLabel="Add new Duty"
+                isDisabled={false}
+              />
+            </Box>
+          </>
+        )}
+      </VStack>
+      {/* </Skeleton> */}
     </VStack>
   );
 };
