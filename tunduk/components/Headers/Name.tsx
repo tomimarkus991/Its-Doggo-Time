@@ -8,7 +8,11 @@ interface Props {
 
 export const Name: React.FC<Props> = ({ title, textProps }) => {
   return (
-    <Text textAlign="center" fontSize={52} {...textProps}>
+    <Text
+      textAlign="center"
+      fontSize={{ base: 30, lg: 52 }}
+      {...textProps}
+    >
       {title}
     </Text>
   );

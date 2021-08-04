@@ -208,7 +208,7 @@ const RegisterAuth: React.FC = () => {
               </GradientButtonText>
             </GradientButton>
             <Box>
-              <Text>Or</Text>
+              <Text fontSize="lg">Or</Text>
             </Box>
             <HStack spacing="4">
               <OAuthButton provider="google" icon={faGoogle} />
@@ -216,9 +216,11 @@ const RegisterAuth: React.FC = () => {
               <OAuthButton provider="github" icon={faGithub} />
             </HStack>
             <HStack spacing={1}>
-              <Text>Already have an account?</Text>
+              <Text fontSize="lg">Already have an account?</Text>
               <Link to="/login">
-                <Text color="#c9ac95">Sign in</Text>
+                <Text fontSize="lg" color="#c9ac95">
+                  Sign in
+                </Text>
               </Link>
             </HStack>
             <ColorMode />

@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import DefaultLayout from '../Layouts/Default';
+import BasicDefaultLayout from '../Layouts/BasicDefaultLayout';
 
 export const DefaultLayoutRoute = ({
   component: Component,
@@ -9,9 +9,9 @@ export const DefaultLayoutRoute = ({
     <Route
       {...rest}
       render={props => (
-        <DefaultLayout>
+        <BasicDefaultLayout>
           <Component {...props} />
-        </DefaultLayout>
+        </BasicDefaultLayout>
       )}
     />
   );

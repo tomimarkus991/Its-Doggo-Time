@@ -1,12 +1,13 @@
-import { Icon } from '@chakra-ui/react';
+import { Icon, IconProps } from '@chakra-ui/react';
 
-export const HeaderBackgroundDark = () => (
+export const HeaderBackgroundDark = (props: IconProps): JSX.Element => (
   <Icon
     width="1920"
     height="351"
     viewBox="0 0 1920 351"
     position="fixed"
     top="-14%"
+    {...props}
   >
     <g clipPath="url(#clip0)">
       <path

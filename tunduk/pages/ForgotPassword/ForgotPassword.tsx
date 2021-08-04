@@ -7,6 +7,7 @@ import {
   Center,
   Flex,
   Heading,
+  HStack,
   Input,
   Text,
   VStack,
@@ -52,7 +53,11 @@ const ForgotPassword: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Flex justifyContent="flex-end" mt="2.8rem">
+        <Flex
+          display={{ base: 'none', md: 'block' }}
+          justifyContent="flex-end"
+          mt="2.8rem"
+        >
           <BackIcon
             w="10"
             h="10"
@@ -63,9 +68,28 @@ const ForgotPassword: React.FC = () => {
       }
       middle={
         <Box mt="8">
-          <VStack mb="12">
-            <Heading size={'2xl'}>Reset Your Password</Heading>
-          </VStack>
+          <HStack justifyContent="center" mb="12">
+            <Box display={{ base: 'block', md: 'none' }}>
+              <BackIcon
+                w="8"
+                h="8"
+                pr="4"
+                cursor="pointer"
+                onClick={() => router.goBack()}
+              />
+            </Box>
+            <Heading
+              fontSize={{
+                base: '2xl',
+                sm: '4xl',
+                md: '2.5rem',
+                lg: '5xl',
+              }}
+              pr={{ base: '8', sm: '0' }}
+            >
+              Reset Your Password
+            </Heading>
+          </HStack>
           {isEmailSent ? (
             <Center maxW="lg" m="auto">
               <Alert
@@ -95,7 +119,7 @@ const ForgotPassword: React.FC = () => {
             <Center
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
               h="xs"
-              w="md"
+              w={{ base: 'xs', sm: 'md' }}
               borderRadius={20}
               m="auto"
             >
@@ -107,6 +131,7 @@ const ForgotPassword: React.FC = () => {
                   onChange={e => setEmail(e.target.value)}
                   size="lg"
                   fontSize="2xl"
+                  maxW={{ base: '16rem', sm: '20rem' }}
                   borderRadius="25"
                   borderColor="beez.700"
                   _placeholder={{ color: 'gray.800' }}

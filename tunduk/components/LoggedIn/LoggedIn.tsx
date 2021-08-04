@@ -1,4 +1,4 @@
-import { Box, Heading, VStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
@@ -136,10 +136,18 @@ const LoggedIn: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{ borderRadius: 100 }}
         >
-          <VStack spacing={0}>
-            <AvatarProfile src={avatar_url as string} />
+          <Flex
+            flexDirection={{ base: 'row', lg: 'column' }}
+            ml={{ base: '6', lg: 'none' }}
+            mt={{ base: '6', lg: 'none' }}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box mr={{ base: '4', lg: 'none' }}>
+              <AvatarProfile src={avatar_url as string} />
+            </Box>
             <Name title={username} />
-          </VStack>
+          </Flex>
         </Skeleton>
       }
       middle={

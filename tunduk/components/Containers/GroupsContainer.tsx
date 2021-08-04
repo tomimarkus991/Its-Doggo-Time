@@ -64,7 +64,17 @@ export const GroupsContainer: React.FC<Props> = ({
           isDisabled={isAddDoggoGroupDisabled || username === null}
         />
       }
-      containerProps={{ w: '2xl', h: 'sm' }}
+      containerProps={{
+        w: {
+          base: 'sm',
+          sm: 'md',
+          md: 'lg',
+          lg: 'xl',
+          '2lg': 'xl',
+          xl: '2xl',
+        },
+        h: 'sm',
+      }}
     >
       {userGroups === null ||
       userGroups === undefined ||
@@ -79,7 +89,7 @@ export const GroupsContainer: React.FC<Props> = ({
           </VStack>
         </Center>
       ) : (
-        <SimpleGrid columns={3} spacing={10}>
+        <SimpleGrid columns={{ base: 2, lg: 3 }} spacing={10}>
           {userGroups.map((group: GroupType, index: number) => (
             <Box key={index}>
               <GroupCard group={group} />
@@ -87,7 +97,7 @@ export const GroupsContainer: React.FC<Props> = ({
           ))}
           {paws?.map((_, index: number) => (
             <Box key={index}>
-              <DogPawn width="115" height="115" />
+              <DogPawn fontSize={{ base: '6rem', lg: '8rem' }} />
             </Box>
           ))}
         </SimpleGrid>

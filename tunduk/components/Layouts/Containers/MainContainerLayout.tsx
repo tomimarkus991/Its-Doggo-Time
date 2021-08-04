@@ -29,7 +29,11 @@ const MainContainerLayout: React.FC<Props> = ({
           mb="1em"
         >
           {children}
-          <Box position="absolute" right="-10" bottom="-10">
+          <Box
+            position="absolute"
+            right={{ base: '0', lg: '-10' }}
+            bottom={{ base: '0', lg: '-10' }}
+          >
             {button}
           </Box>
         </Flex>

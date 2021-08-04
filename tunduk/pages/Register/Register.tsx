@@ -3,8 +3,13 @@ import RegisterAuth from '../../components/Auth/Register';
 
 const Register: React.FC = () => {
   return (
-    <VStack spacing="10">
-      <Heading size={'2xl'}>Create an account</Heading>
+    <VStack spacing={{ base: '10' }}>
+      <Heading
+        display={{ base: 'none', sm: 'block' }}
+        fontSize={{ base: '2xl', sm: '4xl' }}
+      >
+        Create an account
+      </Heading>
       <RegisterAuth />
     </VStack>
   );

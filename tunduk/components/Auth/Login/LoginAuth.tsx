@@ -110,7 +110,7 @@ const LoginAuth: React.FC = () => {
           </InputGroup>
           <Flex justifyContent="flex-end" mt="2">
             <Link to="/forgot-password">
-              <Text color="#c9ac95" textAlign="right">
+              <Text fontSize="lg" color="#c9ac95" textAlign="right">
                 Forgot Password?
               </Text>
             </Link>
@@ -127,7 +127,7 @@ const LoginAuth: React.FC = () => {
           <GradientButtonText fontSize={25}>Sign in</GradientButtonText>
         </GradientButton>
         <Box>
-          <Text>Or</Text>
+          <Text fontSize="lg">Or</Text>
         </Box>
         <HStack spacing="4">
           <OAuthButton provider="google" icon={faGoogle} />
@@ -135,9 +135,11 @@ const LoginAuth: React.FC = () => {
           <OAuthButton provider="github" icon={faGithub} />
         </HStack>
         <HStack spacing={1}>
-          <Text>New to Doggo time?</Text>
+          <Text fontSize="lg">New to Doggo time?</Text>
           <Link to="/register">
-            <Text color="#c9ac95">Sign up</Text>
+            <Text fontSize="lg" color="#c9ac95">
+              Sign up
+            </Text>
           </Link>
         </HStack>
         <ColorMode />

@@ -1,4 +1,6 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
+
 const colors = {
   beez: {
     100: '#FBF0E5',
@@ -11,6 +13,15 @@ const colors = {
   },
 };
 
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  '2lg': '74em',
+  xl: '80em',
+  '2xl': '90em',
+});
+
 const config: ThemeConfig = {
   initialColorMode: 'light',
   useSystemColorMode: false,
@@ -19,6 +30,7 @@ const config: ThemeConfig = {
 export const theme = extendTheme({
   config,
   colors,
+  breakpoints,
   fonts: {
     heading: 'Viga',
     body: 'Viga',

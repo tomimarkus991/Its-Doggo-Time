@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
 import Header from '../../Header';
 
-const DefaultLayout = ({
+const BasicDefaultLayout = ({
   children,
 }: {
   children: React.ReactNode;
@@ -23,4 +23,4 @@ const DefaultLayout = ({
     </Grid>
   );
 };
-export default DefaultLayout;
+export default BasicDefaultLayout;
