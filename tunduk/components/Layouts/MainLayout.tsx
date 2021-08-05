@@ -25,25 +25,21 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       w="100%"
       id="3"
     >
-      <GridItem
-        id="42"
-        display={{ base: 'none', sm: 'block' }}
+      <VStack
+        id="leftSide"
+        display={{ base: 'none', sm: 'flex' }}
         gridArea="leftSide"
+        h="100%"
+        alignItems={{
+          sm: 'flex-start',
+          md: 'center',
+          lg: 'flex-end',
+        }}
       >
-        <VStack
-          h="100%"
-          alignItems={{
-            sm: 'flex-start',
-            lg: 'center',
-            '2xl': 'flex-end',
-          }}
-        >
-          <VStack w="100%" h="100%">
-            {leftSide}
-          </VStack>
-        </VStack>
-      </GridItem>
-      <GridItem position="sticky" id="4" gridArea="middle">
+        {leftSide}
+      </VStack>
+
+      <GridItem id="middle" gridArea="middle">
         {middle}
       </GridItem>
       <GridItem gridArea="rightSide">

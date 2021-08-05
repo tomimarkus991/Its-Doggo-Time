@@ -5,8 +5,7 @@ export const SmallHeaderBgLight = (props: IconProps): JSX.Element => (
     height="334"
     viewBox="0 0 490 334"
     position="fixed"
-    top="-14%"
-    zIndex={'-20'}
+    zIndex={-3}
     {...props}
   >
     <g clipPath="url(#clip2)">

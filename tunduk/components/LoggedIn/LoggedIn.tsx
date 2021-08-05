@@ -148,6 +148,7 @@ const LoggedIn: React.FC = () => {
           }}
         >
           <Flex
+            id="flex1"
             flexDirection={{ sm: 'row', lg: 'column' }}
             mx={{ sm: '6', lg: 'none' }}
             mt={{ sm: '6', lg: 'none' }}
@@ -155,12 +156,14 @@ const LoggedIn: React.FC = () => {
             alignItems={{ sm: 'center', lg: 'flex-end' }}
           >
             <Flex
-              id="tere"
+              id="flex2"
               justifyContent="center"
               alignItems="center"
-              flexDirection="column"
+              flexDirection={{ sm: 'row', lg: 'column' }}
             >
-              <AvatarProfile src={avatar_url as string} />
+              <Box mr={{ sm: '6', lg: '0' }}>
+                <AvatarProfile src={avatar_url as string} />
+              </Box>
               <Name title={username} />
             </Flex>
             <Spacer display={{ sm: 'block', lg: 'none' }} />
