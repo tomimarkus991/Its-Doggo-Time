@@ -197,7 +197,7 @@ const Profile: React.FC = () => {
             <VStack
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
               h="sm"
-              w="xl"
+              w={{ base: 'sm', md: 'md', lg: 'xl' }}
               borderRadius={20}
               justifyContent="center"
             >

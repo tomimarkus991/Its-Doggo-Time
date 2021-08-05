@@ -5,20 +5,22 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { AvatarIconType, AvatarSizeType } from '../../types';
+import { AvatarIconType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import Skeleton from '../Skeleton';
 
 interface Props {
   src: string;
-  size: AvatarSizeType;
+  w: any;
+  h: any;
   icon: AvatarIconType;
   textProps?: BoxProps;
 }
 
 export const Avatar: React.FC<Props> = ({
   src,
-  size,
+  w,
+  h,
   icon,
   textProps,
 }) => {
@@ -55,7 +57,8 @@ export const Avatar: React.FC<Props> = ({
       <Box {...textProps}>
         {avatarUrl ? (
           <ChakraAvatar
-            size={size}
+            w={w}
+            h={h}
             src={avatarUrl}
             icon={<Box></Box>}
             bgColor={avatarBackgroundColor}
@@ -63,7 +66,8 @@ export const Avatar: React.FC<Props> = ({
         ) : (
           <ChakraAvatar
             icon={icon}
-            size={size}
+            w={w}
+            h={h}
             bgGradient="linear(to-r, beez.100, beez.700)"
           />
         )}

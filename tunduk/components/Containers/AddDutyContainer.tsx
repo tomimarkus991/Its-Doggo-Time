@@ -69,7 +69,10 @@ export const AddDutyContainer: React.FC<Props> = ({
     <MainContainerLayout
       mainH="lg"
       isLoading={isLoading}
-      containerProps={{ w: '2xl', h: 'lg' }}
+      containerProps={{
+        w: { base: 'xs', sm: 'md', md: 'xl', lg: '2xl' },
+        h: 'lg',
+      }}
     >
       <VStack flex={1} spacing={0}>
         <AvatarInvite src={groupdata?.avatar_url as string} />

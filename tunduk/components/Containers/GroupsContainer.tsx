@@ -30,7 +30,7 @@ export const GroupsContainer: React.FC<Props> = ({
     useState<boolean>(false);
 
   const getPaws = () => {
-    const max = 6;
+    const max = 4;
     if (!userGroups) return;
     const _paws = max - userGroups.length;
     const dogPawns: string[] = [];
@@ -42,7 +42,7 @@ export const GroupsContainer: React.FC<Props> = ({
   };
 
   const howManyGroupsUserHas = () => {
-    if (userGroups?.length === 6) {
+    if (userGroups?.length === 4) {
       setIsAddDoggoGroupDisabled(true);
     }
   };
@@ -59,19 +59,26 @@ export const GroupsContainer: React.FC<Props> = ({
       button={
         <AddNewIconButton
           to="/group/create-group"
-          icon={<AddGroupIcon width="28" height="28" />}
+          icon={
+            <AddGroupIcon
+              fontSize={{
+                base: '5rem',
+                md: '6rem',
+                lg: '7rem',
+              }}
+            />
+          }
           ariaLabel="Add new doggo group"
           isDisabled={isAddDoggoGroupDisabled || username === null}
         />
       }
       containerProps={{
         w: {
-          base: 'sm',
+          base: 'xs',
           sm: 'md',
-          md: 'lg',
-          lg: 'xl',
-          '2lg': 'xl',
-          xl: '2xl',
+          md: 'md',
+          lg: 'md',
+          xl: 'xl',
         },
         h: 'sm',
       }}
@@ -79,17 +86,19 @@ export const GroupsContainer: React.FC<Props> = ({
       {userGroups === null ||
       userGroups === undefined ||
       userGroups.length === 0 ? (
-        <Center h="100%">
+        <Center h="100%" px={{ base: '8', sm: 0 }}>
           <VStack textAlign="center">
-            <Heading size={'2xl'}>No groups created yet</Heading>
-            <Text fontSize="2xl" maxW="lg">
+            <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
+              No groups created yet
+            </Heading>
+            <Text fontSize={{ base: 'xl', lg: '2xl' }} maxW="lg">
               Create a new doggo group to connect with your family members
               and have a look what your doggo has been up to.
             </Text>
           </VStack>
         </Center>
       ) : (
-        <SimpleGrid columns={{ base: 2, lg: 3 }} spacing={10}>
+        <SimpleGrid columns={{ base: 2 }} spacing={10}>
           {userGroups.map((group: GroupType, index: number) => (
             <Box key={index}>
               <GroupCard group={group} />

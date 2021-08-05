@@ -2,8 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GroupType } from '../../types';
-import { AvatarCard } from '../Avatar';
-import { GroupProfileIcon } from '../Icons/Profile/GroupProfileIcon';
+import { GroupAvatarCard } from '../Avatar/Cards';
 
 interface Props {
   group: GroupType;
@@ -18,10 +17,7 @@ export const GroupCard: React.FC<Props> = ({ group }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <AvatarCard
-            src={avatar_url}
-            icon={<GroupProfileIcon fontSize="5rem" />}
-          />
+          <GroupAvatarCard src={avatar_url} />
           <Text fontSize={28}>{group_name}</Text>
         </Flex>
       </Link>

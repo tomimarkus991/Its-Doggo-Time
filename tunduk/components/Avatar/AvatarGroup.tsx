@@ -9,8 +9,13 @@ export const AvatarGroup: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       src={src}
-      size="3xl"
-      icon={<GroupProfileIcon fontSize="7rem" />}
+      w={{ base: '6rem', sm: '7rem', md: '9rem' }}
+      h={{ base: '6rem', sm: '7rem', md: '9rem' }}
+      icon={
+        <GroupProfileIcon
+          fontSize={{ base: '4rem', sm: '5rem', md: '7rem' }}
+        />
+      }
     />
   );
 };

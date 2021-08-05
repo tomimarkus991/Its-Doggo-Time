@@ -2,6 +2,7 @@ import { Icon, IconProps } from '@chakra-ui/react';
 
 export const HeaderBackgroundLight = (props: IconProps): JSX.Element => (
   <Icon
+    zIndex="-10"
     width="1920"
     height="351"
     viewBox="0 0 1920 351"

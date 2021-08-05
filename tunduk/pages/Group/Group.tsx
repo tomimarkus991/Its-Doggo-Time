@@ -107,7 +107,7 @@ const Group: React.FC = () => {
                         await supabase
                           .from('groups')
                           .delete()
-                          .eq('group_id', group_id),
+                          .eq('id', group_id),
                     ),
               ),
         );

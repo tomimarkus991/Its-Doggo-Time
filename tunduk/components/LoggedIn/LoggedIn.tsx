@@ -151,10 +151,17 @@ const LoggedIn: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <Box mt="8">
-          <Box mb="8">
+        <VStack
+          justifyContent="center"
+          alignItems="center"
+          h={{ base: '90%' }}
+          zIndex="20"
+        >
+          <Box zIndex="20" mb="2">
             <VStack>
-              <Heading size={'2xl'}>Groups</Heading>
+              <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
+                Groups
+              </Heading>
             </VStack>
           </Box>
           <GroupsContainer
@@ -162,7 +169,7 @@ const LoggedIn: React.FC = () => {
             isLoading={isUserdataLoading}
             username={username}
           />
-        </Box>
+        </VStack>
       }
       rightSide={
         <>

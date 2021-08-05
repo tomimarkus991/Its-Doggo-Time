@@ -17,9 +17,10 @@ const MainContainerLayout: React.FC<Props> = ({
   containerProps,
 }) => {
   return (
-    <VStack h={mainH}>
+    <VStack zIndex="20" h={mainH}>
       <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
         <Flex
+          zIndex="20"
           {...containerProps}
           style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
           position="relative"
@@ -31,8 +32,8 @@ const MainContainerLayout: React.FC<Props> = ({
           {children}
           <Box
             position="absolute"
-            right={{ base: '0', lg: '-10' }}
-            bottom={{ base: '0', lg: '-10' }}
+            right={{ base: '+50', lg: '-10' }}
+            bottom={{ base: '-10', lg: '-10' }}
           >
             {button}
           </Box>

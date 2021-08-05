@@ -71,24 +71,35 @@ const CreateGroup: React.FC<Props> = () => {
   return (
     <MainLayout
       leftSide={
-        <Flex justifyContent="flex-end" mt="12">
+        <Flex
+          justifyContent={{ base: 'center', lg: 'flex-end' }}
+          alignItems={{ base: 'center', lg: 'flex-end' }}
+          ml={{ base: '8', lg: 'none' }}
+          mt="12"
+        >
           <BackIcon
-            w="10"
-            h="10"
+            fontSize={{ base: '2rem', md: '2.7rem' }}
+            mr={{ base: '4', lg: '0' }}
             cursor="pointer"
             onClick={() => router.goBack()}
           />
+          <VStack
+            display={{ base: 'flex', lg: 'none' }}
+            mb={{ base: 0, lg: '8' }}
+          >
+            <Heading size={'2xl'}>Create Group</Heading>
+          </VStack>
         </Flex>
       }
       middle={
         <Box mt="8">
-          <VStack mb="8">
+          <VStack display={{ base: 'none', lg: 'flex' }} mb="8">
             <Heading size={'2xl'}>Create Group</Heading>
           </VStack>
           <Center
             style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
             h="sm"
-            w="md"
+            w={{ base: 'xs', sm: 'sm', lg: 'md' }}
             borderRadius={20}
             m="auto"
           >

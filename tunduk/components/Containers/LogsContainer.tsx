@@ -130,7 +130,15 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             <Box position="absolute" right="-10" bottom="-10">
               <AddNewIconButton
                 to={`/group/${group_id}/add-duty`}
-                icon={<AddDutyIcon width="28" height="28" />}
+                icon={
+                  <AddDutyIcon
+                    fontSize={{
+                      base: '5rem',
+                      md: '6rem',
+                      lg: '7rem',
+                    }}
+                  />
+                }
                 ariaLabel="Add new Duty"
                 isDisabled={false}
               />

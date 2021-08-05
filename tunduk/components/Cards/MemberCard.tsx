@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { ProfileType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { AvatarCard } from '../Avatar';
-import { BlackProfileIcon } from '../Icons/Profile/BlackProfileIcon';
+import { ProfileAvatarCard } from '../Avatar/Cards';
 
 interface Props {
   member: ProfileType;
@@ -36,10 +35,7 @@ export const MemberCard: React.FC<Props> = ({
 
   return (
     <VStack spacing={0} position="relative">
-      <AvatarCard
-        src={avatar_url}
-        icon={<BlackProfileIcon w="4.5rem" h="4.5rem" />}
-      />
+      <ProfileAvatarCard src={avatar_url} />
       <Text fontSize={28}>{username}</Text>
       <>
         {isEditable && creator_id !== id ? (

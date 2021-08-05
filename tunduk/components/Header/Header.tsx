@@ -20,15 +20,23 @@ const Header: React.FC = () => {
     <>
       {colorMode === 'dark' ? (
         <>
-          <HeaderBackgroundDark display={{ base: 'none', sm: 'block' }} />
+          <HeaderBackgroundDark
+            h="100%"
+            display={{ base: 'none', sm: 'block' }}
+          />
         </>
       ) : (
         <>
-          <HeaderBackgroundLight display={{ base: 'none', sm: 'block' }} />
-          <SmallHeaderBgLight display={{ base: 'block', sm: 'none' }} />
+          <HeaderBackgroundLight
+            h="100%"
+            display={{ base: 'none', sm: 'block' }}
+          />
+          <SmallHeaderBgLight
+            h="100%"
+            display={{ base: 'block', sm: 'none' }}
+          />
         </>
       )}
-
       <Flex
         zIndex={1}
         position="sticky"

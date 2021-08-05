@@ -1,11 +1,11 @@
 export type AvatarSizeType =
   | (string & {})
-  | 'xl'
   | '2xs'
   | 'xs'
   | 'sm'
   | 'md'
   | 'lg'
+  | 'xl'
   | '2xl'
   | 'full'
   | undefined;
