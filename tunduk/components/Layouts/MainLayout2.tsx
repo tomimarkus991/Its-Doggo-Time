@@ -7,18 +7,20 @@ interface Props {
   rightSide: any;
 }
 
-const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
+export const MainLayout2: React.FC<Props> = ({
+  leftSide,
+  middle,
+  rightSide,
+}) => {
   return (
     <Grid
       templateRows={{
         base: '1fr 0.1fr',
-        sm: '0.4fr 1fr 0.2fr',
         lg: '1fr',
       }}
       templateColumns={{ base: '1fr 1fr', lg: '1fr 2fr 1fr' }}
       templateAreas={{
         base: '"middle middle" "rightSide rightSide" ',
-        sm: '"leftSide leftSide" "middle middle" "rightSide rightSide" ',
         lg: '"leftSide middle rightSide"',
       }}
       h="100%"
@@ -59,4 +61,3 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
     </Grid>
   );
 };
-export default MainLayout;

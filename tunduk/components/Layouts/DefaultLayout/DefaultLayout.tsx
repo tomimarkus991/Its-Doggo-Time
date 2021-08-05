@@ -22,32 +22,27 @@ const DefaultLayout = ({
     >
       {colorMode === 'dark' ? (
         <>
-          <HeaderBackgroundDark
-            zIndex="0"
-            display={{ base: 'block', lg: 'none' }}
-          />
+          <HeaderBackgroundDark display={{ base: 'block', sm: 'none' }} />
         </>
       ) : (
         <>
+          <SmallHeaderBgLight display={{ base: 'block', sm: 'none' }} />
           <HeaderBackgroundLight
-            zIndex="0"
+            h="100%"
             display={{ base: 'none', sm: 'block', lg: 'none' }}
-          />
-          <SmallHeaderBgLight
-            zIndex="0"
-            display={{ base: 'block', sm: 'none' }}
           />
         </>
       )}
       <GridItem
-        zIndex="10"
-        display={{ base: 'none', lg: 'block' }}
+        display={{ base: 'none', lg: 'initial' }}
         gridArea="header"
       >
         <Header />
       </GridItem>
-      <GridItem zIndex="10" gridArea="main">
-        <Box h="100%">{children}</Box>
+      <GridItem zIndex={2} id="1" gridArea="main ">
+        <Box zIndex={2} id="2" h="100%">
+          {children}
+        </Box>
       </GridItem>
     </Grid>
   );

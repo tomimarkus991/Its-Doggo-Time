@@ -15,9 +15,8 @@ import {
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { GradientButton } from '../../components/Buttons';
-
 import { BackIcon } from '../../components/Icons/LightMode';
-import MainLayout from '../../components/Layouts';
+import { MainLayout2 } from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -51,10 +50,10 @@ const ForgotPassword: React.FC = () => {
     }
   };
   return (
-    <MainLayout
+    <MainLayout2
       leftSide={
         <Flex
-          display={{ base: 'none', md: 'block' }}
+          display={{ base: 'none', lg: 'block' }}
           justifyContent="flex-end"
           mt="2.8rem"
         >
@@ -69,18 +68,19 @@ const ForgotPassword: React.FC = () => {
       middle={
         <Box mt="8">
           <HStack justifyContent="center" mb="12">
-            <Box display={{ base: 'block', md: 'none' }}>
+            <Box display={{ base: 'block', lg: 'none' }}>
               <BackIcon
-                w="8"
-                h="8"
-                pr="4"
+                w="9"
+                h="9"
+                pr={{ base: '0', sm: '4' }}
                 cursor="pointer"
                 onClick={() => router.goBack()}
               />
             </Box>
             <Heading
+              textAlign="center"
               fontSize={{
-                base: '2xl',
+                base: '1.7rem',
                 sm: '4xl',
                 md: '2.5rem',
                 lg: '5xl',

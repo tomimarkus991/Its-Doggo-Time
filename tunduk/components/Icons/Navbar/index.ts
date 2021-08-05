@@ -1,4 +1,4 @@
 export { InvitesIcon } from './InvitesIcon';
 export { MembersIcon } from './MembersIcon';
-export { PawIcon } from './PawIcon';
+export { MyGroupsIcon } from './MyGroupsIcon';
 export { ProfileIcon } from './ProfileIcon';

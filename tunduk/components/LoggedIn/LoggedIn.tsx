@@ -1,4 +1,11 @@
-import { Box, Flex, Heading, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Grid,
+  Heading,
+  Spacer,
+  VStack,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import {
@@ -11,6 +18,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { AvatarProfile } from '../Avatar';
 import { GroupsContainer } from '../Containers';
 import { Name } from '../Headers';
+import { DoggoIcon } from '../Icons/Doggo';
 import Invites from '../Invites';
 import MainLayout from '../Layouts/MainLayout';
 import { ProfileLink } from '../Links';
@@ -134,30 +142,43 @@ const LoggedIn: React.FC = () => {
       leftSide={
         <Skeleton
           isLoading={isUserdataLoading}
-          props={{ borderRadius: 100 }}
+          props={{
+            borderRadius: 100,
+            w: { sm: '95%', md: '90%', lg: 'initial' },
+          }}
         >
           <Flex
-            flexDirection={{ base: 'row', lg: 'column' }}
-            ml={{ base: '6', lg: 'none' }}
-            mt={{ base: '6', lg: 'none' }}
-            justifyContent="center"
-            alignItems="center"
+            flexDirection={{ sm: 'row', lg: 'column' }}
+            mx={{ sm: '6', lg: 'none' }}
+            mt={{ sm: '6', lg: 'none' }}
+            justifyContent={{ sm: 'flex-start' }}
+            alignItems={{ sm: 'center', lg: 'flex-end' }}
           >
-            <Box mr={{ base: '4', lg: 'none' }}>
+            <Flex
+              id="tere"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+            >
               <AvatarProfile src={avatar_url as string} />
-            </Box>
-            <Name title={username} />
+              <Name title={username} />
+            </Flex>
+            <Spacer display={{ sm: 'block', lg: 'none' }} />
+            <DoggoIcon
+              display={{ sm: 'block', lg: 'none' }}
+              fontSize={{ sm: '10rem' }}
+            />
           </Flex>
         </Skeleton>
       }
       middle={
         <VStack
+          id="5"
           justifyContent="center"
           alignItems="center"
-          h={{ base: '90%' }}
-          zIndex="20"
+          h={{ base: '100%' }}
         >
-          <Box zIndex="20" mb="2">
+          {/* <Box mb="2">
             <VStack>
               <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
                 Groups
@@ -168,7 +189,22 @@ const LoggedIn: React.FC = () => {
             userGroups={groups}
             isLoading={isUserdataLoading}
             username={username}
-          />
+          /> */}
+          <Grid
+            h={{ base: '100%' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          >
+            <VStack justifyContent="center" alignItems="center">
+              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
+                Groups
+              </Heading>
+            </VStack>
+            <GroupsContainer
+              userGroups={groups}
+              isLoading={isUserdataLoading}
+              username={username}
+            />
+          </Grid>
         </VStack>
       }
       rightSide={

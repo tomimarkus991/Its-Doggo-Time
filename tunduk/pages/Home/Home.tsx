@@ -24,7 +24,7 @@ const Home: React.FC = () => {
           <GridItem gridArea="header">
             <Header2 />
           </GridItem>
-          <GridItem gridArea="main">
+          <GridItem h="100%" gridArea="main">
             <Box h="100%">
               <LoggedOut />
             </Box>

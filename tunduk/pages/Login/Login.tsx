@@ -4,8 +4,9 @@ import LoginAuth from '../../components/Auth/Login';
 
 const Login: React.FC = () => {
   return (
-    <VStack spacing={{ base: '10' }}>
+    <VStack zIndex={2} spacing={{ base: '10' }}>
       <Heading
+        zIndex={2}
         display={{ base: 'none', sm: 'block' }}
         fontSize={{ base: '2xl', sm: '4xl' }}
       >

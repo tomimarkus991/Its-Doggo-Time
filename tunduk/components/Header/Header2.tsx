@@ -29,7 +29,6 @@ export const Header2: React.FC = () => {
       )}
 
       <Flex
-        zIndex={1}
         position="sticky"
         justifyContent="center"
         alignItems="center"
@@ -42,13 +41,13 @@ export const Header2: React.FC = () => {
           justifyContent="center"
         >
           <RouterLink to="/">
-            <Box cursor="pointer">
+            <Box id="header2Box" cursor="pointer">
               <Heading
                 fontSize={{
-                  base: '3xl',
-                  sm: '4xl',
-                  md: '5xl',
-                  lg: '5xl',
+                  base: '2.6rem',
+                  sm: '3rem',
+                  md: '6xl',
+                  lg: '6xl',
                   xl: '6xl',
                 }}
               >
@@ -56,7 +55,7 @@ export const Header2: React.FC = () => {
               </Heading>
             </Box>
           </RouterLink>
-          <Spacer display={{ base: 'none', sm: 'block' }} />
+          <Spacer display={{ base: 'none', xl: 'block' }} />
         </Flex>
       </Flex>
     </>

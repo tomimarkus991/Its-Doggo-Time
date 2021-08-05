@@ -6,7 +6,11 @@ import { GradientButtonText } from '../Text';
 
 const LoggedOut: React.FC = () => {
   return (
-    <Center flexDirection={{ base: 'column', lg: 'row' }}>
+    <Center
+      h="100%"
+      id="center"
+      flexDirection={{ base: 'column', lg: 'row' }}
+    >
       <VStack textAlign="center">
         <Text
           fontSize={{ base: '3xl' }}

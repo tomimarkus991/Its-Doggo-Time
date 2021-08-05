@@ -17,17 +17,18 @@ const MainContainerLayout: React.FC<Props> = ({
   containerProps,
 }) => {
   return (
-    <VStack zIndex="20" h={mainH}>
+    <VStack id="7" h={mainH}>
       <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
         <Flex
-          zIndex="20"
           {...containerProps}
           style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+          bg="white"
           position="relative"
           justifyContent="center"
           alignItems="center"
           borderRadius={20}
           mb="1em"
+          id="9"
         >
           {children}
           <Box

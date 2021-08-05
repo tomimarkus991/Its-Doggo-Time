@@ -129,7 +129,7 @@ const Invites: React.FC<Props> = ({
   return (
     <>
       <VStack cursor="pointer" onClick={onOpen}>
-        <InvitesIcon id="Invites" width="5.5rem" height="4rem" />
+        <InvitesIcon id="Invites" fontSize="4rem" />
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
 

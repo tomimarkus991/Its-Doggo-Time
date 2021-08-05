@@ -9,10 +9,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { HeaderBackgroundDark } from '../Icons/DarkMode';
 import { DoggoIcon } from '../Icons/Doggo';
-import {
-  HeaderBackgroundLight,
-  SmallHeaderBgLight,
-} from '../Icons/LightMode';
+import { HeaderBackgroundLight } from '../Icons/LightMode';
 const Header: React.FC = () => {
   const { colorMode } = useColorMode();
 
@@ -22,27 +19,18 @@ const Header: React.FC = () => {
         <>
           <HeaderBackgroundDark
             h="100%"
-            display={{ base: 'none', sm: 'block' }}
+            display={{ base: 'none', lg: 'block' }}
           />
         </>
       ) : (
         <>
           <HeaderBackgroundLight
             h="100%"
-            display={{ base: 'none', sm: 'block' }}
-          />
-          <SmallHeaderBgLight
-            h="100%"
-            display={{ base: 'block', sm: 'none' }}
+            display={{ base: 'none', lg: 'block' }}
           />
         </>
       )}
-      <Flex
-        zIndex={1}
-        position="sticky"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Flex position="sticky" justifyContent="center" alignItems="center">
         <Flex
           flex={1}
           maxW={{ base: 500, sm: 450, md: 700, lg: 900, xl: 1200 }}
