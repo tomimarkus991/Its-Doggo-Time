@@ -87,47 +87,58 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     getLogsdata();
   }, []);
   return (
-    <VStack>
-      {/* <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}> */}
-      <VStack
-        style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-        bgColor="white"
-        position="relative"
-        h={{ base: 'sm', sm: 'sm', lg: 'md' }}
-        w={{
-          base: 'xs',
-          sm: 'sm',
-          md: 'lg',
-          lg: 'xl',
-          xl: '2xl',
-        }}
-        py={{ base: '4', sm: '4' }}
-        px={{ base: '4' }}
-        borderRadius={20}
-      >
-        {isLoading === true ? null : (
-          <>
-            {logsdata === null ||
-            logsdata === undefined ||
-            logsdata.length === 0 ? (
-              <Center h="100%">
-                <VStack textAlign="center">
-                  <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
-                    Log is Empty
-                  </Heading>
-                  <Text fontSize={{ base: 'xl', lg: '2xl' }} maxW="lg">
-                    Press the button in bottom right to add your dogs duty
-                    to the log
-                  </Text>
-                </VStack>
-              </Center>
-            ) : (
+    <VStack
+      id="logs"
+      style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+      boxSizing="content-box"
+      position="relative"
+      justifyContent="center"
+      alignItems="center"
+      bgColor="white"
+      h={{ base: 'sm', sm: 'sm', lg: 'md' }}
+      w={{
+        base: 'xs',
+        sm: 'sm',
+        sm2: 'lg',
+        md: '2xl',
+        lg: 'xl',
+        xl: '2xl',
+      }}
+      py={{ base: '4', sm: '4', md: '8', lg: '4' }}
+      px={{ base: '4', lg: '0' }}
+      borderRadius={20}
+    >
+      {isLoading === true ? null : (
+        <>
+          {logsdata === null ||
+          logsdata === undefined ||
+          logsdata.length === 0 ? (
+            <Center h="100%">
+              <VStack textAlign="center">
+                <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
+                  Log is Empty
+                </Heading>
+                <Text fontSize={{ base: 'xl', lg: '2xl' }} maxW="lg">
+                  Press the button in bottom right to add your dogs duty to
+                  the log
+                </Text>
+              </VStack>
+            </Center>
+          ) : (
+            <Center>
               <SimpleGrid
                 columns={2}
                 spacing={10}
-                w="2xl"
+                w={{
+                  base: 'xs',
+                  sm: 'sm',
+                  sm2: 'lg',
+                  md: '2xl',
+                  lg: 'xl',
+                  xl: '2xl',
+                }}
                 h="100%"
-                px="16"
+                px={{ sm: '8', md: '12', lg: '16' }}
                 flexDirection="row-reverse"
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
@@ -136,31 +147,30 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                   </Box>
                 ))}
               </SimpleGrid>
-            )}
-            <Box
-              position="absolute"
-              right={{ base: '+50', lg: '-10' }}
-              bottom={{ base: '-10', lg: '-10' }}
-            >
-              <AddNewIconButton
-                to={`/group/${group_id}/add-duty`}
-                icon={
-                  <AddDutyIcon
-                    fontSize={{
-                      base: '5rem',
-                      md: '6rem',
-                      lg: '7rem',
-                    }}
-                  />
-                }
-                ariaLabel="Add new Duty"
-                isDisabled={false}
-              />
-            </Box>
-          </>
-        )}
-      </VStack>
-      {/* </Skeleton> */}
+            </Center>
+          )}
+        </>
+      )}
+      <Box
+        position="absolute"
+        right={{ base: '+50', lg: '-10' }}
+        bottom={{ base: '-10', lg: '-10' }}
+      >
+        <AddNewIconButton
+          to={`/group/${group_id}/add-duty`}
+          icon={
+            <AddDutyIcon
+              fontSize={{
+                base: '5rem',
+                md: '6rem',
+                lg: '7rem',
+              }}
+            />
+          }
+          ariaLabel="Add new Duty"
+          isDisabled={false}
+        />
+      </Box>
     </VStack>
   );
 };

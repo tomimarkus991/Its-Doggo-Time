@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
 
 const colors = {
   beez: {
@@ -15,6 +15,7 @@ const colors = {
 
 const breakpoints = createBreakpoints({
   sm: '30em',
+  sm2: '39em',
   md: '48em',
   lg: '62em',
   '2lg': '74em',
@@ -34,6 +35,15 @@ export const theme = extendTheme({
   fonts: {
     heading: 'Viga',
     body: 'Viga',
+  },
+  layerStyles: {
+    shadowAndBgColor: {
+      boxShadow: mode(
+        '1px 1px 8px 2px #DDCDBF',
+        '1px 1px 8px 2px #707070',
+      ),
+      bg: mode('#ffffff', '#6A6A6A'),
+    },
   },
   components: {
     Avatar: {

@@ -21,8 +21,7 @@ const MainContainerLayout: React.FC<Props> = ({
       <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
         <Flex
           {...containerProps}
-          style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-          bg="white"
+          layerStyle="shadowAndBgColor"
           position="relative"
           justifyContent="center"
           alignItems="center"
