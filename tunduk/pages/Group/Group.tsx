@@ -262,7 +262,11 @@ const Group: React.FC = () => {
                   ) : null}
                 </>
               ) : (
-                <HStack ml="4" flex={1} position="relative">
+                <HStack
+                  ml={{ base: '4', lg: '0' }}
+                  flex={1}
+                  position="relative"
+                >
                   <Name title={group_name} />
                   {/* this is edit group info button */}
                   {user?.id === creator_id && isEditable === false ? (

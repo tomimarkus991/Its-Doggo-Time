@@ -228,8 +228,9 @@ const Profile: React.FC = () => {
               </Heading>
             </VStack>
             <VStack
-              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-              bgColor="white"
+              // style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              // bgColor="white"
+              layerStyle="shadowAndBgColor"
               h="sm"
               w={{ base: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}
               borderRadius={20}

@@ -18,7 +18,8 @@ export const LogCard: React.FC<Props> = ({ log }) => {
             <PeeIcon
               fontSize={{
                 base: '5rem',
-                sm: '6rem',
+                sm: '5.5rem',
+                sm2: '6rem',
                 md: '7rem',
                 lg: '6.5rem',
                 xl: '7rem',
@@ -29,7 +30,8 @@ export const LogCard: React.FC<Props> = ({ log }) => {
             <PoopIcon
               fontSize={{
                 base: '5rem',
-                sm: '6rem',
+                sm: '5.5rem',
+                sm2: '6rem',
                 md: '7rem',
                 lg: '6.5rem',
                 xl: '7rem',
