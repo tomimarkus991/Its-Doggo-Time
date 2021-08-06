@@ -63,21 +63,21 @@ const LoginAuth: React.FC = () => {
     <Box w={300}>
       <VStack spacing="4">
         <Input
+          variant={'removeDefault'}
           autoComplete="off"
           type="email"
           placeholder="Email"
           value={email || ''}
           onChange={e => setEmail(e.target.value)}
-          size="lg"
           fontSize="2xl"
+          size="lg"
           borderRadius="25"
-          borderColor="beez.700"
-          _placeholder={{ color: 'gray.800' }}
           isInvalid={isAuthError}
         />
         <Box w="100%">
           <InputGroup justifyContent="center" alignItems="center">
             <Input
+              variant={'removeDefault'}
               type={show ? 'text' : 'password'}
               value={password || ''}
               onChange={e => setPassword(e.target.value)}
@@ -86,8 +86,6 @@ const LoginAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              borderColor="beez.700"
-              _placeholder={{ color: 'gray.800' }}
               isInvalid={isAuthError}
             />
             <InputRightElement width="3rem" h="100%">

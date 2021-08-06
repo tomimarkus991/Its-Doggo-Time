@@ -20,7 +20,7 @@ export const InviteCard: React.FC<Props> = ({
   return (
     <Box
       boxSizing="border-box"
-      style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+      layerStyle="shadow-and-bg"
       borderRadius={20}
       py="4"
     >

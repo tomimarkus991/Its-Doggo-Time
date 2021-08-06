@@ -23,7 +23,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
-import { StringOrUndefined } from '../../../types';
 import { supabase } from '../../../utils/supabaseClient';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
@@ -35,9 +34,9 @@ const RegisterAuth: React.FC = () => {
   const [isSignupSuccessful, setIsSignupSuccessful] =
     useState<boolean>(false);
 
-  const [username, setUsername] = useState<StringOrUndefined>();
-  const [email, setEmail] = useState<StringOrUndefined>();
-  const [password, setPassword] = useState<StringOrUndefined>();
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const [show, setShow] = useState(false);
 
@@ -140,6 +139,7 @@ const RegisterAuth: React.FC = () => {
         <Box w={300}>
           <VStack spacing="4">
             <Input
+              variant={'removeDefault'}
               type="text"
               placeholder="Username"
               value={username}
@@ -147,11 +147,10 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              borderColor="beez.700"
-              _placeholder={{ color: 'gray.800' }}
               // isInvalid={isAuthError}
             />
             <Input
+              variant={'removeDefault'}
               type="email"
               placeholder="Email"
               value={email}
@@ -159,12 +158,11 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              borderColor="beez.700"
-              _placeholder={{ color: 'gray.800' }}
               isInvalid={isAuthError}
             />
             <InputGroup justifyContent="center" alignItems="center">
               <Input
+                variant={'removeDefault'}
                 type={show ? 'text' : 'password'}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -173,8 +171,6 @@ const RegisterAuth: React.FC = () => {
                 size="lg"
                 fontSize="2xl"
                 borderRadius="25"
-                borderColor="beez.700"
-                _placeholder={{ color: 'gray.800' }}
                 isInvalid={isAuthError}
               />
               <InputRightElement id="input roigs" width="3rem" h="100%">

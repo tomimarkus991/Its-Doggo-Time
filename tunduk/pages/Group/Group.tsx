@@ -225,12 +225,10 @@ const Group: React.FC = () => {
               {isEditable ? (
                 <>
                   <Input
+                    variant={'removeDefault'}
                     onChange={e => setGroupname(e.target.value)}
                     value={group_name as string}
                     isDisabled={!isEditable}
-                    color="gray.800"
-                    _placeholder={{ color: 'gray.800' }}
-                    borderColor="beez.700"
                     borderRadius="50"
                     fontSize="3xl"
                     size="lg"
@@ -336,12 +334,10 @@ const Group: React.FC = () => {
                     title={'Update Photo'}
                   />
                   <Input
+                    variant={'removeDefault'}
                     onChange={e => setGroupname(e.target.value)}
                     value={group_name as string}
                     isDisabled={!isEditable}
-                    color="gray.800"
-                    _placeholder={{ color: 'gray.800' }}
-                    borderColor="beez.700"
                     borderRadius="50"
                     fontSize="3xl"
                     size="lg"

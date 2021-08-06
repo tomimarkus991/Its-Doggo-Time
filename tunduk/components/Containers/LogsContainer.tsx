@@ -89,7 +89,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
   return (
     <VStack
       id="logs"
-      style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+      layerStyle="shadow-and-bg"
       boxSizing="content-box"
       position="relative"
       justifyContent="center"

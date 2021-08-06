@@ -237,9 +237,7 @@ const Profile: React.FC = () => {
               My Profile
             </Heading>
             <VStack
-              // style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-              // bgColor="white"
-              layerStyle="shadowAndBgColor"
+              layerStyle="shadow-and-bg"
               h="sm"
               w={{ base: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}
               borderRadius={20}
@@ -252,23 +250,22 @@ const Profile: React.FC = () => {
                 >
                   <VStack>
                     <Input
+                      variant={'removeDefault'}
                       value={username || ''}
                       onChange={e => setUsername(e.target.value)}
                       size="lg"
                       fontSize="2xl"
                       borderRadius="25"
-                      borderColor="beez.700"
                       maxLength={20}
                       placeholder="Username"
-                      _placeholder={{ color: 'gray.800' }}
                     />
                     <Input
+                      variant={'removeDefault'}
                       value={user?.email}
                       disabled
                       size="lg"
                       fontSize="2xl"
                       borderRadius="25"
-                      borderColor="beez.700"
                     />
                     {user?.app_metadata.provider === 'email' ? (
                       <InputGroup
@@ -276,6 +273,7 @@ const Profile: React.FC = () => {
                         alignItems="center"
                       >
                         <Input
+                          variant={'removeDefault'}
                           type={show ? 'text' : 'password'}
                           value={password}
                           onChange={e => setPassword(e.target.value)}
@@ -284,8 +282,6 @@ const Profile: React.FC = () => {
                           size="lg"
                           fontSize="2xl"
                           borderRadius="25"
-                          borderColor="beez.700"
-                          _placeholder={{ color: 'gray.800' }}
                         />
                         <InputRightElement width="3rem" h="100%">
                           {show ? (

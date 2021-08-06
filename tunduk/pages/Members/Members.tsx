@@ -377,12 +377,10 @@ const Members: React.FC = () => {
                         ) : null}
 
                         <Input
+                          variant={'removeDefault'}
                           isInvalid={isInvalid}
                           errorBorderColor="crimson"
                           placeholder="Username"
-                          color="gray.800"
-                          _placeholder={{ color: 'gray.800' }}
-                          borderColor="beez.700"
                           borderRadius={20}
                           size="lg"
                           fontSize="2xl"

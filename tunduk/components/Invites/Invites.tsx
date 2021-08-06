@@ -135,7 +135,7 @@ const Invites: React.FC<Props> = ({
 
       <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="gray.800">
           <ModalHeader fontSize="3xl">Invites</ModalHeader>
           <ModalCloseButton />
           <ModalBody maxH="lg">

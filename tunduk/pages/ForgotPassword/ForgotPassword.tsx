@@ -117,7 +117,7 @@ const ForgotPassword: React.FC = () => {
             </Center>
           ) : (
             <Center
-              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              layerStyle="shadow-and-bg"
               bg="white"
               h="xs"
               w={{ base: 'xs', sm: 'md' }}
@@ -126,6 +126,7 @@ const ForgotPassword: React.FC = () => {
             >
               <VStack spacing={5} w="xs">
                 <Input
+                  variant={'removeDefault'}
                   type="email"
                   placeholder="Email"
                   value={email}
@@ -134,8 +135,6 @@ const ForgotPassword: React.FC = () => {
                   fontSize="2xl"
                   maxW={{ base: '16rem', sm: '20rem' }}
                   borderRadius="25"
-                  borderColor="beez.700"
-                  _placeholder={{ color: 'gray.800' }}
                   isInvalid={isAuthError}
                 />
 

@@ -178,7 +178,7 @@ const CreateGroup: React.FC<Props> = () => {
               </Heading>
             </HStack>
             <Center
-              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              layerStyle="shadow-and-bg"
               bg="white"
               h="sm"
               w={{ base: 'xs', sm: 'sm', lg: 'md' }}
@@ -194,6 +194,7 @@ const CreateGroup: React.FC<Props> = () => {
                   title="Add Photo"
                 />
                 <Input
+                  variant={'removeDefault'}
                   value={group_name}
                   onChange={e => setGroupname(e.target.value)}
                   isRequired
@@ -201,8 +202,6 @@ const CreateGroup: React.FC<Props> = () => {
                   fontSize="2xl"
                   maxW="2xs"
                   borderRadius="25"
-                  borderColor="beez.700"
-                  _placeholder={{ color: 'gray.800' }}
                   placeholder="Group name"
                 />
 

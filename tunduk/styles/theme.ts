@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
 
 const colors = {
   beez: {
@@ -37,15 +37,35 @@ export const theme = extendTheme({
     body: 'Viga',
   },
   layerStyles: {
-    shadowAndBgColor: {
-      boxShadow: mode(
-        '1px 1px 8px 2px #DDCDBF',
-        '1px 1px 8px 2px #707070',
-      ),
-      bg: mode('#ffffff', '#6A6A6A'),
+    'shadow-and-bg': {
+      boxShadow: '1px 1px 8px 2px #DDCDBF',
+      bg: '#ffffff',
+      '.chakra-ui-dark &': {
+        bg: '#6A6A6A',
+        boxShadow: '1px 1px 8px 2px #707070',
+      },
     },
   },
   components: {
+    Input: {
+      baseStyle: {
+        // borderRadius
+        // size
+        field: {
+          bg: '#ffffff',
+          color: 'gray.800',
+          _placeholder: { color: '#2A2828' },
+          borderColor: 'beez.700',
+          borderWidth: '2px',
+          borderStyle: 'solid',
+          '.chakra-ui-dark &': {
+            bg: 'gray.800',
+            color: '#DDCDBF',
+            _placeholder: { color: '#DDCDBF' },
+          },
+        },
+      },
+    },
     Avatar: {
       sizes: {
         xl: {
