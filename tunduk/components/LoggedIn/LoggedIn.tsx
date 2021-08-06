@@ -185,7 +185,7 @@ const LoggedIn: React.FC = () => {
             h={{ base: '100%' }}
             templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
-            <VStack>
+            <VStack justifyContent="center" alignItems="center">
               <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
                 Groups
               </Heading>

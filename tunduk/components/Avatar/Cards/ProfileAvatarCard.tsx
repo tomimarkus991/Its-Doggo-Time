@@ -9,8 +9,8 @@ export const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       src={src}
-      w={{ base: '6rem', md: '7rem' }}
-      h={{ base: '6rem', md: '7rem' }}
+      w={{ base: '5rem', md: '6rem', lg: '7rem' }}
+      h={{ base: '5rem', md: '6rem', lg: '7rem' }}
       icon={<BlackProfileIcon fontSize={{ base: '4rem', md: '4.5rem' }} />}
     />
   );

@@ -9,7 +9,7 @@ export const MyGroupsLink: React.FC = () => {
     <Link to="/">
       <VStack>
         <MyGroupsIcon id="MyGroups" fontSize="4rem" />
-        <LinkLabel htmlFor="MyGroups" label="My Groups" />
+        <LinkLabel htmlFor="MyGroups" label="Groups" />
       </VStack>
     </Link>
   );

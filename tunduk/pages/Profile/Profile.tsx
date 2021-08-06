@@ -1,10 +1,14 @@
 import {
   Box,
+  Center,
+  Flex,
+  Grid,
   Heading,
   HStack,
   Input,
   InputGroup,
   InputRightElement,
+  Spacer,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -16,6 +20,7 @@ import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import ColorMode from '../../components/ColorMode';
 import { Name } from '../../components/Headers';
+import { DoggoIcon } from '../../components/Icons/Doggo';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink } from '../../components/Links';
@@ -173,31 +178,60 @@ const Profile: React.FC = () => {
       leftSide={
         <Skeleton
           isLoading={isUserdataLoading}
-          props={{ borderRadius: 100 }}
+          props={{
+            borderRadius: 100,
+            w: { sm: '100%', md: '100%', lg: 'initial' },
+          }}
         >
-          <VStack>
-            <AvatarProfile src={avatar_url as string} />
-            <AvatarUpload
-              onUpload={(url: string) => {
-                setAvatarUrl(url);
-                updateAvatar(url);
-              }}
-              title="Change your photo"
+          <Flex
+            id="flex1"
+            flexDirection={{ sm: 'row', lg: 'column' }}
+            mx={{ sm: '6', lg: 'none' }}
+            mt={{ sm: '6', lg: 'none' }}
+            justifyContent={{ sm: 'flex-start' }}
+            alignItems={{ sm: 'center', lg: 'flex-end' }}
+          >
+            <Flex
+              id="flex2"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection={{ base: 'row', lg: 'column' }}
+            >
+              <Center flexDirection="column" mr={{ sm: '6', lg: '0' }}>
+                <AvatarProfile src={avatar_url as string} />
+              </Center>
+
+              <Name title={username} />
+            </Flex>
+            <Spacer display={{ sm: 'block', lg: 'none' }} />
+            <DoggoIcon
+              display={{ sm: 'block', lg: 'none' }}
+              fontSize={{ sm: '10rem' }}
             />
-            <Name title={username} />
-          </VStack>
+          </Flex>
         </Skeleton>
       }
       middle={
-        <Box mt="8">
-          <VStack mb="8">
-            <Heading size={'2xl'}>My Profile</Heading>
-          </VStack>
-          <VStack>
+        <VStack
+          id="5"
+          justifyContent="center"
+          alignItems="center"
+          h={{ base: '100%' }}
+        >
+          <Grid
+            h={{ base: '100%' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          >
+            <VStack justifyContent="center" alignItems="center">
+              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
+                My Profile
+              </Heading>
+            </VStack>
             <VStack
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              bgColor="white"
               h="sm"
-              w={{ base: 'sm', md: 'md', lg: 'xl' }}
+              w={{ base: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}
               borderRadius={20}
               justifyContent="center"
             >
@@ -226,42 +260,53 @@ const Profile: React.FC = () => {
                       borderRadius="25"
                       borderColor="beez.700"
                     />
-                    <InputGroup
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Input
-                        type={show ? 'text' : 'password'}
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        autoComplete="off"
-                        placeholder="Password"
-                        size="lg"
-                        fontSize="2xl"
-                        borderRadius="25"
-                        borderColor="beez.700"
-                        _placeholder={{ color: 'gray.800' }}
-                      />
-                      <InputRightElement width="3rem" h="100%">
-                        {show ? (
-                          <FontAwesomeIcon
-                            icon={faEye}
-                            onClick={() => setShow(!show)}
-                            cursor="pointer"
-                            color="#2A2828"
-                          />
-                        ) : (
-                          <FontAwesomeIcon
-                            icon={faEyeSlash}
-                            onClick={() => setShow(!show)}
-                            cursor="pointer"
-                            color="#2A2828"
-                          />
-                        )}
-                      </InputRightElement>
-                    </InputGroup>
+                    {user?.app_metadata.provider === 'email' ? (
+                      <InputGroup
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Input
+                          type={show ? 'text' : 'password'}
+                          value={password}
+                          onChange={e => setPassword(e.target.value)}
+                          autoComplete="off"
+                          placeholder="Password"
+                          size="lg"
+                          fontSize="2xl"
+                          borderRadius="25"
+                          borderColor="beez.700"
+                          _placeholder={{ color: 'gray.800' }}
+                        />
+                        <InputRightElement width="3rem" h="100%">
+                          {show ? (
+                            <FontAwesomeIcon
+                              icon={faEye}
+                              onClick={() => setShow(!show)}
+                              cursor="pointer"
+                              color="#2A2828"
+                            />
+                          ) : (
+                            <FontAwesomeIcon
+                              icon={faEyeSlash}
+                              onClick={() => setShow(!show)}
+                              cursor="pointer"
+                              color="#2A2828"
+                            />
+                          )}
+                        </InputRightElement>
+                      </InputGroup>
+                    ) : null}
                   </VStack>
                 </Skeleton>
+                <Box>
+                  <AvatarUpload
+                    onUpload={(url: string) => {
+                      setAvatarUrl(url);
+                      updateAvatar(url);
+                    }}
+                    title="Change Avatar"
+                  />
+                </Box>
                 {/* Toggle Color Mode */}
                 <Box pt="10">
                   <ColorMode />
@@ -293,8 +338,8 @@ const Profile: React.FC = () => {
                 </HStack>
               </VStack>
             </VStack>
-          </VStack>
-        </Box>
+          </Grid>
+        </VStack>
       }
       rightSide={
         <>

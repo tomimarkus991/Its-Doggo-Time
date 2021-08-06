@@ -9,7 +9,7 @@ export const ProfileLink: React.FC = () => {
     <Link to="/profile">
       <VStack>
         <ProfileIcon fontSize="3.6rem" />
-        <LinkLabel htmlFor="Profile" label="My Profile" />
+        <LinkLabel htmlFor="Profile" label="Profile" />
       </VStack>
     </Link>
   );

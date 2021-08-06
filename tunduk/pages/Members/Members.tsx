@@ -5,6 +5,8 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Flex,
+  Grid,
   Heading,
   HStack,
   IconButton,
@@ -16,6 +18,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -27,7 +30,7 @@ import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
-import { AddMemberIcon } from '../../components/Icons/Doggo';
+import { AddMemberIcon, DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
 import { MyGroupsLink, ProfileLink } from '../../components/Links';
@@ -212,152 +215,195 @@ const Members: React.FC = () => {
       leftSide={
         <Skeleton
           isLoading={isGroupdataLoading}
-          props={{ borderRadius: 100 }}
+          props={{
+            borderRadius: 100,
+            w: { sm: '95%', md: '90%', lg: 'initial' },
+          }}
         >
-          <VStack>
-            <AvatarGroup src={group_avatar_url as string} />
-            <Name title={group_name} />
-            <>
-              {user?.id === creator_id && isEditable === false ? (
-                <IconButton
-                  onClick={() => setIsEditable(true)}
-                  aria-label="Edit"
-                  bgColor="transparent"
-                  _hover={{ bgColor: 'transparent' }}
-                  icon={
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size={'lg'}
-                      color="#2A2828"
-                    />
-                  }
-                />
-              ) : null}
-              {user?.id === creator_id && isEditable ? (
-                <IconButton
-                  borderRadius="50"
-                  onClick={() => setIsEditable(false)}
-                  aria-label="Save"
-                  colorScheme="green"
-                  icon={<CheckIcon color="white" />}
-                />
-              ) : null}
-            </>
-          </VStack>
+          <Flex
+            id="flex1"
+            flexDirection={{ sm: 'row', lg: 'column' }}
+            mx={{ sm: '6', lg: 'none' }}
+            mt={{ sm: '6', lg: 'none' }}
+            justifyContent={{ sm: 'flex-start' }}
+            alignItems={{ sm: 'center', lg: 'flex-end' }}
+          >
+            <Flex
+              id="flex2"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection={{ base: 'row', lg: 'column' }}
+            >
+              <Box mr={{ sm: '6', lg: '0' }}>
+                <AvatarGroup src={group_avatar_url as string} />
+              </Box>
+              <Name title={group_name} />
+            </Flex>
+            <Spacer display={{ sm: 'block', lg: 'none' }} />
+            <DoggoIcon
+              display={{ sm: 'block', lg: 'none' }}
+              fontSize={{ sm: '10rem' }}
+            />
+          </Flex>
         </Skeleton>
       }
       middle={
-        <Box mt="8">
-          <Box mb="8">
-            <HStack w="50%" m="auto">
-              <Box>
-                <BackIcon
-                  w="10"
-                  h="10"
-                  cursor="pointer"
-                  onClick={() => router.goBack()}
-                />
-              </Box>
-              <Box pl="24">
-                <Heading size={'2xl'}>Members</Heading>
+        <VStack
+          id="5"
+          justifyContent="center"
+          alignItems="center"
+          h={{ base: '100%' }}
+        >
+          <Grid
+            h={{ base: '100%' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          >
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              position="relative"
+            >
+              <BackIcon
+                position="absolute"
+                left={10}
+                w="10"
+                h="10"
+                cursor="pointer"
+                onClick={() => router.goBack()}
+              />
+              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
+                Members
+              </Heading>
+              <Box position="absolute" right={10}>
+                {user?.id === creator_id && isEditable === false ? (
+                  <IconButton
+                    onClick={() => setIsEditable(true)}
+                    aria-label="Edit"
+                    bgColor="transparent"
+                    _hover={{ bgColor: 'transparent' }}
+                    icon={
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size={'lg'}
+                        color="#2A2828"
+                      />
+                    }
+                  />
+                ) : null}
+                {user?.id === creator_id && isEditable ? (
+                  <IconButton
+                    borderRadius="50"
+                    onClick={() => setIsEditable(false)}
+                    aria-label="Save"
+                    colorScheme="green"
+                    icon={<CheckIcon color="white" />}
+                  />
+                ) : null}
               </Box>
             </HStack>
-          </Box>
-          <MembersContainer
-            members={profiles}
-            isEditable={isEditable}
-            group_id={group_id}
-            creator_id={creator_id}
-            isLoading={isGroupdataLoading}
-            AddNewMember={
-              <>
-                <IconButton
-                  onClick={onOpen}
-                  aria-label="Add new member"
-                  w="100%"
-                  h="100%"
-                  borderRadius="100"
-                  isDisabled={isAddMemberDisabled}
-                  bgColor="transparent"
-                  _hover={{ bgColor: 'transparent' }}
-                  icon={<AddMemberIcon width="28" height="28" />}
-                />
-
-                <Modal
-                  isOpen={isOpen}
-                  onClose={() => {
-                    onClose();
-                    setIsInvalid(false);
-                  }}
-                  size="sm"
-                >
-                  <ModalOverlay />
-                  <ModalContent borderRadius={20}>
-                    <ModalHeader
-                      textTransform="uppercase"
-                      textAlign="center"
-                    >
-                      Add a member
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                      {isInvalid ? (
-                        <Alert
-                          status="error"
-                          variant="subtle"
-                          flexDirection="column"
-                          alignItems="center"
-                          justifyContent="center"
-                          textAlign="center"
-                          mb={4}
-                        >
-                          <AlertIcon />
-                          <AlertTitle mt={4} mb={1} fontSize="lg">
-                            FRIEND REQUEST FAILED
-                          </AlertTitle>
-                          <AlertDescription maxWidth="sm">
-                            Hm, that didn&#39;t work. Double check that the
-                            capitalization, spelling, any spaces, and
-                            numbers are correct.
-                          </AlertDescription>
-                          <GradientButton
-                            onClick={() => setIsInvalid(false)}
-                            mt={2}
-                          >
-                            <GradientButtonText fontSize={20}>
-                              Ok
-                            </GradientButtonText>
-                          </GradientButton>
-                        </Alert>
-                      ) : null}
-
-                      <Input
-                        isInvalid={isInvalid}
-                        errorBorderColor="crimson"
-                        placeholder="Username"
-                        color="gray.800"
-                        _placeholder={{ color: 'gray.800' }}
-                        borderColor="beez.700"
-                        borderRadius={20}
-                        size="lg"
-                        fontSize="2xl"
-                        onChange={e => setInviteReceiver(e.target.value)}
+            <MembersContainer
+              members={profiles}
+              isEditable={isEditable}
+              group_id={group_id}
+              creator_id={creator_id}
+              isLoading={isGroupdataLoading}
+              AddNewMember={
+                <>
+                  <IconButton
+                    onClick={onOpen}
+                    aria-label="Add new member"
+                    w="100%"
+                    h="100%"
+                    borderRadius="100"
+                    isDisabled={isAddMemberDisabled}
+                    bgColor="transparent"
+                    _hover={{ bgColor: 'transparent' }}
+                    icon={
+                      <AddMemberIcon
+                        fontSize={{
+                          base: '5rem',
+                          md: '6rem',
+                          lg: '7rem',
+                        }}
                       />
-                    </ModalBody>
+                    }
+                  />
+                  <Modal
+                    isOpen={isOpen}
+                    onClose={() => {
+                      onClose();
+                      setIsInvalid(false);
+                    }}
+                    size="sm"
+                  >
+                    <ModalOverlay />
+                    <ModalContent borderRadius={20}>
+                      <ModalHeader
+                        textTransform="uppercase"
+                        textAlign="center"
+                      >
+                        Add a member
+                      </ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        {isInvalid ? (
+                          <Alert
+                            status="error"
+                            variant="subtle"
+                            flexDirection="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            textAlign="center"
+                            mb={4}
+                          >
+                            <AlertIcon />
+                            <AlertTitle mt={4} mb={1} fontSize="lg">
+                              FRIEND REQUEST FAILED
+                            </AlertTitle>
+                            <AlertDescription maxWidth="sm">
+                              Hm, that didn&#39;t work. Double check that
+                              the capitalization, spelling, any spaces, and
+                              numbers are correct.
+                            </AlertDescription>
+                            <GradientButton
+                              onClick={() => setIsInvalid(false)}
+                              mt={2}
+                            >
+                              <GradientButtonText fontSize={20}>
+                                Ok
+                              </GradientButtonText>
+                            </GradientButton>
+                          </Alert>
+                        ) : null}
 
-                    <ModalFooter>
-                      <GradientButton onClick={sendInvite}>
-                        <GradientButtonText fontSize={25}>
-                          Invite
-                        </GradientButtonText>
-                      </GradientButton>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </>
-            }
-          />
-        </Box>
+                        <Input
+                          isInvalid={isInvalid}
+                          errorBorderColor="crimson"
+                          placeholder="Username"
+                          color="gray.800"
+                          _placeholder={{ color: 'gray.800' }}
+                          borderColor="beez.700"
+                          borderRadius={20}
+                          size="lg"
+                          fontSize="2xl"
+                          onChange={e => setInviteReceiver(e.target.value)}
+                        />
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <GradientButton onClick={sendInvite}>
+                          <GradientButtonText fontSize={25}>
+                            Invite
+                          </GradientButtonText>
+                        </GradientButton>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </>
+              }
+            />
+          </Grid>
+        </VStack>
       }
       rightSide={
         <>

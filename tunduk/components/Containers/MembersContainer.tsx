@@ -23,14 +23,7 @@ export const MembersContainer: React.FC<Props> = ({
   AddNewMember,
 }) => {
   const [paws, setPaws] = useState<string[]>();
-  const [defaultPaws] = useState<string[]>([
-    'paw',
-    'paw',
-    'paw',
-    'paw',
-    'paw',
-    'paw',
-  ]);
+
   useEffect(() => {
     let getPaws = () => {
       let max = 6;
@@ -52,35 +45,41 @@ export const MembersContainer: React.FC<Props> = ({
       mainH="sm"
       isLoading={isLoading}
       button={AddNewMember}
-      containerProps={{ w: '2xl', h: 'sm' }}
+      containerProps={{
+        w: {
+          base: 'xs',
+          sm: 'md',
+          md: 'md',
+          lg: 'lg',
+          xl: 'xl',
+        },
+        h: { base: 'md', sm: 'sm' },
+      }}
     >
-      {members ? (
-        <SimpleGrid columns={3} spacing={10}>
-          {members.map((member: ProfileType, index: number) => (
-            <Box key={index}>
-              <MemberCard
-                member={member}
-                isEditable={isEditable}
-                group_id={group_id}
-                creator_id={creator_id}
-              />
-            </Box>
-          ))}
-          {paws?.map((_, index: number) => (
-            <Box key={index}>
-              <DogPawn width="116" height="100" />
-            </Box>
-          ))}
-        </SimpleGrid>
-      ) : (
-        <SimpleGrid columns={3} spacing={10}>
-          {defaultPaws?.map((_, index: number) => (
-            <Box key={index}>
-              <DogPawn width="116" height="100" />
-            </Box>
-          ))}
-        </SimpleGrid>
-      )}
+      <SimpleGrid columns={{ base: 2, sm: 3 }} spacing={10}>
+        {members?.map((member: ProfileType, index: number) => (
+          <Box key={index}>
+            <MemberCard
+              member={member}
+              isEditable={isEditable}
+              group_id={group_id}
+              creator_id={creator_id}
+            />
+          </Box>
+        ))}
+        {paws?.map((_, index: number) => (
+          <Box key={index}>
+            <DogPawn
+              fontSize={{
+                base: '5rem',
+                md: '6rem',
+                lg: '6.5rem',
+                xl: '7rem',
+              }}
+            />
+          </Box>
+        ))}
+      </SimpleGrid>
     </MainContainerLayout>
   );
 };

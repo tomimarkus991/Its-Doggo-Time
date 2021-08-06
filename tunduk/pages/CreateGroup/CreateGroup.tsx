@@ -219,31 +219,6 @@ const CreateGroup: React.FC<Props> = () => {
             </Center>
           </Grid>
         </VStack>
-        // <Box mt="8">
-        //   <HStack justifyContent="center" mb="12">
-        //     <Box display={{ base: 'block', lg: 'none' }}>
-        //       <BackIcon
-        //         w="9"
-        //         h="9"
-        //         pr={{ base: '0', sm: '4' }}
-        //         cursor="pointer"
-        //         onClick={() => router.goBack()}
-        //       />
-        //     </Box>
-        //     <Heading
-        //       textAlign="center"
-        //       fontSize={{
-        //         base: '1.7rem',
-        //         sm: '4xl',
-        //         md: '2.5rem',
-        //         lg: '5xl',
-        //       }}
-        //       pr={{ base: '8', sm: '0' }}
-        //     >
-        //       Create Group
-        //     </Heading>
-        //   </HStack>
-        // </Box>
       }
       rightSide={
         <>
