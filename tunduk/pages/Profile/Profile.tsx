@@ -220,13 +220,22 @@ const Profile: React.FC = () => {
         >
           <Grid
             h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+            templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
           >
-            <VStack justifyContent="center" alignItems="center">
-              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
-                My Profile
-              </Heading>
-            </VStack>
+            <HStack
+              justifyContent="flex-start"
+              alignItems="center"
+              display={{ base: 'flex', sm: 'none' }}
+            >
+              <AvatarProfile src={avatar_url as string} />
+              <Name title={username} />
+            </HStack>
+            <Heading
+              textAlign="center"
+              fontSize={{ base: '4xl', sm: '4xl' }}
+            >
+              My Profile
+            </Heading>
             <VStack
               // style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
               // bgColor="white"
