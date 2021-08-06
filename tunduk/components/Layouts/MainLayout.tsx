@@ -27,12 +27,11 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
     >
       <VStack
         id="leftSide"
-        display={{ base: 'none', sm: 'flex' }}
         gridArea="leftSide"
+        display={{ base: 'none', sm: 'flex' }}
         h="100%"
         alignItems={{
           sm: 'flex-start',
-          md: 'center',
           lg: 'flex-end',
         }}
       >
@@ -42,16 +41,16 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       <GridItem id="middle" gridArea="middle">
         {middle}
       </GridItem>
-      <GridItem gridArea="rightSide">
-        <HStack
-          h={{ base: '80%', lg: 'fit-content' }}
-          spacing="6"
-          alignItems={{ base: 'flex-end' }}
-          justifyContent={{ base: 'space-evenly', lg: 'normal' }}
-        >
-          {rightSide}
-        </HStack>
-      </GridItem>
+      <HStack
+        gridArea="rightSide"
+        h={{ base: '80%', lg: 'fit-content' }}
+        flexDirection={{ base: 'initial' }}
+        spacing={{ base: '6' }}
+        alignItems={{ base: 'flex-end' }}
+        justifyContent={{ base: 'space-evenly', lg: 'normal' }}
+      >
+        {rightSide}
+      </HStack>
     </Grid>
   );
 };

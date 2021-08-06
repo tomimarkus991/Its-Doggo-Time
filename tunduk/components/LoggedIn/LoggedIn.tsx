@@ -159,7 +159,7 @@ const LoggedIn: React.FC = () => {
               id="flex2"
               justifyContent="center"
               alignItems="center"
-              flexDirection={{ sm: 'row', lg: 'column' }}
+              flexDirection={{ base: 'row', lg: 'column' }}
             >
               <Box mr={{ sm: '6', lg: '0' }}>
                 <AvatarProfile src={avatar_url as string} />
@@ -181,23 +181,11 @@ const LoggedIn: React.FC = () => {
           alignItems="center"
           h={{ base: '100%' }}
         >
-          {/* <Box mb="2">
-            <VStack>
-              <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
-                Groups
-              </Heading>
-            </VStack>
-          </Box>
-          <GroupsContainer
-            userGroups={groups}
-            isLoading={isUserdataLoading}
-            username={username}
-          /> */}
           <Grid
             h={{ base: '100%' }}
             templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
-            <VStack justifyContent="center" alignItems="center">
+            <VStack>
               <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
                 Groups
               </Heading>

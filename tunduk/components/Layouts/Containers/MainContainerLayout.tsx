@@ -3,7 +3,7 @@ import React from 'react';
 import Skeleton from '../../Skeleton';
 
 interface Props {
-  mainH: string;
+  mainH: any;
   isLoading: boolean;
   button?: any;
   containerProps?: FlexProps;

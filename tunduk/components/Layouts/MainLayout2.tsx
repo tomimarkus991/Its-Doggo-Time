@@ -27,37 +27,35 @@ export const MainLayout2: React.FC<Props> = ({
       w="100%"
       id="3"
     >
-      <GridItem
-        id="42"
-        display={{ base: 'none', sm: 'block' }}
+      <VStack
+        id="leftSide"
         gridArea="leftSide"
+        display={{ base: 'none', sm: 'block' }}
+        h="100%"
+        alignItems={{
+          sm: 'flex-start',
+          lg: 'center',
+          '2xl': 'flex-end',
+        }}
       >
-        <VStack
-          h="100%"
-          alignItems={{
-            sm: 'flex-start',
-            lg: 'center',
-            '2xl': 'flex-end',
-          }}
-        >
-          <VStack w="100%" h="100%">
-            {leftSide}
-          </VStack>
+        <VStack w="100%" h="100%">
+          {leftSide}
         </VStack>
-      </GridItem>
-      <GridItem position="sticky" id="4" gridArea="middle">
+      </VStack>
+
+      <GridItem id="middle" gridArea="middle">
         {middle}
       </GridItem>
-      <GridItem gridArea="rightSide">
-        <HStack
-          h={{ base: '80%', lg: 'fit-content' }}
-          spacing="6"
-          alignItems={{ base: 'flex-end' }}
-          justifyContent={{ base: 'space-evenly', lg: 'normal' }}
-        >
-          {rightSide}
-        </HStack>
-      </GridItem>
+
+      <HStack
+        gridArea="rightSide"
+        h={{ base: '80%', lg: 'fit-content' }}
+        spacing="6"
+        alignItems={{ base: 'flex-end' }}
+        justifyContent={{ base: 'space-evenly', lg: 'normal' }}
+      >
+        {rightSide}
+      </HStack>
     </Grid>
   );
 };

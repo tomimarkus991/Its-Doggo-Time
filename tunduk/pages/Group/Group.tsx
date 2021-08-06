@@ -4,10 +4,12 @@ import {
   Button,
   ButtonGroup,
   Flex,
+  Grid,
   Heading,
   HStack,
   IconButton,
   Input,
+  Spacer,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -18,12 +20,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { LogsContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
+import { DoggoIcon } from '../../components/Icons/Doggo';
 import MainLayout from '../../components/Layouts/MainLayout';
-import {
-  MembersLink,
-  MyGroupsLink,
-  ProfileLink,
-} from '../../components/Links';
+import { MembersLink, MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
@@ -188,79 +187,102 @@ const Group: React.FC = () => {
       leftSide={
         <Skeleton
           isLoading={isGroupdataLoading}
-          props={{ borderRadius: 100, h: '90%' }}
+          props={{
+            borderRadius: 100,
+            w: { sm: '95%', md: '90%', lg: 'initial' },
+            h: '100%',
+          }}
         >
-          <VStack h="90%">
-            <HStack>
-              <VStack>
+          <Flex
+            id="flex1"
+            flexDirection={{ sm: 'row', lg: 'column' }}
+            mx={{ sm: '6', lg: 'none' }}
+            mt={{ sm: '6', lg: 'none' }}
+            justifyContent={{ sm: 'flex-start' }}
+            alignItems={{ sm: 'center' }}
+            h={{ lg: 'md' }}
+          >
+            <Flex
+              id="flex2"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection={{ base: 'row', lg: 'column' }}
+            >
+              <Box mr={{ sm: '6', lg: '0' }}>
                 <AvatarGroup src={group_avatar_url as string} />
-                {/* if edit button was pressed (isEditable === true)
+              </Box>
+              {/* if edit button was pressed (isEditable === true)
                 then show us avatarUpload and input */}
-                {isEditable ? (
-                  <>
-                    <AvatarUpload
-                      onUpload={(url: string) => {
-                        setGroupAvatarUrl(url);
-                        updateGroupPicture(url);
-                      }}
-                      title={'Update Photo'}
-                    />
-                    <Input
-                      onChange={e => setGroupname(e.target.value)}
-                      value={group_name as string}
-                      isDisabled={!isEditable}
-                      color="gray.800"
-                      _placeholder={{ color: 'gray.800' }}
-                      borderColor="beez.700"
-                      borderRadius="50"
-                      fontSize="3xl"
-                      size="lg"
-                      width="2xs"
-                    />
-                  </>
-                ) : (
-                  <Name title={group_name} />
-                )}
-
-                {user?.id === creator_id && isEditable ? (
-                  <ButtonGroup alignItems="center" size="sm">
-                    <IconButton
-                      borderRadius="50"
-                      onClick={() => cancelSave()}
-                      aria-label="Cancel"
-                      colorScheme="red"
-                      icon={<CloseIcon fontSize="xs" />}
-                    />
-                    <IconButton
-                      borderRadius="50"
-                      onClick={() => submitSave()}
-                      aria-label="Save"
-                      colorScheme="green"
-                      icon={<CheckIcon />}
-                    />
-                  </ButtonGroup>
-                ) : null}
-              </VStack>
-              {/* this is edit group info button */}
-              <>
-                {user?.id === creator_id && isEditable === false ? (
-                  <IconButton
-                    onClick={() => setIsEditable(true)}
-                    aria-label="Edit"
-                    bgColor="transparent"
-                    _hover={{ bgColor: 'transparent' }}
-                    icon={
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        size={'lg'}
-                        color="#2A2828"
-                      />
-                    }
+              {isEditable ? (
+                <>
+                  <AvatarUpload
+                    onUpload={(url: string) => {
+                      setGroupAvatarUrl(url);
+                      updateGroupPicture(url);
+                    }}
+                    title={'Update Photo'}
                   />
-                ) : null}
-              </>
-            </HStack>
-          </VStack>
+                  <Input
+                    onChange={e => setGroupname(e.target.value)}
+                    value={group_name as string}
+                    isDisabled={!isEditable}
+                    color="gray.800"
+                    _placeholder={{ color: 'gray.800' }}
+                    borderColor="beez.700"
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    width="2xs"
+                  />
+                  {user?.id === creator_id && isEditable ? (
+                    <ButtonGroup mt="2" alignItems="center" size="sm">
+                      <IconButton
+                        borderRadius="50"
+                        onClick={() => cancelSave()}
+                        aria-label="Cancel"
+                        colorScheme="red"
+                        icon={<CloseIcon fontSize="xs" />}
+                      />
+                      <IconButton
+                        borderRadius="50"
+                        onClick={() => submitSave()}
+                        aria-label="Save"
+                        colorScheme="green"
+                        icon={<CheckIcon />}
+                      />
+                    </ButtonGroup>
+                  ) : null}
+                </>
+              ) : (
+                <HStack flex={1} position="relative">
+                  <Name title={group_name} />
+                  {/* this is edit group info button */}
+                  {user?.id === creator_id && isEditable === false ? (
+                    <IconButton
+                      onClick={() => setIsEditable(true)}
+                      position="absolute"
+                      right={-10}
+                      aria-label="Edit"
+                      bgColor="transparent"
+                      _hover={{ bgColor: 'transparent' }}
+                      icon={
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          size={'lg'}
+                          color="#2A2828"
+                        />
+                      }
+                    />
+                  ) : null}
+                </HStack>
+              )}
+            </Flex>
+            <Spacer display={{ sm: 'block', lg: 'none' }} />
+            <DoggoIcon
+              display={{ sm: 'block', lg: 'none' }}
+              fontSize={{ sm: '10rem' }}
+            />
+          </Flex>
           {/* this is delete group button */}
           <Flex alignSelf="flex-end" justifyContent="center">
             {user?.id === creator_id && isEditable ? (
@@ -277,18 +299,22 @@ const Group: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <Box mt="8">
-          <VStack mb="8">
-            <Heading size={'2xl'}>Overview</Heading>
-          </VStack>
-          <LogsContainer />
-        </Box>
+        <VStack id="5" h={{ base: '100%' }}>
+          <Grid
+            h={{ base: '100%' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          >
+            <VStack justifyContent="center" alignItems="center">
+              <Heading fontSize={{ base: '4xl' }}>Overview</Heading>
+            </VStack>
+            <LogsContainer />
+          </Grid>
+        </VStack>
       }
       rightSide={
         <>
           <MembersLink group_id={group_id} />
           <MyGroupsLink />
-          <ProfileLink />
         </>
       }
     />

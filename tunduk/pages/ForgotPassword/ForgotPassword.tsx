@@ -118,6 +118,7 @@ const ForgotPassword: React.FC = () => {
           ) : (
             <Center
               style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              bg="white"
               h="xs"
               w={{ base: 'xs', sm: 'md' }}
               borderRadius={20}

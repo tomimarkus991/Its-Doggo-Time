@@ -67,12 +67,31 @@ export const AddDutyContainer: React.FC<Props> = ({
 
   return (
     <MainContainerLayout
-      mainH="lg"
+      mainH={{ base: 'sm', lg: 'lg' }}
       isLoading={isLoading}
       containerProps={{
-        w: { base: 'xs', sm: 'md', md: 'xl', lg: '2xl' },
-        h: 'lg',
+        w: { base: 'xs', sm: 'sm', md: 'lg', lg: '2xl' },
+        h: { base: 'sm', lg: 'md' },
       }}
+      button={
+        <IconButton
+          onClick={() => addDuty()}
+          mt={4}
+          h="100%"
+          aria-label="Remove User"
+          bgColor="transparent"
+          _hover={{ bgColor: 'transparent' }}
+          icon={
+            <AddDutyInputIcon
+              fontSize={{
+                base: '5rem',
+                md: '6rem',
+                lg: '7rem',
+              }}
+            />
+          }
+        />
+      }
     >
       <VStack flex={1} spacing={0}>
         <AvatarInvite src={groupdata?.avatar_url as string} />
@@ -82,24 +101,17 @@ export const AddDutyContainer: React.FC<Props> = ({
             <CheckboxGroup onChange={(value: string[]) => setDutys(value)}>
               <HStack>
                 <Checkbox value="pee">
-                  <PeeIcon w="8rem" h="8rem" />
+                  <PeeIcon
+                    fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }}
+                  />
                 </Checkbox>
                 <Checkbox value="poop">
-                  <PoopIcon w="8rem" h="8rem" />
+                  <PoopIcon
+                    fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }}
+                  />
                 </Checkbox>
               </HStack>
             </CheckboxGroup>
-            <Box>
-              <IconButton
-                onClick={() => addDuty()}
-                mt={4}
-                h="100%"
-                aria-label="Remove User"
-                bgColor="transparent"
-                _hover={{ bgColor: 'transparent' }}
-                icon={<AddDutyInputIcon w="5rem" h="5rem" />}
-              />
-            </Box>
           </VStack>
         </Box>
       </VStack>

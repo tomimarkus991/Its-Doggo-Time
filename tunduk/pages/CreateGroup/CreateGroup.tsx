@@ -2,20 +2,30 @@ import {
   Box,
   Center,
   Flex,
+  Grid,
   Heading,
+  HStack,
   Input,
+  Spacer,
   VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
+import {
+  AvatarGroup,
+  AvatarProfile,
+  AvatarUpload,
+} from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
-
+import { Name } from '../../components/Headers';
+import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
+import { MyGroupsLink, ProfileLink } from '../../components/Links';
+import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
-import { StringOrUndefined } from '../../types';
+import { ProfileType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 interface Props {}
@@ -26,6 +36,9 @@ const CreateGroup: React.FC<Props> = () => {
   const { user } = useAuth();
   const router = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState<StringOrUndefined>();
+  const [isUserdataLoading, setIsUserdataLoading] =
+    useState<boolean>(true);
 
   const createGroup = async () => {
     try {
@@ -68,76 +81,176 @@ const CreateGroup: React.FC<Props> = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchUserdata = async () => {
+      try {
+        setIsUserdataLoading(true);
+        let { data } = await supabase
+          .from('profiles')
+          .select(
+            `
+            id,
+            username
+        `,
+          )
+          .eq('id', user?.id)
+          .single();
+
+        const _userdata: ProfileType = data;
+
+        if (_userdata === null) return <Box>No data</Box>;
+
+        const { username } = _userdata;
+
+        setUsername(username);
+        setAvatarUrl(avatar_url);
+        return <Box>Error</Box>;
+      } finally {
+        setIsUserdataLoading(false);
+      }
+    };
+    fetchUserdata();
+  }, []);
+
   return (
     <MainLayout
       leftSide={
-        <Flex
-          justifyContent={{ base: 'center', lg: 'flex-end' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          ml={{ base: '8', lg: 'none' }}
-          mt="12"
+        <Skeleton
+          isLoading={isUserdataLoading}
+          props={{
+            borderRadius: 100,
+            w: { sm: '95%', md: '90%', lg: 'initial' },
+          }}
         >
-          <BackIcon
-            fontSize={{ base: '2rem', md: '2.7rem' }}
-            mr={{ base: '4', lg: '0' }}
-            cursor="pointer"
-            onClick={() => router.goBack()}
-          />
-          <VStack
-            display={{ base: 'flex', lg: 'none' }}
-            mb={{ base: 0, lg: '8' }}
+          <Flex
+            id="flex1"
+            flexDirection={{ sm: 'row', lg: 'column' }}
+            mx={{ sm: '6', lg: 'none' }}
+            mt={{ sm: '6', lg: 'none' }}
+            justifyContent={{ sm: 'flex-start' }}
+            alignItems={{ sm: 'center', lg: 'flex-end' }}
           >
-            <Heading size={'2xl'}>Create Group</Heading>
-          </VStack>
-        </Flex>
+            <Flex
+              id="flex2"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection={{ base: 'row', lg: 'column' }}
+            >
+              <Box mr={{ sm: '6', lg: '0' }}>
+                <AvatarProfile src={avatar_url as string} />
+              </Box>
+              <Name title={username} />
+            </Flex>
+            <Spacer display={{ sm: 'initial', lg: 'none' }} />
+            <DoggoIcon
+              display={{ sm: 'initial', lg: 'none' }}
+              fontSize={{ sm: '10rem' }}
+            />
+          </Flex>
+        </Skeleton>
       }
       middle={
-        <Box mt="8">
-          <VStack display={{ base: 'none', lg: 'flex' }} mb="8">
-            <Heading size={'2xl'}>Create Group</Heading>
-          </VStack>
-          <Center
-            style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
-            h="sm"
-            w={{ base: 'xs', sm: 'sm', lg: 'md' }}
-            borderRadius={20}
-            m="auto"
+        <VStack
+          id="5"
+          justifyContent="center"
+          alignItems="center"
+          h={{ base: '100%' }}
+        >
+          <Grid
+            h={{ base: '100%' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
-            <VStack spacing={4} minW="16rem">
-              <AvatarGroup src={avatar_url as string} />
-              <AvatarUpload
-                onUpload={(url: string) => {
-                  setAvatarUrl(url);
-                }}
-                title="Add Photo"
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              position="relative"
+            >
+              <BackIcon
+                position="absolute"
+                left={{ base: '-3', sm: '4' }}
+                w="10"
+                h="10"
+                cursor="pointer"
+                onClick={() => router.goBack()}
               />
-              <Input
-                value={group_name}
-                onChange={e => setGroupname(e.target.value)}
-                isRequired
-                size="lg"
-                fontSize="2xl"
-                maxW="2xs"
-                borderRadius="25"
-                borderColor="beez.700"
-                _placeholder={{ color: 'gray.800' }}
-                placeholder="Group name"
-              />
+              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
+                Create a Group
+              </Heading>
+            </HStack>
+            <Center
+              style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+              bg="white"
+              h="sm"
+              w={{ base: 'xs', sm: 'sm', lg: 'md' }}
+              borderRadius={20}
+              m="auto"
+            >
+              <VStack spacing={4} minW="16rem">
+                <AvatarGroup src={avatar_url as string} />
+                <AvatarUpload
+                  onUpload={(url: string) => {
+                    setAvatarUrl(url);
+                  }}
+                  title="Add Photo"
+                />
+                <Input
+                  value={group_name}
+                  onChange={e => setGroupname(e.target.value)}
+                  isRequired
+                  size="lg"
+                  fontSize="2xl"
+                  maxW="2xs"
+                  borderRadius="25"
+                  borderColor="beez.700"
+                  _placeholder={{ color: 'gray.800' }}
+                  placeholder="Group name"
+                />
 
-              <GradientButton
-                onClick={createGroup}
-                isLoading={isLoading}
-                loadingText="Creating"
-              >
-                <GradientButtonText fontSize={25}>
-                  Create
-                </GradientButtonText>
-              </GradientButton>
-            </VStack>
-          </Center>
-        </Box>
+                <GradientButton
+                  onClick={createGroup}
+                  isLoading={isLoading}
+                  loadingText="Creating"
+                >
+                  <GradientButtonText fontSize={25}>
+                    Create
+                  </GradientButtonText>
+                </GradientButton>
+              </VStack>
+            </Center>
+          </Grid>
+        </VStack>
+        // <Box mt="8">
+        //   <HStack justifyContent="center" mb="12">
+        //     <Box display={{ base: 'block', lg: 'none' }}>
+        //       <BackIcon
+        //         w="9"
+        //         h="9"
+        //         pr={{ base: '0', sm: '4' }}
+        //         cursor="pointer"
+        //         onClick={() => router.goBack()}
+        //       />
+        //     </Box>
+        //     <Heading
+        //       textAlign="center"
+        //       fontSize={{
+        //         base: '1.7rem',
+        //         sm: '4xl',
+        //         md: '2.5rem',
+        //         lg: '5xl',
+        //       }}
+        //       pr={{ base: '8', sm: '0' }}
+        //     >
+        //       Create Group
+        //     </Heading>
+        //   </HStack>
+        // </Box>
       }
-      rightSide={null}
+      rightSide={
+        <>
+          <MyGroupsLink />
+          <ProfileLink />
+        </>
+      }
     />
   );
 };

@@ -91,10 +91,18 @@ export const LogsContainer: React.FC<Props> = ({}) => {
       {/* <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}> */}
       <VStack
         style={{ boxShadow: '1px 1px 8px 2px #DDCDBF' }}
+        bgColor="white"
         position="relative"
-        h="md"
-        w="2xl"
-        py="4"
+        h={{ base: 'sm', sm: 'sm', lg: 'md' }}
+        w={{
+          base: 'xs',
+          sm: 'sm',
+          md: 'lg',
+          lg: 'xl',
+          xl: '2xl',
+        }}
+        py={{ base: '4', sm: '4' }}
+        px={{ base: '4' }}
         borderRadius={20}
       >
         {isLoading === true ? null : (
@@ -104,8 +112,10 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             logsdata.length === 0 ? (
               <Center h="100%">
                 <VStack textAlign="center">
-                  <Heading size={'2xl'}>Log is Empty</Heading>
-                  <Text fontSize="2xl" maxW="lg">
+                  <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
+                    Log is Empty
+                  </Heading>
+                  <Text fontSize={{ base: 'xl', lg: '2xl' }} maxW="lg">
                     Press the button in bottom right to add your dogs duty
                     to the log
                   </Text>
@@ -127,7 +137,11 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                 ))}
               </SimpleGrid>
             )}
-            <Box position="absolute" right="-10" bottom="-10">
+            <Box
+              position="absolute"
+              right={{ base: '+50', lg: '-10' }}
+              bottom={{ base: '-10', lg: '-10' }}
+            >
               <AddNewIconButton
                 to={`/group/${group_id}/add-duty`}
                 icon={
