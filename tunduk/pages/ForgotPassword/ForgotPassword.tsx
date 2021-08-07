@@ -80,7 +80,8 @@ const ForgotPassword: React.FC = () => {
             <Heading
               textAlign="center"
               fontSize={{
-                base: '1.7rem',
+                base: '1.5rem',
+                base2: '1.7rem',
                 sm: '4xl',
                 md: '2.5rem',
                 lg: '5xl',
@@ -100,14 +101,22 @@ const ForgotPassword: React.FC = () => {
                 justifyContent="center"
                 textAlign="center"
                 mb={4}
-                py="20"
+                py={{ base: '10', sm: '10', md: '14' }}
                 borderRadius="20"
+                w={{ base: 'xs', base2: 'sm', sm: 'md' }}
               >
                 <AlertIcon w="10" h="10" mb="4" />
-                <AlertTitle mt={4} mb={6} fontSize="3xl">
+                <AlertTitle
+                  mt={4}
+                  mb={6}
+                  fontSize={{ base: '2xl', sm: '3xl' }}
+                >
                   Email Sent
                 </AlertTitle>
-                <AlertDescription maxWidth="sm" fontSize="2xl">
+                <AlertDescription
+                  maxWidth="sm"
+                  fontSize={{ base: 'xl', sm: '2xl' }}
+                >
                   <Text mb="4">
                     Check your email for reset password link.
                   </Text>
@@ -127,6 +136,7 @@ const ForgotPassword: React.FC = () => {
               <VStack spacing={5} w="xs">
                 <Input
                   variant={'removeDefault'}
+                  autoCapitalize="off"
                   type="email"
                   placeholder="Email"
                   value={email}

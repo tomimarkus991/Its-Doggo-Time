@@ -5,6 +5,7 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Button,
   Flex,
   Grid,
   Heading,
@@ -365,19 +366,23 @@ const Members: React.FC = () => {
                               the capitalization, spelling, any spaces, and
                               numbers are correct.
                             </AlertDescription>
-                            <GradientButton
+
+                            <Button
                               onClick={() => setIsInvalid(false)}
+                              borderRadius="50"
+                              colorScheme="green"
+                              size="lg"
+                              fontSize={20}
                               mt={2}
                             >
-                              <GradientButtonText fontSize={20}>
-                                Ok
-                              </GradientButtonText>
-                            </GradientButton>
+                              OK
+                            </Button>
                           </Alert>
                         ) : null}
 
                         <Input
                           variant={'removeDefault'}
+                          autoCapitalize="off"
                           isInvalid={isInvalid}
                           errorBorderColor="crimson"
                           placeholder="Username"

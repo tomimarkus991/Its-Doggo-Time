@@ -195,6 +195,7 @@ const CreateGroup: React.FC<Props> = () => {
                 />
                 <Input
                   variant={'removeDefault'}
+                  autoCapitalize="off"
                   value={group_name}
                   onChange={e => setGroupname(e.target.value)}
                   isRequired

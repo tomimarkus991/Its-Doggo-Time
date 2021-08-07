@@ -251,6 +251,7 @@ const Profile: React.FC = () => {
                   <VStack>
                     <Input
                       variant={'removeDefault'}
+                      autoCapitalize="off"
                       value={username || ''}
                       onChange={e => setUsername(e.target.value)}
                       size="lg"
@@ -278,6 +279,7 @@ const Profile: React.FC = () => {
                           value={password}
                           onChange={e => setPassword(e.target.value)}
                           autoComplete="off"
+                          autoCapitalize="off"
                           placeholder="Password"
                           size="lg"
                           fontSize="2xl"

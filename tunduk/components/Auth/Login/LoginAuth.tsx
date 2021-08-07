@@ -64,7 +64,7 @@ const LoginAuth: React.FC = () => {
       <VStack spacing="4">
         <Input
           variant={'removeDefault'}
-          autoComplete="off"
+          autoCapitalize="off"
           type="email"
           placeholder="Email"
           value={email || ''}
@@ -82,6 +82,7 @@ const LoginAuth: React.FC = () => {
               value={password || ''}
               onChange={e => setPassword(e.target.value)}
               autoComplete="off"
+              autoCapitalize="off"
               placeholder="Password"
               size="lg"
               fontSize="2xl"

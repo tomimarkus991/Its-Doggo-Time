@@ -14,6 +14,7 @@ const colors = {
 };
 
 const breakpoints = createBreakpoints({
+  base2: '25em',
   sm: '30em',
   sm2: '39em',
   md: '48em',
@@ -41,8 +42,8 @@ export const theme = extendTheme({
       boxShadow: '1px 1px 8px 2px #DDCDBF',
       bg: '#ffffff',
       '.chakra-ui-dark &': {
-        bg: '#6A6A6A',
-        boxShadow: '1px 1px 8px 2px #707070',
+        bg: '#4B4949',
+        boxShadow: '1px 1px 8px 2px #4B4949',
       },
     },
   },

@@ -226,6 +226,7 @@ const Group: React.FC = () => {
                 <>
                   <Input
                     variant={'removeDefault'}
+                    autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
                     value={group_name as string}
                     isDisabled={!isEditable}
@@ -335,6 +336,7 @@ const Group: React.FC = () => {
                   />
                   <Input
                     variant={'removeDefault'}
+                    autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
                     value={group_name as string}
                     isDisabled={!isEditable}

@@ -121,16 +121,19 @@ const RegisterAuth: React.FC = () => {
           justifyContent="center"
           textAlign="center"
           mb={4}
-          py="10"
+          py={{ base: '10', sm: '10' }}
           borderRadius="20"
-          w="md"
+          w={{ base: 'xs', base2: 'sm', sm: 'md' }}
         >
           <AlertIcon w="10" h="10" mb="4" />
-          <AlertTitle mt={4} mb={6} fontSize="3xl">
+          <AlertTitle mt={4} mb={6} fontSize={{ base: '2xl', sm: '3xl' }}>
             <Text mb="2">Account Created</Text>
             <Text mb="2">Successfully</Text>
           </AlertTitle>
-          <AlertDescription maxWidth="sm" fontSize="2xl">
+          <AlertDescription
+            maxWidth="sm"
+            fontSize={{ base: 'xl', sm: '2xl' }}
+          >
             <Text mb="8">Please confirm your email</Text>
             <Text>You can close this tab now</Text>
           </AlertDescription>
@@ -140,6 +143,7 @@ const RegisterAuth: React.FC = () => {
           <VStack spacing="4">
             <Input
               variant={'removeDefault'}
+              autoCapitalize="off"
               type="text"
               placeholder="Username"
               value={username}
@@ -153,6 +157,7 @@ const RegisterAuth: React.FC = () => {
               variant={'removeDefault'}
               type="email"
               placeholder="Email"
+              autoCapitalize="off"
               value={email}
               onChange={e => setEmail(e.target.value)}
               size="lg"
@@ -167,6 +172,7 @@ const RegisterAuth: React.FC = () => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 autoComplete="off"
+                autoCapitalize="off"
                 placeholder="Password"
                 size="lg"
                 fontSize="2xl"
