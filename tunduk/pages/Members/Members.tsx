@@ -275,7 +275,7 @@ const Members: React.FC = () => {
               <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
                 Members
               </Heading>
-              <Box position="absolute" right={10}>
+              <Box position="absolute" right={{ base: 6, sm: 10 }}>
                 {user?.id === creator_id && isEditable === false ? (
                   <IconButton
                     onClick={() => setIsEditable(true)}
@@ -293,6 +293,7 @@ const Members: React.FC = () => {
                 ) : null}
                 {user?.id === creator_id && isEditable ? (
                   <IconButton
+                    id="editasdasd"
                     borderRadius="50"
                     onClick={() => setIsEditable(false)}
                     aria-label="Save"

@@ -42,8 +42,8 @@ export const MemberCard: React.FC<Props> = ({
           <IconButton
             onClick={() => removeUser()}
             position="absolute"
-            bottom="0"
-            right="-4"
+            top="-4"
+            right="-5"
             aria-label="Remove User"
             bgColor="transparent"
             _hover={{ bgColor: 'transparent' }}
