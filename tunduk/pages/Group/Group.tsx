@@ -9,6 +9,7 @@ import {
   IconButton,
   Input,
   Spacer,
+  useColorModeValue,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -44,6 +45,8 @@ const Group: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
+
+  const penColor = useColorModeValue('#2A2828', '#E5E0D5');
 
   const cancelSave = () => {
     setGroupname(old_group_name);
@@ -280,7 +283,7 @@ const Group: React.FC = () => {
                         <FontAwesomeIcon
                           icon={faPen}
                           size={'lg'}
-                          color="#2A2828"
+                          color={penColor}
                         />
                       }
                     />
@@ -383,7 +386,7 @@ const Group: React.FC = () => {
                         <FontAwesomeIcon
                           icon={faPen}
                           size={'lg'}
-                          color="#2A2828"
+                          color={penColor}
                         />
                       }
                     />

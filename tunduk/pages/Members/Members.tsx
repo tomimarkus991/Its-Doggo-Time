@@ -20,6 +20,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Spacer,
+  useColorModeValue,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -66,6 +67,7 @@ const Members: React.FC = () => {
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
   const [isAddMemberDisabled, setIsAddMemberDisabled] =
     useState<boolean>(false);
+  const penColor = useColorModeValue('#2A2828', '#E5E0D5');
 
   const fetchGroupData = async () => {
     try {
@@ -286,14 +288,13 @@ const Members: React.FC = () => {
                       <FontAwesomeIcon
                         icon={faPen}
                         size={'lg'}
-                        color="#2A2828"
+                        color={penColor}
                       />
                     }
                   />
                 ) : null}
                 {user?.id === creator_id && isEditable ? (
                   <IconButton
-                    id="editasdasd"
                     borderRadius="50"
                     onClick={() => setIsEditable(false)}
                     aria-label="Save"
