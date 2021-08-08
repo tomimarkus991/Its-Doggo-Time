@@ -325,8 +325,7 @@ const Members: React.FC = () => {
                       <AddMemberIcon
                         fontSize={{
                           base: '5rem',
-                          md: '6rem',
-                          lg: '7rem',
+                          md: '7rem',
                         }}
                       />
                     }

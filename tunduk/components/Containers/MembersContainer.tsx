@@ -2,7 +2,7 @@ import { Box, SimpleGrid } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ProfileType, StringOrUndefined } from '../../types';
 import { MemberCard } from '../Cards';
-import { DogPawn } from '../Icons/LightMode';
+import { ProfileIcon } from '../Icons/Navbar';
 import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
@@ -49,7 +49,8 @@ export const MembersContainer: React.FC<Props> = ({
         w: {
           base: 'xs',
           sm: 'md',
-          md: 'md',
+          sm2: 'lg',
+          md: 'xl',
           lg: 'lg',
           xl: 'xl',
         },
@@ -69,12 +70,12 @@ export const MembersContainer: React.FC<Props> = ({
         ))}
         {paws?.map((_, index: number) => (
           <Box key={index}>
-            <DogPawn
+            <ProfileIcon
               fontSize={{
                 base: '5rem',
                 md: '6rem',
-                lg: '6.5rem',
-                xl: '7rem',
+                lg: '6rem',
+                xl: '6.5rem',
               }}
             />
           </Box>

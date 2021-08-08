@@ -32,8 +32,8 @@ const MainContainerLayout: React.FC<Props> = ({
           {children}
           <Box
             position="absolute"
-            right={{ base: '+50', lg: '-10' }}
-            bottom={{ base: '-10', lg: '-10' }}
+            right={{ base: '+50', md: '-10' }}
+            bottom={{ base: '-10', md: '-10' }}
           >
             {button}
           </Box>

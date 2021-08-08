@@ -36,7 +36,9 @@ export const MemberCard: React.FC<Props> = ({
   return (
     <VStack spacing={0} position="relative">
       <ProfileAvatarCard src={avatar_url} />
-      <Text fontSize={{ base: '20', lg: '28' }}>{username}</Text>
+      <Text fontSize={{ base: '20', sm: '24', md: '28', lg: '28' }}>
+        {username}
+      </Text>
       <>
         {isEditable && creator_id !== id ? (
           <IconButton
