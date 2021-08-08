@@ -13,6 +13,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { AddNewIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
 import { AddDutyIcon } from '../Icons/Doggo';
+import { PeeAndPoopPlaceholderIcon } from '../Icons/Dutys';
 
 interface Props {}
 interface RouteParams {
@@ -23,6 +24,8 @@ export const LogsContainer: React.FC<Props> = ({}) => {
   const { group_id } = useParams<RouteParams>();
   const [logsdata, setLogsdata] = useState<LogsdataType[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
     const getLogsdata = async () => {
@@ -86,6 +89,24 @@ export const LogsContainer: React.FC<Props> = ({}) => {
 
     getLogsdata();
   }, []);
+
+  useEffect(() => {
+    let getPlaceholders = () => {
+      let max = 4;
+      if (!logsdata) return;
+
+      // gets how many placeholders to render
+      const _placeholders = max - logsdata.length;
+
+      let placeholderArray: string[] = [];
+
+      for (let i = 1; i <= _placeholders; i++) {
+        placeholderArray.push('holder');
+      }
+      setPlaceholders(placeholderArray);
+    };
+    getPlaceholders();
+  }, [logsdata]);
   return (
     <VStack
       id="logs"
@@ -145,6 +166,27 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                   <Box key={index}>
                     <LogCard log={log} />
                   </Box>
+                ))}
+                {placeholders?.map((_, index: number) => (
+                  <Center key={index}>
+                    <VStack>
+                      <PeeAndPoopPlaceholderIcon
+                        fontSize={{
+                          base: '6rem',
+                          sm: '7rem',
+                          md: '9rem',
+                          lg: '8rem',
+                          xl: '9rem',
+                        }}
+                      />
+                      <Text
+                        textAlign="center"
+                        fontSize={{ base: 'xl', sm: 'xl', md: '2xl' }}
+                      >
+                        &nbsp;
+                      </Text>
+                    </VStack>
+                  </Center>
                 ))}
               </SimpleGrid>
             </Center>
