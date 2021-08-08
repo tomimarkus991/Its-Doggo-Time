@@ -29,7 +29,7 @@ export const AddDutyContainer: React.FC<Props> = ({
   groupdata,
   isLoading,
 }) => {
-  const [dutys, setDutys] = useState<string[]>();
+  const [dutys, setDutys] = useState<string[]>([]);
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
@@ -78,9 +78,10 @@ export const AddDutyContainer: React.FC<Props> = ({
           onClick={() => addDuty()}
           mt={4}
           h="100%"
-          aria-label="Remove User"
+          aria-label="Add Duty Button"
           bgColor="transparent"
           _hover={{ bgColor: 'transparent' }}
+          isDisabled={dutys?.length === 0}
           icon={
             <AddDutyInputIcon
               fontSize={{
@@ -98,7 +99,9 @@ export const AddDutyContainer: React.FC<Props> = ({
         <Name title={groupdata?.group_name} textProps={{ fontSize: 30 }} />
         <Box>
           <VStack mt={4}>
-            <CheckboxGroup onChange={(value: string[]) => setDutys(value)}>
+            <CheckboxGroup
+              onChange={(values: string[]) => setDutys(values)}
+            >
               <HStack>
                 <Checkbox value="pee">
                   <PeeIcon
