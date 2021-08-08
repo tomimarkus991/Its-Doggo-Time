@@ -25,9 +25,7 @@ import { ProfileLink } from '../Links';
 import Skeleton from '../Skeleton';
 
 const LoggedIn: React.FC = () => {
-  const [userInvites, setUserInvites] = useState<
-    InviteDataType[] | undefined
-  >();
+  const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
   const [username, setUsername] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
   const [groups, setGroups] = useState<GroupType[]>();

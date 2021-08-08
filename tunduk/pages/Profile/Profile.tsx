@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
   const [old_username, setOldUsername] = useState<StringOrUndefined>();
   const [password, setPassword] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const [userInvites, setUserInvites] = useState<InviteDataType[]>();
+  const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isUserdataLoading, setIsUserdataLoading] =
@@ -259,14 +259,6 @@ const Profile: React.FC = () => {
                       borderRadius="25"
                       maxLength={20}
                       placeholder="Username"
-                    />
-                    <Input
-                      variant={'removeDefault'}
-                      value={user?.email}
-                      disabled
-                      size="lg"
-                      fontSize="2xl"
-                      borderRadius="25"
                     />
                     {user?.app_metadata.provider === 'email' ? (
                       <InputGroup

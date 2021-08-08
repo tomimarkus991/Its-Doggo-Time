@@ -1,5 +1,6 @@
 import {
   Box,
+  Icon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -21,10 +22,8 @@ import { InvitesIcon } from '../Icons/Navbar';
 import { GradientButtonText, LinkLabel } from '../Text';
 
 interface Props {
-  userInvites: InviteDataType[] | undefined;
-  setUserInvites: React.Dispatch<
-    React.SetStateAction<InviteDataType[] | undefined>
-  >;
+  userInvites: InviteDataType[];
+  setUserInvites: React.Dispatch<React.SetStateAction<InviteDataType[]>>;
   currentUsername: StringOrUndefined;
 }
 
@@ -132,7 +131,24 @@ const Invites: React.FC<Props> = ({
   return (
     <>
       <VStack cursor="pointer" onClick={onOpen}>
-        <InvitesIcon id="Invites" fontSize="4rem" />
+        <Box position="relative">
+          <InvitesIcon id="Invites" fontSize="4rem" />
+          {userInvites.length >= 1 && (
+            <Icon
+              position="absolute"
+              bottom={-2}
+              right={-2}
+              viewBox="0 0 200 200"
+              fontSize="1.5rem"
+              color="green.500"
+            >
+              <path
+                fill="currentColor"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+              />
+            </Icon>
+          )}
+        </Box>
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
 
