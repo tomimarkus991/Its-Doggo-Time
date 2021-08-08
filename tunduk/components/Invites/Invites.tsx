@@ -36,7 +36,7 @@ const Invites: React.FC<Props> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth();
 
-  const InvitesModalBG = useColorModeValue('#ffffff', 'gray.800');
+  const modalBG = useColorModeValue('#ffffff', 'gray.800');
 
   const fetchInvites = async (_username: StringOrUndefined) => {
     try {
@@ -138,7 +138,7 @@ const Invites: React.FC<Props> = ({
 
       <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
         <ModalOverlay />
-        <ModalContent bg={InvitesModalBG}>
+        <ModalContent bg={modalBG}>
           <ModalHeader fontSize="3xl">Invites</ModalHeader>
           <ModalCloseButton />
           <ModalBody maxH="lg">

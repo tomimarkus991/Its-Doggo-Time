@@ -68,6 +68,7 @@ const Members: React.FC = () => {
   const [isAddMemberDisabled, setIsAddMemberDisabled] =
     useState<boolean>(false);
   const penColor = useColorModeValue('#2A2828', '#E5E0D5');
+  const modalBG = useColorModeValue('#ffffff', 'gray.800');
 
   const fetchGroupData = async () => {
     try {
@@ -339,7 +340,7 @@ const Members: React.FC = () => {
                     size="sm"
                   >
                     <ModalOverlay />
-                    <ModalContent borderRadius={20}>
+                    <ModalContent bg={modalBG} borderRadius={20}>
                       <ModalHeader
                         textTransform="uppercase"
                         textAlign="center"
