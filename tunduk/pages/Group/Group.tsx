@@ -217,13 +217,35 @@ const Group: React.FC = () => {
                 <VStack>
                   <AvatarGroup src={group_avatar_url as string} />
                   {isEditable ? (
-                    <AvatarUpload
-                      onUpload={(url: string) => {
-                        setGroupAvatarUrl(url);
-                        updateGroupPicture(url);
-                      }}
-                      title={'Update Photo'}
-                    />
+                    <>
+                      <AvatarUpload
+                        onUpload={(url: string) => {
+                          setGroupAvatarUrl(url);
+                          updateGroupPicture(url);
+                        }}
+                        title={'Update Photo'}
+                      />
+                      {/* this is delete group button */}
+                      <Flex
+                        display={{ sm: 'flex', lg: 'none' }}
+                        w="100%"
+                        h="40%"
+                        justifyContent="center"
+                      >
+                        <Flex alignSelf="flex-end">
+                          {user?.id === creator_id && isEditable ? (
+                            <Button
+                              onClick={deleteGroup}
+                              colorScheme="red"
+                              textTransform="uppercase"
+                              borderRadius="50"
+                            >
+                              Delete group
+                            </Button>
+                          ) : null}
+                        </Flex>
+                      </Flex>
+                    </>
                   ) : null}
                 </VStack>
 
@@ -307,8 +329,8 @@ const Group: React.FC = () => {
                 fontSize={{ sm: '10rem' }}
               />
             </Flex>
-            {/* this is delete group button */}
           </Skeleton>
+          {/* this is delete group button */}
           <Flex
             display={{ base: 'none', lg: 'flex' }}
             w="100%"
@@ -334,7 +356,10 @@ const Group: React.FC = () => {
         <VStack id="5" h={{ base: '100%' }}>
           <Grid
             h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
+            templateRows={{
+              base: '0.4fr 0.1fr 1fr 0.1fr',
+              sm: '0.2fr 1fr',
+            }}
           >
             <HStack
               justifyContent="flex-start"
@@ -413,6 +438,26 @@ const Group: React.FC = () => {
               Overview
             </Heading>
             <LogsContainer />
+            {/* this is delete group button */}
+            <Flex
+              display={{ base: 'flex', sm: 'none' }}
+              w="100%"
+              h="40%"
+              justifyContent="center"
+            >
+              <Flex alignSelf="flex-end">
+                {user?.id === creator_id && isEditable ? (
+                  <Button
+                    onClick={deleteGroup}
+                    colorScheme="red"
+                    textTransform="uppercase"
+                    borderRadius="50"
+                  >
+                    Delete group
+                  </Button>
+                ) : null}
+              </Flex>
+            </Flex>
           </Grid>
         </VStack>
       }
