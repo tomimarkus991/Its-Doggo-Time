@@ -7,7 +7,10 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { HeaderBackgroundDark } from '../Icons/DarkMode';
+import {
+  HeaderBackgroundDark,
+  SmallHeaderBgDark,
+} from '../Icons/DarkMode';
 import {
   HeaderBackgroundLight,
   SmallHeaderBgLight,
@@ -19,12 +22,13 @@ export const Header2: React.FC = () => {
     <>
       {colorMode === 'dark' ? (
         <>
+          <SmallHeaderBgDark display={{ base: 'block', sm: 'none' }} />
           <HeaderBackgroundDark display={{ base: 'none', sm: 'block' }} />
         </>
       ) : (
         <>
-          <HeaderBackgroundLight display={{ base: 'none', sm: 'block' }} />
           <SmallHeaderBgLight display={{ base: 'block', sm: 'none' }} />
+          <HeaderBackgroundLight display={{ base: 'none', sm: 'block' }} />
         </>
       )}
 

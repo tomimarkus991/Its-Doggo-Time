@@ -1,7 +1,10 @@
 import { Box, Grid, GridItem, useColorMode } from '@chakra-ui/react';
 import React from 'react';
 import Header from '../../Header';
-import { HeaderBackgroundDark } from '../../Icons/DarkMode';
+import {
+  HeaderBackgroundDark,
+  SmallHeaderBgDark,
+} from '../../Icons/DarkMode';
 import {
   SmallHeaderBgLight,
   HeaderBackgroundLight,
@@ -22,7 +25,11 @@ const BasicDefaultLayout = ({
     >
       {colorMode === 'dark' ? (
         <>
-          <HeaderBackgroundDark display={{ base: 'block', sm: 'none' }} />
+          <SmallHeaderBgDark display={{ base: 'block', sm: 'none' }} />
+          <HeaderBackgroundDark
+            h="100%"
+            display={{ base: 'none', sm: 'block', lg: 'none' }}
+          />
         </>
       ) : (
         <>

@@ -15,7 +15,7 @@ const Skeleton: React.FC<Props> = ({
 }): JSX.Element => {
   return (
     <ChakraSkeleton
-      id="8"
+      id="skeleton"
       startColor="beez.100"
       endColor="beez.700"
       isLoaded={!isLoading}
