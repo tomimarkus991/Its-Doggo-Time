@@ -199,7 +199,8 @@ const Group: React.FC = () => {
             <Flex
               id="flex1"
               flexDirection={{ sm: 'row', lg: 'column' }}
-              mr={{ md: '6', lg: 'none' }}
+              ml={{ sm: '6', lg: 'none' }}
+              mr={{ sm: '4', md: '6', lg: 'none' }}
               mt={{ sm: '6', lg: 'none' }}
               justifyContent={{ sm: 'flex-start' }}
               alignItems={{ sm: 'center' }}
