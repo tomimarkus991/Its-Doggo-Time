@@ -91,8 +91,8 @@ export const PeeAndPoopPlaceholderIcon = (
         y2="303.525"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#DDCDBF" />
-        <stop offset="1" stop-color="#FBEFEF" />
+        <stop stopColor="#DDCDBF" />
+        <stop offset="1" stopColor="#FBEFEF" />
       </linearGradient>
       <linearGradient
         id="paint17_linear"
@@ -102,8 +102,8 @@ export const PeeAndPoopPlaceholderIcon = (
         y2="680.531"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#DDCDBF" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#DDCDBF" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint18_linear"
@@ -113,9 +113,9 @@ export const PeeAndPoopPlaceholderIcon = (
         y2="333.056"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#DDCDBF" />
-        <stop offset="0.958" stop-color="#FCF9E8" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#DDCDBF" />
+        <stop offset="0.958" stopColor="#FCF9E8" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint19_linear"
@@ -125,8 +125,8 @@ export const PeeAndPoopPlaceholderIcon = (
         y2="472.093"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#DDCDBF" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#DDCDBF" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
     </defs>
   </Icon>

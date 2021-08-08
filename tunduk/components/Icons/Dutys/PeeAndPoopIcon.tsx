@@ -89,8 +89,8 @@ export const PeeAndPoopIcon = (props: IconProps): JSX.Element => (
         y2="289.653"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6E3434" />
-        <stop offset="1" stop-color="#FBEFEF" />
+        <stop stopColor="#6E3434" />
+        <stop offset="1" stopColor="#FBEFEF" />
       </linearGradient>
       <linearGradient
         id="paint13_linear"
@@ -100,8 +100,8 @@ export const PeeAndPoopIcon = (props: IconProps): JSX.Element => (
         y2="666.658"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6E3434" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#6E3434" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint14_linear"
@@ -111,9 +111,9 @@ export const PeeAndPoopIcon = (props: IconProps): JSX.Element => (
         y2="319.183"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#EED952" />
-        <stop offset="0.958" stop-color="#FCF9E8" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#EED952" />
+        <stop offset="0.958" stopColor="#FCF9E8" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint15_linear"
@@ -123,8 +123,8 @@ export const PeeAndPoopIcon = (props: IconProps): JSX.Element => (
         y2="458.221"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FCE656" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#FCE656" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
     </defs>
   </Icon>
