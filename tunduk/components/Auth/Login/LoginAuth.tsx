@@ -1,28 +1,23 @@
 import {
   Box,
   Flex,
-  HStack,
   Input,
   InputGroup,
   InputRightElement,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import {
-  faFacebook,
-  faGithub,
-  faGoogle,
-} from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import { StringOrUndefined } from '../../../types';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
+import OAuthSection from '../OAuth';
+import { RerouteLoginRegister } from '../RerouteLoginRegister';
 
 const LoginAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -128,19 +123,8 @@ const LoginAuth: React.FC = () => {
         <Box>
           <Text fontSize="lg">Or</Text>
         </Box>
-        <HStack spacing="4">
-          <OAuthButton provider="google" icon={faGoogle} />
-          <OAuthButton provider="facebook" icon={faFacebook} />
-          <OAuthButton provider="github" icon={faGithub} />
-        </HStack>
-        <HStack spacing={1}>
-          <Text fontSize="lg">New to Doggo time?</Text>
-          <Link to="/register">
-            <Text fontSize="lg" color="#c9ac95">
-              Sign up
-            </Text>
-          </Link>
-        </HStack>
+        <OAuthSection />
+        <RerouteLoginRegister title="New to Doggo time?" to="/register" />
         <ColorMode />
       </VStack>
     </Box>

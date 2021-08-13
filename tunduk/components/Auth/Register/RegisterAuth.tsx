@@ -4,7 +4,6 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
-  HStack,
   Input,
   InputGroup,
   InputRightElement,
@@ -12,21 +11,16 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import {
-  faFacebook,
-  faGithub,
-  faGoogle,
-} from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { OAuthButton } from '..';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import { supabase } from '../../../utils/supabaseClient';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
+import OAuthSection from '../OAuth';
+import { RerouteLoginRegister } from '../RerouteLoginRegister';
 
 const RegisterAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -212,19 +206,11 @@ const RegisterAuth: React.FC = () => {
             <Box>
               <Text fontSize="lg">Or</Text>
             </Box>
-            <HStack spacing="4">
-              <OAuthButton provider="google" icon={faGoogle} />
-              <OAuthButton provider="facebook" icon={faFacebook} />
-              <OAuthButton provider="github" icon={faGithub} />
-            </HStack>
-            <HStack spacing={1}>
-              <Text fontSize="lg">Already have an account?</Text>
-              <Link to="/login">
-                <Text fontSize="lg" color="#c9ac95">
-                  Sign in
-                </Text>
-              </Link>
-            </HStack>
+            <OAuthSection />
+            <RerouteLoginRegister
+              title="Already have an account?"
+              to="/login"
+            />
             <ColorMode />
           </VStack>
         </Box>

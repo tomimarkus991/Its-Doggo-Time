@@ -1,7 +1,7 @@
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Provider } from '@supabase/gotrue-js';
-import { useAuth } from '../../context/authContext/AuthContext';
+import { useAuth } from '../../../context/authContext/AuthContext';
 interface Props {
   icon: IconDefinition;
   provider: Provider;
