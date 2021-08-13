@@ -11,6 +11,10 @@
 # testing
 /coverage
 
+/public/**.js
+/public/**.**.map
+
+
 # next.js
 /.next/
 /out/
