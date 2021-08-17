@@ -1,7 +1,5 @@
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Button,
-  ButtonGroup,
   Flex,
   Grid,
   Heading,
@@ -18,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
+import EditButtons from '../../components/Buttons/EditButtons';
 import { LogsContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
 import { DoggoIcon } from '../../components/Icons/Doggo';
@@ -271,26 +270,15 @@ const Group: React.FC = () => {
                       width={{ base: '3xs', xl: '2xs' }}
                     />
                     {user?.id === creator_id && isEditable ? (
-                      <ButtonGroup
-                        mt={{ base: 0, sm: '2', lg: '2' }}
-                        alignItems="center"
-                        size="sm"
-                      >
-                        <IconButton
-                          borderRadius="50"
-                          onClick={() => cancelSave()}
-                          aria-label="Cancel"
-                          colorScheme="red"
-                          icon={<CloseIcon fontSize="xs" />}
-                        />
-                        <IconButton
-                          borderRadius="50"
-                          onClick={() => submitSave()}
-                          aria-label="Save"
-                          colorScheme="green"
-                          icon={<CheckIcon />}
-                        />
-                      </ButtonGroup>
+                      <EditButtons
+                        buttonGroupProps={{
+                          mt: { base: 0, sm: '2' },
+                          alignItems: 'center',
+                          size: 'sm',
+                        }}
+                        onCrossClick={cancelSave}
+                        onCheckClick={submitSave}
+                      />
                     ) : null}
                   </Flex>
                 ) : (
@@ -389,27 +377,15 @@ const Group: React.FC = () => {
                     mr="4"
                     width={{ base: '3xs', xl: '2xs' }}
                   />
-
-                  <ButtonGroup
-                    mt={{ base: 0, lg: '2' }}
-                    alignItems="center"
-                    size="sm"
-                  >
-                    <IconButton
-                      borderRadius="50"
-                      onClick={() => cancelSave()}
-                      aria-label="Cancel"
-                      colorScheme="red"
-                      icon={<CloseIcon fontSize="xs" />}
-                    />
-                    <IconButton
-                      borderRadius="50"
-                      onClick={() => submitSave()}
-                      aria-label="Save"
-                      colorScheme="green"
-                      icon={<CheckIcon />}
-                    />
-                  </ButtonGroup>
+                  <EditButtons
+                    buttonGroupProps={{
+                      mt: { base: 0, lg: '2' },
+                      alignItems: 'center',
+                      size: 'sm',
+                    }}
+                    onCrossClick={cancelSave}
+                    onCheckClick={submitSave}
+                  />
                 </VStack>
               ) : (
                 <HStack ml="4" flex={1}>

@@ -1,8 +1,8 @@
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
-import { Box, Flex, HStack, IconButton, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { InviteDataType } from '../../types';
 import { AvatarInvite } from '../Avatar';
+import EditButtons from '../Buttons/EditButtons';
 
 interface Props {
   invite: InviteDataType;
@@ -35,23 +35,11 @@ export const InviteCard: React.FC<Props> = ({
             <strong> &#34;{group_name}&#34;</strong>
           </Text>
         </Box>
-
-        <HStack spacing="7">
-          <IconButton
-            aria-label="decline"
-            borderRadius="100"
-            colorScheme="red"
-            icon={<CloseIcon fontSize="xs" />}
-            onClick={() => declineInvite(id)}
-          />
-          <IconButton
-            aria-label="accept"
-            borderRadius="100"
-            colorScheme="green"
-            icon={<CheckIcon />}
-            onClick={() => acceptInvite(groups.id, id)}
-          />
-        </HStack>
+        <EditButtons
+          buttonGroupProps={{ spacing: '7' }}
+          onCrossClick={() => declineInvite(id)}
+          onCheckClick={() => acceptInvite(groups.id, id)}
+        />
       </Flex>
     </Box>
   );
