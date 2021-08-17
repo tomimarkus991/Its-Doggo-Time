@@ -11,6 +11,10 @@ const colors = {
   gray: {
     800: '#2A2828',
   },
+  green: {
+    100: '#48BB78', // siis kui on dark theme
+    500: '#48BB78', // siis kui on light theme
+  },
 };
 
 const breakpoints = createBreakpoints({
