@@ -1,9 +1,8 @@
 import {
   Box,
-  Checkbox,
-  CheckboxGroup,
   HStack,
   IconButton,
+  useCheckboxGroup,
   VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -12,8 +11,9 @@ import { useAuth } from '../../context/authContext/AuthContext';
 import { CreateLogsdataType, GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { AvatarInvite } from '../Avatar';
+import { CheckboxCard } from '../Cards';
 import { Name } from '../Headers';
-import { AddDutyInputIcon, PeeIcon, PoopIcon } from '../Icons/Dutys';
+import { AddDutyInputIcon } from '../Icons/Dutys';
 import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
@@ -29,10 +29,17 @@ export const AddDutyContainer: React.FC<Props> = ({
   groupdata,
   isLoading,
 }) => {
-  const [dutys, setDutys] = useState<string[]>([]);
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
+
+  const [dutys, setDutys] = useState<any>([]);
+
+  const businesses = ['pee', 'poop'];
+
+  const { getCheckboxProps } = useCheckboxGroup({
+    onChange: setDutys,
+  });
 
   const addDuty = async () => {
     let pee: boolean;
@@ -99,22 +106,16 @@ export const AddDutyContainer: React.FC<Props> = ({
         <Name title={groupdata?.group_name} textProps={{ fontSize: 30 }} />
         <Box>
           <VStack mt={4}>
-            <CheckboxGroup
-              onChange={(values: string[]) => setDutys(values)}
-            >
-              <HStack>
-                <Checkbox value="pee">
-                  <PeeIcon
-                    fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }}
-                  />
-                </Checkbox>
-                <Checkbox value="poop">
-                  <PoopIcon
-                    fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }}
-                  />
-                </Checkbox>
-              </HStack>
-            </CheckboxGroup>
+            <HStack>
+              {businesses.map(business => {
+                const checkbox = getCheckboxProps({ value: business });
+                return (
+                  <CheckboxCard key={business} {...checkbox}>
+                    {business}
+                  </CheckboxCard>
+                );
+              })}
+            </HStack>
           </VStack>
         </Box>
       </VStack>
