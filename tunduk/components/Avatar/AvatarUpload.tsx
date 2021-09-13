@@ -7,6 +7,7 @@ interface Props {
 }
 export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
   const [uploading, setUploading] = useState(false);
+
   const uploadAvatar = async (event: any) => {
     try {
       setUploading(true);

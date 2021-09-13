@@ -22,11 +22,11 @@ import { RerouteLoginRegister } from '../RerouteLoginRegister';
 const LoginAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
   const { email, password, handleChange } = useForm({
     email: '',
     password: '',
   });
-  const [show, setShow] = useState(false);
   const router = useHistory();
   const { signIn } = useAuth();
 

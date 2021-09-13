@@ -25,7 +25,7 @@ export const Avatar: React.FC<Props> = ({
   textProps,
 }) => {
   const avatarBackgroundColor = useColorModeValue('white', 'gray.800');
-  const [avatarUrl, setAvatarUrl] = useState<string>();
+  const [avatarUrl, setAvatarUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const downloadImage = async (path: string) => {
