@@ -1,10 +1,6 @@
-import {
-  Avatar as ChakraAvatar,
-  Box,
-  BoxProps,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Avatar as ChakraAvatar, Box, BoxProps } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import useColors from '../../hooks/useColors';
 import { AvatarIconType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import Skeleton from '../Skeleton';
@@ -24,7 +20,7 @@ export const Avatar: React.FC<Props> = ({
   icon,
   textProps,
 }) => {
-  const avatarBackgroundColor = useColorModeValue('white', 'gray.800');
+  const { defaultColor } = useColors();
   const [avatarUrl, setAvatarUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -61,7 +57,7 @@ export const Avatar: React.FC<Props> = ({
             h={h}
             src={avatarUrl}
             icon={<Box></Box>}
-            bgColor={avatarBackgroundColor}
+            bgColor={defaultColor}
           />
         ) : (
           <ChakraAvatar

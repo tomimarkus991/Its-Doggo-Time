@@ -20,7 +20,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Spacer,
-  useColorModeValue,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -39,6 +38,7 @@ import { MyGroupsLink, ProfileLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 import {
   GroupPageDataType,
   ProfileType,
@@ -67,8 +67,8 @@ const Members: React.FC = () => {
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
   const [isAddMemberDisabled, setIsAddMemberDisabled] =
     useState<boolean>(false);
-  const penColor = useColorModeValue('#2A2828', '#E5E0D5');
-  const modalBG = useColorModeValue('#ffffff', 'gray.800');
+
+  const { defaultColor, penColor } = useColors();
 
   const fetchGroupData = async () => {
     try {
@@ -340,7 +340,7 @@ const Members: React.FC = () => {
                     size="sm"
                   >
                     <ModalOverlay />
-                    <ModalContent bg={modalBG} borderRadius={20}>
+                    <ModalContent bg={defaultColor} borderRadius={20}>
                       <ModalHeader
                         textTransform="uppercase"
                         textAlign="center"

@@ -1,6 +1,7 @@
-import { Icon, IconProps, useColorModeValue } from '@chakra-ui/react';
+import { Icon, IconProps } from '@chakra-ui/react';
+import useColors from '../../../hooks/useColors';
 export const BackIcon = (props: IconProps): JSX.Element => {
-  const backIconColor = useColorModeValue('#2A2828', '#E5E0D5');
+  const { backIconColor } = useColors();
   return (
     <Icon viewBox="0 0 27 48" {...props}>
       <path

@@ -8,12 +8,12 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useColorModeValue,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { GradientButton } from '../Buttons';
@@ -35,7 +35,7 @@ const Invites: React.FC<Props> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth();
 
-  const modalBG = useColorModeValue('#ffffff', 'gray.800');
+  const { defaultColor } = useColors();
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
@@ -153,7 +153,7 @@ const Invites: React.FC<Props> = ({
 
       <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
         <ModalOverlay />
-        <ModalContent bg={modalBG}>
+        <ModalContent bg={defaultColor}>
           <ModalHeader fontSize="3xl">Invites</ModalHeader>
           <ModalCloseButton />
           <ModalBody maxH="lg">

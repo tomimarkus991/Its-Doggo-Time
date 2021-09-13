@@ -1,6 +1,9 @@
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import useColors from '../../hooks/useColors';
 
 export const Line: React.FC = () => {
-  const borderColor = useColorModeValue('gray.800', 'white');
-  return <Box w="125px" borderBottom="2px" borderColor={borderColor} />;
+  const { defaultReversedColor } = useColors();
+  return (
+    <Box w="125px" borderBottom="2px" borderColor={defaultReversedColor} />
+  );
 };

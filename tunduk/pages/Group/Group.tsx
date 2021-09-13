@@ -7,7 +7,6 @@ import {
   IconButton,
   Input,
   Spacer,
-  useColorModeValue,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -24,6 +23,7 @@ import MainLayout from '../../components/Layouts/MainLayout';
 import { MembersLink, MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -44,8 +44,7 @@ const Group: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
-
-  const penColor = useColorModeValue('#2A2828', '#E5E0D5');
+  const { penColor } = useColors();
 
   const cancelSave = () => {
     setGroupname(old_group_name);
