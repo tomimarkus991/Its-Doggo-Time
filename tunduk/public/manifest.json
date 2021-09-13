@@ -3,14 +3,14 @@
   "short_name": "It's Doggo Time",
   "icons": [
     {
-      "src": "/icon192.png",
+      "src": "/icon192v1.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
 
     {
-      "src": "/icon512.png",
+      "src": "/icon512v1.png",
       "sizes": "512x512",
       "type": "image/png"
     }
