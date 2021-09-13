@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext/AuthContext';
-import { StringOrUndefined } from '../../../types';
+import useForm from '../../../hooks/useForm/useForm';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
@@ -22,8 +22,10 @@ import { RerouteLoginRegister } from '../RerouteLoginRegister';
 const LoginAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
-  const [email, setEmail] = useState<StringOrUndefined>();
-  const [password, setPassword] = useState<StringOrUndefined>();
+  const { email, password, handleChange } = useForm({
+    email: '',
+    password: '',
+  });
   const [show, setShow] = useState(false);
   const router = useHistory();
   const { signIn } = useAuth();
@@ -59,11 +61,12 @@ const LoginAuth: React.FC = () => {
       <VStack spacing="4">
         <Input
           variant={'removeDefault'}
+          name="email"
           autoCapitalize="off"
           type="email"
           placeholder="Email"
           value={email || ''}
-          onChange={e => setEmail(e.target.value)}
+          onChange={handleChange}
           fontSize="2xl"
           size="lg"
           borderRadius="25"
@@ -73,9 +76,10 @@ const LoginAuth: React.FC = () => {
           <InputGroup justifyContent="center" alignItems="center">
             <Input
               variant={'removeDefault'}
+              name="password"
               type={show ? 'text' : 'password'}
               value={password || ''}
-              onChange={e => setPassword(e.target.value)}
+              onChange={handleChange}
               autoComplete="off"
               autoCapitalize="off"
               placeholder="Password"
@@ -124,7 +128,11 @@ const LoginAuth: React.FC = () => {
           <Text fontSize="lg">Or</Text>
         </Box>
         <OAuthSection />
-        <RerouteLoginRegister title="New to Doggo time?" to="/register" />
+        <RerouteLoginRegister
+          title="New to Doggo time?"
+          to="/register"
+          action="Sign Up"
+        />
         <ColorMode />
       </VStack>
     </Box>

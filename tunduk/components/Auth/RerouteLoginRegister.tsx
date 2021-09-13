@@ -4,15 +4,20 @@ import { Link } from 'react-router-dom';
 interface Props {
   title: string;
   to: '/register' | '/login';
+  action: 'Sign Up' | 'Sign In';
 }
 
-export const RerouteLoginRegister: React.FC<Props> = ({ title, to }) => {
+export const RerouteLoginRegister: React.FC<Props> = ({
+  title,
+  to,
+  action,
+}) => {
   return (
     <HStack spacing={1}>
       <Text fontSize="lg">{title}</Text>
       <Link to={to}>
         <Text fontSize="lg" color="#c9ac95">
-          Sign up
+          {action}
         </Text>
       </Link>
     </HStack>

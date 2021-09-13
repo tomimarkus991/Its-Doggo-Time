@@ -15,6 +15,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext/AuthContext';
+import useForm from '../../../hooks/useForm/useForm';
 import { supabase } from '../../../utils/supabaseClient';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
@@ -28,9 +29,11 @@ const RegisterAuth: React.FC = () => {
   const [isSignupSuccessful, setIsSignupSuccessful] =
     useState<boolean>(false);
 
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const { username, email, password, handleChange } = useForm({
+    username: '',
+    email: '',
+    password: '',
+  });
 
   const [show, setShow] = useState(false);
 
@@ -137,11 +140,12 @@ const RegisterAuth: React.FC = () => {
           <VStack spacing="4">
             <Input
               variant={'removeDefault'}
+              name="username"
               autoCapitalize="off"
               type="text"
               placeholder="Username"
               value={username}
-              onChange={e => setUsername(e.target.value)}
+              onChange={handleChange}
               size="lg"
               fontSize="2xl"
               borderRadius="25"
@@ -149,11 +153,12 @@ const RegisterAuth: React.FC = () => {
             />
             <Input
               variant={'removeDefault'}
+              name="email"
               type="email"
               placeholder="Email"
               autoCapitalize="off"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={handleChange}
               size="lg"
               fontSize="2xl"
               borderRadius="25"
@@ -162,9 +167,10 @@ const RegisterAuth: React.FC = () => {
             <InputGroup justifyContent="center" alignItems="center">
               <Input
                 variant={'removeDefault'}
+                name="password"
                 type={show ? 'text' : 'password'}
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={handleChange}
                 autoComplete="off"
                 autoCapitalize="off"
                 placeholder="Password"
@@ -210,6 +216,7 @@ const RegisterAuth: React.FC = () => {
             <RerouteLoginRegister
               title="Already have an account?"
               to="/login"
+              action="Sign In"
             />
             <ColorMode />
           </VStack>
