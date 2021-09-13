@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useLogsPlaceholder from '../../hooks/placeholders/useLogsPlaceholder';
+import { useSubscribeToLogInserts } from '../../hooks/subcribe';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { AddNewIconButton } from '../Buttons';
@@ -22,10 +23,14 @@ interface RouteParams {
 }
 
 export const LogsContainer: React.FC<Props> = ({}) => {
-  const [logsdata, setLogsdata] = useState<LogsdataType[]>();
+  const [logsdata, setLogsdata] = useState<LogsdataType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { group_id } = useParams<RouteParams>();
   const { placeholders } = useLogsPlaceholder(logsdata);
+  const { subscribeToLogInserts } = useSubscribeToLogInserts({
+    group_id,
+    setLogsdata,
+  });
 
   useEffect(() => {
     const getLogsdata = async () => {
@@ -61,30 +66,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
         setIsLoading(false);
       }
     };
-    const subscribeToNewLogs = () => {
-      supabase
-        .from(`logs:group_id=eq.${group_id}`)
-        .on('INSERT', payload => {
-          const { created_at, creator_id, group_id, id, pee, poop } =
-            payload.new as LogsdataType;
-
-          const newLog: LogsdataType = {
-            created_at,
-            creator_id,
-            group_id,
-            id,
-            pee,
-            poop,
-          };
-
-          setLogsdata((oldData: any) => {
-            const newData = oldData.slice(1);
-            return [...newData, newLog];
-          });
-        })
-        .subscribe();
-    };
-    subscribeToNewLogs();
+    subscribeToLogInserts();
 
     getLogsdata();
   }, []);

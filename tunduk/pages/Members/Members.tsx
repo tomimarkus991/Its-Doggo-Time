@@ -38,6 +38,10 @@ import { MyGroupsLink, ProfileLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
+import {
+  useSubscribeToMemberDeletes,
+  useSubscribeToMemberInserts,
+} from '../../hooks/subcribe';
 import useColors from '../../hooks/useColors';
 import {
   GroupPageDataType,
@@ -58,7 +62,7 @@ const Members: React.FC = () => {
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
-  const [profiles, setProfiles] = useState<ProfileType[]>();
+  const [profiles, setProfiles] = useState<ProfileType[]>([]);
   const [inviteReceiver, setInviteReceiver] = useState<string | null>();
   const [creator_id, setCreatorId] = useState<StringOrUndefined>();
 
@@ -69,6 +73,11 @@ const Members: React.FC = () => {
     useState<boolean>(false);
 
   const { defaultColor, penColor } = useColors();
+
+  const { subscribetoMemberInserts } = useSubscribeToMemberInserts({
+    group_id,
+    setProfiles,
+  });
 
   const fetchGroupData = async () => {
     try {
@@ -125,6 +134,10 @@ const Members: React.FC = () => {
       setIsGroupdataLoading(false);
     }
   };
+  const { subscribeToMemberDeletes } = useSubscribeToMemberDeletes({
+    group_id,
+    fetchUpdatedMembers,
+  });
 
   const sendInvite = async () => {
     try {
@@ -166,47 +179,8 @@ const Members: React.FC = () => {
   };
 
   useEffect(() => {
-    const listenForMemberInserts = () => {
-      // when you are inserted to members
-      // (by accepting invite or directly from database)
-      supabase
-        // only show it to members with this group_id
-        .from(`members:group_id=eq.${group_id}`)
-        .on('INSERT', async payload => {
-          let { data: profile } = await supabase
-            .from('profiles')
-            .select(
-              `
-            id,
-            username,
-            avatar_url
-        `,
-            )
-            .eq('id', payload.new.profile_id)
-            .single();
-
-          const { id, username, avatar_url } = profile as ProfileType;
-
-          const newProfile: ProfileType = {
-            id,
-            username,
-            avatar_url,
-          };
-          // update frontend with new data
-          setProfiles((oldData: any) => [...oldData, newProfile]);
-        })
-        .subscribe();
-    };
-    const listenForMemberDeletes = () => {
-      supabase
-        .from(`members:group_id=eq.${group_id}`)
-        .on('DELETE', () => {
-          fetchUpdatedMembers();
-        })
-        .subscribe();
-    };
-    listenForMemberInserts();
-    listenForMemberDeletes();
+    subscribetoMemberInserts();
+    subscribeToMemberDeletes();
     fetchGroupData();
   }, []);
 

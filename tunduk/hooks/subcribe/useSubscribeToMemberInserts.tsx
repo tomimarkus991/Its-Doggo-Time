@@ -1,39 +1,43 @@
-import { useState } from 'react';
-import { GroupType, StringOrUndefined } from '../../types';
+import { ProfileType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useSubscribeToMemberInserts = (userId: StringOrUndefined) => {
-  const [values, setGroups] = useState<GroupType[]>();
-  // when a you are inserted to members
-  // (by accepting invite or directly from database)
-  supabase
-    .from(`members:profile_id=eq.${userId}`)
-    .on('INSERT', async payload => {
-      // you get the group_id from payload
-      // and get group_name and avatar_url
-      let { data: group } = await supabase
-        .from('groups')
-        .select(
-          `
-            id,
-            group_name,
-            avatar_url
-        `,
-        )
-        .eq('id', payload.new.group_id)
-        .single();
-      const { id, group_name, avatar_url } = group as GroupType;
-
-      const newGroup: GroupType = {
-        id,
-        group_name,
-        avatar_url,
-      };
-      // update frontend with new data
-      setGroups((oldData: any) => [...oldData, newGroup]);
-    })
-    .subscribe();
+export const useSubscribeToMemberInserts = ({
+  group_id,
+  setProfiles,
+}: {
+  group_id: string;
+  setProfiles: React.Dispatch<React.SetStateAction<ProfileType[]>>;
+}) => {
   return {
-    values,
+    subscribetoMemberInserts: () =>
+      // when you are inserted to members
+      // (by accepting invite or directly from database)
+      supabase
+        // only show it to members with this group_id
+        .from(`members:group_id=eq.${group_id}`)
+        .on('INSERT', async payload => {
+          let { data: profile } = await supabase
+            .from('profiles')
+            .select(
+              `
+          id,
+          username,
+          avatar_url
+      `,
+            )
+            .eq('id', payload.new.profile_id)
+            .single();
+
+          const { id, username, avatar_url } = profile as ProfileType;
+
+          const newProfile: ProfileType = {
+            id,
+            username,
+            avatar_url,
+          };
+          // update frontend with new data
+          setProfiles((oldData: any) => [...oldData, newProfile]);
+        })
+        .subscribe(),
   };
 };

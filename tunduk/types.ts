@@ -36,7 +36,13 @@ export interface ProfileType {
   id: string;
   username: string;
   avatar_url: string;
-  groups?: GroupType[];
+}
+
+export interface ProfileAndGroupsType {
+  id: string;
+  username: string;
+  avatar_url: string;
+  groups: GroupType[];
 }
 
 export interface GroupPageDataType {

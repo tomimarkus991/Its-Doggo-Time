@@ -8,10 +8,11 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
+import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
 import {
   GroupType,
   InviteDataType,
-  ProfileType,
+  ProfileAndGroupsType,
   StringOrUndefined,
 } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -28,43 +29,18 @@ const LoggedIn: React.FC = () => {
   const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
   const [username, setUsername] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const [groups, setGroups] = useState<GroupType[]>();
+  const [groups, setGroups] = useState<GroupType[]>([]);
   const { user } = useAuth();
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
 
-  useEffect(() => {
-    const subscribeToMemberInserts = () => {
-      // when a you are inserted to members
-      // (by accepting invite or directly from database)
-      supabase
-        .from(`members:profile_id=eq.${user?.id}`)
-        .on('INSERT', async payload => {
-          // you get the group_id from payload
-          // and get group_name and avatar_url
-          let { data: group } = await supabase
-            .from('groups')
-            .select(
-              `
-            id,
-            group_name,
-            avatar_url
-        `,
-            )
-            .eq('id', payload.new.group_id)
-            .single();
-          const { id, group_name, avatar_url } = group as GroupType;
+  const { subscribeToGroupInserts } = useSubscribeToGroupInserts({
+    userId: user?.id,
+    setGroups,
+  });
 
-          const newGroup: GroupType = {
-            id,
-            group_name,
-            avatar_url,
-          };
-          // update frontend with new data
-          setGroups((oldData: any) => [...oldData, newGroup]);
-        })
-        .subscribe();
-    };
+  useEffect(() => {
+    subscribeToGroupInserts();
 
     const fetchUserdata = async () => {
       try {
@@ -82,7 +58,7 @@ const LoggedIn: React.FC = () => {
           .eq('id', user?.id)
           .single();
 
-        const _userdata: ProfileType = data;
+        const _userdata: ProfileAndGroupsType = data;
 
         if (_userdata === null) return <Box>No data</Box>;
 
@@ -129,8 +105,6 @@ const LoggedIn: React.FC = () => {
         setUsername(updatedData.username);
       }
     };
-
-    subscribeToMemberInserts();
     updateOAuthData();
     fetchUserdata();
   }, []);
