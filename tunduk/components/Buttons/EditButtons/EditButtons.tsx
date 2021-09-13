@@ -20,7 +20,7 @@ const EditButtons: React.FC<Props> = ({
     <ButtonGroup {...buttonGroupProps}>
       <IconButton
         aria-label="Cancel"
-        onClick={onCrossClick()}
+        onClick={() => onCrossClick()}
         borderRadius="100"
         bg="red.500"
         colorScheme="red"

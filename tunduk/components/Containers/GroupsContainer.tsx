@@ -6,7 +6,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import useGroupsPlaceholder from '../../hooks/placeholders/useGroupsPlaceholder';
 import { GroupType, StringOrUndefined } from '../../types';
 import { AddNewIconButton } from '../Buttons';
 import { GroupCard } from '../Cards';
@@ -25,32 +25,8 @@ export const GroupsContainer: React.FC<Props> = ({
   isLoading,
   username,
 }) => {
-  const [paws, setPaws] = useState<string[]>();
-  const [isAddDoggoGroupDisabled, setIsAddDoggoGroupDisabled] =
-    useState<boolean>(false);
-
-  const getPaws = () => {
-    const max = 4;
-    if (!userGroups) return;
-    const _paws = max - userGroups.length;
-    const dogPawns: string[] = [];
-
-    for (let i = 1; i <= _paws; i++) {
-      dogPawns.push('paw');
-    }
-    setPaws(dogPawns);
-  };
-
-  const howManyGroupsUserHas = () => {
-    if (userGroups?.length === 4) {
-      setIsAddDoggoGroupDisabled(true);
-    }
-  };
-
-  useEffect(() => {
-    getPaws();
-    howManyGroupsUserHas();
-  }, [userGroups]);
+  const { placeholders, isAddDoggoGroupDisabled } =
+    useGroupsPlaceholder(userGroups);
 
   return (
     <MainContainerLayout
@@ -104,7 +80,7 @@ export const GroupsContainer: React.FC<Props> = ({
               <GroupCard group={group} />
             </Box>
           ))}
-          {paws?.map((_, index: number) => (
+          {placeholders?.map((_, index: number) => (
             <Box key={index}>
               <DogPawn fontSize={{ base: '6rem', lg: '8rem' }} />
             </Box>

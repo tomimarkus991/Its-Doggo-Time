@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useLogsPlaceholder from '../../hooks/placeholders/useLogsPlaceholder';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { AddNewIconButton } from '../Buttons';
@@ -21,11 +22,10 @@ interface RouteParams {
 }
 
 export const LogsContainer: React.FC<Props> = ({}) => {
-  const { group_id } = useParams<RouteParams>();
   const [logsdata, setLogsdata] = useState<LogsdataType[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const [placeholders, setPlaceholders] = useState<string[]>();
+  const { group_id } = useParams<RouteParams>();
+  const { placeholders } = useLogsPlaceholder(logsdata);
 
   useEffect(() => {
     const getLogsdata = async () => {
@@ -61,7 +61,6 @@ export const LogsContainer: React.FC<Props> = ({}) => {
         setIsLoading(false);
       }
     };
-
     const subscribeToNewLogs = () => {
       supabase
         .from(`logs:group_id=eq.${group_id}`)
@@ -90,23 +89,6 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     getLogsdata();
   }, []);
 
-  useEffect(() => {
-    let getPlaceholders = () => {
-      let max = 4;
-      if (!logsdata) return;
-
-      // gets how many placeholders to render
-      const _placeholders = max - logsdata.length;
-
-      let placeholderArray: string[] = [];
-
-      for (let i = 1; i <= _placeholders; i++) {
-        placeholderArray.push('holder');
-      }
-      setPlaceholders(placeholderArray);
-    };
-    getPlaceholders();
-  }, [logsdata]);
   return (
     <VStack
       id="logs"

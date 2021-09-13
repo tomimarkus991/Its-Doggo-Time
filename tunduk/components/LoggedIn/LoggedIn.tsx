@@ -34,7 +34,7 @@ const LoggedIn: React.FC = () => {
     useState<boolean>(true);
 
   useEffect(() => {
-    const listenForMemberInserts = () => {
+    const subscribeToMemberInserts = () => {
       // when a you are inserted to members
       // (by accepting invite or directly from database)
       supabase
@@ -130,7 +130,7 @@ const LoggedIn: React.FC = () => {
       }
     };
 
-    listenForMemberInserts();
+    subscribeToMemberInserts();
     updateOAuthData();
     fetchUserdata();
   }, []);

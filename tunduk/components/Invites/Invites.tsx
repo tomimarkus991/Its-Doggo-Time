@@ -37,63 +37,6 @@ const Invites: React.FC<Props> = ({
 
   const modalBG = useColorModeValue('#ffffff', 'gray.800');
 
-  const fetchInvites = async (_username: StringOrUndefined) => {
-    try {
-      const { data: invitesdata, error } = await supabase
-        .from('invites')
-        .select(
-          `
-            id,
-            receiver,
-            sender,
-            group_id,
-            groups (id, group_name, avatar_url)
-          `,
-        )
-        .eq('receiver', _username);
-      const _invitesdata = invitesdata as InviteDataType[];
-      setUserInvites(_invitesdata);
-      // _invitesdata.forEach(invite => {
-      // listenForInviteDeletes(invite);
-      // });
-      if (error) throw error.message;
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  const listenForInviteInserts = (username: StringOrUndefined) => {
-    supabase
-      // only listen to updates that have your username in it
-      .from(`invites:receiver=eq.${username}`)
-      // when someone invites you to group
-      .on('INSERT', async payload => {
-        // take the newly inserted data
-        const { sender, receiver, id, group_id } = payload.new;
-        let { data: groups } = await supabase
-          .from('groups')
-          .select(
-            `
-            id,
-            group_name,
-            avatar_url
-        `,
-          )
-          .eq('id', group_id)
-          .single();
-
-        const newInvite: InviteDataType = {
-          id,
-          group_id,
-          sender,
-          receiver,
-          groups,
-        };
-        setUserInvites((oldData: any) => [...oldData, newInvite]);
-      })
-      .subscribe();
-  };
-
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
     await supabase.from('invites').delete().eq('id', invite_id);
@@ -118,6 +61,62 @@ const Invites: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    const fetchInvites = async (_username: StringOrUndefined) => {
+      try {
+        const { data: invitesdata, error } = await supabase
+          .from('invites')
+          .select(
+            `
+              id,
+              receiver,
+              sender,
+              group_id,
+              groups (id, group_name, avatar_url)
+            `,
+          )
+          .eq('receiver', _username);
+        const _invitesdata = invitesdata as InviteDataType[];
+        setUserInvites(_invitesdata);
+        // _invitesdata.forEach(invite => {
+        // listenForInviteDeletes(invite);
+        // });
+        if (error) throw error.message;
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    const listenForInviteInserts = (username: StringOrUndefined) => {
+      supabase
+        // only listen to updates that have your username in it
+        .from(`invites:receiver=eq.${username}`)
+        // when someone invites you to group
+        .on('INSERT', async payload => {
+          // take the newly inserted data
+          const { sender, receiver, id, group_id } = payload.new;
+          let { data: groups } = await supabase
+            .from('groups')
+            .select(
+              `
+              id,
+              group_name,
+              avatar_url
+          `,
+            )
+            .eq('id', group_id)
+            .single();
+
+          const newInvite: InviteDataType = {
+            id,
+            group_id,
+            sender,
+            receiver,
+            groups,
+          };
+          setUserInvites((oldData: any) => [...oldData, newInvite]);
+        })
+        .subscribe();
+    };
     listenForInviteInserts(currentUsername);
     fetchInvites(currentUsername);
   }, [currentUsername]);

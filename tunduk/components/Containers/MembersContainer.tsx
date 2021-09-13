@@ -1,5 +1,6 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useMembersPlaceholder from '../../hooks/placeholders/useMembersPlaceholder';
 import { ProfileType, StringOrUndefined } from '../../types';
 import { MemberCard } from '../Cards';
 import { ProfileIcon } from '../Icons/Navbar';
@@ -22,23 +23,7 @@ export const MembersContainer: React.FC<Props> = ({
   isLoading,
   AddNewMember,
 }) => {
-  const [paws, setPaws] = useState<string[]>();
-
-  useEffect(() => {
-    let getPaws = () => {
-      let max = 6;
-      if (!members) return;
-      const _paws = max - members.length;
-
-      let dogPawns: string[] = [];
-
-      for (let i = 1; i <= _paws; i++) {
-        dogPawns.push('paw');
-      }
-      setPaws(dogPawns);
-    };
-    getPaws();
-  }, [members]);
+  const { placeholders } = useMembersPlaceholder(members);
 
   return (
     <MainContainerLayout
@@ -68,7 +53,7 @@ export const MembersContainer: React.FC<Props> = ({
             />
           </Box>
         ))}
-        {paws?.map((_, index: number) => (
+        {placeholders?.map((_, index: number) => (
           <Box key={index}>
             <ProfileIcon
               fontSize={{
