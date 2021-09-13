@@ -95,6 +95,7 @@ const ForgotPassword: React.FC = () => {
             <Center maxW="lg" m="auto">
               <Alert
                 status="success"
+                colorScheme="whatsapp"
                 variant="subtle"
                 flexDirection="column"
                 alignItems="center"

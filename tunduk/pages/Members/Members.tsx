@@ -357,6 +357,7 @@ const Members: React.FC = () => {
                             alignItems="center"
                             justifyContent="center"
                             textAlign="center"
+                            borderRadius="20"
                             mb={4}
                           >
                             <AlertIcon />
