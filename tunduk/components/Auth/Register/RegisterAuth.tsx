@@ -1,10 +1,5 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Box,
-  Center,
   Input,
   InputGroup,
   InputRightElement,
@@ -18,6 +13,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import useForm from '../../../hooks/useForm/useForm';
 import { supabase } from '../../../utils/supabaseClient';
+import SignUpAlert from '../../Alerts/SignUpAlert';
 import { GradientButton } from '../../Buttons';
 import ColorMode from '../../ColorMode';
 import { GradientButtonText } from '../../Text';
@@ -111,38 +107,7 @@ const RegisterAuth: React.FC = () => {
   return (
     <>
       {isSignupSuccessful ? (
-        <Alert
-          status="success"
-          colorScheme="whatsapp"
-          variant="subtle"
-          borderRadius="20"
-          w={{ base: 'xs', base2: 'sm', sm: 'md' }}
-        >
-          <Center
-            w={{ base: 'xs', base2: 'sm', sm: 'md' }}
-            flexDirection="column"
-            textAlign="center"
-            mb={4}
-            py={{ base: '10', sm: '10' }}
-          >
-            <AlertIcon w="10" h="10" mb="4" color="green.400" />
-            <AlertTitle
-              mt={4}
-              mb={6}
-              fontSize={{ base: '2xl', sm: '3xl' }}
-            >
-              <Text mb="2">Account Created</Text>
-              <Text mb="2">Successfully</Text>
-            </AlertTitle>
-            <AlertDescription
-              maxWidth="sm"
-              fontSize={{ base: 'xl', sm: '2xl' }}
-            >
-              <Text mb="8">Please confirm your email</Text>
-              <Text>You can close this tab now</Text>
-            </AlertDescription>
-          </Center>
-        </Alert>
+        <SignUpAlert />
       ) : (
         <Box w={300}>
           <VStack spacing="4">

@@ -1,19 +1,15 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Box,
   Center,
   Flex,
   Heading,
   HStack,
   Input,
-  Text,
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ForgotPasswordAlert from '../../components/Alerts/ForgotPasswordAlert';
 import { GradientButton } from '../../components/Buttons';
 import { BackIcon } from '../../components/Icons/LightMode';
 import { MainLayout2 } from '../../components/Layouts';
@@ -92,39 +88,7 @@ const ForgotPassword: React.FC = () => {
             </Heading>
           </HStack>
           {isEmailSent ? (
-            <Center maxW="lg" m="auto">
-              <Alert
-                status="success"
-                colorScheme="whatsapp"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-                mb={4}
-                py={{ base: '10', sm: '10', md: '14' }}
-                borderRadius="20"
-                w={{ base: 'xs', base2: 'sm', sm: 'md' }}
-              >
-                <AlertIcon w="10" h="10" mb="4" />
-                <AlertTitle
-                  mt={4}
-                  mb={6}
-                  fontSize={{ base: '2xl', sm: '3xl' }}
-                >
-                  Email Sent
-                </AlertTitle>
-                <AlertDescription
-                  maxWidth="sm"
-                  fontSize={{ base: 'xl', sm: '2xl' }}
-                >
-                  <Text mb="4">
-                    Check your email for reset password link.
-                  </Text>
-                  <Text>You can close this tab now.</Text>
-                </AlertDescription>
-              </Alert>
-            </Center>
+            <ForgotPasswordAlert />
           ) : (
             <Center
               layerStyle="shadow-and-bg"

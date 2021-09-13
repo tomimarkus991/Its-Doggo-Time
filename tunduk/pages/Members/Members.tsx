@@ -1,11 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons';
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Box,
-  Button,
   Flex,
   Grid,
   Heading,
@@ -27,6 +22,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import MembersAlert from '../../components/Alerts/MembersAlert';
 import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
@@ -323,39 +319,7 @@ const Members: React.FC = () => {
                       </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody>
-                        {isInvalid ? (
-                          <Alert
-                            status="error"
-                            variant="subtle"
-                            flexDirection="column"
-                            alignItems="center"
-                            justifyContent="center"
-                            textAlign="center"
-                            borderRadius="20"
-                            mb={4}
-                          >
-                            <AlertIcon />
-                            <AlertTitle mt={4} mb={1} fontSize="lg">
-                              FRIEND REQUEST FAILED
-                            </AlertTitle>
-                            <AlertDescription maxWidth="sm">
-                              Hm, that didn&#39;t work. Double check that
-                              the capitalization, spelling, any spaces, and
-                              numbers are correct.
-                            </AlertDescription>
-
-                            <Button
-                              onClick={() => setIsInvalid(false)}
-                              borderRadius="50"
-                              colorScheme="green"
-                              size="lg"
-                              fontSize={20}
-                              mt={2}
-                            >
-                              OK
-                            </Button>
-                          </Alert>
-                        ) : null}
+                        {isInvalid ? <MembersAlert /> : null}
 
                         <Input
                           variant={'removeDefault'}
