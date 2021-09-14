@@ -5,7 +5,7 @@ import AuthDetailsProvider from '../context/authContext';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
 import '@fontsource/viga';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 function SafeHydrate({ children }: any) {
   return (
