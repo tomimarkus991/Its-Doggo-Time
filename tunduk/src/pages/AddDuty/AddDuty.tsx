@@ -1,11 +1,4 @@
-import {
-  Center,
-  Flex,
-  Grid,
-  Heading,
-  HStack,
-  VStack,
-} from '@chakra-ui/react';
+import { Center, Grid, Heading, HStack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddDutyContainer } from '../../components/Containers';
