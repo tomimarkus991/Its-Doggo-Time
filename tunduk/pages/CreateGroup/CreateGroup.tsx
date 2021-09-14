@@ -21,7 +21,7 @@ import { Name } from '../../components/Headers';
 import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
-import { MyGroupsLink, ProfileLink } from '../../components/Links';
+import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
@@ -220,12 +220,7 @@ const CreateGroup: React.FC<Props> = () => {
           </Grid>
         </VStack>
       }
-      rightSide={
-        <>
-          <MyGroupsLink />
-          <ProfileLink />
-        </>
-      }
+      rightSide={<ProfileAndMyGroups />}
     />
   );
 };

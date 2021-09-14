@@ -4,7 +4,6 @@ import {
   InputGroup,
   InputRightElement,
   Text,
-  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext/AuthContext';
 import useForm from '../../../hooks/useForm/useForm';
+import useErrorToast from '../../../hooks/useToast/useErrorToast';
 import { supabase } from '../../../utils/supabaseClient';
 import SignUpAlert from '../../Alerts/SignUpAlert';
 import { GradientButton } from '../../Buttons';
@@ -35,7 +35,8 @@ const RegisterAuth: React.FC = () => {
   const [show, setShow] = useState(false);
 
   const { signUp } = useAuth();
-  const toast = useToast();
+
+  const { showToast } = useErrorToast();
 
   const updateProfile = async (userid: any) => {
     try {
@@ -51,14 +52,7 @@ const RegisterAuth: React.FC = () => {
       });
 
       if (error) {
-        toast({
-          title: 'Error',
-          description: error.message,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top',
-        });
+        showToast({ title: 'Error', description: error.message });
       }
     } catch (error) {
       throw error;
@@ -80,14 +74,7 @@ const RegisterAuth: React.FC = () => {
       if (error) {
         isError = true;
         setIsAuthError(true);
-        toast({
-          title: 'Error',
-          description: error.message,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top',
-        });
+        showToast({ title: 'Error', description: error.message });
       } else {
         updateProfile(data?.id);
       }

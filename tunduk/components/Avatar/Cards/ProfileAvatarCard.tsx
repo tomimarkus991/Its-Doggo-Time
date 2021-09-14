@@ -11,7 +11,11 @@ export const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
       src={src}
       w={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
       h={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
-      icon={<BlackProfileIcon fontSize={{ base: '4rem', md: '4.5rem' }} />}
+      icon={
+        <BlackProfileIcon
+          fontSize={{ base: '3.5rem', md: '4rem', lg: '4.8rem' }}
+        />
+      }
     />
   );
 };

@@ -9,7 +9,6 @@ import {
   InputGroup,
   InputRightElement,
   Spacer,
-  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -27,12 +26,12 @@ import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useToast from '../../hooks/useToast';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 const Profile: React.FC = () => {
   const { user, signOut } = useAuth();
-  const toast = useToast();
   const router = useHistory();
 
   const [username, setUsername] = useState<StringOrUndefined>();
@@ -44,6 +43,7 @@ const Profile: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
+  const { showToast } = useToast();
   // const [areInvitesLoading, setAreInvitesLoading] =
   //   useState<boolean>(true);
 
@@ -102,13 +102,9 @@ const Profile: React.FC = () => {
       }
     } finally {
       setIsLoading(false);
-      toast({
+      showToast({
         title: 'Profile Updated',
         description: 'Your Profile has been updated.',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        position: 'top',
       });
     }
   };
@@ -133,13 +129,9 @@ const Profile: React.FC = () => {
       throw error;
     } finally {
       setIsLoading(false);
-      toast({
+      showToast({
         title: 'Photo Updated',
         description: 'Your Profile Photo has been updated.',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        position: 'top',
       });
     }
   };

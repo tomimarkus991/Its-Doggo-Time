@@ -7,7 +7,6 @@ import {
   IconButton,
   Input,
   Spacer,
-  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +23,7 @@ import { MembersLink, MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
 import useColors from '../../hooks/useColors';
+import useToast from '../../hooks/useToast';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -34,7 +34,6 @@ interface RouteParams {
 const Group: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
-  const toast = useToast();
   const router = useHistory();
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [old_group_name, setOldGroupname] = useState<StringOrUndefined>();
@@ -45,6 +44,7 @@ const Group: React.FC = () => {
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
   const { penColor } = useColors();
+  const { showToast } = useToast();
 
   const cancelSave = () => {
     setGroupname(old_group_name);
@@ -68,17 +68,12 @@ const Group: React.FC = () => {
     } catch (error) {
       throw error;
     } finally {
-      toast({
+      showToast({
         title: 'Group Updated',
         description: 'Your Group has been updated.',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        position: 'top',
       });
     }
   };
-
   const deleteGroup = async () => {
     // kustuta kõik grupi id-ga seostuvad invited
     // kustuta kõik grupi id-ga seostuvad logid
@@ -172,13 +167,9 @@ const Group: React.FC = () => {
     } catch (error) {
       throw error;
     } finally {
-      toast({
+      showToast({
         title: 'Group Picture Updated',
         description: 'Your Group Picture has been updated.',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        position: 'top',
       });
     }
   };
@@ -286,7 +277,12 @@ const Group: React.FC = () => {
                     flex={1}
                     position="relative"
                   >
-                    <Name title={group_name} />
+                    <Name
+                      title={group_name}
+                      textProps={{
+                        fontSize: { base: '2xl', sm: '3xl', md: '5xl' },
+                      }}
+                    />
                     {/* this is edit group info button */}
                     {user?.id === creator_id && isEditable === false ? (
                       <IconButton

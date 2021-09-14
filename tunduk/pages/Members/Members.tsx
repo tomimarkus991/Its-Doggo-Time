@@ -1,6 +1,7 @@
 import { CheckIcon } from '@chakra-ui/icons';
 import {
   Box,
+  Button,
   Flex,
   Grid,
   Heading,
@@ -30,7 +31,7 @@ import { Name } from '../../components/Headers';
 import { AddMemberIcon, DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
-import { MyGroupsLink, ProfileLink } from '../../components/Links';
+import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
@@ -187,6 +188,24 @@ const Members: React.FC = () => {
     howManyMembersGroupHas();
   }, [profiles]);
 
+  const leaveGroup = async () => {
+    try {
+      await supabase
+        .from('members')
+        .delete()
+        .eq('profile_id', user?.id)
+        .eq('group_id', group_id)
+        .then(
+          async () =>
+            await supabase.from('groups').delete().eq('id', group_id),
+        );
+    } catch (error) {
+      throw error;
+    } finally {
+      router.push('/');
+    }
+  };
+
   return (
     <MainLayout
       leftSide={
@@ -195,6 +214,7 @@ const Members: React.FC = () => {
           props={{
             borderRadius: 100,
             w: { sm: '95%', md: '90%', lg: 'initial' },
+            h: '100%',
           }}
         >
           <Flex
@@ -202,8 +222,8 @@ const Members: React.FC = () => {
             flexDirection={{ sm: 'row', lg: 'column' }}
             mx={{ sm: '6', lg: 'none' }}
             mt={{ sm: '6', lg: 'none' }}
-            justifyContent={{ sm: 'flex-start' }}
-            alignItems={{ sm: 'center', lg: 'flex-end' }}
+            justifyContent="center"
+            alignItems={{ sm: 'center' }}
           >
             <Flex
               id="flex2"
@@ -214,13 +234,38 @@ const Members: React.FC = () => {
               <Box mr={{ sm: '6', lg: '0' }}>
                 <AvatarGroup src={group_avatar_url as string} />
               </Box>
-              <Name title={group_name} />
+              <Name
+                title={group_name}
+                textProps={{
+                  fontSize: { base: '2xl', sm: '3xl', md: '5xl' },
+                }}
+              />
             </Flex>
             <Spacer display={{ sm: 'block', lg: 'none' }} />
             <DoggoIcon
               display={{ sm: 'block', lg: 'none' }}
               fontSize={{ sm: '10rem' }}
             />
+          </Flex>
+          {/* this is leave group button */}
+          <Flex
+            display={{ base: 'none', lg: 'flex' }}
+            w="100%"
+            h="40%"
+            justifyContent="center"
+          >
+            <Flex alignSelf="flex-end">
+              {user?.id !== creator_id ? (
+                <Button
+                  onClick={leaveGroup}
+                  colorScheme="red"
+                  textTransform="uppercase"
+                  borderRadius="50"
+                >
+                  Leave group
+                </Button>
+              ) : null}
+            </Flex>
           </Flex>
         </Skeleton>
       }
@@ -352,12 +397,7 @@ const Members: React.FC = () => {
           </Grid>
         </VStack>
       }
-      rightSide={
-        <>
-          <ProfileLink />
-          <MyGroupsLink />
-        </>
-      }
+      rightSide={<ProfileAndMyGroups />}
     />
   );
 };
