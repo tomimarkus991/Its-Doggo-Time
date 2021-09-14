@@ -38,7 +38,7 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
       // NR 2. update database avatar url
       onUpload(filePath);
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       setUploading(false);
     }

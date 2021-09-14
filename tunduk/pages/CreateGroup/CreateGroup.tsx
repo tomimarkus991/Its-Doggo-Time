@@ -69,12 +69,12 @@ const CreateGroup: React.FC<Props> = () => {
           });
         if (error) throw error.message;
       } catch (error) {
-        alert(error.message);
+        throw error;
       }
 
       if (error) throw error.message;
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       router.push('/');
       setIsLoading(false);

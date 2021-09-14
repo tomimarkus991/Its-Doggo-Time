@@ -66,7 +66,7 @@ const Group: React.FC = () => {
       setOldGroupname(group_name);
       if (error) throw error.message;
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       toast({
         title: 'Group Updated',
@@ -145,7 +145,7 @@ const Group: React.FC = () => {
 
         if (error) throw error.message;
       } catch (error) {
-        alert(error.message);
+        throw error;
       } finally {
         setIsGroupdataLoading(false);
       }
@@ -170,7 +170,7 @@ const Group: React.FC = () => {
         throw error;
       }
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       toast({
         title: 'Group Picture Updated',

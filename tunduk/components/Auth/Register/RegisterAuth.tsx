@@ -61,7 +61,7 @@ const RegisterAuth: React.FC = () => {
         });
       }
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -92,7 +92,7 @@ const RegisterAuth: React.FC = () => {
         updateProfile(data?.id);
       }
     } catch (error) {
-      alert(error.error_description || error.message);
+      throw error;
     } finally {
       setIsLoading(false);
 

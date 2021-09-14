@@ -15,7 +15,7 @@ export const OAuthButton: React.FC<Props> = ({ provider, icon }) => {
         provider,
       });
     } catch (error) {
-      alert(error.error_description || error.message);
+      throw error;
     }
   };
   return (

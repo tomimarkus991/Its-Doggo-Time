@@ -5,8 +5,6 @@ const useLogsPlaceholder = (logsdata: LogsdataType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
-    console.log('jeje');
-
     let getPlaceholders = () => {
       let max = 4;
       if (!logsdata) return;

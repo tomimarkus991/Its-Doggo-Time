@@ -91,12 +91,14 @@ const Profile: React.FC = () => {
         )
         .eq('sender', old_username);
     } catch (error) {
-      if (
-        !error.message.includes(
-          'JSON.parse: unexpected end of data at line 1 column 1 of the JSON data',
-        )
-      ) {
-        alert(error);
+      if (error instanceof Error) {
+        if (
+          !error.message.includes(
+            'JSON.parse: unexpected end of data at line 1 column 1 of the JSON data',
+          )
+        ) {
+          alert(error);
+        }
       }
     } finally {
       setIsLoading(false);
@@ -128,7 +130,7 @@ const Profile: React.FC = () => {
         throw error;
       }
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       setIsLoading(false);
       toast({
@@ -165,7 +167,7 @@ const Profile: React.FC = () => {
 
         if (error) throw error.message;
       } catch (error) {
-        alert(error.message);
+        throw error;
       } finally {
         setIsUserdataLoading(false);
       }

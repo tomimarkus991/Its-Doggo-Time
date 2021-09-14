@@ -34,7 +34,7 @@ export const Avatar: React.FC<Props> = ({
       const src = URL.createObjectURL(data);
       setAvatarUrl(src);
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       setIsLoading(false);
     }

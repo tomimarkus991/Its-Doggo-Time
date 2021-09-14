@@ -44,7 +44,7 @@ const LoginAuth: React.FC = () => {
         setIsAuthError(true);
       }
     } catch (error) {
-      alert(error.error_description || error.message);
+      throw error;
     } finally {
       setIsLoading(false);
 

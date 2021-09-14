@@ -69,6 +69,9 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     subscribeToLogInserts();
 
     getLogsdata();
+    return () => {
+      supabase.removeSubscription(subscribeToLogInserts());
+    };
   }, []);
 
   return (

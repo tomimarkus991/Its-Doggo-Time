@@ -6,7 +6,7 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
 import {
@@ -107,6 +107,9 @@ const LoggedIn: React.FC = () => {
     };
     updateOAuthData();
     fetchUserdata();
+    return () => {
+      supabase.removeSubscription(subscribeToGroupInserts());
+    };
   }, []);
 
   return (

@@ -75,36 +75,6 @@ const Members: React.FC = () => {
     setProfiles,
   });
 
-  const fetchGroupData = async () => {
-    try {
-      setIsGroupdataLoading(true);
-      let { data } = await supabase
-        .from('groups')
-        .select(
-          `
-            id,
-            group_name,
-            avatar_url,
-            creator_id,
-            profiles (id, username, avatar_url)
-        `,
-        )
-        .eq('id', group_id)
-        .single();
-      let _groupData: GroupPageDataType = data;
-      const { avatar_url, group_name, creator_id, profiles } = _groupData;
-
-      setCreatorId(creator_id);
-      setGroupname(group_name);
-      setGroupAvatarUrl(avatar_url);
-      setProfiles(profiles);
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsGroupdataLoading(false);
-    }
-  };
-
   const fetchUpdatedMembers = async () => {
     try {
       setIsGroupdataLoading(true);
@@ -125,7 +95,7 @@ const Members: React.FC = () => {
 
       if (error) throw error.message;
     } catch (error) {
-      alert(error.message);
+      throw error;
     } finally {
       setIsGroupdataLoading(false);
     }
@@ -168,19 +138,52 @@ const Members: React.FC = () => {
     }
   };
 
-  const howManyMembersGroupHas = () => {
-    if (profiles?.length === 9) {
-      setIsAddMemberDisabled(true);
-    }
-  };
-
   useEffect(() => {
+    const fetchGroupData = async () => {
+      try {
+        setIsGroupdataLoading(true);
+        let { data } = await supabase
+          .from('groups')
+          .select(
+            `
+              id,
+              group_name,
+              avatar_url,
+              creator_id,
+              profiles (id, username, avatar_url)
+          `,
+          )
+          .eq('id', group_id)
+          .single();
+        let _groupData: GroupPageDataType = data;
+        const { avatar_url, group_name, creator_id, profiles } =
+          _groupData;
+
+        setCreatorId(creator_id);
+        setGroupname(group_name);
+        setGroupAvatarUrl(avatar_url);
+        setProfiles(profiles);
+      } catch (error) {
+        throw error;
+      } finally {
+        setIsGroupdataLoading(false);
+      }
+    };
     subscribetoMemberInserts();
     subscribeToMemberDeletes();
     fetchGroupData();
+    return () => {
+      supabase.removeSubscription(subscribetoMemberInserts());
+      supabase.removeSubscription(subscribeToMemberDeletes());
+    };
   }, []);
 
   useEffect(() => {
+    const howManyMembersGroupHas = () => {
+      if (profiles?.length >= 6) {
+        setIsAddMemberDisabled(true);
+      }
+    };
     howManyMembersGroupHas();
   }, [profiles]);
 
@@ -351,8 +354,8 @@ const Members: React.FC = () => {
       }
       rightSide={
         <>
-          <MyGroupsLink />
           <ProfileLink />
+          <MyGroupsLink />
         </>
       }
     />

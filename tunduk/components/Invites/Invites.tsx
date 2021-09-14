@@ -87,12 +87,15 @@ const Invites: React.FC<Props> = ({
         // });
         if (error) throw error.message;
       } catch (error) {
-        alert(error.message);
+        throw error;
       }
     };
 
     subscribeToInviteInserts();
     fetchInvites(currentUsername);
+    return () => {
+      supabase.removeSubscription(subscribeToInviteInserts());
+    };
   }, [currentUsername]);
 
   useEffect(() => {

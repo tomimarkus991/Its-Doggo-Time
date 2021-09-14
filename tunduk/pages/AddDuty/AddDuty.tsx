@@ -51,7 +51,7 @@ const AddDuty: React.FC = () => {
 
         if (error) throw error.message;
       } catch (error) {
-        alert(error.message);
+        throw error;
       } finally {
         setIsGroupdataLoading(false);
       }
@@ -126,8 +126,8 @@ const AddDuty: React.FC = () => {
       }
       rightSide={
         <>
-          <MyGroupsLink />
           <ProfileLink />
+          <MyGroupsLink />
         </>
       }
     />
