@@ -1,5 +1,5 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-export const AddDutyInputIcon = (props: IconProps): JSX.Element => (
+export const AddLogCheckboxIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 138 138" {...props}>
     <g clipPath="url(#clip0)">
       <path

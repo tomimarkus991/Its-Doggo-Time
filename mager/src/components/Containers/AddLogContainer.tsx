@@ -13,7 +13,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { AvatarInvite } from '../Avatar';
 import { CheckboxCard } from '../Cards';
 import { Name } from '../Headers';
-import { AddDutyInputIcon } from '../Icons/Dutys';
+import { AddLogCheckboxIcon } from '../Icons/Logs';
 import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {
@@ -25,7 +25,7 @@ interface RouteParams {
   group_id: string;
 }
 
-export const AddDutyContainer: React.FC<Props> = ({
+export const AddLogContainer: React.FC<Props> = ({
   groupdata,
   isLoading,
 }) => {
@@ -33,23 +33,23 @@ export const AddDutyContainer: React.FC<Props> = ({
   const { user } = useAuth();
   const router = useHistory();
 
-  const [dutys, setDutys] = useState<any>([]);
+  const [logData, setLogData] = useState<any>([]);
 
   const businesses = ['pee', 'poop'];
 
   const { getCheckboxProps } = useCheckboxGroup({
-    onChange: setDutys,
+    onChange: setLogData,
   });
 
-  const addDuty = async () => {
+  const addLog = async () => {
     let pee: boolean;
     let poop: boolean;
-    if (dutys?.includes('pee')) {
+    if (logData?.includes('pee')) {
       pee = true;
     } else {
       pee = false;
     }
-    if (dutys?.includes('poop')) {
+    if (logData?.includes('poop')) {
       poop = true;
     } else {
       poop = false;
@@ -82,15 +82,15 @@ export const AddDutyContainer: React.FC<Props> = ({
       }}
       button={
         <IconButton
-          onClick={() => addDuty()}
+          onClick={() => addLog()}
           mt={4}
           h="100%"
-          aria-label="Add Duty Button"
+          aria-label="Add Log Button"
           bgColor="transparent"
           _hover={{ bgColor: 'transparent' }}
-          isDisabled={dutys?.length === 0}
+          isDisabled={logData?.length === 0}
           icon={
-            <AddDutyInputIcon
+            <AddLogCheckboxIcon
               fontSize={{
                 base: '5rem',
                 md: '6rem',

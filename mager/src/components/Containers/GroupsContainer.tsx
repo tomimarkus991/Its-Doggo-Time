@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import useGroupsPlaceholder from '../../hooks/placeholders/useGroupsPlaceholder';
 import { GroupType, StringOrUndefined } from '../../types';
-import { AddNewIconButton } from '../Buttons';
+import { AddNewLogIconButton } from '../Buttons';
 import { GroupCard } from '../Cards';
 import { AddGroupIcon } from '../Icons/Doggo';
 import { DogPawn } from '../Icons/LightMode';
@@ -33,7 +33,7 @@ export const GroupsContainer: React.FC<Props> = ({
       mainH="sm"
       isLoading={isLoading}
       button={
-        <AddNewIconButton
+        <AddNewLogIconButton
           to="/group/create-group"
           icon={
             <AddGroupIcon

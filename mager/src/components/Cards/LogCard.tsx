@@ -1,7 +1,7 @@
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import moment from 'moment';
 import { LogsdataType } from '../../types';
-import { PoopIcon, PeeIcon, PeeAndPoopIcon } from '../Icons/Dutys';
+import { PoopIcon, PeeIcon, PeeAndPoopIcon } from '../Icons/Logs';
 
 interface Props {
   log: LogsdataType;

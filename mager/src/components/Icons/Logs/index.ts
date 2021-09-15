@@ -1,5 +1,5 @@
 export { PoopIcon } from './PoopIcon';
 export { PeeIcon } from './PeeIcon';
-export { AddDutyInputIcon } from './AddDutyInputIcon';
+export { AddLogCheckboxIcon } from './AddLogCheckboxIcon';
 export { PeeAndPoopIcon } from './PeeAndPoopIcon';
 export { PeeAndPoopPlaceholderIcon } from './PeeAndPoopPlaceholderIcon';

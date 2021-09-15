@@ -8,7 +8,7 @@ import { useAuth } from '../../context/authContext/AuthContext';
 
 const Home: React.FC = () => {
   const { user } = useAuth();
-  console.log('home user', user);
+  // console.log('home user', user);
 
   return (
     <>

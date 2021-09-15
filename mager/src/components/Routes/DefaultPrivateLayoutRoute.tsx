@@ -7,7 +7,7 @@ export const DefaultPrivateLayoutRoute = ({
   ...rest
 }: any) => {
   const { user } = useAuth();
-  console.log('user', user);
+  // console.log('user', user);
 
   return (
     <Route

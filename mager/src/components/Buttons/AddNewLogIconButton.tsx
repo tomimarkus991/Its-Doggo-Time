@@ -8,7 +8,7 @@ interface Props {
   isDisabled: boolean;
 }
 
-export const AddNewIconButton: React.FC<Props> = ({
+export const AddNewLogIconButton: React.FC<Props> = ({
   to,
   icon,
   ariaLabel,

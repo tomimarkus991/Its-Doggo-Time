@@ -1,7 +1,7 @@
 import { Center, Grid, Heading, HStack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { AddDutyContainer } from '../../components/Containers';
+import { AddLogContainer } from '../../components/Containers';
 import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
@@ -14,7 +14,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const AddDuty: React.FC = () => {
+const AddLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   // const { user } = useAuth();
   const router = useHistory();
@@ -95,7 +95,7 @@ const AddDuty: React.FC = () => {
                 </HStack>
               </Skeleton>
             </Center>
-            <AddDutyContainer
+            <AddLogContainer
               groupdata={groupdata}
               isLoading={isGroupdataLoading}
             />
@@ -106,4 +106,4 @@ const AddDuty: React.FC = () => {
     />
   );
 };
-export default AddDuty;
+export default AddLog;

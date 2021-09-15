@@ -12,10 +12,10 @@ import useLogsPlaceholder from '../../hooks/placeholders/useLogsPlaceholder';
 import { useSubscribeToLogInserts } from '../../hooks/subcribe';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { AddNewIconButton } from '../Buttons';
+import { AddNewLogIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
-import { AddDutyIcon } from '../Icons/Doggo';
-import { PeeAndPoopPlaceholderIcon } from '../Icons/Dutys';
+import { AddLogIcon } from '../Icons/Doggo';
+import { PeeAndPoopPlaceholderIcon } from '../Icons/Logs';
 
 interface Props {}
 interface RouteParams {
@@ -107,8 +107,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                   Log is Empty
                 </Heading>
                 <Text fontSize={{ base: 'xl', lg: '2xl' }} maxW="lg">
-                  Press the button in bottom right to add your dogs duty to
-                  the log
+                  Press the button in bottom right to add a new log
                 </Text>
               </VStack>
             </Center>
@@ -165,10 +164,10 @@ export const LogsContainer: React.FC<Props> = ({}) => {
         right={{ base: '+50', lg: '-10' }}
         bottom={{ base: '-10', lg: '-10' }}
       >
-        <AddNewIconButton
-          to={`/group/${group_id}/add-duty`}
+        <AddNewLogIconButton
+          to={`/group/${group_id}/add-log`}
           icon={
-            <AddDutyIcon
+            <AddLogIcon
               fontSize={{
                 base: '5rem',
                 md: '6rem',
@@ -176,7 +175,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
               }}
             />
           }
-          ariaLabel="Add new Duty"
+          ariaLabel="Add new Log"
           isDisabled={false}
         />
       </Box>

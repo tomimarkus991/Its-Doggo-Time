@@ -1,2 +1,2 @@
 export { GradientButton } from './GradientButton';
-export { AddNewIconButton } from './AddNewIconButton';
+export { AddNewLogIconButton } from './AddNewLogIconButton';
