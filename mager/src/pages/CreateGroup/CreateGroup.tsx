@@ -1,26 +1,22 @@
 import {
   Box,
   Center,
-  Flex,
   Grid,
   Heading,
   HStack,
   Input,
-  Spacer,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  AvatarGroup,
-  AvatarProfile,
-  AvatarUpload,
-} from '../../components/Avatar';
+import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
-import { Name } from '../../components/Headers';
-import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+} from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
@@ -122,31 +118,15 @@ const CreateGroup: React.FC<Props> = () => {
             w: { sm: '95%', md: '90%', lg: 'initial' },
           }}
         >
-          <Flex
-            id="flex1"
-            flexDirection={{ sm: 'row', lg: 'column' }}
-            mx={{ sm: '6', lg: 'none' }}
-            mt={{ sm: '6', lg: 'none' }}
-            justifyContent={{ sm: 'flex-start' }}
-            alignItems={{ sm: 'center', lg: 'flex-end' }}
-          >
-            <Flex
-              id="flex2"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection={{ base: 'row', lg: 'column' }}
-            >
-              <Box mr={{ sm: '6', lg: '0' }}>
-                <AvatarProfile src={avatar_url as string} />
-              </Box>
-              <Name title={username} />
-            </Flex>
-            <Spacer display={{ sm: 'initial', lg: 'none' }} />
-            <DoggoIcon
-              display={{ sm: 'initial', lg: 'none' }}
-              fontSize={{ sm: '10rem' }}
-            />
-          </Flex>
+          <HeaderAvatar
+            nameAndAvatar={
+              <NameAndAvatar
+                title={username}
+                avatar_url={avatar_url as string}
+                avatar="User"
+              />
+            }
+          />
         </Skeleton>
       }
       middle={

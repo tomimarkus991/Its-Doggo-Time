@@ -1,27 +1,23 @@
 import {
   Box,
-  Center,
-  Flex,
   Grid,
   Heading,
   HStack,
   Input,
-  InputGroup,
-  InputRightElement,
-  Spacer,
   VStack,
 } from '@chakra-ui/react';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import ColorMode from '../../components/ColorMode';
 import { Name } from '../../components/Headers';
-import { DoggoIcon } from '../../components/Icons/Doggo';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+} from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
@@ -36,10 +32,8 @@ const Profile: React.FC = () => {
 
   const [username, setUsername] = useState<StringOrUndefined>();
   const [old_username, setOldUsername] = useState<StringOrUndefined>();
-  const [password, setPassword] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
   const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
-  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
@@ -61,13 +55,6 @@ const Profile: React.FC = () => {
       await supabase.from('profiles').upsert(profile_updates, {
         returning: 'minimal',
       });
-
-      // update password
-      if (password?.length) {
-        await supabase.auth.update({
-          password,
-        });
-      }
 
       // update all receivers usernames
       await supabase
@@ -174,35 +161,18 @@ const Profile: React.FC = () => {
           isLoading={isUserdataLoading}
           props={{
             borderRadius: 100,
-            w: { sm: '100%', md: '100%', lg: 'initial' },
+            w: { sm: '95%', md: '90%', lg: 'initial' },
           }}
         >
-          <Flex
-            id="flex1"
-            flexDirection={{ sm: 'row', lg: 'column' }}
-            mx={{ sm: '6', lg: 'none' }}
-            mt={{ sm: '6', lg: 'none' }}
-            justifyContent={{ sm: 'flex-start' }}
-            alignItems={{ sm: 'center', lg: 'flex-end' }}
-          >
-            <Flex
-              id="flex2"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection={{ base: 'row', lg: 'column' }}
-            >
-              <Center flexDirection="column" mr={{ sm: '6', lg: '0' }}>
-                <AvatarProfile src={avatar_url as string} />
-              </Center>
-
-              <Name title={username} />
-            </Flex>
-            <Spacer display={{ sm: 'block', lg: 'none' }} />
-            <DoggoIcon
-              display={{ sm: 'block', lg: 'none' }}
-              fontSize={{ sm: '10rem' }}
-            />
-          </Flex>
+          <HeaderAvatar
+            nameAndAvatar={
+              <NameAndAvatar
+                title={username}
+                avatar_url={avatar_url as string}
+                avatar="User"
+              />
+            }
+          />
         </Skeleton>
       }
       middle={
@@ -217,9 +187,12 @@ const Profile: React.FC = () => {
             templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
           >
             <HStack
-              justifyContent="flex-start"
+              justifyContent={{ base: 'center', sm: 'flex-start' }}
+              flexDirection={{ base: 'column', sm: 'row' }}
               alignItems="center"
               display={{ base: 'flex', sm: 'none' }}
+              mt={{ base: 12, sm: 0 }}
+              mb={{ base: 10, sm: 0 }}
             >
               <AvatarProfile src={avatar_url as string} />
               <Name title={username} />
@@ -227,6 +200,7 @@ const Profile: React.FC = () => {
             <Heading
               textAlign="center"
               fontSize={{ base: '4xl', sm: '4xl' }}
+              mb={{ base: 4, sm: 0 }}
             >
               My Profile
             </Heading>
@@ -242,55 +216,17 @@ const Profile: React.FC = () => {
                   isLoading={isUserdataLoading}
                   props={{ borderRadius: 100 }}
                 >
-                  <VStack>
-                    <Input
-                      variant={'removeDefault'}
-                      autoCapitalize="off"
-                      value={username || ''}
-                      onChange={e => setUsername(e.target.value)}
-                      size="lg"
-                      fontSize="2xl"
-                      borderRadius="25"
-                      maxLength={20}
-                      placeholder="Username"
-                    />
-                    {user?.app_metadata.provider === 'email' ? (
-                      <InputGroup
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <Input
-                          variant={'removeDefault'}
-                          type={show ? 'text' : 'password'}
-                          value={password}
-                          onChange={e => setPassword(e.target.value)}
-                          autoComplete="off"
-                          autoCapitalize="off"
-                          placeholder="Password"
-                          size="lg"
-                          fontSize="2xl"
-                          borderRadius="25"
-                        />
-                        <InputRightElement width="3rem" h="100%">
-                          {show ? (
-                            <FontAwesomeIcon
-                              icon={faEye}
-                              onClick={() => setShow(!show)}
-                              cursor="pointer"
-                              color="#2A2828"
-                            />
-                          ) : (
-                            <FontAwesomeIcon
-                              icon={faEyeSlash}
-                              onClick={() => setShow(!show)}
-                              cursor="pointer"
-                              color="#2A2828"
-                            />
-                          )}
-                        </InputRightElement>
-                      </InputGroup>
-                    ) : null}
-                  </VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    value={username || ''}
+                    onChange={e => setUsername(e.target.value)}
+                    size="lg"
+                    fontSize="2xl"
+                    borderRadius="25"
+                    maxLength={12}
+                    placeholder="Username"
+                  />
                 </Skeleton>
                 <Box>
                   <AvatarUpload

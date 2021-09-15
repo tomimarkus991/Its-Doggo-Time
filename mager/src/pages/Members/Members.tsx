@@ -1,6 +1,4 @@
-import { CheckIcon } from '@chakra-ui/icons';
 import {
-  Box,
   Button,
   Flex,
   Grid,
@@ -15,22 +13,21 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spacer,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import MembersAlert from '../../components/Alerts/MembersAlert';
-import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
-import { Name } from '../../components/Headers';
-import { AddMemberIcon, DoggoIcon } from '../../components/Icons/Doggo';
+import { AddMemberIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+} from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
@@ -69,7 +66,7 @@ const Members: React.FC = () => {
   const [isAddMemberDisabled, setIsAddMemberDisabled] =
     useState<boolean>(false);
 
-  const { defaultColor, penColor } = useColors();
+  const { defaultColor } = useColors();
 
   const { subscribetoMemberInserts } = useSubscribeToMemberInserts({
     group_id,
@@ -217,36 +214,15 @@ const Members: React.FC = () => {
             h: '100%',
           }}
         >
-          <Flex
-            id="flex1"
-            flexDirection={{ sm: 'row', lg: 'column' }}
-            mx={{ sm: '6', lg: 'none' }}
-            mt={{ sm: '6', lg: 'none' }}
-            justifyContent="center"
-            alignItems={{ sm: 'center' }}
-          >
-            <Flex
-              id="flex2"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection={{ base: 'row', lg: 'column' }}
-            >
-              <Box mr={{ sm: '6', lg: '0' }}>
-                <AvatarGroup src={group_avatar_url as string} />
-              </Box>
-              <Name
+          <HeaderAvatar
+            nameAndAvatar={
+              <NameAndAvatar
                 title={group_name}
-                textProps={{
-                  fontSize: { base: '2xl', sm: '3xl', md: '5xl' },
-                }}
+                avatar_url={group_avatar_url as string}
+                avatar="Group"
               />
-            </Flex>
-            <Spacer display={{ sm: 'block', lg: 'none' }} />
-            <DoggoIcon
-              display={{ sm: 'block', lg: 'none' }}
-              fontSize={{ sm: '10rem' }}
-            />
-          </Flex>
+            }
+          />
           {/* this is leave group button */}
           <Flex
             display={{ base: 'none', lg: 'flex' }}
@@ -296,36 +272,11 @@ const Members: React.FC = () => {
               <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
                 Members
               </Heading>
-              <Box position="absolute" right={{ base: 6, sm: 10 }}>
-                {user?.id === creator_id && isEditable === false ? (
-                  <IconButton
-                    onClick={() => setIsEditable(true)}
-                    aria-label="Edit"
-                    bgColor="transparent"
-                    _hover={{ bgColor: 'transparent' }}
-                    icon={
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        size={'lg'}
-                        color={penColor}
-                      />
-                    }
-                  />
-                ) : null}
-                {user?.id === creator_id && isEditable ? (
-                  <IconButton
-                    borderRadius="50"
-                    onClick={() => setIsEditable(false)}
-                    aria-label="Save"
-                    colorScheme="green"
-                    icon={<CheckIcon color="white" />}
-                  />
-                ) : null}
-              </Box>
             </HStack>
             <MembersContainer
               members={profiles}
               isEditable={isEditable}
+              setIsEditable={setIsEditable}
               group_id={group_id}
               creator_id={creator_id}
               isLoading={isGroupdataLoading}

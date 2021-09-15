@@ -57,12 +57,12 @@ const AddLog: React.FC = () => {
     <MainLayout
       leftSide={
         <>
-          <VStack display={{ base: 'flex', lg: 'none' }} w="100%">
+          <Center display={{ base: 'flex', lg: 'none' }} w="100%">
             <DoggoIcon
               display={{ sm: 'initial', lg: 'none' }}
               fontSize={{ sm: '10rem' }}
             />
-          </VStack>
+          </Center>
         </>
       }
       middle={

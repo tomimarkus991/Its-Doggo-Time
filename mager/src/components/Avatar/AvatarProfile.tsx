@@ -9,11 +9,11 @@ export const AvatarProfile: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       src={src}
-      w={{ base: '6rem', sm: '7rem', md: '9rem' }}
-      h={{ base: '6rem', sm: '7rem', md: '9rem' }}
+      w={{ base: '8rem', sm: '7rem', md: '9rem' }}
+      h={{ base: '8rem', sm: '7rem', md: '9rem' }}
       icon={
         <BlackProfileIcon
-          fontSize={{ base: '4rem', sm: '5rem', md: '6rem' }}
+          fontSize={{ base: '5.5rem', sm: '5rem', md: '6rem' }}
         />
       }
     />
