@@ -1,4 +1,4 @@
-import { Box, Flex, FlexProps, VStack } from '@chakra-ui/react';
+import { Box, Center, FlexProps, VStack } from '@chakra-ui/react';
 import React from 'react';
 import Skeleton from '../../Skeleton';
 
@@ -19,15 +19,13 @@ const MainContainerLayout: React.FC<Props> = ({
   return (
     <VStack id="7" h={mainH}>
       <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
-        <Flex
+        <Center
           {...containerProps}
+          id="9"
           layerStyle="shadow-and-bg"
           position="relative"
-          justifyContent="center"
-          alignItems="center"
-          borderRadius={20}
           mb="1em"
-          id="9"
+          borderRadius={20}
         >
           {children}
           <Box
@@ -37,7 +35,7 @@ const MainContainerLayout: React.FC<Props> = ({
           >
             {button}
           </Box>
-        </Flex>
+        </Center>
       </Skeleton>
     </VStack>
   );

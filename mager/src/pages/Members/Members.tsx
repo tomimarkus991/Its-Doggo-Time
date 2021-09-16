@@ -1,6 +1,4 @@
 import {
-  Button,
-  Flex,
   Grid,
   Heading,
   HStack,
@@ -20,6 +18,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import MembersAlert from '../../components/Alerts/MembersAlert';
 import { GradientButton } from '../../components/Buttons';
+import LeaveGroupButton from '../../components/Buttons/LeaveGroupButton';
 import { MembersContainer } from '../../components/Containers';
 import { AddMemberIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
@@ -185,24 +184,6 @@ const Members: React.FC = () => {
     howManyMembersGroupHas();
   }, [profiles]);
 
-  const leaveGroup = async () => {
-    try {
-      await supabase
-        .from('members')
-        .delete()
-        .eq('profile_id', user?.id)
-        .eq('group_id', group_id)
-        .then(
-          async () =>
-            await supabase.from('groups').delete().eq('id', group_id),
-        );
-    } catch (error) {
-      throw error;
-    } finally {
-      router.push('/');
-    }
-  };
-
   return (
     <MainLayout
       leftSide={
@@ -211,38 +192,21 @@ const Members: React.FC = () => {
           props={{
             borderRadius: 100,
             w: { sm: '95%', md: '90%', lg: 'initial' },
-            h: '100%',
+            h: '80%',
           }}
         >
-          <HeaderAvatar
-            nameAndAvatar={
-              <NameAndAvatar
-                title={group_name}
-                avatar_url={group_avatar_url as string}
-                avatar="Group"
-              />
-            }
+          <HeaderAvatar>
+            <NameAndAvatar
+              title={group_name}
+              avatar_url={group_avatar_url as string}
+              avatar="Group"
+            />
+          </HeaderAvatar>
+          <LeaveGroupButton
+            user_id={user?.id}
+            group_id={group_id}
+            creator_id={creator_id}
           />
-          {/* this is leave group button */}
-          <Flex
-            display={{ base: 'none', lg: 'flex' }}
-            w="100%"
-            h="40%"
-            justifyContent="center"
-          >
-            <Flex alignSelf="flex-end">
-              {user?.id !== creator_id ? (
-                <Button
-                  onClick={leaveGroup}
-                  colorScheme="red"
-                  textTransform="uppercase"
-                  borderRadius="50"
-                >
-                  Leave group
-                </Button>
-              ) : null}
-            </Flex>
-          </Flex>
         </Skeleton>
       }
       middle={

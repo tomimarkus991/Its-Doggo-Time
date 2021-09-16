@@ -5,7 +5,7 @@ import { Name } from '../../Headers';
 
 interface Props {
   title: StringOrUndefined;
-  avatar_url: string;
+  avatar_url: StringOrUndefined;
   avatar: 'User' | 'Group';
 }
 

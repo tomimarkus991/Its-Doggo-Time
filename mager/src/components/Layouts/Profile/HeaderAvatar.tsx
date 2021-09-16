@@ -1,10 +1,7 @@
 import { Flex, Spacer } from '@chakra-ui/react';
 import { DoggoIcon } from '../../Icons/Doggo';
 
-interface Props {
-  nameAndAvatar: any;
-}
-export const HeaderAvatar: React.FC<Props> = ({ nameAndAvatar }) => {
+export const HeaderAvatar: React.FC = ({ children }) => {
   return (
     <Flex
       id="flex1"
@@ -15,7 +12,7 @@ export const HeaderAvatar: React.FC<Props> = ({ nameAndAvatar }) => {
       alignItems="center"
       minW="16rem"
     >
-      {nameAndAvatar}
+      {children}
       <Spacer display={{ sm: 'initial', lg: 'none' }} />
       <DoggoIcon
         display={{ sm: 'none', sm2: 'initial', lg: 'none' }}

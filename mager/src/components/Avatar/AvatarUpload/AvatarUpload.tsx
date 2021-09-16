@@ -56,11 +56,7 @@ const AvatarUpload: React.FC<Props> = ({
   };
 
   return (
-    <Flex
-      id="editable avatar box"
-      mr={{ sm: '6', lg: '0' }}
-      cursor="pointer"
-    >
+    <Flex id="editable avatar box" cursor="pointer">
       <Box
         as={FormLabel}
         id="avatarUpload"
@@ -70,8 +66,8 @@ const AvatarUpload: React.FC<Props> = ({
         m={0}
         isLoading={uploading}
         loadingText="Uploading"
+        _hover={{ opacity: 0.6 }}
         // bgColor="#000"
-        _hover={{ bgColor: '#000', opacity: 0.6 }}
       >
         {avatar === 'User' ? (
           <AvatarProfile src={avatar_url} />

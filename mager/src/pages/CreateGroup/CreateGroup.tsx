@@ -4,13 +4,11 @@ import {
   Grid,
   Heading,
   HStack,
-  Input,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
-import { GradientButton } from '../../components/Buttons';
+import CreateGroupContainer from '../../components/Containers/CreateGroupContainer';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
 import {
@@ -19,7 +17,6 @@ import {
 } from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
-import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { ProfileType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -27,55 +24,14 @@ import { supabase } from '../../utils/supabaseClient';
 interface Props {}
 
 const CreateGroup: React.FC<Props> = () => {
-  const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const { user } = useAuth();
-  const router = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
+
   const [username, setUsername] = useState<StringOrUndefined>();
   const [isUserdataLoading, setIsUserdataLoading] =
     useState<boolean>(true);
 
-  const createGroup = async () => {
-    try {
-      const updates = {
-        group_name,
-        avatar_url,
-        creator_id: user?.id,
-        updated_at: new Date(),
-      };
-
-      let { data, error } = await supabase
-        .from('groups')
-        .insert(updates, {
-          returning: 'representation',
-        })
-        .single();
-      try {
-        setIsLoading(true);
-        const memberUpdates = {
-          profile_id: user?.id,
-          group_id: data.id,
-        };
-
-        let { error } = await supabase
-          .from('members')
-          .insert(memberUpdates, {
-            returning: 'minimal',
-          });
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      }
-
-      if (error) throw error.message;
-    } catch (error) {
-      throw error;
-    } finally {
-      router.push('/');
-      setIsLoading(false);
-    }
-  };
+  const { user } = useAuth();
+  const router = useHistory();
 
   useEffect(() => {
     const fetchUserdata = async () => {
@@ -86,7 +42,8 @@ const CreateGroup: React.FC<Props> = () => {
           .select(
             `
             id,
-            username
+            username,
+            avatar_url
         `,
           )
           .eq('id', user?.id)
@@ -96,7 +53,7 @@ const CreateGroup: React.FC<Props> = () => {
 
         if (_userdata === null) return <Box>No data</Box>;
 
-        const { username } = _userdata;
+        const { username, avatar_url } = _userdata;
 
         setUsername(username);
         setAvatarUrl(avatar_url);
@@ -118,85 +75,40 @@ const CreateGroup: React.FC<Props> = () => {
             w: { sm: '95%', md: '90%', lg: 'initial' },
           }}
         >
-          <HeaderAvatar
-            nameAndAvatar={
-              <NameAndAvatar
-                title={username}
-                avatar_url={avatar_url as string}
-                avatar="User"
-              />
-            }
-          />
+          <HeaderAvatar>
+            <NameAndAvatar
+              title={username}
+              avatar_url={avatar_url}
+              avatar="User"
+            />
+          </HeaderAvatar>
         </Skeleton>
       }
       middle={
-        <VStack
-          id="5"
-          justifyContent="center"
-          alignItems="center"
-          h={{ base: '100%' }}
-        >
+        <VStack id="5" h="100%">
           <Grid
-            h={{ base: '100%' }}
+            h="100%"
             templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
-            <HStack
-              justifyContent="center"
-              alignItems="center"
-              position="relative"
-            >
-              <BackIcon
-                position="absolute"
-                left={{ base: '-3', sm: '4' }}
-                w="10"
-                h="10"
-                cursor="pointer"
-                onClick={() => router.goBack()}
-              />
-              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
-                Create a Group
-              </Heading>
-            </HStack>
-            <Center
-              layerStyle="shadow-and-bg"
-              bg="white"
-              h="sm"
-              w={{ base: 'xs', sm: 'sm', lg: 'md' }}
-              borderRadius={20}
-              m="auto"
-            >
-              <VStack spacing={4} minW="16rem">
-                <AvatarUpload
-                  onUpload={(url: string) => {
-                    setAvatarUrl(url);
+            <Center>
+              <HStack position="relative">
+                <BackIcon
+                  position="absolute"
+                  left={{
+                    base: '-25%',
+                    md: '-27%',
+                    lg: '-40%',
                   }}
-                  avatar_url={avatar_url}
-                  avatar="Group"
+                  fontSize={{ base: '2rem', md: '2.7rem' }}
+                  cursor="pointer"
+                  onClick={() => router.goBack()}
                 />
-                <Input
-                  variant={'removeDefault'}
-                  autoCapitalize="off"
-                  value={group_name}
-                  onChange={e => setGroupname(e.target.value)}
-                  isRequired
-                  size="lg"
-                  fontSize="2xl"
-                  maxW="2xs"
-                  borderRadius="25"
-                  placeholder="Group name"
-                />
-
-                <GradientButton
-                  onClick={createGroup}
-                  isLoading={isLoading}
-                  loadingText="Creating"
-                >
-                  <GradientButtonText fontSize={25}>
-                    Create
-                  </GradientButtonText>
-                </GradientButton>
-              </VStack>
+                <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
+                  Create a group
+                </Heading>
+              </HStack>
             </Center>
+            <CreateGroupContainer isLoading={isUserdataLoading} />
           </Grid>
         </VStack>
       }

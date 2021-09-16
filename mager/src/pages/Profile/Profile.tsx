@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   Grid,
   Heading,
   HStack,
@@ -162,33 +161,27 @@ const Profile: React.FC = () => {
           props={{
             borderRadius: 100,
             w: { sm: '95%', md: '90%', lg: 'initial' },
+            h: 'fit-content',
           }}
         >
-          <HeaderAvatar
-            nameAndAvatar={
-              <Flex
-                id="flex2"
-                justifyContent="center"
-                alignItems="center"
-                flexDirection={{ sm: 'row', lg: 'column' }}
-              >
-                <AvatarUpload
-                  onUpload={(url: string) => {
-                    setAvatarUrl(url);
-                    updateAvatar(url);
-                  }}
-                  avatar_url={avatar_url}
-                  avatar="User"
-                />
-                <Name
-                  title={username}
-                  textProps={{
-                    fontSize: { sm: '4xl', md: '5xl' },
-                  }}
-                />
-              </Flex>
-            }
-          />
+          <HeaderAvatar>
+            <Box mr={{ sm: '6', lg: '0' }}>
+              <AvatarUpload
+                onUpload={(url: string) => {
+                  setAvatarUrl(url);
+                  updateAvatar(url);
+                }}
+                avatar_url={avatar_url}
+                avatar="User"
+              />
+            </Box>
+            <Name
+              title={username}
+              textProps={{
+                fontSize: { sm: '4xl', md: '5xl' },
+              }}
+            />
+          </HeaderAvatar>
         </Skeleton>
       }
       middle={

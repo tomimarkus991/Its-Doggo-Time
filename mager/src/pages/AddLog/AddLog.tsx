@@ -6,7 +6,6 @@ import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
-import Skeleton from '../../components/Skeleton';
 import { GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -66,34 +65,24 @@ const AddLog: React.FC = () => {
         </>
       }
       middle={
-        <VStack
-          id="5"
-          justifyContent="center"
-          alignItems="center"
-          h={{ base: '100%' }}
-        >
+        <VStack id="5" h="100%">
           <Grid
-            h={{ base: '100%' }}
+            h="100%"
             templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
             <Center>
-              <Skeleton
-                isLoading={isGroupdataLoading}
-                props={{ borderRadius: 50 }}
-              >
-                <HStack position="relative">
-                  <BackIcon
-                    position="absolute"
-                    left={{ base: '-170%', md: '-270%', lg: '-370%' }}
-                    fontSize={{ base: '2rem', md: '2.7rem' }}
-                    cursor="pointer"
-                    onClick={() => router.goBack()}
-                  />
-                  <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
-                    ADD
-                  </Heading>
-                </HStack>
-              </Skeleton>
+              <HStack position="relative">
+                <BackIcon
+                  position="absolute"
+                  left={{ base: '-170%', md: '-270%', lg: '-370%' }}
+                  fontSize={{ base: '2rem', md: '2.7rem' }}
+                  cursor="pointer"
+                  onClick={() => router.goBack()}
+                />
+                <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
+                  ADD
+                </Heading>
+              </HStack>
             </Center>
             <AddLogContainer
               groupdata={groupdata}
