@@ -1,6 +1,5 @@
-import { BlackProfileIcon } from '../../Icons/Profile/BlackProfileIcon';
 import { Avatar } from '../Avatar';
-
+import ProfileAvatarIcon from '../../Icons/Avatar/Profile';
 interface Props {
   src: string;
 }
@@ -12,7 +11,7 @@ export const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
       w={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
       h={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
       icon={
-        <BlackProfileIcon
+        <ProfileAvatarIcon
           fontSize={{ base: '3.5rem', md: '4rem', lg: '4.8rem' }}
         />
       }

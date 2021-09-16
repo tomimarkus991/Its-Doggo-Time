@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
+import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
 import { GradientButton } from '../../components/Buttons';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
@@ -166,12 +166,12 @@ const CreateGroup: React.FC<Props> = () => {
               m="auto"
             >
               <VStack spacing={4} minW="16rem">
-                <AvatarGroup src={avatar_url as string} />
                 <AvatarUpload
                   onUpload={(url: string) => {
                     setAvatarUrl(url);
                   }}
-                  title="Add Photo"
+                  avatar_url={avatar_url}
+                  avatar="Group"
                 />
                 <Input
                   variant={'removeDefault'}

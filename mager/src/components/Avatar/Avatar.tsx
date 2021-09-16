@@ -1,12 +1,12 @@
 import { Avatar as ChakraAvatar, Box, BoxProps } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import useColors from '../../hooks/useColors';
-import { AvatarIconType } from '../../types';
+import { AvatarIconType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import Skeleton from '../Skeleton';
 
 interface Props {
-  src: string;
+  src: StringOrUndefined;
   w: any;
   h: any;
   icon: AvatarIconType;

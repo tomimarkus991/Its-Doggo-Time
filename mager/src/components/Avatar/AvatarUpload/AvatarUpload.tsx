@@ -1,11 +1,22 @@
-import { Button, FormLabel } from '@chakra-ui/react';
+import { Box, Flex, FormLabel } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { supabase } from '../../utils/supabaseClient';
+import { AvatarProfile } from '..';
+import { AvatarGroup } from '..';
+import { StringOrUndefined } from '../../../types';
+import { supabase } from '../../../utils/supabaseClient';
+import AddAvatarIcon from '../../Icons/Avatar/Add';
+
 interface Props {
   onUpload: (url: string) => void;
-  title: string;
+  avatar_url: StringOrUndefined;
+  avatar: 'User' | 'Group';
 }
-export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
+
+const AvatarUpload: React.FC<Props> = ({
+  onUpload,
+  avatar_url,
+  avatar,
+}) => {
   const [uploading, setUploading] = useState(false);
 
   const uploadAvatar = async (event: any) => {
@@ -43,21 +54,32 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
       setUploading(false);
     }
   };
+
   return (
-    <>
-      <Button
+    <Flex
+      id="editable avatar box"
+      mr={{ sm: '6', lg: '0' }}
+      cursor="pointer"
+    >
+      <Box
         as={FormLabel}
+        id="avatarUpload"
         htmlFor="uploadInput"
         cursor="pointer"
+        borderRadius="100"
         m={0}
         isLoading={uploading}
         loadingText="Uploading"
-        variant="ghost"
-        fontSize="2xl"
-        textTransform="uppercase"
+        // bgColor="#000"
+        _hover={{ bgColor: '#000', opacity: 0.6 }}
       >
-        {title}
-      </Button>
+        {avatar === 'User' ? (
+          <AvatarProfile src={avatar_url} />
+        ) : (
+          <AvatarGroup src={avatar_url} />
+        )}
+        <AddAvatarIcon />
+      </Box>
       <input
         style={{
           visibility: 'hidden',
@@ -70,6 +92,7 @@ export const AvatarUpload: React.FC<Props> = ({ onUpload, title }) => {
         onChange={uploadAvatar}
         disabled={uploading}
       />
-    </>
+    </Flex>
   );
 };
+export default AvatarUpload;

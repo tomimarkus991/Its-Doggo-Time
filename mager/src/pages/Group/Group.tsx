@@ -14,7 +14,8 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { AvatarGroup, AvatarUpload } from '../../components/Avatar';
+import { AvatarGroup } from '../../components/Avatar';
+import AvatarUpload from '../../components/Avatar/AvatarUpload/index';
 import EditButtons from '../../components/Buttons/EditButtons';
 import { LogsContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
@@ -206,9 +207,6 @@ const Group: React.FC = () => {
               }}
             >
               <VStack>
-                <Box mr={{ sm: '6', lg: '0' }}>
-                  <AvatarGroup src={group_avatar_url as string} />
-                </Box>
                 {isEditable ? (
                   <>
                     <AvatarUpload
@@ -216,8 +214,10 @@ const Group: React.FC = () => {
                         setGroupAvatarUrl(url);
                         updateGroupPicture(url);
                       }}
-                      title={'Update Photo'}
+                      avatar_url={group_avatar_url}
+                      avatar="Group"
                     />
+
                     {/* this is delete group button */}
                     <Flex
                       display={{ sm: 'flex', lg: 'none' }}
@@ -239,7 +239,11 @@ const Group: React.FC = () => {
                       </Flex>
                     </Flex>
                   </>
-                ) : null}
+                ) : (
+                  <Box mr={{ sm: '6', lg: '0' }}>
+                    <AvatarGroup src={group_avatar_url} />
+                  </Box>
+                )}
               </VStack>
 
               {isEditable ? (
@@ -260,6 +264,7 @@ const Group: React.FC = () => {
                     borderRadius="50"
                     fontSize="3xl"
                     size="lg"
+                    mt="4"
                     bg="white"
                     width={{ base: '3xs', xl: '2xs' }}
                   />
@@ -347,7 +352,6 @@ const Group: React.FC = () => {
               alignItems="center"
               display={{ base: 'flex', sm: 'none' }}
             >
-              <AvatarGroup src={group_avatar_url as string} />
               {isEditable ? (
                 <VStack>
                   <AvatarUpload
@@ -355,7 +359,8 @@ const Group: React.FC = () => {
                       setGroupAvatarUrl(url);
                       updateGroupPicture(url);
                     }}
-                    title={'Update Photo'}
+                    avatar_url={group_avatar_url}
+                    avatar="Group"
                   />
                   <Input
                     variant={'removeDefault'}
@@ -381,25 +386,28 @@ const Group: React.FC = () => {
                   />
                 </VStack>
               ) : (
-                <HStack flex={1}>
-                  <Name title={group_name} />
-                  {/* this is edit group info button */}
-                  {user?.id === creator_id && isEditable === false ? (
-                    <IconButton
-                      onClick={() => setIsEditable(true)}
-                      aria-label="Edit"
-                      bgColor="transparent"
-                      _hover={{ bgColor: 'transparent' }}
-                      icon={
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          size={'lg'}
-                          color={penColor}
-                        />
-                      }
-                    />
-                  ) : null}
-                </HStack>
+                <>
+                  <AvatarGroup src={group_avatar_url} />
+                  <HStack flex={1}>
+                    <Name title={group_name} />
+                    {/* this is edit group info button */}
+                    {user?.id === creator_id && isEditable === false ? (
+                      <IconButton
+                        onClick={() => setIsEditable(true)}
+                        aria-label="Edit"
+                        bgColor="transparent"
+                        _hover={{ bgColor: 'transparent' }}
+                        icon={
+                          <FontAwesomeIcon
+                            icon={faPen}
+                            size={'lg'}
+                            color={penColor}
+                          />
+                        }
+                      />
+                    ) : null}
+                  </HStack>
+                </>
               )}
             </HStack>
 

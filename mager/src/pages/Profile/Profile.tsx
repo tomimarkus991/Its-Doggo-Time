@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   Grid,
   Heading,
   HStack,
@@ -8,16 +9,14 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
+import { AvatarProfile } from '../../components/Avatar';
+import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
 import { GradientButton } from '../../components/Buttons';
 import ColorMode from '../../components/ColorMode';
 import { Name } from '../../components/Headers';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
-import {
-  HeaderAvatar,
-  NameAndAvatar,
-} from '../../components/Layouts/Profile';
+import { HeaderAvatar } from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
@@ -154,6 +153,7 @@ const Profile: React.FC = () => {
 
     fetchUserdata();
   }, []);
+
   return (
     <MainLayout
       leftSide={
@@ -166,11 +166,27 @@ const Profile: React.FC = () => {
         >
           <HeaderAvatar
             nameAndAvatar={
-              <NameAndAvatar
-                title={username}
-                avatar_url={avatar_url as string}
-                avatar="User"
-              />
+              <Flex
+                id="flex2"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection={{ sm: 'row', lg: 'column' }}
+              >
+                <AvatarUpload
+                  onUpload={(url: string) => {
+                    setAvatarUrl(url);
+                    updateAvatar(url);
+                  }}
+                  avatar_url={avatar_url}
+                  avatar="User"
+                />
+                <Name
+                  title={username}
+                  textProps={{
+                    fontSize: { sm: '4xl', md: '5xl' },
+                  }}
+                />
+              </Flex>
             }
           />
         </Skeleton>
@@ -228,15 +244,6 @@ const Profile: React.FC = () => {
                     placeholder="Username"
                   />
                 </Skeleton>
-                <Box>
-                  <AvatarUpload
-                    onUpload={(url: string) => {
-                      setAvatarUrl(url);
-                      updateAvatar(url);
-                    }}
-                    title="Change Avatar"
-                  />
-                </Box>
                 {/* Toggle Color Mode */}
                 <Box pt="10">
                   <ColorMode />

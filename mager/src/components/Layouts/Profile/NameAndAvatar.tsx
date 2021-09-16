@@ -1,4 +1,4 @@
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { StringOrUndefined } from '../../../types';
 import { AvatarGroup, AvatarProfile } from '../../Avatar';
 import { Name } from '../../Headers';
@@ -21,13 +21,13 @@ export const NameAndAvatar: React.FC<Props> = ({
       alignItems="center"
       flexDirection={{ sm: 'row', lg: 'column' }}
     >
-      <Box mr={{ sm: '6', lg: '0' }}>
+      <Flex id="regular avatar box" mr={{ sm: '6', lg: '0' }}>
         {avatar === 'User' ? (
           <AvatarProfile src={avatar_url} />
         ) : (
           <AvatarGroup src={avatar_url} />
         )}
-      </Box>
+      </Flex>
 
       <Name
         title={title}
