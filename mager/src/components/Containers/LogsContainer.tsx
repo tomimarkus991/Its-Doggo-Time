@@ -15,7 +15,9 @@ import { supabase } from '../../utils/supabaseClient';
 import { AddNewLogIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
 import { AddLogIcon } from '../Icons/Doggo';
-import { PeeAndPoopPlaceholderIcon } from '../Icons/Logs';
+import { DefaultPeeAndPoopIcon } from '../Icons/Logs';
+
+import MainContainerLayout from '../Layouts/Containers';
 
 interface Props {}
 interface RouteParams {
@@ -75,28 +77,38 @@ export const LogsContainer: React.FC<Props> = ({}) => {
   }, []);
 
   return (
-    <VStack
-      id="logs"
-      layerStyle="shadow-and-bg"
-      boxSizing="content-box"
-      position="relative"
-      justifyContent="center"
-      alignItems="center"
-      bgColor="white"
-      h={{ base: 'sm', sm: 'sm', lg: 'md' }}
-      w={{
-        base: 'xs',
-        sm: 'sm',
-        sm2: 'lg',
-        md: '2xl',
-        lg: 'xl',
-        xl: '2xl',
+    <MainContainerLayout
+      mainH="sm"
+      isLoading={isLoading}
+      button={
+        <AddNewLogIconButton
+          to={`/group/${group_id}/add-log`}
+          icon={
+            <AddLogIcon
+              fontSize={{
+                base: '5rem',
+                md: '6rem',
+                lg: '7rem',
+              }}
+            />
+          }
+          ariaLabel="Add new Log"
+          isDisabled={false}
+        />
+      }
+      containerProps={{
+        w: {
+          base: 'xs',
+          sm: 'sm',
+          sm2: 'lg',
+          md: '2xl',
+          lg: 'xl',
+          xl: '2xl',
+        },
+        h: { base: 'sm', lg: 'md' },
       }}
-      py={{ base: '4', sm: '4', md: '8', lg: '4' }}
-      px={{ base: '4', lg: '0' }}
-      borderRadius={20}
     >
-      {isLoading === true ? null : (
+      {isLoading ? null : (
         <>
           {logsdata === null ||
           logsdata === undefined ||
@@ -112,7 +124,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
               </VStack>
             </Center>
           ) : (
-            <Center>
+            <Center h="100%">
               <SimpleGrid
                 columns={2}
                 spacing={10}
@@ -126,17 +138,18 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                 }}
                 h="100%"
                 px={{ sm: '8', md: '12', lg: '16' }}
+                py={{ sm: '4', md: '6', lg: '8' }}
                 flexDirection="row-reverse"
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
-                  <Box key={index}>
+                  <Box id="LogCard" key={index}>
                     <LogCard log={log} />
                   </Box>
                 ))}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>
                     <VStack>
-                      <PeeAndPoopPlaceholderIcon
+                      <DefaultPeeAndPoopIcon
                         fontSize={{
                           base: '6rem',
                           sm: '7rem',
@@ -159,26 +172,6 @@ export const LogsContainer: React.FC<Props> = ({}) => {
           )}
         </>
       )}
-      <Box
-        position="absolute"
-        right={{ base: '+50', lg: '-10' }}
-        bottom={{ base: '-10', lg: '-10' }}
-      >
-        <AddNewLogIconButton
-          to={`/group/${group_id}/add-log`}
-          icon={
-            <AddLogIcon
-              fontSize={{
-                base: '5rem',
-                md: '6rem',
-                lg: '7rem',
-              }}
-            />
-          }
-          ariaLabel="Add new Log"
-          isDisabled={false}
-        />
-      </Box>
-    </VStack>
+    </MainContainerLayout>
   );
 };
