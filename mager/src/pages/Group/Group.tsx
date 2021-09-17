@@ -134,36 +134,7 @@ const Group: React.FC = () => {
       });
     }
   };
-  const InputWithEditButtons = () => {
-    return (
-      <VStack>
-        <Input
-          variant={'removeDefault'}
-          autoCapitalize="off"
-          onChange={e => setGroupname(e.target.value)}
-          value={group_name as string}
-          isDisabled={!isEditable}
-          borderRadius="50"
-          fontSize="3xl"
-          size="lg"
-          mt="4"
-          bg="white"
-          width={{ base: '3xs', xl: '2xs' }}
-        />
-        {user?.id === creator_id && isEditable ? (
-          <EditButtons
-            buttonGroupProps={{
-              mt: { base: 0, sm: '2' },
-              alignItems: 'center',
-              size: 'sm',
-            }}
-            onCrossClick={cancelSave}
-            onCheckClick={submitSave}
-          />
-        ) : null}
-      </VStack>
-    );
-  };
+
   return (
     <MainLayout
       leftSide={
@@ -201,7 +172,32 @@ const Group: React.FC = () => {
                     />
                   </Flex>
                 </VStack>
-                <InputWithEditButtons />
+                <VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    onChange={e => setGroupname(e.target.value)}
+                    value={group_name as string}
+                    isDisabled={!isEditable}
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    mt="4"
+                    bg="white"
+                    width={{ base: '3xs', xl: '2xs' }}
+                  />
+                  {user?.id === creator_id && isEditable ? (
+                    <EditButtons
+                      buttonGroupProps={{
+                        mt: { base: 0, sm: '2' },
+                        alignItems: 'center',
+                        size: 'sm',
+                      }}
+                      onCrossClick={cancelSave}
+                      onCheckClick={submitSave}
+                    />
+                  ) : null}
+                </VStack>
               </>
             ) : (
               <>
@@ -258,7 +254,32 @@ const Group: React.FC = () => {
                     avatar_url={group_avatar_url}
                     avatar="Group"
                   />
-                  <InputWithEditButtons />
+                  <VStack>
+                    <Input
+                      variant={'removeDefault'}
+                      autoCapitalize="off"
+                      onChange={e => setGroupname(e.target.value)}
+                      value={group_name as string}
+                      isDisabled={!isEditable}
+                      borderRadius="50"
+                      fontSize="3xl"
+                      size="lg"
+                      mt="4"
+                      bg="white"
+                      width={{ base: '3xs', xl: '2xs' }}
+                    />
+                    {user?.id === creator_id && isEditable ? (
+                      <EditButtons
+                        buttonGroupProps={{
+                          mt: { base: 0, sm: '2' },
+                          alignItems: 'center',
+                          size: 'sm',
+                        }}
+                        onCrossClick={cancelSave}
+                        onCheckClick={submitSave}
+                      />
+                    ) : null}
+                  </VStack>
                 </HStack>
               ) : (
                 <HStack>
