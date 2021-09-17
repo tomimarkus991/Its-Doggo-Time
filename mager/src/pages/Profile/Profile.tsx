@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AvatarProfile } from '../../components/Avatar';
 import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
 import { GradientButton } from '../../components/Buttons';
 import ColorMode from '../../components/ColorMode';
@@ -193,7 +192,7 @@ const Profile: React.FC = () => {
         >
           <Grid
             h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
+            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
           >
             <HStack
               justifyContent={{ base: 'center', sm: 'flex-start' }}
@@ -203,10 +202,19 @@ const Profile: React.FC = () => {
               mt={{ base: 12, sm: 0 }}
               mb={{ base: 10, sm: 0 }}
             >
-              <AvatarProfile src={avatar_url as string} />
+              {/* <AvatarProfile src={avatar_url as string} /> */}
+              <AvatarUpload
+                onUpload={(url: string) => {
+                  setAvatarUrl(url);
+                  updateAvatar(url);
+                }}
+                avatar_url={avatar_url}
+                avatar="User"
+              />
               <Name title={username} />
             </HStack>
             <Heading
+              display={{ base: 'none', sm: 'initial' }}
               textAlign="center"
               fontSize={{ base: '4xl', sm: '4xl' }}
               mb={{ base: 4, sm: 0 }}
