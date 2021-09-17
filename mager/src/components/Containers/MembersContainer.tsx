@@ -9,6 +9,7 @@ import { ProfileIcon } from '../Icons/Navbar';
 import MainContainerLayout from '../Layouts/Containers';
 import { CheckIcon } from '@chakra-ui/icons';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 interface Props {
   members: ProfileType[] | undefined;
   isEditable: boolean;
@@ -30,6 +31,7 @@ export const MembersContainer: React.FC<Props> = ({
 }) => {
   const { placeholders } = useMembersPlaceholder(members);
   const { user } = useAuth();
+  const { penColor } = useColors();
 
   return (
     <MainContainerLayout
@@ -83,7 +85,7 @@ export const MembersContainer: React.FC<Props> = ({
                   <FontAwesomeIcon
                     icon={faPen}
                     size={'lg'}
-                    color="#DDCDBF"
+                    color={penColor}
                   />
                 }
               />
