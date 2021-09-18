@@ -12,7 +12,7 @@ export const MembersLink: React.FC<Props> = ({ group_id }) => {
   return (
     <Link to={`/group/${group_id}/members`}>
       <VStack>
-        <MembersIcon id="Members" width="5.5rem" height="4rem" />
+        <MembersIcon id="Members" width="5rem" height="4rem" />
         <LinkLabel htmlFor="Members" label="Members" />
       </VStack>
     </Link>

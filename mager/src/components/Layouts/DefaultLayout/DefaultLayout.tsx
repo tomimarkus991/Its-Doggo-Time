@@ -18,6 +18,7 @@ const DefaultLayout = ({
   const { colorMode } = useColorMode();
   return (
     <Grid
+      id="default grid"
       templateColumns="1fr"
       templateRows={{ base: '1fr', lg: '0.4fr 1fr' }}
       templateAreas={{ base: '"main"', lg: '"header" "main"' }}
@@ -46,7 +47,7 @@ const DefaultLayout = ({
       >
         <Header />
       </GridItem>
-      <GridItem zIndex={2} id="1" gridArea="main ">
+      <GridItem zIndex={2} id="1" gridArea="main" h="100%">
         <Box zIndex={2} id="2" h="100%">
           {children}
         </Box>

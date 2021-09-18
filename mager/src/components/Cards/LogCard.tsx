@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import moment from 'moment';
 import { LogsdataType } from '../../types';
 import { PeeAndPoopIcon, PeeIcon, PoopIcon } from '../Icons/Logs';
@@ -11,12 +11,7 @@ export const LogCard: React.FC<Props> = ({ log }) => {
   const { pee, poop, created_at } = log;
 
   return (
-    <Flex
-      h="100%"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <>
       {pee && poop === false && (
         <PeeIcon
           fontSize={{
@@ -50,7 +45,10 @@ export const LogCard: React.FC<Props> = ({ log }) => {
           }}
         />
       )}
-      <Text textAlign="center" fontSize={{ base: 'xl', md: '2xl' }}>
+      <Text
+        textAlign="center"
+        fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
+      >
         {moment(created_at).local().calendar(null, {
           lastDay: '[Yesterday at] HH:mm',
           sameDay: '[Today at] HH:mm',
@@ -60,6 +58,6 @@ export const LogCard: React.FC<Props> = ({ log }) => {
           sameElse: 'DD.MM.YY [at] HH:mm',
         })}
       </Text>
-    </Flex>
+    </>
   );
 };

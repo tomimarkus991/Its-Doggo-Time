@@ -1,6 +1,6 @@
 import { Center, Grid, Heading, HStack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AddLogContainer } from '../../components/Containers';
 import { DoggoIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
@@ -16,7 +16,6 @@ interface RouteParams {
 const AddLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   // const { user } = useAuth();
-  const router = useHistory();
 
   const [groupdata, setGroupdata] = useState<GroupPageDataType>();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
@@ -75,9 +74,6 @@ const AddLog: React.FC = () => {
                 <BackIcon
                   position="absolute"
                   left={{ base: '-170%', md: '-270%', lg: '-370%' }}
-                  fontSize={{ base: '2rem', md: '2.7rem' }}
-                  cursor="pointer"
-                  onClick={() => router.goBack()}
                 />
                 <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
                   ADD

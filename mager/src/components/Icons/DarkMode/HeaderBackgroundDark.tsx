@@ -9,7 +9,7 @@ export const HeaderBackgroundDark = (props: IconProps): JSX.Element => (
     top="-14%"
     {...props}
   >
-    <g clipPath="url(#clip0)">
+    <g clipPath="url(#clip1)">
       <path
         d="M954.123 -195.835C1712.62 -195.835 2327.51 -73.274 2327.51 77.913C2327.51 229.1 1712.62 351.665 954.123 351.665C195.622 351.665 -419.265 229.1 -419.265 77.913C-419.265 -73.274 195.622 -195.835 954.123 -195.835Z"
         fill="#373636"

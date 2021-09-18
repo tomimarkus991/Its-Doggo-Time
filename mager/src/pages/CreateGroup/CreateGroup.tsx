@@ -7,7 +7,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import CreateGroupContainer from '../../components/Containers/CreateGroupContainer';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
@@ -31,7 +30,6 @@ const CreateGroup: React.FC<Props> = () => {
     useState<boolean>(true);
 
   const { user } = useAuth();
-  const router = useHistory();
 
   useEffect(() => {
     const fetchUserdata = async () => {
@@ -99,9 +97,6 @@ const CreateGroup: React.FC<Props> = () => {
                     md: '-27%',
                     lg: '-40%',
                   }}
-                  fontSize={{ base: '2rem', md: '2.7rem' }}
-                  cursor="pointer"
-                  onClick={() => router.goBack()}
                 />
                 <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
                   Create a group

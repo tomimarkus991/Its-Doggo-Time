@@ -8,7 +8,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import ForgotPasswordAlert from '../../components/Alerts/ForgotPasswordAlert';
 import { GradientButton } from '../../components/Buttons';
 import { BackIcon } from '../../components/Icons/LightMode';
@@ -21,7 +20,6 @@ const ForgotPassword: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isAuthError, setIsAuthError] = useState<boolean>(false);
-  const router = useHistory();
 
   const sendResetPassword = async () => {
     let isError = false;
@@ -53,25 +51,14 @@ const ForgotPassword: React.FC = () => {
           justifyContent="flex-end"
           mt="2.8rem"
         >
-          <BackIcon
-            w="10"
-            h="10"
-            cursor="pointer"
-            onClick={() => router.goBack()}
-          />
+          <BackIcon />
         </Flex>
       }
       middle={
         <Box mt="8">
           <HStack justifyContent="center" mb="12">
             <Box display={{ base: 'block', lg: 'none' }}>
-              <BackIcon
-                w="9"
-                h="9"
-                pr={{ base: '0', sm: '4' }}
-                cursor="pointer"
-                onClick={() => router.goBack()}
-              />
+              <BackIcon pr={{ base: '0', sm: '4' }} />
             </Box>
             <Heading
               textAlign="center"

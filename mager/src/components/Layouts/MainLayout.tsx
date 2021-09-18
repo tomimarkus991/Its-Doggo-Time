@@ -44,10 +44,15 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       <HStack
         id="rightSide"
         gridArea="rightSide"
-        h={{ base: '80%', lg: 'fit-content' }}
+        py={{ base: '4', lg: '0' }}
+        h={{ base: '100%', lg: 'fit-content' }}
         alignItems="flex-end"
         spacing="6"
         justifyContent={{ base: 'space-evenly', lg: 'normal' }}
+        // position={{ base: 'fixed', lg: 'unset' }}
+        // bgColor="white"
+        // bottom={{ base: 0, lg: 'unset' }}
+        // zIndex={20}
       >
         {rightSide}
       </HStack>

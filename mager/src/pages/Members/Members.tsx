@@ -15,7 +15,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MembersAlert from '../../components/Alerts/MembersAlert';
 import { GradientButton } from '../../components/Buttons';
 import LeaveGroupButton from '../../components/Buttons/LeaveGroupButton';
@@ -49,7 +49,6 @@ interface RouteParams {
 const Members: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
-  const router = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [group_name, setGroupname] = useState<StringOrUndefined>();
@@ -225,14 +224,7 @@ const Members: React.FC = () => {
               alignItems="center"
               position="relative"
             >
-              <BackIcon
-                position="absolute"
-                left={10}
-                w="10"
-                h="10"
-                cursor="pointer"
-                onClick={() => router.goBack()}
-              />
+              <BackIcon position="absolute" left={10} />
               <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
                 Members
               </Heading>

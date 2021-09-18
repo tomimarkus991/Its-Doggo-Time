@@ -1,11 +1,6 @@
-import {
-  Flex,
-  Grid,
-  Heading,
-  HStack,
-  Input,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, Grid, HStack, Input, VStack } from '@chakra-ui/react';
+import { faBone, faPoop } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AvatarGroup } from '../../components/Avatar';
@@ -23,6 +18,7 @@ import {
 import { MembersLink, MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 import useToast from '../../hooks/useToast';
 import { GroupPageDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -43,6 +39,7 @@ const Group: React.FC = () => {
   // const [groupMembers, setGroupMembers] = useState<any>([]);
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
   const { showToast } = useToast();
+  const { defaultColor } = useColors();
 
   const cancelSave = () => {
     setGroupname(old_group_name);
@@ -231,13 +228,15 @@ const Group: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <VStack id="5" h={{ base: '100%' }}>
+        <VStack id="5" h="100%">
           <Grid
-            h={{ base: '100%' }}
+            h="100%"
             templateRows={{
-              base: '0.4fr 0.1fr 1fr 0.1fr',
+              base: '0.4fr 0.1fr 1fr',
               sm: '0.2fr 1fr',
             }}
+            justifyContent={{ base: 'center', lg: 'normal' }}
+            alignItems={{ base: 'center', lg: 'normal' }}
           >
             <HStack
               justifyContent="center"
@@ -297,11 +296,37 @@ const Group: React.FC = () => {
               )}
             </HStack>
 
-            <Heading textAlign="center" fontSize={{ base: '4xl' }}>
-              Overview
-            </Heading>
+            <HStack
+              spacing={10}
+              justifyContent="center"
+              alignItems="center"
+              py={{ base: '4', lg: '0' }}
+            >
+              <Box
+                as={FontAwesomeIcon}
+                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
+                icon={faPoop}
+                color="beez.700"
+                cursor="pointer"
+                bgColor={defaultColor}
+                py="2"
+                px="2"
+                borderRadius="100"
+              />
+              <Box
+                as={FontAwesomeIcon}
+                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
+                icon={faBone}
+                color="beez.700"
+                cursor="pointer"
+                bgColor={defaultColor}
+                py="2"
+                px="2"
+                borderRadius="100"
+              />
+            </HStack>
             <LogsContainer />
-            <Flex
+            {/* <Flex
               display={{ base: 'flex', sm: 'none' }}
               w="100%"
               h="40%"
@@ -313,7 +338,7 @@ const Group: React.FC = () => {
                 creator_id={creator_id}
                 isEditable={isEditable}
               />
-            </Flex>
+            </Flex> */}
           </Grid>
         </VStack>
       }

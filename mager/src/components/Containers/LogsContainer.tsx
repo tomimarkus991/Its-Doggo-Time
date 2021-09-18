@@ -1,6 +1,6 @@
 import {
-  Box,
   Center,
+  Flex,
   Heading,
   SimpleGrid,
   Text,
@@ -127,7 +127,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             <Center h="100%">
               <SimpleGrid
                 columns={2}
-                spacing={10}
+                spacing={{ base: 0, lg: 10 }}
                 w={{
                   base: 'xs',
                   sm: 'sm',
@@ -136,15 +136,20 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                   lg: 'xl',
                   xl: '2xl',
                 }}
-                h="100%"
                 px={{ sm: '8', md: '12', lg: '16' }}
                 py={{ sm: '4', md: '6', lg: '8' }}
-                flexDirection="row-reverse"
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
-                  <Box id="LogCard" key={index}>
+                  <Flex
+                    id="LogCard"
+                    key={index}
+                    h="100%"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <LogCard log={log} />
-                  </Box>
+                  </Flex>
                 ))}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>
@@ -152,10 +157,10 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                       <DefaultPeeAndPoopIcon
                         fontSize={{
                           base: '6rem',
-                          sm: '7rem',
-                          md: '9rem',
-                          lg: '8rem',
-                          xl: '9rem',
+                          sm2: '6.5rem',
+                          md: '7.5rem',
+                          lg: '7rem',
+                          xl: '7.5rem',
                         }}
                       />
                       <Text

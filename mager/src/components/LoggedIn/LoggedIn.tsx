@@ -165,6 +165,7 @@ const LoggedIn: React.FC = () => {
                 Groups
               </Heading>
             </VStack>
+
             <GroupsContainer
               userGroups={groups}
               isLoading={isUserdataLoading}

@@ -8,7 +8,7 @@ export const SmallHeaderBgLight = (props: IconProps): JSX.Element => (
     zIndex={-3}
     {...props}
   >
-    <g clipPath="url(#clip2)">
+    <g clipPath="url(#clip7)">
       <path
         d="M243.5 -186C437.076 -186 594 -69.594 594 74C594 217.594 437.076 334 243.5 334C49.924 334 -107 217.594 -107 74C-107 -69.594 49.924 -186 243.5 -186Z"
         fill="#DDCDBF"
