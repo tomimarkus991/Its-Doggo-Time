@@ -1,4 +1,12 @@
-import { Box, Flex, Grid, HStack, Input, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  Grid,
+  HStack,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 import { faBone, faPoop } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -135,125 +143,39 @@ const Group: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Skeleton
-          isLoading={isGroupdataLoading}
-          props={{
-            borderRadius: 100,
-            w: { sm: '95%', md: '90%', lg: 'initial' },
-            h: '80%',
-          }}
-        >
-          <HeaderAvatar>
-            {isEditable ? (
-              <>
-                <VStack>
-                  <AvatarUpload
-                    onUpload={(url: string) => {
-                      setGroupAvatarUrl(url);
-                      updateGroupPicture(url);
-                    }}
-                    avatar_url={group_avatar_url}
-                    avatar="Group"
-                  />
-                  <Flex
-                    display={{ sm: 'flex', lg: 'none' }}
-                    w="100%"
-                    h="40%"
-                    justifyContent="center"
-                  >
-                    <DeleteGroupButton
-                      user_id={user?.id}
-                      group_id={group_id}
-                      creator_id={creator_id}
-                      isEditable={isEditable}
-                    />
-                  </Flex>
-                </VStack>
-                <VStack>
-                  <Input
-                    variant={'removeDefault'}
-                    autoCapitalize="off"
-                    onChange={e => setGroupname(e.target.value)}
-                    value={group_name as string}
-                    isDisabled={!isEditable}
-                    borderRadius="50"
-                    fontSize="3xl"
-                    size="lg"
-                    mt="4"
-                    bg="white"
-                    width={{ base: '3xs', xl: '2xs' }}
-                  />
-                  {user?.id === creator_id && isEditable ? (
-                    <EditButtons
-                      buttonGroupProps={{
-                        mt: { base: 0, sm: '2' },
-                        alignItems: 'center',
-                        size: 'sm',
-                      }}
-                      onCrossClick={cancelSave}
-                      onCheckClick={submitSave}
-                    />
-                  ) : null}
-                </VStack>
-              </>
-            ) : (
-              <>
-                <NameAndAvatar
-                  title={group_name}
-                  avatar_url={group_avatar_url}
-                  avatar="Group"
-                />
-                <EditGroupInfoButton
-                  user_id={user?.id}
-                  creator_id={creator_id}
-                  isEditable={isEditable}
-                  setIsEditable={setIsEditable}
-                />
-              </>
-            )}
-          </HeaderAvatar>
-          <Flex
-            display={{ base: 'none', lg: 'flex' }}
-            w="100%"
-            h="40%"
-            justifyContent="center"
-          >
-            <DeleteGroupButton
-              user_id={user?.id}
-              group_id={group_id}
-              creator_id={creator_id}
-              isEditable={isEditable}
-            />
-          </Flex>
-        </Skeleton>
-      }
-      middle={
-        <VStack id="5" h="100%">
-          <Grid
-            h={{ base: '100%', sm: 'unset' }}
-            templateRows={{
-              base: '0.4fr 0.1fr 1fr',
-              sm: '0.1fr 1fr',
-              md: '0.2fr 1fr',
+        <Flex flexDir="column" w="100%" h="80%">
+          <Skeleton
+            isLoading={isGroupdataLoading}
+            props={{
+              borderRadius: 100,
             }}
-            justifyContent={{ base: 'center', lg: 'normal' }}
-            alignItems={{ base: 'center', lg: 'normal' }}
           >
-            <HStack
-              justifyContent="center"
-              alignItems="center"
-              display={{ base: 'flex', sm: 'none' }}
-            >
+            <HeaderAvatar>
               {isEditable ? (
-                <HStack>
-                  <AvatarUpload
-                    onUpload={(url: string) => {
-                      setGroupAvatarUrl(url);
-                      updateGroupPicture(url);
-                    }}
-                    avatar_url={group_avatar_url}
-                    avatar="Group"
-                  />
+                <>
+                  <VStack>
+                    <AvatarUpload
+                      onUpload={(url: string) => {
+                        setGroupAvatarUrl(url);
+                        updateGroupPicture(url);
+                      }}
+                      avatar_url={group_avatar_url}
+                      avatar="Group"
+                    />
+                    <Flex
+                      display={{ sm: 'flex', lg: 'none' }}
+                      w="100%"
+                      h="40%"
+                      justifyContent="center"
+                    >
+                      <DeleteGroupButton
+                        user_id={user?.id}
+                        group_id={group_id}
+                        creator_id={creator_id}
+                        isEditable={isEditable}
+                      />
+                    </Flex>
+                  </VStack>
                   <VStack>
                     <Input
                       variant={'removeDefault'}
@@ -280,54 +202,134 @@ const Group: React.FC = () => {
                       />
                     ) : null}
                   </VStack>
-                </HStack>
+                </>
               ) : (
-                <HStack>
-                  <AvatarGroup src={group_avatar_url} />
-                  <HStack flex={1}>
-                    <Name title={group_name} />
-                    <EditGroupInfoButton
-                      user_id={user?.id}
-                      creator_id={creator_id}
-                      isEditable={isEditable}
-                      setIsEditable={setIsEditable}
-                    />
-                  </HStack>
-                </HStack>
+                <>
+                  <NameAndAvatar
+                    title={group_name}
+                    avatar_url={group_avatar_url}
+                    avatar="Group"
+                  />
+                  <EditGroupInfoButton
+                    user_id={user?.id}
+                    creator_id={creator_id}
+                    isEditable={isEditable}
+                    setIsEditable={setIsEditable}
+                  />
+                </>
               )}
-            </HStack>
+            </HeaderAvatar>
+          </Skeleton>
+          <Flex
+            display={{ base: 'none', lg: 'flex' }}
+            w="100%"
+            h="40%"
+            justifyContent="center"
+          >
+            <DeleteGroupButton
+              user_id={user?.id}
+              group_id={group_id}
+              creator_id={creator_id}
+              isEditable={isEditable}
+            />
+          </Flex>
+        </Flex>
+      }
+      middle={
+        <Grid
+          h={{ base: '100%', sm: '90%' }}
+          templateRows={{
+            base: '0.4fr 0.1fr 1fr',
+            sm: '0.2fr 1fr',
+          }}
+        >
+          <Center
+            flexDirection="row"
+            display={{ base: 'flex', sm: 'none' }}
+          >
+            {isEditable ? (
+              <HStack>
+                <AvatarUpload
+                  onUpload={(url: string) => {
+                    setGroupAvatarUrl(url);
+                    updateGroupPicture(url);
+                  }}
+                  avatar_url={group_avatar_url}
+                  avatar="Group"
+                />
+                <VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    onChange={e => setGroupname(e.target.value)}
+                    value={group_name as string}
+                    isDisabled={!isEditable}
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    mt="4"
+                    bg="white"
+                    width={{ base: '3xs', xl: '2xs' }}
+                  />
+                  {user?.id === creator_id && isEditable ? (
+                    <EditButtons
+                      buttonGroupProps={{
+                        mt: { base: 0, sm: '2' },
+                        alignItems: 'center',
+                        size: 'sm',
+                      }}
+                      onCrossClick={cancelSave}
+                      onCheckClick={submitSave}
+                    />
+                  ) : null}
+                </VStack>
+              </HStack>
+            ) : (
+              <HStack>
+                <AvatarGroup src={group_avatar_url} />
+                <HStack flex={1}>
+                  <Name title={group_name} />
+                  <EditGroupInfoButton
+                    user_id={user?.id}
+                    creator_id={creator_id}
+                    isEditable={isEditable}
+                    setIsEditable={setIsEditable}
+                  />
+                </HStack>
+              </HStack>
+            )}
+          </Center>
 
-            <HStack
-              spacing={10}
-              justifyContent="center"
-              alignItems="center"
-              py={{ base: '4', md: '0' }}
-            >
-              <Box
-                as={FontAwesomeIcon}
-                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
-                icon={faPoop}
-                color="beez.700"
-                cursor="pointer"
-                bgColor={defaultColor}
-                py="2"
-                px="2"
-                borderRadius="100"
-              />
-              <Box
-                as={FontAwesomeIcon}
-                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
-                icon={faBone}
-                color="beez.700"
-                cursor="pointer"
-                bgColor={defaultColor}
-                py="2"
-                px="2"
-                borderRadius="100"
-              />
-            </HStack>
-            <LogsContainer />
-            {/* <Flex
+          <Center
+            flexDirection="row"
+            spacing={10}
+            // py={{ base: '4', md: '0' }}
+          >
+            <Box
+              as={FontAwesomeIcon}
+              fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
+              icon={faPoop}
+              color="beez.700"
+              cursor="pointer"
+              bgColor={defaultColor}
+              py="2"
+              px="2"
+              borderRadius="100"
+            />
+            <Box
+              as={FontAwesomeIcon}
+              fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
+              icon={faBone}
+              color="beez.700"
+              cursor="pointer"
+              bgColor={defaultColor}
+              py="2"
+              px="2"
+              borderRadius="100"
+            />
+          </Center>
+          <LogsContainer />
+          {/* <Flex
               display={{ base: 'flex', sm: 'none' }}
               w="100%"
               h="40%"
@@ -340,8 +342,7 @@ const Group: React.FC = () => {
                 isEditable={isEditable}
               />
             </Flex> */}
-          </Grid>
-        </VStack>
+        </Grid>
       }
       rightSide={
         <>

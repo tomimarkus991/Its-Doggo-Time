@@ -1,6 +1,5 @@
 import {
   Center,
-  Flex,
   Heading,
   SimpleGrid,
   Text,
@@ -78,7 +77,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'xs', sm: 'sm', md: 'md' }}
+      mainH={{ base: 'xs', sm: 'sm', md: 'sm' }}
       isLoading={isLoading}
       button={
         <AddNewLogIconButton
@@ -141,18 +140,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                 py={{ base: 4, md: 6, lg: 8 }}
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
-                  <Flex
-                    id="LogCard"
-                    key={index}
-                    h="100%"
-                    flexDirection="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    // boxSizing="border-box"
-                    // px={{ base: '8', sm: 0, lg: 0 }}
-                  >
-                    <LogCard log={log} />
-                  </Flex>
+                  <LogCard log={log} key={index} group_id={group_id} />
                 ))}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>

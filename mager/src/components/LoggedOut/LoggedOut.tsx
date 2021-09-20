@@ -46,7 +46,7 @@ const LoggedOut: React.FC = () => {
         </Flex>
       </VStack>
       <Box
-        id="mingi box"
+        id="whitespace box"
         display={{ base: 'none', md: 'block' }}
         w={{ sm: '2rem', md: '2rem', lg: '4rem', xl: '7rem' }}
       ></Box>

@@ -7,6 +7,7 @@ import {
 import AddLog from './AddLog';
 
 import CreateGroup from './CreateGroup/CreateGroup';
+import EditLog from './EditLog';
 import Error from './Error';
 import ForgotPassword from './ForgotPassword';
 import GroupPage from './Group';
@@ -45,6 +46,11 @@ const Router: React.FC = () => {
         exact
         path="/group/:group_id/add-log"
         component={AddLog}
+      />
+      <DefaultPrivateLayoutRoute
+        exact
+        path="/group/:group_id/log/:log_id"
+        component={EditLog}
       />
       <DefaultLayoutRoute component={Error} />
     </Switch>

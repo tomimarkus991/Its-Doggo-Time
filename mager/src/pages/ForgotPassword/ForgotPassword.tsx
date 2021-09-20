@@ -1,17 +1,8 @@
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  HStack,
-  Input,
-  VStack,
-} from '@chakra-ui/react';
+import { Center, Grid, Heading, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import ForgotPasswordAlert from '../../components/Alerts/ForgotPasswordAlert';
 import { GradientButton } from '../../components/Buttons';
 import { BackIcon } from '../../components/Icons/LightMode';
-import { MainLayout2 } from '../../components/Layouts';
 import { GradientButtonText } from '../../components/Text';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -44,78 +35,57 @@ const ForgotPassword: React.FC = () => {
     }
   };
   return (
-    <MainLayout2
-      leftSide={
-        <Flex
-          display={{ base: 'none', lg: 'block' }}
-          justifyContent="flex-end"
-          mt="2.8rem"
+    <Grid h="90%" templateRows="0.4fr 1fr">
+      <Center id="heading & back" w={{ base: 'xs', sm: 'md' }} m="auto">
+        <Grid
+          flex={1}
+          templateColumns="0.1fr 1fr"
+          justifyContent="center"
+          alignItems="center"
         >
           <BackIcon />
-        </Flex>
-      }
-      middle={
-        <Box mt="8">
-          <HStack justifyContent="center" mb="12">
-            <Box display={{ base: 'block', lg: 'none' }}>
-              <BackIcon pr={{ base: '0', sm: '4' }} />
-            </Box>
-            <Heading
-              textAlign="center"
-              fontSize={{
-                base: '1.5rem',
-                base2: '1.7rem',
-                sm: '4xl',
-                md: '2.5rem',
-                lg: '5xl',
-              }}
-              pr={{ base: '8', sm: '0' }}
-            >
-              Reset Your Password
-            </Heading>
-          </HStack>
-          {isEmailSent ? (
-            <ForgotPasswordAlert />
-          ) : (
-            <Center
-              layerStyle="shadow-and-bg"
-              bg="white"
-              h="xs"
-              w={{ base: 'xs', sm: 'md' }}
-              borderRadius={20}
-              m="auto"
-            >
-              <VStack spacing={5} w="xs">
-                <Input
-                  variant={'removeDefault'}
-                  autoCapitalize="off"
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  size="lg"
-                  fontSize="2xl"
-                  maxW={{ base: '16rem', sm: '20rem' }}
-                  borderRadius="25"
-                  isInvalid={isAuthError}
-                />
+          <Heading fontSize="4xl" textAlign="center">
+            Reset Password
+          </Heading>
+        </Grid>
+      </Center>
+      {isEmailSent ? (
+        <ForgotPasswordAlert />
+      ) : (
+        <Center
+          layerStyle="shadow-and-bg"
+          bg="white"
+          h="xs"
+          w={{ base: 'xs', sm: 'md' }}
+          borderRadius={20}
+          m="auto"
+        >
+          <VStack spacing={5} w="xs">
+            <Input
+              variant={'removeDefault'}
+              autoCapitalize="off"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              size="lg"
+              fontSize="2xl"
+              maxW={{ base: '16rem', sm: '20rem' }}
+              borderRadius="25"
+              isInvalid={isAuthError}
+            />
 
-                <GradientButton
-                  onClick={sendResetPassword}
-                  isLoading={isLoading}
-                  loadingText="Sending"
-                >
-                  <GradientButtonText fontSize={25}>
-                    Send
-                  </GradientButtonText>
-                </GradientButton>
-              </VStack>
-            </Center>
-          )}
-        </Box>
-      }
-      rightSide={null}
-    />
+            <GradientButton
+              onClick={sendResetPassword}
+              isLoading={isLoading}
+              loadingText="Sending"
+            >
+              <GradientButtonText fontSize={25}>Send</GradientButtonText>
+            </GradientButton>
+          </VStack>
+        </Center>
+      )}
+    </Grid>
   );
 };
 export default ForgotPassword;

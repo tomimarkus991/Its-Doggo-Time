@@ -8,11 +8,7 @@ import AvatarUpload from '../../Avatar/AvatarUpload';
 import { AddLogCheckboxIcon } from '../../Icons/Logs';
 import MainContainerLayout from '../../Layouts/Containers/MainContainerLayout';
 
-interface Props {
-  isLoading: boolean;
-}
-
-const CreateGroupContainer: React.FC<Props> = ({ isLoading }) => {
+const CreateGroupContainer: React.FC = () => {
   const [group_name, setGroupname] = useState<StringOrUndefined>();
   const [group_avatar_url, setGroupAvatarUrl] =
     useState<StringOrUndefined>();
@@ -60,11 +56,11 @@ const CreateGroupContainer: React.FC<Props> = ({ isLoading }) => {
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'xs' }}
-      isLoading={isLoading}
+      mainH={{ base: 'xs', md: 'sm' }}
+      isLoading={false}
       containerProps={{
         w: { base: 'xs', sm: 'sm', lg: 'md' },
-        h: { base: 'xs', lg: 'md' },
+        h: { base: 'xs', md: 'sm' },
       }}
       button={
         <IconButton
@@ -87,7 +83,7 @@ const CreateGroupContainer: React.FC<Props> = ({ isLoading }) => {
         />
       }
     >
-      <VStack pb="20" spacing={4} minW="16rem">
+      <VStack pb="12" spacing={4} minW="16rem">
         <AvatarUpload
           onUpload={(url: string) => {
             setGroupAvatarUrl(url);

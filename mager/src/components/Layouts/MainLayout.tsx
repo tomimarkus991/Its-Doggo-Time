@@ -39,7 +39,9 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       </VStack>
 
       <GridItem id="middle" gridArea="middle">
-        {middle}
+        <VStack id="5" h="100%">
+          {middle}
+        </VStack>
       </GridItem>
       <HStack
         id="rightSide"

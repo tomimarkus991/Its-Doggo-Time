@@ -1,11 +1,17 @@
-import { Center, Grid, Heading, HStack, VStack } from '@chakra-ui/react';
+import { Box, Center, Grid, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AvatarGroup } from '../../components/Avatar';
 import { AddLogContainer } from '../../components/Containers';
-import { DoggoIcon } from '../../components/Icons/Doggo';
+import { Name } from '../../components/Headers';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+} from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
+import Skeleton from '../../components/Skeleton';
 import { GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -15,7 +21,6 @@ interface RouteParams {
 
 const AddLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-  // const { user } = useAuth();
 
   const [groupdata, setGroupdata] = useState<GroupPageDataType>();
   const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
@@ -54,38 +59,57 @@ const AddLog: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <>
-          <Center display={{ base: 'flex', lg: 'none' }} w="100%">
-            <DoggoIcon
-              display={{ sm: 'initial', lg: 'none' }}
-              fontSize={{ sm: '10rem' }}
+        <Skeleton
+          isLoading={isGroupdataLoading}
+          props={{
+            borderRadius: 50,
+            w: '100%',
+          }}
+        >
+          <HeaderAvatar>
+            <NameAndAvatar
+              title={groupdata?.group_name}
+              avatar_url={groupdata?.avatar_url}
+              avatar="Group"
             />
-          </Center>
-        </>
+          </HeaderAvatar>
+        </Skeleton>
       }
       middle={
-        <VStack id="5" h="100%">
-          <Grid
-            h="100%"
-            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+        <Grid
+          h={{ base: '100%', sm: '90%' }}
+          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
+        >
+          <Center
+            flexDirection="row"
+            display={{ base: 'flex', sm: 'none' }}
           >
-            <Center>
-              <HStack position="relative">
-                <BackIcon
-                  position="absolute"
-                  left={{ base: '-170%', md: '-270%', lg: '-370%' }}
-                />
-                <Heading fontSize={{ base: '3xl', sm: '4xl' }}>
-                  ADD
-                </Heading>
-              </HStack>
-            </Center>
-            <AddLogContainer
-              groupdata={groupdata}
-              isLoading={isGroupdataLoading}
+            <Box mr={2}>
+              <AvatarGroup src={groupdata?.avatar_url} />
+            </Box>
+
+            <Name
+              title={groupdata?.group_name}
+              textProps={{
+                fontSize: '4xl',
+              }}
             />
-          </Grid>
-        </VStack>
+          </Center>
+          <Center>
+            <Grid
+              flex={1}
+              templateColumns="0.1fr 1fr"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <BackIcon />
+              <Heading fontSize="4xl" textAlign="center">
+                Add Log
+              </Heading>
+            </Grid>
+          </Center>
+          <AddLogContainer />
+        </Grid>
       }
       rightSide={<ProfileAndMyGroups />}
     />

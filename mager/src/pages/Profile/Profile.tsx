@@ -1,15 +1,21 @@
 import {
   Box,
+  Center,
   Grid,
   Heading,
   HStack,
+  IconButton,
   Input,
   VStack,
 } from '@chakra-ui/react';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AvatarProfile } from '../../components/Avatar';
 import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
 import { GradientButton } from '../../components/Buttons';
+import EditButtons from '../../components/Buttons/EditButtons';
 import ColorMode from '../../components/ColorMode';
 import { Name } from '../../components/Headers';
 import Invites from '../../components/Invites';
@@ -19,6 +25,7 @@ import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
 import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
+import useColors from '../../hooks/useColors';
 import useToast from '../../hooks/useToast';
 import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -37,61 +44,8 @@ const Profile: React.FC = () => {
   const { showToast } = useToast();
   // const [areInvitesLoading, setAreInvitesLoading] =
   //   useState<boolean>(true);
-
-  const updateProfile = async (username: StringOrUndefined) => {
-    try {
-      setIsLoading(true);
-
-      const profile_updates = {
-        id: user?.id,
-        username,
-        updated_at: new Date(),
-      };
-
-      // update username
-      await supabase.from('profiles').upsert(profile_updates, {
-        returning: 'minimal',
-      });
-
-      // update all receivers usernames
-      await supabase
-        .from('invites')
-        .update(
-          { receiver: username },
-          {
-            returning: 'minimal',
-          },
-        )
-        .eq('receiver', old_username);
-
-      // update all senders usernames
-      await supabase
-        .from('invites')
-        .update(
-          { sender: username },
-          {
-            returning: 'minimal',
-          },
-        )
-        .eq('sender', old_username);
-    } catch (error) {
-      if (error instanceof Error) {
-        if (
-          !error.message.includes(
-            'JSON.parse: unexpected end of data at line 1 column 1 of the JSON data',
-          )
-        ) {
-          alert(error);
-        }
-      }
-    } finally {
-      setIsLoading(false);
-      showToast({
-        title: 'Profile Updated',
-        description: 'Your Profile has been updated.',
-      });
-    }
-  };
+  const [isEditable, setIsEditable] = useState(false);
+  const { penColor } = useColors();
 
   const updateAvatar = async (avatar_url: StringOrUndefined) => {
     try {
@@ -116,6 +70,55 @@ const Profile: React.FC = () => {
       showToast({
         title: 'Photo Updated',
         description: 'Your Profile Photo has been updated.',
+      });
+    }
+  };
+
+  const cancelSave = () => {
+    setUsername(old_username);
+    setIsEditable(false);
+  };
+  const submitSave = async () => {
+    setIsEditable(false);
+    const profile_updates = {
+      id: user?.id,
+      username,
+      updated_at: new Date(),
+    };
+
+    try {
+      // update username
+      await supabase.from('profiles').upsert(profile_updates, {
+        returning: 'minimal',
+      });
+      // update all receivers usernames
+      await supabase
+        .from('invites')
+        .update(
+          { receiver: username },
+          {
+            returning: 'minimal',
+          },
+        )
+        .eq('receiver', old_username);
+
+      // update all senders usernames
+      await supabase
+        .from('invites')
+        .update(
+          { sender: username },
+          {
+            returning: 'minimal',
+          },
+        )
+        .eq('sender', old_username);
+      setOldUsername(username);
+    } catch (error) {
+      throw error;
+    } finally {
+      showToast({
+        title: 'Group Updated',
+        description: 'Your Group has been updated.',
       });
     }
   };
@@ -164,103 +167,141 @@ const Profile: React.FC = () => {
           }}
         >
           <HeaderAvatar>
-            <Box mr={{ sm: '6', lg: '0' }}>
-              <AvatarUpload
-                onUpload={(url: string) => {
-                  setAvatarUrl(url);
-                  updateAvatar(url);
-                }}
-                avatar_url={avatar_url}
-                avatar="User"
-              />
-            </Box>
-            <Name
-              title={username}
-              textProps={{
-                fontSize: { sm: '4xl', md: '5xl' },
-              }}
-            />
+            {isEditable ? (
+              <VStack>
+                <AvatarUpload
+                  onUpload={(url: string) => {
+                    setAvatarUrl(url);
+                    updateAvatar(url);
+                  }}
+                  avatar_url={avatar_url}
+                  avatar="User"
+                />
+                <VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    onChange={e => setUsername(e.target.value)}
+                    value={username}
+                    isDisabled={!isEditable}
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    mt="4"
+                    bg="white"
+                    width={{ base: '3xs', xl: '2xs' }}
+                  />
+                </VStack>
+              </VStack>
+            ) : (
+              <VStack flexDirection={{ sm: 'row', lg: 'column' }}>
+                <Box mr={{ sm: 4, md: 6, lg: 0 }}>
+                  <AvatarProfile src={avatar_url} />
+                </Box>
+                <HStack flex={1}>
+                  <Name
+                    title={username}
+                    textProps={{
+                      fontSize: { sm: '4xl', md: '5xl' },
+                    }}
+                  />
+                </HStack>
+              </VStack>
+            )}
           </HeaderAvatar>
         </Skeleton>
       }
       middle={
-        <VStack
-          id="5"
-          justifyContent="center"
-          alignItems="center"
-          h={{ base: '100%' }}
+        <Grid
+          h={{ base: '100%', sm: '90%' }}
+          templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          justifyContent={{ base: 'center', lg: 'normal' }}
+          alignItems={{ base: 'center', lg: 'normal' }}
         >
-          <Grid
-            h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          <HStack
+            display={{ base: 'flex', sm: 'none' }}
+            my="4"
+            justifyContent="center"
+            alignItems="center"
           >
-            <HStack
-              justifyContent={{ base: 'center', sm: 'flex-start' }}
-              flexDirection={{ base: 'column', sm: 'row' }}
-              alignItems="center"
-              display={{ base: 'flex', sm: 'none' }}
-              mt={{ base: 12, sm: 0 }}
-              mb={{ base: 10, sm: 0 }}
-            >
-              {/* <AvatarProfile src={avatar_url as string} /> */}
-              <AvatarUpload
-                onUpload={(url: string) => {
-                  setAvatarUrl(url);
-                  updateAvatar(url);
-                }}
-                avatar_url={avatar_url}
-                avatar="User"
-              />
-              <Name title={username} />
-            </HStack>
-            <Heading
-              display={{ base: 'none', sm: 'initial' }}
-              textAlign="center"
-              fontSize={{ base: '4xl', sm: '4xl' }}
-              mb={{ base: 4, sm: 0 }}
-            >
-              My Profile
-            </Heading>
+            {isEditable ? (
+              <VStack>
+                <AvatarUpload
+                  onUpload={(url: string) => {
+                    setAvatarUrl(url);
+                    updateAvatar(url);
+                  }}
+                  avatar_url={avatar_url}
+                  avatar="User"
+                />
+                <VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    onChange={e => setUsername(e.target.value)}
+                    value={username}
+                    isDisabled={!isEditable}
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    mt="4"
+                    bg="white"
+                    width={{ base: '3xs', xl: '2xs' }}
+                  />
+                </VStack>
+              </VStack>
+            ) : (
+              <VStack>
+                <AvatarProfile src={avatar_url} />
+                <HStack flex={1}>
+                  <Name title={username} />
+                </HStack>
+              </VStack>
+            )}
+          </HStack>
+          <Center display={{ base: 'none', sm: 'flex' }}>
+            <Heading fontSize="4xl">My Profile</Heading>
+          </Center>
+          <Center>
             <VStack
               layerStyle="shadow-and-bg"
-              h="sm"
-              w={{ base: 'sm', md: 'md', lg: 'lg', xl: 'xl' }}
+              h="xs"
+              w={{ base: 'xs', sm: 'sm', md: 'md' }}
               borderRadius={20}
               justifyContent="center"
             >
               <VStack w="xs">
-                <Skeleton
-                  isLoading={isUserdataLoading}
-                  props={{ borderRadius: 100 }}
-                >
-                  <Input
-                    variant={'removeDefault'}
-                    autoCapitalize="off"
-                    value={username || ''}
-                    onChange={e => setUsername(e.target.value)}
-                    size="lg"
-                    fontSize="2xl"
-                    borderRadius="25"
-                    maxLength={12}
-                    placeholder="Nickname"
+                {isEditable ? (
+                  <EditButtons
+                    buttonGroupProps={{
+                      mt: { base: 0, sm: '2' },
+                      alignItems: 'center',
+                      size: 'sm',
+                    }}
+                    onCrossClick={cancelSave}
+                    onCheckClick={submitSave}
                   />
-                </Skeleton>
+                ) : (
+                  <IconButton
+                    onClick={() => setIsEditable(true)}
+                    aria-label="Edit"
+                    bgColor="transparent"
+                    _hover={{ bgColor: 'transparent' }}
+                    icon={
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        size={'lg'}
+                        color={penColor}
+                      />
+                    }
+                  />
+                )}
                 {/* Toggle Color Mode */}
                 <Box pt="10">
                   <ColorMode />
                 </Box>
-                {/* Update & Sign out */}
+                {/*  Sign out */}
                 <HStack spacing="8" pt="8">
-                  <GradientButton
-                    onClick={() => updateProfile(username)}
-                    isLoading={isLoading}
-                    loadingText="Updating"
-                  >
-                    <GradientButtonText fontSize={20}>
-                      Update
-                    </GradientButtonText>
-                  </GradientButton>
-
                   <GradientButton
                     onClick={async () => {
                       router.push('/');
@@ -276,8 +317,8 @@ const Profile: React.FC = () => {
                 </HStack>
               </VStack>
             </VStack>
-          </Grid>
-        </VStack>
+          </Center>
+        </Grid>
       }
       rightSide={
         <>

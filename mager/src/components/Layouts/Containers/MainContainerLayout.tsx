@@ -17,27 +17,29 @@ const MainContainerLayout: React.FC<Props> = ({
   containerProps,
 }) => {
   return (
-    <VStack id="7" h={mainH}>
-      <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
-        <Center
-          {...containerProps}
-          id="9"
-          layerStyle="shadow-and-bg"
-          position="relative"
-          mb="1em"
-          borderRadius={20}
-        >
-          {children}
-          <Box
-            position="absolute"
-            right={{ base: '+50', md: '-10' }}
-            bottom={{ base: '-10', md: '-10' }}
+    <Center id="7">
+      <VStack h={mainH}>
+        <Skeleton isLoading={isLoading} props={{ borderRadius: 20 }}>
+          <Center
+            {...containerProps}
+            id="9"
+            layerStyle="shadow-and-bg"
+            position="relative"
+            mb="1em"
+            borderRadius={20}
           >
-            {button}
-          </Box>
-        </Center>
-      </Skeleton>
-    </VStack>
+            {children}
+            <Box
+              position="absolute"
+              right={{ base: '+50', md: '-10' }}
+              bottom={{ base: '-10', md: '-10' }}
+            >
+              {button}
+            </Box>
+          </Center>
+        </Skeleton>
+      </VStack>
+    </Center>
   );
 };
 export default MainContainerLayout;

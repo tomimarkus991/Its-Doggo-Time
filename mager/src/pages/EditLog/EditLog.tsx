@@ -1,7 +1,8 @@
 import { Box, Center, Grid, Heading } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { AvatarProfile } from '../../components/Avatar';
-import CreateGroupContainer from '../../components/Containers/CreateGroupContainer';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { AvatarGroup } from '../../components/Avatar';
+import { AddLogContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
@@ -11,68 +12,65 @@ import {
 } from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
-import { useAuth } from '../../context/authContext/AuthContext';
-import { ProfileType, StringOrUndefined } from '../../types';
+import { GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-interface Props {}
+interface RouteParams {
+  group_id: string;
+}
 
-const CreateGroup: React.FC<Props> = () => {
-  const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
+const EditLog: React.FC = () => {
+  const { group_id } = useParams<RouteParams>();
 
-  const [username, setUsername] = useState<StringOrUndefined>();
-  const [isUserdataLoading, setIsUserdataLoading] =
-    useState<boolean>(true);
-
-  const { user } = useAuth();
+  const [groupdata, setGroupdata] = useState<GroupPageDataType>();
+  const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserdata = async () => {
+    const fetchGroupData = async () => {
       try {
-        setIsUserdataLoading(true);
-        let { data } = await supabase
-          .from('profiles')
+        setIsGroupdataLoading(true);
+        let { data, error } = await supabase
+          .from('groups')
           .select(
             `
             id,
-            username,
+            group_name,
             avatar_url
         `,
           )
-          .eq('id', user?.id)
+          .eq('id', group_id)
           .single();
 
-        const _userdata: ProfileType = data;
+        let _groupData: GroupPageDataType = data;
 
-        if (_userdata === null) return <Box>No data</Box>;
+        setGroupdata(_groupData);
 
-        const { username, avatar_url } = _userdata;
-
-        setUsername(username);
-        setAvatarUrl(avatar_url);
-        return <Box>Error</Box>;
+        if (error) throw error.message;
+      } catch (error) {
+        throw error;
       } finally {
-        setIsUserdataLoading(false);
+        setIsGroupdataLoading(false);
       }
     };
-    fetchUserdata();
+
+    fetchGroupData();
   }, []);
 
   return (
     <MainLayout
       leftSide={
         <Skeleton
-          isLoading={isUserdataLoading}
+          isLoading={isGroupdataLoading}
           props={{
-            borderRadius: 100,
-            w: { sm: '95%', md: '90%', lg: 'initial' },
+            borderRadius: 50,
+            w: '100%',
           }}
         >
           <HeaderAvatar>
             <NameAndAvatar
-              title={username}
-              avatar_url={avatar_url}
-              avatar="User"
+              title={groupdata?.group_name}
+              avatar_url={groupdata?.avatar_url}
+              avatar="Group"
             />
           </HeaderAvatar>
         </Skeleton>
@@ -87,11 +85,11 @@ const CreateGroup: React.FC<Props> = () => {
             display={{ base: 'flex', sm: 'none' }}
           >
             <Box mr={2}>
-              <AvatarProfile src={avatar_url} />
+              <AvatarGroup src={groupdata?.avatar_url} />
             </Box>
 
             <Name
-              title={username}
+              title={groupdata?.group_name}
               textProps={{
                 fontSize: '4xl',
               }}
@@ -106,16 +104,15 @@ const CreateGroup: React.FC<Props> = () => {
             >
               <BackIcon />
               <Heading fontSize="4xl" textAlign="center">
-                Create a group
+                Edit Log
               </Heading>
             </Grid>
           </Center>
-
-          <CreateGroupContainer />
+          <AddLogContainer />
         </Grid>
       }
       rightSide={<ProfileAndMyGroups />}
     />
   );
 };
-export default CreateGroup;
+export default EditLog;

@@ -1,34 +1,18 @@
-import {
-  Box,
-  HStack,
-  IconButton,
-  useCheckboxGroup,
-  VStack,
-} from '@chakra-ui/react';
+import { HStack, IconButton, useCheckboxGroup } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext/AuthContext';
-import { CreateLogsdataType, GroupPageDataType } from '../../types';
+import { CreateLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { AvatarInvite } from '../Avatar';
 import { CheckboxCard } from '../Cards';
-import { Name } from '../Headers';
 import { AddLogCheckboxIcon } from '../Icons/Logs';
 import MainContainerLayout from '../Layouts/Containers';
-
-interface Props {
-  groupdata: GroupPageDataType | undefined;
-  isLoading: boolean;
-}
 
 interface RouteParams {
   group_id: string;
 }
 
-export const AddLogContainer: React.FC<Props> = ({
-  groupdata,
-  isLoading,
-}) => {
+export const AddLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
@@ -74,11 +58,11 @@ export const AddLogContainer: React.FC<Props> = ({
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'sm', lg: 'lg' }}
-      isLoading={isLoading}
+      mainH={{ base: 'sm' }}
+      isLoading={false}
       containerProps={{
-        w: { base: 'xs', sm: 'sm', md: 'lg', lg: '2xl' },
-        h: { base: 'sm', lg: 'md' },
+        w: { base: 'xs', sm: 'sm' },
+        h: { base: 'sm' },
       }}
       button={
         <IconButton
@@ -101,24 +85,16 @@ export const AddLogContainer: React.FC<Props> = ({
         />
       }
     >
-      <VStack flex={1} spacing={0}>
-        <AvatarInvite src={groupdata?.avatar_url as string} />
-        <Name title={groupdata?.group_name} textProps={{ fontSize: 30 }} />
-        <Box>
-          <VStack mt={4}>
-            <HStack>
-              {businesses.map(business => {
-                const checkbox = getCheckboxProps({ value: business });
-                return (
-                  <CheckboxCard key={business} {...checkbox}>
-                    {business}
-                  </CheckboxCard>
-                );
-              })}
-            </HStack>
-          </VStack>
-        </Box>
-      </VStack>
+      <HStack>
+        {businesses.map(business => {
+          const checkbox = getCheckboxProps({ value: business });
+          return (
+            <CheckboxCard key={business} {...checkbox}>
+              {business}
+            </CheckboxCard>
+          );
+        })}
+      </HStack>
     </MainContainerLayout>
   );
 };

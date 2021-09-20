@@ -1,11 +1,4 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Spacer,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Center, Grid, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
@@ -19,9 +12,9 @@ import { supabase } from '../../utils/supabaseClient';
 import { AvatarProfile } from '../Avatar';
 import { GroupsContainer } from '../Containers';
 import { Name } from '../Headers';
-import { DoggoIcon } from '../Icons/Doggo';
 import Invites from '../Invites';
 import MainLayout from '../Layouts/MainLayout';
+import { HeaderAvatar, NameAndAvatar } from '../Layouts/Profile';
 import { ProfileLink } from '../Links';
 import Skeleton from '../Skeleton';
 
@@ -122,57 +115,46 @@ const LoggedIn: React.FC = () => {
             w: { sm: '95%', md: '90%', lg: 'initial' },
           }}
         >
-          <Flex
-            id="flex1"
-            flexDirection={{ sm: 'row', lg: 'column' }}
-            mx={{ sm: '6', lg: 'none' }}
-            mt={{ sm: '6', lg: 'none' }}
-            justifyContent={{ sm: 'flex-start' }}
-            alignItems={{ sm: 'center', lg: 'flex-end' }}
-          >
-            <Flex
-              id="flex2"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection={{ base: 'row', lg: 'column' }}
-            >
-              <Box mr={{ sm: '6', lg: '0' }}>
-                <AvatarProfile src={avatar_url as string} />
-              </Box>
-              <Name title={username} />
-            </Flex>
-            <Spacer display={{ sm: 'block', lg: 'none' }} />
-            <DoggoIcon
-              display={{ sm: 'block', lg: 'none' }}
-              fontSize={{ sm: '10rem' }}
+          <HeaderAvatar>
+            <NameAndAvatar
+              title={username}
+              avatar_url={avatar_url}
+              avatar="User"
             />
-          </Flex>
+          </HeaderAvatar>
         </Skeleton>
       }
       middle={
-        <VStack
-          id="5"
-          justifyContent="center"
-          alignItems="center"
-          h={{ base: '100%' }}
+        <Grid
+          h={{ base: '100%', sm: '90%' }}
+          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
         >
-          <Grid
-            h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          <Center
+            flexDirection="row"
+            display={{ base: 'flex', sm: 'none' }}
           >
-            <VStack justifyContent="center" alignItems="center">
-              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
-                Groups
-              </Heading>
-            </VStack>
+            <Box mr={2}>
+              <AvatarProfile src={avatar_url} />
+            </Box>
 
-            <GroupsContainer
-              userGroups={groups}
-              isLoading={isUserdataLoading}
-              username={username}
+            <Name
+              title={username}
+              textProps={{
+                fontSize: '4xl',
+              }}
             />
-          </Grid>
-        </VStack>
+          </Center>
+
+          <Center>
+            <Heading fontSize="4xl">Groups</Heading>
+          </Center>
+
+          <GroupsContainer
+            userGroups={groups}
+            isLoading={isUserdataLoading}
+            username={username}
+          />
+        </Grid>
       }
       rightSide={
         <>

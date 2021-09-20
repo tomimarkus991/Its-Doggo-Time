@@ -1,7 +1,8 @@
 import {
+  Box,
+  Center,
   Grid,
   Heading,
-  HStack,
   IconButton,
   Input,
   Modal,
@@ -12,14 +13,15 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MembersAlert from '../../components/Alerts/MembersAlert';
+import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import LeaveGroupButton from '../../components/Buttons/LeaveGroupButton';
 import { MembersContainer } from '../../components/Containers';
+import { Name } from '../../components/Headers';
 import { AddMemberIcon } from '../../components/Icons/Doggo';
 import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
@@ -197,7 +199,7 @@ const Members: React.FC = () => {
           <HeaderAvatar>
             <NameAndAvatar
               title={group_name}
-              avatar_url={group_avatar_url as string}
+              avatar_url={group_avatar_url}
               avatar="Group"
             />
           </HeaderAvatar>
@@ -209,100 +211,114 @@ const Members: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <VStack
-          id="5"
-          justifyContent="center"
-          alignItems="center"
-          h={{ base: '100%' }}
+        <Grid
+          h={{ base: '100%', sm: '90%' }}
+          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
+          justifyContent={{ base: 'center', lg: 'normal' }}
+          alignItems={{ base: 'center', lg: 'normal' }}
         >
-          <Grid
-            h={{ base: '100%' }}
-            templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
+          <Center
+            flexDirection="row"
+            display={{ base: 'flex', sm: 'none' }}
           >
-            <HStack
+            <Box mr={2}>
+              <AvatarGroup src={group_avatar_url} />
+            </Box>
+
+            <Name
+              title={group_name}
+              textProps={{
+                fontSize: '4xl',
+              }}
+            />
+          </Center>
+
+          <Center>
+            <Grid
+              flex={1}
+              templateColumns="0.1fr 1fr"
               justifyContent="center"
               alignItems="center"
-              position="relative"
             >
-              <BackIcon position="absolute" left={10} />
-              <Heading fontSize={{ base: '4xl', sm: '4xl' }}>
+              <BackIcon />
+              <Heading fontSize="4xl" textAlign="center">
                 Members
               </Heading>
-            </HStack>
-            <MembersContainer
-              members={profiles}
-              isEditable={isEditable}
-              setIsEditable={setIsEditable}
-              group_id={group_id}
-              creator_id={creator_id}
-              isLoading={isGroupdataLoading}
-              AddNewMember={
-                <>
-                  <IconButton
-                    onClick={onOpen}
-                    aria-label="Add new member"
-                    w="100%"
-                    h="100%"
-                    borderRadius="100"
-                    isDisabled={isAddMemberDisabled}
-                    bgColor="transparent"
-                    _hover={{ bgColor: 'transparent' }}
-                    icon={
-                      <AddMemberIcon
-                        fontSize={{
-                          base: '5rem',
-                          md: '7rem',
-                        }}
+            </Grid>
+          </Center>
+          <MembersContainer
+            members={profiles}
+            isEditable={isEditable}
+            setIsEditable={setIsEditable}
+            group_id={group_id}
+            creator_id={creator_id}
+            isLoading={isGroupdataLoading}
+            AddNewMember={
+              <>
+                <IconButton
+                  onClick={onOpen}
+                  aria-label="Add new member"
+                  w="100%"
+                  h="100%"
+                  borderRadius="100"
+                  isDisabled={isAddMemberDisabled}
+                  bgColor="transparent"
+                  _hover={{ bgColor: 'transparent' }}
+                  icon={
+                    <AddMemberIcon
+                      fontSize={{
+                        base: '5rem',
+                        md: '7rem',
+                      }}
+                    />
+                  }
+                />
+                <Modal
+                  isOpen={isOpen}
+                  onClose={() => {
+                    onClose();
+                    setIsInvalid(false);
+                  }}
+                  size="sm"
+                >
+                  <ModalOverlay />
+                  <ModalContent bg={defaultColor} borderRadius={20}>
+                    <ModalHeader
+                      textTransform="uppercase"
+                      textAlign="center"
+                    >
+                      Add a member
+                    </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      {isInvalid ? <MembersAlert /> : null}
+
+                      <Input
+                        variant={'removeDefault'}
+                        autoCapitalize="off"
+                        isInvalid={isInvalid}
+                        errorBorderColor="crimson"
+                        placeholder="Nickname"
+                        borderRadius={20}
+                        size="lg"
+                        fontSize="2xl"
+                        onChange={e => setInviteReceiver(e.target.value)}
                       />
-                    }
-                  />
-                  <Modal
-                    isOpen={isOpen}
-                    onClose={() => {
-                      onClose();
-                      setIsInvalid(false);
-                    }}
-                    size="sm"
-                  >
-                    <ModalOverlay />
-                    <ModalContent bg={defaultColor} borderRadius={20}>
-                      <ModalHeader
-                        textTransform="uppercase"
-                        textAlign="center"
-                      >
-                        Add a member
-                      </ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>
-                        {isInvalid ? <MembersAlert /> : null}
+                    </ModalBody>
 
-                        <Input
-                          variant={'removeDefault'}
-                          autoCapitalize="off"
-                          isInvalid={isInvalid}
-                          errorBorderColor="crimson"
-                          placeholder="Nickname"
-                          borderRadius={20}
-                          size="lg"
-                          fontSize="2xl"
-                          onChange={e => setInviteReceiver(e.target.value)}
-                        />
-                      </ModalBody>
-
-                      <ModalFooter>
-                        <GradientButton onClick={sendInvite}>
-                          <GradientButtonText fontSize={25}>
-                            Invite
-                          </GradientButtonText>
-                        </GradientButton>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
-                </>
-              }
-            />
-          </Grid>
-        </VStack>
+                    <ModalFooter>
+                      <GradientButton onClick={sendInvite}>
+                        <GradientButtonText fontSize={25}>
+                          Invite
+                        </GradientButtonText>
+                      </GradientButton>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </>
+            }
+          />
+        </Grid>
       }
       rightSide={<ProfileAndMyGroups />}
     />

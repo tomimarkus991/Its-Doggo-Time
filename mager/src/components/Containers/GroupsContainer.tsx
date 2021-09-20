@@ -76,9 +76,7 @@ export const GroupsContainer: React.FC<Props> = ({
       ) : (
         <SimpleGrid id="10" columns={{ base: 2 }} spacing={10}>
           {userGroups.map((group: GroupType, index: number) => (
-            <Box key={index}>
-              <GroupCard group={group} />
-            </Box>
+            <GroupCard group={group} key={index} />
           ))}
           {placeholders?.map((_, index: number) => (
             <Box key={index}>

@@ -5,12 +5,12 @@ export const HeaderAvatar: React.FC = ({ children }) => {
   return (
     <Flex
       id="flex1"
-      flexDirection={{ sm: 'row', lg: 'column' }}
       mx={{ sm: '6', lg: 'none' }}
       mt={{ sm: '6', lg: 'none' }}
+      minW="16rem"
       justifyContent={{ sm: 'flex-start', lg: 'center' }}
       alignItems="center"
-      minW="16rem"
+      flexDirection={{ sm: 'row', lg: 'column' }}
     >
       {children}
       <Spacer display={{ sm: 'initial', lg: 'none' }} />
