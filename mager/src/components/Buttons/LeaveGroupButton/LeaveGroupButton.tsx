@@ -25,9 +25,11 @@ const LeaveGroupButton: React.FC<Props> = ({
         {user_id !== creator_id ? (
           <Button
             onClick={leaveGroup}
+            bg="red.500"
             colorScheme="red"
             textTransform="uppercase"
             borderRadius="50"
+            color="white"
           >
             Leave group
           </Button>

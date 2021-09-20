@@ -21,9 +21,11 @@ const DeleteGroupButton: React.FC<Props> = ({
       {user_id === creator_id && isEditable ? (
         <Button
           onClick={deleteGroup}
+          bg="red.500"
           colorScheme="red"
           textTransform="uppercase"
           borderRadius="50"
+          color="white"
         >
           Delete group
         </Button>
