@@ -103,7 +103,7 @@ const RegisterAuth: React.FC = () => {
               name="username"
               autoCapitalize="off"
               type="text"
-              placeholder="Username"
+              placeholder="Nickname"
               value={username}
               onChange={handleChange}
               size="lg"

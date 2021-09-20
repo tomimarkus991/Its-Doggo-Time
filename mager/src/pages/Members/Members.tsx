@@ -281,7 +281,7 @@ const Members: React.FC = () => {
                           autoCapitalize="off"
                           isInvalid={isInvalid}
                           errorBorderColor="crimson"
-                          placeholder="Username"
+                          placeholder="Nickname"
                           borderRadius={20}
                           size="lg"
                           fontSize="2xl"

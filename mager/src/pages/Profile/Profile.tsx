@@ -242,7 +242,7 @@ const Profile: React.FC = () => {
                     fontSize="2xl"
                     borderRadius="25"
                     maxLength={12}
-                    placeholder="Username"
+                    placeholder="Nickname"
                   />
                 </Skeleton>
                 {/* Toggle Color Mode */}
