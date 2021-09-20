@@ -48,14 +48,13 @@ export const LogCard: React.FC<Props> = ({ log }) => {
       <Text
         textAlign="center"
         fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
+        minH="3rem"
       >
         {moment(created_at).local().calendar(null, {
           lastDay: '[Yesterday at] HH:mm',
           sameDay: '[Today at] HH:mm',
-          nextDay: '[Tomorrow at] HH:mm',
-          lastWeek: '[last] dddd [at] HH:mm',
-          nextWeek: 'dddd [at] HH:mm',
-          sameElse: 'DD.MM.YY [at] HH:mm',
+          lastWeek: 'DD.MM [at] HH:mm',
+          sameElse: 'DD.MM [at] HH:mm',
         })}
       </Text>
     </>

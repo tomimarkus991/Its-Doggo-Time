@@ -78,7 +78,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
 
   return (
     <MainContainerLayout
-      mainH="sm"
+      mainH={{ base: 'xs', sm: 'sm', md: 'md' }}
       isLoading={isLoading}
       button={
         <AddNewLogIconButton
@@ -105,7 +105,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
           lg: 'xl',
           xl: '2xl',
         },
-        h: { base: 'sm', lg: 'md' },
+        h: { base: '22rem', sm: 'sm', md: 'md' },
       }}
     >
       {isLoading ? null : (
@@ -127,7 +127,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
             <Center h="100%">
               <SimpleGrid
                 columns={2}
-                spacing={{ base: 0, lg: 10 }}
+                spacing={{ base: 2, lg: 10 }}
                 w={{
                   base: 'xs',
                   sm: 'sm',
@@ -136,8 +136,9 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                   lg: 'xl',
                   xl: '2xl',
                 }}
-                px={{ sm: '8', md: '12', lg: '16' }}
-                py={{ sm: '4', md: '6', lg: '8' }}
+                h={{ base: '22rem', sm: 'sm', md: 'md' }}
+                px={{ base: 4, md: 12, lg: 16 }}
+                py={{ base: 4, md: 6, lg: 8 }}
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
                   <Flex
@@ -147,6 +148,8 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                     flexDirection="column"
                     justifyContent="center"
                     alignItems="center"
+                    // boxSizing="border-box"
+                    // px={{ base: '8', sm: 0, lg: 0 }}
                   >
                     <LogCard log={log} />
                   </Flex>

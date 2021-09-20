@@ -230,10 +230,11 @@ const Group: React.FC = () => {
       middle={
         <VStack id="5" h="100%">
           <Grid
-            h="100%"
+            h={{ base: '100%', sm: 'unset' }}
             templateRows={{
               base: '0.4fr 0.1fr 1fr',
-              sm: '0.2fr 1fr',
+              sm: '0.1fr 1fr',
+              md: '0.2fr 1fr',
             }}
             justifyContent={{ base: 'center', lg: 'normal' }}
             alignItems={{ base: 'center', lg: 'normal' }}
@@ -300,7 +301,7 @@ const Group: React.FC = () => {
               spacing={10}
               justifyContent="center"
               alignItems="center"
-              py={{ base: '4', lg: '0' }}
+              py={{ base: '4', md: '0' }}
             >
               <Box
                 as={FontAwesomeIcon}
