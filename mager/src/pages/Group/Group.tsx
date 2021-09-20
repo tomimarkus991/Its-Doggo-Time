@@ -2,7 +2,6 @@ import {
   Box,
   Center,
   Flex,
-  Grid,
   HStack,
   Input,
   VStack,
@@ -190,7 +189,7 @@ const Group: React.FC = () => {
                       bg="white"
                       width={{ base: '3xs', xl: '2xs' }}
                     />
-                    {user?.id === creator_id && isEditable ? (
+                    {user?.id === creator_id ? (
                       <EditButtons
                         buttonGroupProps={{
                           mt: { base: 0, sm: '2' },
@@ -236,17 +235,8 @@ const Group: React.FC = () => {
         </Flex>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{
-            base: '0.4fr 0.1fr 1fr',
-            sm: '0.2fr 1fr',
-          }}
-        >
-          <Center
-            flexDirection="row"
-            display={{ base: 'flex', sm: 'none' }}
-          >
+        <>
+          <Flex flexDirection="row" display={{ base: 'flex', sm: 'none' }}>
             {isEditable ? (
               <HStack>
                 <AvatarUpload
@@ -262,7 +252,7 @@ const Group: React.FC = () => {
                     variant={'removeDefault'}
                     autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
-                    value={group_name as string}
+                    value={group_name}
                     isDisabled={!isEditable}
                     borderRadius="50"
                     fontSize="3xl"
@@ -271,7 +261,7 @@ const Group: React.FC = () => {
                     bg="white"
                     width={{ base: '3xs', xl: '2xs' }}
                   />
-                  {user?.id === creator_id && isEditable ? (
+                  {user?.id === creator_id ? (
                     <EditButtons
                       buttonGroupProps={{
                         mt: { base: 0, sm: '2' },
@@ -285,20 +275,30 @@ const Group: React.FC = () => {
                 </VStack>
               </HStack>
             ) : (
-              <HStack>
-                <AvatarGroup src={group_avatar_url} />
-                <HStack flex={1}>
-                  <Name title={group_name} />
-                  <EditGroupInfoButton
-                    user_id={user?.id}
-                    creator_id={creator_id}
-                    isEditable={isEditable}
-                    setIsEditable={setIsEditable}
-                  />
-                </HStack>
-              </HStack>
+              <Flex
+                flexDirection="row"
+                display={{ base: 'flex', sm: 'none' }}
+                alignItems="center"
+              >
+                <Box mr={2}>
+                  <AvatarGroup src={group_avatar_url} />
+                </Box>
+
+                <Name
+                  title={group_name}
+                  textProps={{
+                    fontSize: '4xl',
+                  }}
+                />
+                <EditGroupInfoButton
+                  user_id={user?.id}
+                  creator_id={creator_id}
+                  isEditable={isEditable}
+                  setIsEditable={setIsEditable}
+                />
+              </Flex>
             )}
-          </Center>
+          </Flex>
 
           <Center
             flexDirection="row"
@@ -342,7 +342,7 @@ const Group: React.FC = () => {
                 isEditable={isEditable}
               />
             </Flex> */}
-        </Grid>
+        </>
       }
       rightSide={
         <>

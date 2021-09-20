@@ -1,14 +1,12 @@
-import { Box, Center, Grid, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AvatarGroup } from '../../components/Avatar';
 import { AddLogContainer } from '../../components/Containers';
-import { Name } from '../../components/Headers';
-import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
+import PageHeaderBack from '../../components/Layouts/Pages/PageHeaderBack';
 import {
   HeaderAvatar,
   NameAndAvatar,
+  NameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
@@ -76,40 +74,17 @@ const AddLog: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
-        >
-          <Center
-            flexDirection="row"
-            display={{ base: 'flex', sm: 'none' }}
-          >
-            <Box mr={2}>
-              <AvatarGroup src={groupdata?.avatar_url} />
-            </Box>
+        <>
+          <NameAndAvatarMiddle
+            name={groupdata?.group_name}
+            avatar_url={groupdata?.avatar_url}
+            avatar="Group"
+          />
 
-            <Name
-              title={groupdata?.group_name}
-              textProps={{
-                fontSize: '4xl',
-              }}
-            />
-          </Center>
-          <Center>
-            <Grid
-              flex={1}
-              templateColumns="0.1fr 1fr"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <BackIcon />
-              <Heading fontSize="4xl" textAlign="center">
-                Add Log
-              </Heading>
-            </Grid>
-          </Center>
+          <PageHeaderBack>Add Log</PageHeaderBack>
+
           <AddLogContainer />
-        </Grid>
+        </>
       }
       rightSide={<ProfileAndMyGroups />}
     />

@@ -1,8 +1,6 @@
 import {
   Box,
-  Center,
-  Grid,
-  Heading,
+  Flex,
   HStack,
   IconButton,
   Input,
@@ -11,19 +9,20 @@ import {
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AvatarProfile } from '../../components/Avatar';
 import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
-import { GradientButton } from '../../components/Buttons';
 import EditButtons from '../../components/Buttons/EditButtons';
-import ColorMode from '../../components/ColorMode';
+import MyProfileContainer from '../../components/Containers/MyProfileContainer';
 import { Name } from '../../components/Headers';
 import Invites from '../../components/Invites';
 import MainLayout from '../../components/Layouts/MainLayout';
-import { HeaderAvatar } from '../../components/Layouts/Profile';
+import PageHeader from '../../components/Layouts/Pages/PageHeader';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+} from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
 import Skeleton from '../../components/Skeleton';
-import { GradientButtonText } from '../../components/Text';
 import { useAuth } from '../../context/authContext/AuthContext';
 import useColors from '../../hooks/useColors';
 import useToast from '../../hooks/useToast';
@@ -31,8 +30,7 @@ import { InviteDataType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 const Profile: React.FC = () => {
-  const { user, signOut } = useAuth();
-  const router = useHistory();
+  const { user } = useAuth();
 
   const [username, setUsername] = useState<StringOrUndefined>();
   const [old_username, setOldUsername] = useState<StringOrUndefined>();
@@ -46,33 +44,6 @@ const Profile: React.FC = () => {
   //   useState<boolean>(true);
   const [isEditable, setIsEditable] = useState(false);
   const { penColor } = useColors();
-
-  const updateAvatar = async (avatar_url: StringOrUndefined) => {
-    try {
-      setIsLoading(true);
-      const updates = {
-        id: user?.id,
-        avatar_url,
-        updated_at: new Date(),
-      };
-
-      let { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal',
-      });
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsLoading(false);
-      showToast({
-        title: 'Photo Updated',
-        description: 'Your Profile Photo has been updated.',
-      });
-    }
-  };
 
   const cancelSave = () => {
     setUsername(old_username);
@@ -119,6 +90,33 @@ const Profile: React.FC = () => {
       showToast({
         title: 'Group Updated',
         description: 'Your Group has been updated.',
+      });
+    }
+  };
+
+  const updateAvatar = async (avatar_url: StringOrUndefined) => {
+    try {
+      setIsLoading(true);
+      const updates = {
+        id: user?.id,
+        avatar_url,
+        updated_at: new Date(),
+      };
+
+      let { error } = await supabase.from('profiles').upsert(updates, {
+        returning: 'minimal',
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+      showToast({
+        title: 'Photo Updated',
+        description: 'Your Profile Photo has been updated.',
       });
     }
   };
@@ -191,41 +189,47 @@ const Profile: React.FC = () => {
                     bg="white"
                     width={{ base: '3xs', xl: '2xs' }}
                   />
+                  <EditButtons
+                    buttonGroupProps={{
+                      mt: { base: 0, sm: '2' },
+                      alignItems: 'center',
+                      size: 'sm',
+                    }}
+                    onCrossClick={cancelSave}
+                    onCheckClick={submitSave}
+                  />
                 </VStack>
               </VStack>
             ) : (
-              <VStack flexDirection={{ sm: 'row', lg: 'column' }}>
-                <Box mr={{ sm: 4, md: 6, lg: 0 }}>
-                  <AvatarProfile src={avatar_url} />
-                </Box>
-                <HStack flex={1}>
-                  <Name
-                    title={username}
-                    textProps={{
-                      fontSize: { sm: '4xl', md: '5xl' },
-                    }}
-                  />
-                </HStack>
-              </VStack>
+              <>
+                <NameAndAvatar
+                  title={username}
+                  avatar_url={avatar_url}
+                  avatar="User"
+                />
+                <IconButton
+                  onClick={() => setIsEditable(true)}
+                  aria-label="Edit"
+                  bgColor="transparent"
+                  _hover={{ bgColor: 'transparent' }}
+                  icon={
+                    <FontAwesomeIcon
+                      icon={faPen}
+                      size={'lg'}
+                      color={penColor}
+                    />
+                  }
+                />
+              </>
             )}
           </HeaderAvatar>
         </Skeleton>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{ base: '0.4fr 1fr', sm: '0.2fr 1fr' }}
-          justifyContent={{ base: 'center', lg: 'normal' }}
-          alignItems={{ base: 'center', lg: 'normal' }}
-        >
-          <HStack
-            display={{ base: 'flex', sm: 'none' }}
-            my="4"
-            justifyContent="center"
-            alignItems="center"
-          >
+        <>
+          <Flex flexDirection="row" display={{ base: 'flex', sm: 'none' }}>
             {isEditable ? (
-              <VStack>
+              <HStack>
                 <AvatarUpload
                   onUpload={(url: string) => {
                     setAvatarUrl(url);
@@ -234,6 +238,7 @@ const Profile: React.FC = () => {
                   avatar_url={avatar_url}
                   avatar="User"
                 />
+
                 <VStack>
                   <Input
                     variant={'removeDefault'}
@@ -248,30 +253,7 @@ const Profile: React.FC = () => {
                     bg="white"
                     width={{ base: '3xs', xl: '2xs' }}
                   />
-                </VStack>
-              </VStack>
-            ) : (
-              <VStack>
-                <AvatarProfile src={avatar_url} />
-                <HStack flex={1}>
-                  <Name title={username} />
-                </HStack>
-              </VStack>
-            )}
-          </HStack>
-          <Center display={{ base: 'none', sm: 'flex' }}>
-            <Heading fontSize="4xl">My Profile</Heading>
-          </Center>
-          <Center>
-            <VStack
-              layerStyle="shadow-and-bg"
-              h="xs"
-              w={{ base: 'xs', sm: 'sm', md: 'md' }}
-              borderRadius={20}
-              justifyContent="center"
-            >
-              <VStack w="xs">
-                {isEditable ? (
+
                   <EditButtons
                     buttonGroupProps={{
                       mt: { base: 0, sm: '2' },
@@ -281,44 +263,45 @@ const Profile: React.FC = () => {
                     onCrossClick={cancelSave}
                     onCheckClick={submitSave}
                   />
-                ) : (
-                  <IconButton
-                    onClick={() => setIsEditable(true)}
-                    aria-label="Edit"
-                    bgColor="transparent"
-                    _hover={{ bgColor: 'transparent' }}
-                    icon={
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        size={'lg'}
-                        color={penColor}
-                      />
-                    }
-                  />
-                )}
-                {/* Toggle Color Mode */}
-                <Box pt="10">
-                  <ColorMode />
+                </VStack>
+              </HStack>
+            ) : (
+              <Flex
+                flexDirection="row"
+                display={{ base: 'flex', sm: 'none' }}
+                alignItems="center"
+              >
+                <Box mr={2}>
+                  <AvatarProfile src={avatar_url} />
                 </Box>
-                {/*  Sign out */}
-                <HStack spacing="8" pt="8">
-                  <GradientButton
-                    onClick={async () => {
-                      router.push('/');
-                      await signOut();
-                    }}
-                    isLoading={isLoading}
-                    loadingText="Signing out"
-                  >
-                    <GradientButtonText fontSize={20}>
-                      Sign Out
-                    </GradientButtonText>
-                  </GradientButton>
-                </HStack>
-              </VStack>
-            </VStack>
-          </Center>
-        </Grid>
+
+                <Name
+                  title={username}
+                  textProps={{
+                    fontSize: '4xl',
+                  }}
+                />
+                <IconButton
+                  onClick={() => setIsEditable(true)}
+                  aria-label="Edit"
+                  bgColor="transparent"
+                  _hover={{ bgColor: 'transparent' }}
+                  icon={
+                    <FontAwesomeIcon
+                      icon={faPen}
+                      size={'lg'}
+                      color={penColor}
+                    />
+                  }
+                />
+              </Flex>
+            )}
+          </Flex>
+
+          <PageHeader>My Profile</PageHeader>
+
+          <MyProfileContainer isLoading={isLoading} />
+        </>
       }
       rightSide={
         <>

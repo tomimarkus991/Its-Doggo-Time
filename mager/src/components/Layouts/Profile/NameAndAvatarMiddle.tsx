@@ -1,22 +1,26 @@
-import { Box, Center } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { StringOrUndefined } from '../../../types';
 import { AvatarGroup, AvatarProfile } from '../../Avatar';
 import { Name } from '../../Headers';
 
 interface Props {
-  title: StringOrUndefined;
+  name: StringOrUndefined;
   avatar_url: StringOrUndefined;
   avatar: 'User' | 'Group';
 }
 
-export const NameAndAvatar: React.FC<Props> = ({
-  title,
+export const NameAndAvatarMiddle: React.FC<Props> = ({
+  name,
   avatar_url,
   avatar,
 }) => {
   return (
-    <Center flexDirection={{ sm: 'row', lg: 'column' }}>
-      <Box mr={{ sm: '6', lg: '0' }}>
+    <Flex
+      flexDirection="row"
+      display={{ base: 'flex', sm: 'none' }}
+      alignItems="center"
+    >
+      <Box mr={2}>
         {avatar === 'User' ? (
           <AvatarProfile src={avatar_url} />
         ) : (
@@ -25,11 +29,11 @@ export const NameAndAvatar: React.FC<Props> = ({
       </Box>
 
       <Name
-        title={title}
+        title={name}
         textProps={{
-          fontSize: { sm: '4xl', md: '5xl' },
+          fontSize: '4xl',
         }}
       />
-    </Center>
+    </Flex>
   );
 };

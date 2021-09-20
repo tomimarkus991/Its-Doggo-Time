@@ -40,7 +40,12 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
 
       <GridItem id="middle" gridArea="middle">
         <VStack id="5" h="100%">
-          {middle}
+          <Grid
+            h={{ base: '100%', sm: '90%' }}
+            templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
+          >
+            {middle}
+          </Grid>
         </VStack>
       </GridItem>
       <HStack

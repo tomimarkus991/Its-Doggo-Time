@@ -1,4 +1,4 @@
-import { Box, Center, Grid, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
@@ -9,12 +9,15 @@ import {
   StringOrUndefined,
 } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { AvatarProfile } from '../Avatar';
 import { GroupsContainer } from '../Containers';
-import { Name } from '../Headers';
 import Invites from '../Invites';
 import MainLayout from '../Layouts/MainLayout';
-import { HeaderAvatar, NameAndAvatar } from '../Layouts/Profile';
+import PageHeader from '../Layouts/Pages/PageHeader';
+import {
+  HeaderAvatar,
+  NameAndAvatar,
+  NameAndAvatarMiddle,
+} from '../Layouts/Profile';
 import { ProfileLink } from '../Links';
 import Skeleton from '../Skeleton';
 
@@ -125,36 +128,21 @@ const LoggedIn: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
-        >
-          <Center
-            flexDirection="row"
-            display={{ base: 'flex', sm: 'none' }}
-          >
-            <Box mr={2}>
-              <AvatarProfile src={avatar_url} />
-            </Box>
+        <>
+          <NameAndAvatarMiddle
+            name={username}
+            avatar_url={avatar_url}
+            avatar="User"
+          />
 
-            <Name
-              title={username}
-              textProps={{
-                fontSize: '4xl',
-              }}
-            />
-          </Center>
-
-          <Center>
-            <Heading fontSize="4xl">Groups</Heading>
-          </Center>
+          <PageHeader>Groups</PageHeader>
 
           <GroupsContainer
             userGroups={groups}
             isLoading={isUserdataLoading}
             username={username}
           />
-        </Grid>
+        </>
       }
       rightSide={
         <>

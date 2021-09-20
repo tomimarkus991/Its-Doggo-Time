@@ -1,8 +1,4 @@
 import {
-  Box,
-  Center,
-  Grid,
-  Heading,
   IconButton,
   Input,
   Modal,
@@ -17,17 +13,16 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MembersAlert from '../../components/Alerts/MembersAlert';
-import { AvatarGroup } from '../../components/Avatar';
 import { GradientButton } from '../../components/Buttons';
 import LeaveGroupButton from '../../components/Buttons/LeaveGroupButton';
 import { MembersContainer } from '../../components/Containers';
-import { Name } from '../../components/Headers';
 import { AddMemberIcon } from '../../components/Icons/Doggo';
-import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts/MainLayout';
+import PageHeaderBack from '../../components/Layouts/Pages/PageHeaderBack';
 import {
   HeaderAvatar,
   NameAndAvatar,
+  NameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
@@ -211,41 +206,15 @@ const Members: React.FC = () => {
         </Skeleton>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
-          justifyContent={{ base: 'center', lg: 'normal' }}
-          alignItems={{ base: 'center', lg: 'normal' }}
-        >
-          <Center
-            flexDirection="row"
-            display={{ base: 'flex', sm: 'none' }}
-          >
-            <Box mr={2}>
-              <AvatarGroup src={group_avatar_url} />
-            </Box>
+        <>
+          <NameAndAvatarMiddle
+            name={group_name}
+            avatar_url={group_avatar_url}
+            avatar="Group"
+          />
 
-            <Name
-              title={group_name}
-              textProps={{
-                fontSize: '4xl',
-              }}
-            />
-          </Center>
+          <PageHeaderBack>Members</PageHeaderBack>
 
-          <Center>
-            <Grid
-              flex={1}
-              templateColumns="0.1fr 1fr"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <BackIcon />
-              <Heading fontSize="4xl" textAlign="center">
-                Members
-              </Heading>
-            </Grid>
-          </Center>
           <MembersContainer
             members={profiles}
             isEditable={isEditable}
@@ -318,7 +287,7 @@ const Members: React.FC = () => {
               </>
             }
           />
-        </Grid>
+        </>
       }
       rightSide={<ProfileAndMyGroups />}
     />

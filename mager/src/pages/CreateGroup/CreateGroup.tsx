@@ -1,13 +1,12 @@
-import { Box, Center, Grid, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { AvatarProfile } from '../../components/Avatar';
 import CreateGroupContainer from '../../components/Containers/CreateGroupContainer';
-import { Name } from '../../components/Headers';
-import { BackIcon } from '../../components/Icons/LightMode';
 import MainLayout from '../../components/Layouts';
+import PageHeaderBack from '../../components/Layouts/Pages/PageHeaderBack';
 import {
   HeaderAvatar,
   NameAndAvatar,
+  NameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
 import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
 import Skeleton from '../../components/Skeleton';
@@ -78,41 +77,17 @@ const CreateGroup: React.FC<Props> = () => {
         </Skeleton>
       }
       middle={
-        <Grid
-          h={{ base: '100%', sm: '90%' }}
-          templateRows={{ base: '0.4fr 0.1fr 1fr', sm: '0.2fr 1fr' }}
-        >
-          <Center
-            flexDirection="row"
-            display={{ base: 'flex', sm: 'none' }}
-          >
-            <Box mr={2}>
-              <AvatarProfile src={avatar_url} />
-            </Box>
+        <>
+          <NameAndAvatarMiddle
+            name={username}
+            avatar_url={avatar_url}
+            avatar="User"
+          />
 
-            <Name
-              title={username}
-              textProps={{
-                fontSize: '4xl',
-              }}
-            />
-          </Center>
-          <Center>
-            <Grid
-              flex={1}
-              templateColumns="0.1fr 1fr"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <BackIcon />
-              <Heading fontSize="4xl" textAlign="center">
-                Create a group
-              </Heading>
-            </Grid>
-          </Center>
+          <PageHeaderBack>Create a group</PageHeaderBack>
 
           <CreateGroupContainer />
-        </Grid>
+        </>
       }
       rightSide={<ProfileAndMyGroups />}
     />
