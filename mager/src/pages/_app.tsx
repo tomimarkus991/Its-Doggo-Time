@@ -6,8 +6,8 @@ import '../styles/globals.css';
 import { theme } from '../styles/theme';
 import '@fontsource/viga';
 import type {} from '@mui/lab/themeAugmentation';
-// import { ThemeProvider } from '@material-ui/styles';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
 // import { useEffect } from 'react';
 
 function SafeHydrate({ children }: any) {
@@ -36,20 +36,22 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   //     });
   //   }
   // }, []);
-  const materialTheme = createTheme({
+  const materialTheme = createMuiTheme({
     palette: {
       primary: {
         main: '#DDCDBF',
         contrastText: '#2A2828',
       },
     },
-    // overrides: {
-    //   MuiPickersToolbar: {
-    //     toolbar: {
-    //       backgroundColor: '#DDCDBF',
-    //     },
-    //   },
-    // },
+    // @ts-ignore
+    overrides: {
+      // @ts-ignore
+      MuiPickersToolbar: {
+        toolbar: {
+          backgroundColor: '#DDCDBF',
+        },
+      },
+    },
   });
   return (
     <SafeHydrate>

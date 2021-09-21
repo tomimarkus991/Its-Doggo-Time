@@ -4,19 +4,18 @@ import {
   useCheckboxGroup,
   VStack,
 } from '@chakra-ui/react';
-// import { TextField } from '@material-ui/core';
-// import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
 import {
-  LocalizationProvider,
-  MobileTimePicker,
-  TimePicker,
-} from '@mui/lab';
-import DateAdapter from '@mui/lab/AdapterMoment';
-import { TextField } from '@mui/material';
-import moment from 'moment';
+  MuiPickersUtilsProvider,
+  TimePicker as MTimePicker,
+} from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+// import { LocalizationProvider, TimePicker } from '@mui/lab';
+// import DateAdapter from '@mui/lab/AdapterMoment';
+// import { TextField } from '@mui/material';
+// import moment from 'moment';
+// import { BrowserView, MobileView } from 'react-device-detect';
 import 'moment/locale/et';
 import React, { useState } from 'react';
-import { BrowserView, MobileView } from 'react-device-detect';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { CreateLogsdataType } from '../../types';
@@ -115,7 +114,7 @@ export const AddLogContainer: React.FC = () => {
             );
           })}
         </HStack>
-        <LocalizationProvider
+        {/* <LocalizationProvider
           dateAdapter={DateAdapter}
           locale={moment.locale('et')}
         >
@@ -133,21 +132,24 @@ export const AddLogContainer: React.FC = () => {
             />
           </BrowserView>
           <MobileView>
-            <MobileTimePicker
-              value={time}
-              onChange={newTime => setTime(newTime)}
-              renderInput={params => <TextField {...params} />}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <MTimePicker
+                ampm={false}
+                value={time}
+                onChange={(newTime: any) => setTime(newTime)}
+                color="primary"
+              />
+            </MuiPickersUtilsProvider>
           </MobileView>
-        </LocalizationProvider>
-        {/* <MuiPickersUtilsProvider utils={MomentUtils}>
-          <TimePicker
+        </LocalizationProvider> */}
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <MTimePicker
             ampm={false}
             value={time}
             onChange={(newTime: any) => setTime(newTime)}
             color="primary"
           />
-        </MuiPickersUtilsProvider> */}
+        </MuiPickersUtilsProvider>
       </VStack>
     </MainContainerLayout>
   );
