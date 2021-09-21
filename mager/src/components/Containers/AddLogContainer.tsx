@@ -4,6 +4,9 @@ import {
   useCheckboxGroup,
   VStack,
 } from '@chakra-ui/react';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
+import 'moment/locale/et';
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext/AuthContext';
@@ -12,17 +15,6 @@ import { supabase } from '../../utils/supabaseClient';
 import { CheckboxCard } from '../Cards';
 import { AddLogCheckboxIcon } from '../Icons/Logs';
 import MainContainerLayout from '../Layouts/Containers';
-import DateAdapter from '@mui/lab/AdapterMoment';
-import {
-  LocalizationProvider,
-  MobileTimePicker,
-  TimePicker,
-} from '@mui/lab';
-import { TextField } from '@mui/material';
-import 'moment/locale/et';
-import moment from 'moment';
-import { BrowserView, MobileView } from 'react-device-detect';
-
 interface RouteParams {
   group_id: string;
 }
@@ -114,7 +106,7 @@ export const AddLogContainer: React.FC = () => {
             );
           })}
         </HStack>
-        <LocalizationProvider
+        {/* <LocalizationProvider
           dateAdapter={DateAdapter}
           locale={moment.locale('et')}
         >
@@ -132,7 +124,15 @@ export const AddLogContainer: React.FC = () => {
               renderInput={params => <TextField {...params} />}
             />
           </MobileView>
-        </LocalizationProvider>
+        </LocalizationProvider> */}
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <TimePicker
+            clearable
+            ampm={false}
+            value={time}
+            onChange={(newTime: any) => setTime(newTime)}
+          />
+        </MuiPickersUtilsProvider>
       </VStack>
     </MainContainerLayout>
   );
