@@ -140,7 +140,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                 py={{ base: 4, md: 6, lg: 8 }}
               >
                 {logsdata.map((log: LogsdataType, index: number) => (
-                  <LogCard log={log} key={index} group_id={group_id} />
+                  <LogCard key={index} log={log} group_id={group_id} />
                 ))}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>

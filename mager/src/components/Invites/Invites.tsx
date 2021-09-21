@@ -138,17 +138,16 @@ const Invites: React.FC<Props> = ({
               {userInvites?.map(
                 (invite: InviteDataType, index: number) => {
                   return (
-                    <Box w="full" key={index}>
-                      <InviteCard
-                        invite={invite}
-                        declineInvite={async invite_id =>
-                          declineInvite(invite_id)
-                        }
-                        acceptInvite={async (group_id, invite_id) =>
-                          acceptInvite(group_id, invite_id)
-                        }
-                      />
-                    </Box>
+                    <InviteCard
+                      key={index}
+                      invite={invite}
+                      declineInvite={async invite_id =>
+                        declineInvite(invite_id)
+                      }
+                      acceptInvite={async (group_id, invite_id) =>
+                        acceptInvite(group_id, invite_id)
+                      }
+                    />
                   );
                 },
               )}

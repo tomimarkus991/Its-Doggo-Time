@@ -1,4 +1,9 @@
-import { HStack, IconButton, useCheckboxGroup } from '@chakra-ui/react';
+import {
+  HStack,
+  IconButton,
+  useCheckboxGroup,
+  VStack,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext/AuthContext';
@@ -7,6 +12,11 @@ import { supabase } from '../../utils/supabaseClient';
 import { CheckboxCard } from '../Cards';
 import { AddLogCheckboxIcon } from '../Icons/Logs';
 import MainContainerLayout from '../Layouts/Containers';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import { LocalizationProvider, TimePicker } from '@mui/lab';
+import { TextField } from '@mui/material';
+import 'moment/locale/et';
+import moment from 'moment';
 
 interface RouteParams {
   group_id: string;
@@ -24,6 +34,8 @@ export const AddLogContainer: React.FC = () => {
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
   });
+
+  const [time, setTime] = useState<Date | null>(new Date());
 
   const addLog = async () => {
     let pee: boolean;
@@ -44,6 +56,7 @@ export const AddLogContainer: React.FC = () => {
       poop,
       creator_id: user?.id as string,
       group_id,
+      created_at: time,
     };
     try {
       await supabase.from('logs').insert(values, {
@@ -85,16 +98,28 @@ export const AddLogContainer: React.FC = () => {
         />
       }
     >
-      <HStack>
-        {businesses.map(business => {
-          const checkbox = getCheckboxProps({ value: business });
-          return (
-            <CheckboxCard key={business} {...checkbox}>
-              {business}
-            </CheckboxCard>
-          );
-        })}
-      </HStack>
+      <VStack>
+        <HStack>
+          {businesses.map((business, index: number) => {
+            const checkbox = getCheckboxProps({ value: business });
+            return (
+              <CheckboxCard key={index} {...checkbox}>
+                {business}
+              </CheckboxCard>
+            );
+          })}
+        </HStack>
+        <LocalizationProvider
+          dateAdapter={DateAdapter}
+          locale={moment.locale('et')}
+        >
+          <TimePicker
+            value={time}
+            onChange={newTime => setTime(newTime)}
+            renderInput={params => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </VStack>
     </MainContainerLayout>
   );
 };

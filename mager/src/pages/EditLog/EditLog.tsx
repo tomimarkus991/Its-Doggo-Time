@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AddLogContainer } from '../../components/Containers';
+import EditLogContainer from '../../components/Containers/EditLogContainer';
 import MainLayout from '../../components/Layouts';
 import PageHeaderBack from '../../components/Layouts/Pages/PageHeaderBack';
 import {
@@ -27,7 +27,7 @@ const EditLog: React.FC = () => {
     const fetchGroupData = async () => {
       try {
         setIsGroupdataLoading(true);
-        let { data, error } = await supabase
+        let { data } = await supabase
           .from('groups')
           .select(
             `
@@ -42,8 +42,6 @@ const EditLog: React.FC = () => {
         let _groupData: GroupPageDataType = data;
 
         setGroupdata(_groupData);
-
-        if (error) throw error.message;
       } catch (error) {
         throw error;
       } finally {
@@ -83,7 +81,7 @@ const EditLog: React.FC = () => {
 
           <PageHeaderBack>Edit Log</PageHeaderBack>
 
-          <AddLogContainer />
+          <EditLogContainer />
         </>
       }
       rightSide={<ProfileAndMyGroups />}

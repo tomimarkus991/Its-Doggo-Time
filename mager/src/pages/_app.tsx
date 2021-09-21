@@ -5,6 +5,8 @@ import AuthDetailsProvider from '../context/authContext';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
 import '@fontsource/viga';
+import type {} from '@mui/lab/themeAugmentation';
+import { createTheme, ThemeProvider } from '@mui/material';
 // import { useEffect } from 'react';
 
 function SafeHydrate({ children }: any) {
@@ -33,20 +35,23 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   //     });
   //   }
   // }, []);
+  const themeMUI = createTheme({});
   return (
     <SafeHydrate>
-      <ChakraProvider resetCSS theme={theme}>
-        <AuthDetailsProvider>
-          <Head>
-            <title>It&#39;s Doggo Time</title>
-            <meta
-              name="viewport"
-              content="initial-scale=1.0, width=device-width"
-            />
-          </Head>
-          <Component {...pageProps} />
-        </AuthDetailsProvider>
-      </ChakraProvider>
+      <ThemeProvider theme={themeMUI}>
+        <ChakraProvider resetCSS theme={theme}>
+          <AuthDetailsProvider>
+            <Head>
+              <title>It&#39;s Doggo Time</title>
+              <meta
+                name="viewport"
+                content="initial-scale=1, width=device-width"
+              />
+            </Head>
+            <Component {...pageProps} />
+          </AuthDetailsProvider>
+        </ChakraProvider>
+      </ThemeProvider>
     </SafeHydrate>
   );
 };

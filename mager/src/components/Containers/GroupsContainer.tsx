@@ -1,5 +1,4 @@
 import {
-  Box,
   Center,
   Heading,
   SimpleGrid,
@@ -76,12 +75,10 @@ export const GroupsContainer: React.FC<Props> = ({
       ) : (
         <SimpleGrid id="10" columns={{ base: 2 }} spacing={10}>
           {userGroups.map((group: GroupType, index: number) => (
-            <GroupCard group={group} key={index} />
+            <GroupCard key={index} group={group} />
           ))}
           {placeholders?.map((_, index: number) => (
-            <Box key={index}>
-              <DogPawn fontSize={{ base: '6rem', lg: '8rem' }} />
-            </Box>
+            <DogPawn key={index} fontSize={{ base: '6rem', lg: '8rem' }} />
           ))}
         </SimpleGrid>
       )}

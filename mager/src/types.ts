@@ -67,4 +67,14 @@ export interface CreateLogsdataType {
   poop: boolean;
   group_id: string;
   creator_id: string;
+  created_at: Date | null;
+}
+
+export interface UpdateLogsdataType {
+  id: string;
+  pee: boolean;
+  poop: boolean;
+  group_id: string;
+  creator_id: string;
+  created_at: Date | null;
 }

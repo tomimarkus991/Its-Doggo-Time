@@ -6,16 +6,15 @@ import { PeeAndPoopIcon, PeeIcon, PoopIcon } from '../Icons/Logs';
 
 interface Props {
   log: LogsdataType;
-  key: number;
   group_id: string;
 }
 
-export const LogCard: React.FC<Props> = ({ log, key, group_id }) => {
+export const LogCard: React.FC<Props> = ({ log, group_id }) => {
   const { id, pee, poop, created_at } = log;
 
   return (
     <Link to={`/group/${group_id}/log/${id}`}>
-      <Center id="LogCard" key={key} h="100%" flexDirection="column">
+      <Center id="LogCard" h="100%" flexDirection="column">
         {pee && poop === false && (
           <PeeIcon
             fontSize={{

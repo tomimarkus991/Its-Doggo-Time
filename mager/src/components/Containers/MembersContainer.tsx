@@ -52,26 +52,24 @@ export const MembersContainer: React.FC<Props> = ({
     >
       <SimpleGrid columns={{ base: 2, sm: 3 }} spacing={10}>
         {members?.map((member: ProfileType, index: number) => (
-          <Box key={index}>
-            <MemberCard
-              member={member}
-              isEditable={isEditable}
-              group_id={group_id}
-              creator_id={creator_id}
-            />
-          </Box>
+          <MemberCard
+            key={index}
+            member={member}
+            isEditable={isEditable}
+            group_id={group_id}
+            creator_id={creator_id}
+          />
         ))}
         {placeholders?.map((_, index: number) => (
-          <Box key={index}>
-            <ProfileIcon
-              fontSize={{
-                base: '5rem',
-                md: '6rem',
-                lg: '6rem',
-                xl: '6.5rem',
-              }}
-            />
-          </Box>
+          <ProfileIcon
+            key={index}
+            fontSize={{
+              base: '5rem',
+              md: '6rem',
+              lg: '6rem',
+              xl: '6.5rem',
+            }}
+          />
         ))}
         <Box position="absolute" right="0" top="0">
           <Box position="relative" float="right" right="2" top="2">
