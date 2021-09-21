@@ -4,10 +4,19 @@ import {
   useCheckboxGroup,
   VStack,
 } from '@chakra-ui/react';
-import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
+// import { TextField } from '@material-ui/core';
+// import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
+import {
+  LocalizationProvider,
+  MobileTimePicker,
+  TimePicker,
+} from '@mui/lab';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import { TextField } from '@mui/material';
+import moment from 'moment';
 import 'moment/locale/et';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { BrowserView, MobileView } from 'react-device-detect';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/authContext/AuthContext';
 import { CreateLogsdataType } from '../../types';
@@ -32,7 +41,7 @@ export const AddLogContainer: React.FC = () => {
     onChange: setLogData,
   });
 
-  const [time, setTime] = useState<Date | null>(new Date());
+  const [time, setTime] = useState<any>(new Date());
 
   const addLog = async () => {
     let pee: boolean;
@@ -68,11 +77,11 @@ export const AddLogContainer: React.FC = () => {
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'sm' }}
+      mainH="xs"
       isLoading={false}
       containerProps={{
         w: { base: 'xs', sm: 'sm' },
-        h: { base: 'sm' },
+        h: 'xs',
       }}
       button={
         <IconButton
@@ -106,7 +115,7 @@ export const AddLogContainer: React.FC = () => {
             );
           })}
         </HStack>
-        {/* <LocalizationProvider
+        <LocalizationProvider
           dateAdapter={DateAdapter}
           locale={moment.locale('et')}
         >
@@ -114,7 +123,13 @@ export const AddLogContainer: React.FC = () => {
             <TimePicker
               value={time}
               onChange={newTime => setTime(newTime)}
-              renderInput={params => <TextField {...params} />}
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  color="primary"
+                  variant="standard"
+                />
+              )}
             />
           </BrowserView>
           <MobileView>
@@ -124,15 +139,15 @@ export const AddLogContainer: React.FC = () => {
               renderInput={params => <TextField {...params} />}
             />
           </MobileView>
-        </LocalizationProvider> */}
-        <MuiPickersUtilsProvider utils={MomentUtils}>
+        </LocalizationProvider>
+        {/* <MuiPickersUtilsProvider utils={MomentUtils}>
           <TimePicker
-            clearable
             ampm={false}
             value={time}
             onChange={(newTime: any) => setTime(newTime)}
+            color="primary"
           />
-        </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider> */}
       </VStack>
     </MainContainerLayout>
   );

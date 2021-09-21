@@ -6,6 +6,7 @@ import '../styles/globals.css';
 import { theme } from '../styles/theme';
 import '@fontsource/viga';
 import type {} from '@mui/lab/themeAugmentation';
+// import { ThemeProvider } from '@material-ui/styles';
 import { createTheme, ThemeProvider } from '@mui/material';
 // import { useEffect } from 'react';
 
@@ -35,10 +36,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   //     });
   //   }
   // }, []);
-  const themeMUI = createTheme({});
+  const materialTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#DDCDBF',
+        contrastText: '#2A2828',
+      },
+    },
+    // overrides: {
+    //   MuiPickersToolbar: {
+    //     toolbar: {
+    //       backgroundColor: '#DDCDBF',
+    //     },
+    //   },
+    // },
+  });
   return (
     <SafeHydrate>
-      <ThemeProvider theme={themeMUI}>
+      <ThemeProvider theme={materialTheme}>
         <ChakraProvider resetCSS theme={theme}>
           <AuthDetailsProvider>
             <Head>
