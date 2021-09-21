@@ -13,10 +13,15 @@ import { CheckboxCard } from '../Cards';
 import { AddLogCheckboxIcon } from '../Icons/Logs';
 import MainContainerLayout from '../Layouts/Containers';
 import DateAdapter from '@mui/lab/AdapterMoment';
-import { LocalizationProvider, TimePicker } from '@mui/lab';
+import {
+  LocalizationProvider,
+  MobileTimePicker,
+  TimePicker,
+} from '@mui/lab';
 import { TextField } from '@mui/material';
 import 'moment/locale/et';
 import moment from 'moment';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 interface RouteParams {
   group_id: string;
@@ -113,11 +118,20 @@ export const AddLogContainer: React.FC = () => {
           dateAdapter={DateAdapter}
           locale={moment.locale('et')}
         >
-          <TimePicker
-            value={time}
-            onChange={newTime => setTime(newTime)}
-            renderInput={params => <TextField {...params} />}
-          />
+          <BrowserView>
+            <TimePicker
+              value={time}
+              onChange={newTime => setTime(newTime)}
+              renderInput={params => <TextField {...params} />}
+            />
+          </BrowserView>
+          <MobileView>
+            <MobileTimePicker
+              value={time}
+              onChange={newTime => setTime(newTime)}
+              renderInput={params => <TextField {...params} />}
+            />
+          </MobileView>
         </LocalizationProvider>
       </VStack>
     </MainContainerLayout>
