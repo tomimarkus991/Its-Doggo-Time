@@ -18,7 +18,7 @@ import {
 } from '../components/Buttons';
 import {
   FoodLogsContainer,
-  LogsContainer,
+  ExcrementLogsContainer,
 } from '../components/Containers';
 import { HeaderAvatar, MainLayout } from '../components/Layouts';
 import {
@@ -282,7 +282,7 @@ export const GroupPage: React.FC = () => {
             ) : null}
           </VStack>
           {view === ViewType.Excrement ? (
-            <LogsContainer />
+            <ExcrementLogsContainer />
           ) : (
             <FoodLogsContainer />
           )}

@@ -1,3 +1,4 @@
 export { default as useGroupsPlaceholder } from './useGroupsPlaceholder';
-export { default as useLogsPlaceholder } from './useLogsPlaceholder';
+export { default as useExcrementLogsPlaceholder } from './useExcrementLogsPlaceholder';
+export { default as useFoodLogsPlaceholder } from './useFoodLogsPlaceholder';
 export { default as useMembersPlaceholder } from './useMembersPlaceholder';

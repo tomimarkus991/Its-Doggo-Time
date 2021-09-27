@@ -1,11 +1,13 @@
 import { createContext, useState, useContext } from 'react';
-import { LogsdataType } from '../types';
+import { ExcrementLogsdataType, FoodLogsdataType } from '../types';
 
 type InitialContextType = {
-  excrementLogs: LogsdataType[];
-  setExcrementLogs: React.Dispatch<React.SetStateAction<LogsdataType[]>>;
-  foodLogs: LogsdataType[];
-  setFoodLogs: React.Dispatch<React.SetStateAction<LogsdataType[]>>;
+  excrementLogs: ExcrementLogsdataType[];
+  setExcrementLogs: React.Dispatch<
+    React.SetStateAction<ExcrementLogsdataType[]>
+  >;
+  foodLogs: FoodLogsdataType[];
+  setFoodLogs: React.Dispatch<React.SetStateAction<FoodLogsdataType[]>>;
 };
 
 const initialContext: InitialContextType = {
@@ -20,8 +22,10 @@ const LogsContext = createContext(initialContext);
 export const useLogs = () => useContext(LogsContext);
 
 const LogsDetailsProvider = ({ children }: any) => {
-  const [excrementLogs, setExcrementLogs] = useState<LogsdataType[]>([]);
-  const [foodLogs, setFoodLogs] = useState<LogsdataType[]>([]);
+  const [excrementLogs, setExcrementLogs] = useState<
+    ExcrementLogsdataType[]
+  >([]);
+  const [foodLogs, setFoodLogs] = useState<FoodLogsdataType[]>([]);
 
   const value = {
     excrementLogs,

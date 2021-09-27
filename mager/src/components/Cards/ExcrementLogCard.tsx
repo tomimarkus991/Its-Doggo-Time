@@ -1,15 +1,15 @@
 import { Center, Text } from '@chakra-ui/react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { LogsdataType } from '../../types';
+import { ExcrementLogsdataType } from '../../types';
 import { PeeAndPoopIcon, PeeIcon, PoopIcon } from '../Icons';
 
 interface Props {
-  log: LogsdataType;
+  log: ExcrementLogsdataType;
   group_id: string;
 }
 
-const LogCard: React.FC<Props> = ({ log, group_id }) => {
+const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
   const { id, pee, poop, created_at } = log;
 
   return (
@@ -65,4 +65,4 @@ const LogCard: React.FC<Props> = ({ log, group_id }) => {
   );
 };
 
-export default LogCard;
+export default ExcrementLogCard;

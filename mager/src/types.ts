@@ -58,16 +58,8 @@ export interface GroupPageDataType {
   profiles: ProfileType[];
 }
 
-export interface LogsdataType {
-  id: string;
-  pee: boolean;
-  poop: boolean;
-  group_id: string;
-  creator_id: string;
-  created_at: Date;
-}
-
-export interface CreateLogsdataType {
+export interface ExcrementLogsdataType {
+  id?: string;
   pee: boolean;
   poop: boolean;
   group_id: string;
@@ -75,10 +67,9 @@ export interface CreateLogsdataType {
   created_at: Date | null;
 }
 
-export interface UpdateLogsdataType {
-  id: string;
-  pee: boolean;
-  poop: boolean;
+export interface FoodLogsdataType {
+  id?: string;
+  food: boolean;
   group_id: string;
   creator_id: string;
   created_at: Date | null;

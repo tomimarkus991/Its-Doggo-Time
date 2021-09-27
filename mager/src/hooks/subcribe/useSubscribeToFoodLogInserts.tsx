@@ -1,32 +1,27 @@
 import { useEffect } from 'react';
 import { useLogs } from '../../context';
-import { LogsdataType } from '../../types';
+import { FoodLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useSubscribeToLogInserts = ({
-  group_id,
-}: {
-  group_id: string;
-}) => {
-  const { setExcrementLogs } = useLogs();
+export const useSubscribeToFoodLogInserts = (group_id: string) => {
+  const { setFoodLogs } = useLogs();
   useEffect(() => {
     const subscribeToLogInserts = () =>
       supabase
-        .from(`logs:group_id=eq.${group_id}`)
+        .from(`food_logs:group_id=eq.${group_id}`)
         .on('INSERT', payload => {
-          const { created_at, creator_id, group_id, id, pee, poop } =
-            payload.new as LogsdataType;
+          const { id, created_at, creator_id, group_id, food } =
+            payload.new as FoodLogsdataType;
 
-          const newLog: LogsdataType = {
+          const newLog: FoodLogsdataType = {
+            id,
             created_at,
             creator_id,
             group_id,
-            id,
-            pee,
-            poop,
+            food,
           };
 
-          setExcrementLogs(oldData => {
+          setFoodLogs(oldData => {
             if (oldData.length <= 3) {
               return [...oldData, newLog];
             } else {

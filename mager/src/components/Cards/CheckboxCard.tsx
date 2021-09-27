@@ -1,5 +1,5 @@
 import { Box, useCheckbox } from '@chakra-ui/react';
-import { PeeIcon, PoopIcon } from '../Icons';
+import { FoodIcon, PeeIcon, PoopIcon } from '../Icons';
 
 const CheckboxCard = (props: any) => {
   const { getInputProps, getCheckboxProps } = useCheckbox(props);
@@ -23,9 +23,13 @@ const CheckboxCard = (props: any) => {
       >
         {props.children === 'pee' ? (
           <PeeIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
-        ) : (
+        ) : null}
+        {props.children === 'poop' ? (
           <PoopIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
-        )}
+        ) : null}
+        {props.children === 'food' ? (
+          <FoodIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
+        ) : null}
       </Box>
     </Box>
   );

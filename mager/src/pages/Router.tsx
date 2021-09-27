@@ -11,6 +11,7 @@ import ForgotPassword from './ForgotPassword';
 import GroupPage from './GroupPage';
 import Home from './Home';
 import Login from './Login';
+import LogsSummary from './LogsSummary';
 import Members from './Members';
 import Profile from './Profile';
 import Register from './Register';
@@ -44,6 +45,11 @@ const Router: React.FC = () => {
         exact
         path="/group/:group_id/add-log"
         component={AddLog}
+      />
+      <DefaultPrivateLayoutRoute
+        exact
+        path="/group/:group_id/summary"
+        component={LogsSummary}
       />
       <DefaultPrivateLayoutRoute
         exact

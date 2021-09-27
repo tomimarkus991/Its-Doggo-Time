@@ -20,3 +20,5 @@ export { default as BackIcon } from './BackIcon';
 export { default as DogPaw } from './DogPaw';
 export { default as HeaderBackground } from './HeaderBackground';
 export { default as HeaderBackgroundSmall } from './HeaderBackgroundSmall';
+export { default as FoodIcon } from './FoodIcon';
+export { default as DefaultFoodIcon } from './DefaultFoodIcon';

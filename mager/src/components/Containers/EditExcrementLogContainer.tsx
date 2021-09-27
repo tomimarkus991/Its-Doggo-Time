@@ -14,7 +14,7 @@ import 'moment/locale/et';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
-import { CreateLogsdataType, LogsdataType } from '../../types';
+import { ExcrementLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { CheckboxCard } from '../Cards';
 import { AddLogCheckboxIcon } from '../Icons';
@@ -26,7 +26,7 @@ interface RouteParams {
   log_id: string;
 }
 
-const EditLogContainer: React.FC = () => {
+const EditExcrementLogContainer: React.FC = () => {
   const { group_id, log_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
@@ -57,7 +57,7 @@ const EditLogContainer: React.FC = () => {
       poop = false;
     }
 
-    const values: CreateLogsdataType = {
+    const values: ExcrementLogsdataType = {
       pee,
       poop,
       creator_id: user?.id as string,
@@ -66,7 +66,7 @@ const EditLogContainer: React.FC = () => {
     };
     try {
       await supabase
-        .from('logs')
+        .from('excrement_logs')
         .update(values, {
           returning: 'minimal',
         })
@@ -83,7 +83,7 @@ const EditLogContainer: React.FC = () => {
       try {
         setIsLogdataLoading(true);
         let { data } = await supabase
-          .from('logs')
+          .from('excrement_logs')
           .select(
             `
             id,
@@ -95,7 +95,7 @@ const EditLogContainer: React.FC = () => {
           .eq('id', log_id)
           .single();
 
-        let _logData: LogsdataType = data;
+        let _logData: ExcrementLogsdataType = data;
 
         const { created_at, pee, poop } = _logData;
 
@@ -180,4 +180,4 @@ const EditLogContainer: React.FC = () => {
   );
 };
 
-export default EditLogContainer;
+export default EditExcrementLogContainer;

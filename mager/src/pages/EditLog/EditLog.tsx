@@ -1,6 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { EditLogContainer } from '../../components/Containers';
+import {
+  EditExcrementLogContainer,
+  EditFoodLogContainer,
+} from '../../components/Containers';
 import {
   HeaderAvatar,
   MainLayout,
@@ -12,6 +15,7 @@ import {
 } from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
 import { Skeleton } from '../../components/Skeleton';
+import { useLogsView, ViewType } from '../../context';
 import { useFetchGroupProfile } from '../../hooks/api';
 
 interface RouteParams {
@@ -20,8 +24,8 @@ interface RouteParams {
 
 const EditLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-
   const { isLoading } = useFetchGroupProfile(group_id);
+  const { view } = useLogsView();
 
   return (
     <MainLayout
@@ -42,7 +46,12 @@ const EditLog: React.FC = () => {
         <>
           <GroupNameAndAvatarMiddle />
           <PageHeaderBack>Edit Log</PageHeaderBack>
-          <EditLogContainer />
+
+          {view === ViewType.Excrement ? (
+            <EditExcrementLogContainer />
+          ) : (
+            <EditFoodLogContainer />
+          )}
         </>
       }
       rightSide={<ProfileAndMyGroups />}

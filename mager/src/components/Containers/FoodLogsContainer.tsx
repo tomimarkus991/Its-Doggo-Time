@@ -7,14 +7,16 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useColors } from '../../hooks';
-import { useLogsPlaceholder } from '../../hooks/placeholders';
-import { LogsdataType } from '../../types';
-import { AddLogIcon, DefaultPeeAndPoopIcon } from '../Icons';
+import { useLogs } from '../../context';
+import { useFetchFoodLogs } from '../../hooks/api';
+import { useFoodLogsPlaceholder } from '../../hooks/placeholders';
+import { useSubscribeToFoodLogInserts } from '../../hooks/subcribe/useSubscribeToFoodLogInserts';
+import { FoodLogsdataType } from '../../types';
+import { LogSummaryButton } from '../Buttons';
+import { FoodLogCard } from '../Cards';
+import { AddLogIcon, DefaultFoodIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
 interface Props {}
@@ -24,10 +26,11 @@ interface RouteParams {
 
 const FoodLogsContainer: React.FC<Props> = ({}) => {
   const { group_id } = useParams<RouteParams>();
-  const { containerItemColor } = useColors();
-  const [logsdata] = useState<LogsdataType[]>([]);
-  const { placeholders } = useLogsPlaceholder(logsdata);
-  const [isLoading] = useState<boolean>(true);
+  const { isLoading } = useFetchFoodLogs(group_id);
+  const { foodLogs } = useLogs();
+  const { placeholders } = useFoodLogsPlaceholder(foodLogs);
+
+  useSubscribeToFoodLogInserts(group_id);
 
   return (
     <MainContainerLayout
@@ -68,9 +71,9 @@ const FoodLogsContainer: React.FC<Props> = ({}) => {
     >
       {isLoading ? null : (
         <>
-          {logsdata === null ||
-          logsdata === undefined ||
-          logsdata.length === 0 ? (
+          {foodLogs === null ||
+          foodLogs === undefined ||
+          foodLogs.length === 0 ? (
             <Center h="100%">
               <VStack textAlign="center">
                 <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
@@ -98,13 +101,13 @@ const FoodLogsContainer: React.FC<Props> = ({}) => {
                 px={{ base: 4, md: 12, lg: 16 }}
                 py={{ base: 4, md: 6, lg: 8 }}
               >
-                {/* {logsdata.map((log: LogsdataType, index: number) => (
-                  <LogCard key={index} log={log} group_id={group_id} />
-                ))} */}
+                {foodLogs.map((log: FoodLogsdataType, index: number) => (
+                  <FoodLogCard key={index} log={log} group_id={group_id} />
+                ))}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>
                     <VStack>
-                      <DefaultPeeAndPoopIcon
+                      <DefaultFoodIcon
                         fontSize={{
                           base: '6rem',
                           sm2: '6.5rem',
@@ -122,24 +125,7 @@ const FoodLogsContainer: React.FC<Props> = ({}) => {
                     </VStack>
                   </Center>
                 ))}
-                <Box position="absolute" right="0" top="0">
-                  <Link to={`/group/${group_id}/summary`}>
-                    <Box
-                      position="relative"
-                      cursor="pointer"
-                      float="right"
-                      right={{ base: 2, sm: 4 }}
-                      top={{ base: 2, sm: 4 }}
-                      p={{ base: 2, sm: 3, md: 4 }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faEllipsisV}
-                        size="2x"
-                        color={containerItemColor}
-                      />
-                    </Box>
-                  </Link>
-                </Box>
+                <LogSummaryButton group_id={group_id} />
               </SimpleGrid>
             </Center>
           )}

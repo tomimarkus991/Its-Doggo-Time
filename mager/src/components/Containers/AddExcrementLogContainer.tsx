@@ -14,7 +14,7 @@ import 'moment/locale/et';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
-import { CreateLogsdataType } from '../../types';
+import { ExcrementLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { CheckboxCard } from '../Cards';
 import { AddLogCheckboxIcon } from '../Icons';
@@ -24,7 +24,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const AddLogContainer: React.FC = () => {
+const AddExcrementLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
@@ -53,7 +53,7 @@ const AddLogContainer: React.FC = () => {
       poop = false;
     }
 
-    const values: CreateLogsdataType = {
+    const values: ExcrementLogsdataType = {
       pee,
       poop,
       creator_id: user?.id as string,
@@ -61,7 +61,7 @@ const AddLogContainer: React.FC = () => {
       created_at: time,
     };
     try {
-      await supabase.from('logs').insert(values, {
+      await supabase.from('excrement_logs').insert(values, {
         returning: 'minimal',
       });
     } catch (error) {
@@ -124,4 +124,4 @@ const AddLogContainer: React.FC = () => {
   );
 };
 
-export default AddLogContainer;
+export default AddExcrementLogContainer;

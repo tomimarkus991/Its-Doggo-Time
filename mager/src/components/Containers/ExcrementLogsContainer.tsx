@@ -7,18 +7,15 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useLogs } from '../../context';
-import { useColors } from '../../hooks';
 import { useFetchExcrementLogs } from '../../hooks/api';
-import { useLogsPlaceholder } from '../../hooks/placeholders';
-import { useSubscribeToLogInserts } from '../../hooks/subcribe';
-import { useCountRenders } from '../../hooks/useCountRenders';
-import { LogsdataType } from '../../types';
-import { LogCard } from '../Cards';
+import { useExcrementLogsPlaceholder } from '../../hooks/placeholders';
+import { useSubscribeToExcrementLogInserts } from '../../hooks/subcribe';
+import { ExcrementLogsdataType } from '../../types';
+import { LogSummaryButton } from '../Buttons';
+import ExcrementLogCard from '../Cards/ExcrementLogCard';
 import { AddLogIcon, DefaultPeeAndPoopIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
@@ -27,18 +24,13 @@ interface RouteParams {
   group_id: string;
 }
 
-const LogsContainer: React.FC<Props> = () => {
+const ExcrementLogsContainer: React.FC<Props> = () => {
   const { group_id } = useParams<RouteParams>();
-  const { containerItemColor } = useColors();
   const { isLoading } = useFetchExcrementLogs(group_id);
   const { excrementLogs } = useLogs();
-  const { placeholders } = useLogsPlaceholder(excrementLogs);
+  const { placeholders } = useExcrementLogsPlaceholder(excrementLogs);
 
-  useSubscribeToLogInserts({
-    group_id,
-  });
-
-  useCountRenders();
+  useSubscribeToExcrementLogInserts(group_id);
 
   return (
     <MainContainerLayout
@@ -109,9 +101,15 @@ const LogsContainer: React.FC<Props> = () => {
                 px={{ base: 4, md: 12, lg: 16 }}
                 py={{ base: 4, md: 6, lg: 8 }}
               >
-                {excrementLogs.map((log: LogsdataType, index: number) => (
-                  <LogCard key={index} log={log} group_id={group_id} />
-                ))}
+                {excrementLogs.map(
+                  (log: ExcrementLogsdataType, index: number) => (
+                    <ExcrementLogCard
+                      key={index}
+                      log={log}
+                      group_id={group_id}
+                    />
+                  ),
+                )}
                 {placeholders?.map((_, index: number) => (
                   <Center key={index}>
                     <VStack>
@@ -133,24 +131,7 @@ const LogsContainer: React.FC<Props> = () => {
                     </VStack>
                   </Center>
                 ))}
-                <Box position="absolute" right="0" top="0">
-                  <Link to={`/group/${group_id}/summary`}>
-                    <Box
-                      position="relative"
-                      cursor="pointer"
-                      float="right"
-                      right={{ base: 2, sm: 4 }}
-                      top={{ base: 2, sm: 4 }}
-                      p={{ base: 2, sm: 3, md: 4 }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faEllipsisV}
-                        size="2x"
-                        color={containerItemColor}
-                      />
-                    </Box>
-                  </Link>
-                </Box>
+                <LogSummaryButton group_id={group_id} />
               </SimpleGrid>
             </Center>
           )}
@@ -160,4 +141,4 @@ const LogsContainer: React.FC<Props> = () => {
   );
 };
 
-export default LogsContainer;
+export default ExcrementLogsContainer;
