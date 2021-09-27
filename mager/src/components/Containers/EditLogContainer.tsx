@@ -1,17 +1,18 @@
 import {
+  Box,
   HStack,
   IconButton,
   useCheckboxGroup,
   VStack,
-  Box,
 } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import DateAdapter from '@mui/lab/AdapterMoment';
-import { LocalizationProvider, TimePicker } from '@mui/lab';
-import { TextField } from '@mui/material';
+import MomentUtils from '@date-io/moment';
+import {
+  MuiPickersUtilsProvider,
+  TimePicker as MTimePicker,
+} from '@material-ui/pickers';
 import 'moment/locale/et';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
 import { CreateLogsdataType, LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
@@ -36,12 +37,11 @@ const EditLogContainer: React.FC = () => {
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
+    value: logData,
   });
 
   const [time, setTime] = useState<Date | null>(new Date());
   const [isLogdataLoading, setIsLogdataLoading] = useState(true);
-  // const [pee, setPee] = useState<boolean>();
-  // const [poop, setPoop] = useState<boolean>();
 
   const editLog = async () => {
     let pee: boolean;
@@ -101,21 +101,11 @@ const EditLogContainer: React.FC = () => {
 
         setTime(created_at);
 
-        // setPee(pee);
-        // setPoop(poop);
-        // if (pee && poop) {
-        //   setLogData(['pee', 'poop']);
-        //   // let newArr = [...businesses];
-        //   // newArr[0] = { value: 'pee', hasDuty: true };
-        //   // setBusinesses(newArr);
-        // }
         if (pee) {
           setLogData((oldData: any) => [...oldData, 'pee']);
-          // setLogData(['pee']);
         }
         if (poop) {
           setLogData((oldData: any) => [...oldData, 'poop']);
-          // setLogData(['poop']);
         }
       } catch (error) {
         throw error;
@@ -129,11 +119,11 @@ const EditLogContainer: React.FC = () => {
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'sm' }}
+      mainH="xs"
       isLoading={false}
       containerProps={{
         w: { base: 'xs', sm: 'sm' },
-        h: { base: 'sm' },
+        h: 'xs',
       }}
       button={
         <Box
@@ -141,7 +131,7 @@ const EditLogContainer: React.FC = () => {
           onClick={() => editLog()}
           mt={4}
           h="100%"
-          aria-label="Add Log Button"
+          aria-label="Add Edited Log Button"
           bgColor="transparent"
           _hover={{ bgColor: 'transparent' }}
           isDisabled={logData?.length === 0}
@@ -166,12 +156,9 @@ const EditLogContainer: React.FC = () => {
         <VStack>
           <HStack>
             {businesses.map((business, index: number) => {
-              // console.log('business', business);
-
               const checkbox = getCheckboxProps({
                 value: business,
               });
-              // console.log('checkbox', checkbox);
               return (
                 <CheckboxCard key={index} {...checkbox}>
                   {business}
@@ -179,16 +166,14 @@ const EditLogContainer: React.FC = () => {
               );
             })}
           </HStack>
-          <LocalizationProvider
-            dateAdapter={DateAdapter}
-            locale={moment.locale('et')}
-          >
-            <TimePicker
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <MTimePicker
+              ampm={false}
               value={time}
-              onChange={newTime => setTime(newTime)}
-              renderInput={params => <TextField {...params} />}
+              onChange={(newTime: any) => setTime(newTime)}
+              color="primary"
             />
-          </LocalizationProvider>
+          </MuiPickersUtilsProvider>
         </VStack>
       </Skeleton>
     </MainContainerLayout>

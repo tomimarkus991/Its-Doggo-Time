@@ -111,34 +111,6 @@ const AddLogContainer: React.FC = () => {
             );
           })}
         </HStack>
-        {/* <LocalizationProvider
-          dateAdapter={DateAdapter}
-          locale={moment.locale('et')}
-        >
-          <BrowserView>
-            <TimePicker
-              value={time}
-              onChange={newTime => setTime(newTime)}
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  color="primary"
-                  variant="standard"
-                />
-              )}
-            />
-          </BrowserView>
-          <MobileView>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-              <MTimePicker
-                ampm={false}
-                value={time}
-                onChange={(newTime: any) => setTime(newTime)}
-                color="primary"
-              />
-            </MuiPickersUtilsProvider>
-          </MobileView>
-        </LocalizationProvider> */}
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <MTimePicker
             ampm={false}
