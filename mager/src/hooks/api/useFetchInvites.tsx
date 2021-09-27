@@ -7,9 +7,11 @@ export const useFetchInvites = () => {
   const { username, setUserInvites } = useUser();
 
   useEffect(() => {
+    console.log('fetchhhhhhhh');
+
     const fetchInvites = async () => {
       try {
-        const { data: invitesdata, error } = await supabase
+        const { data, error } = await supabase
           .from('invites')
           .select(
             `
@@ -21,7 +23,7 @@ export const useFetchInvites = () => {
             `,
           )
           .eq('receiver', username);
-        const _invitesdata = invitesdata as InviteDataType[];
+        const _invitesdata = data as InviteDataType[];
         setUserInvites(_invitesdata);
         // _invitesdata.forEach(invite => {
         // listenForInviteDeletes(invite);

@@ -33,9 +33,7 @@ const Members: React.FC = () => {
 
   const { setMembers, creator_id } = useGroup();
 
-  const { subscribetoMemberInserts } = useSubscribeToMemberInserts({
-    group_id,
-  });
+  useSubscribeToMemberInserts(group_id);
 
   const { isLoading } = useFetchGroupData(group_id);
 
@@ -67,11 +65,9 @@ const Members: React.FC = () => {
   });
 
   useEffect(() => {
-    subscribetoMemberInserts();
     subscribeToMemberDeletes();
 
     return () => {
-      supabase.removeSubscription(subscribetoMemberInserts());
       supabase.removeSubscription(subscribeToMemberDeletes());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

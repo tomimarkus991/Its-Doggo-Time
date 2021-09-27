@@ -1,22 +1,19 @@
+import { useEffect } from 'react';
 import { useGroup } from '../../context';
 import { MemberType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useSubscribeToMemberInserts = ({
-  group_id,
-}: {
-  group_id: string;
-}) => {
+export const useSubscribeToMemberInserts = (group_id: string) => {
   const { setMembers } = useGroup();
-  return {
-    subscribetoMemberInserts: () =>
+  useEffect(() => {
+    const subscribeToMemberInserts = () =>
       // when you are inserted to members
       // (by accepting invite or directly from database)
       supabase
         // only show it to members with this group_id
         .from(`members:group_id=eq.${group_id}`)
         .on('INSERT', async payload => {
-          let { data: profile } = await supabase
+          let { data } = await supabase
             .from('profiles')
             .select(
               `
@@ -28,7 +25,7 @@ export const useSubscribeToMemberInserts = ({
             .eq('id', payload.new.profile_id)
             .single();
 
-          const { id, username, avatar_url } = profile as MemberType;
+          const { id, username, avatar_url } = data as MemberType;
 
           const newProfile: MemberType = {
             id,
@@ -38,6 +35,12 @@ export const useSubscribeToMemberInserts = ({
           // update frontend with new data
           setMembers((oldData: any) => [...oldData, newProfile]);
         })
-        .subscribe(),
-  };
+        .subscribe();
+
+    subscribeToMemberInserts();
+
+    return () => {
+      supabase.removeSubscription(subscribeToMemberInserts());
+    };
+  }, []);
 };

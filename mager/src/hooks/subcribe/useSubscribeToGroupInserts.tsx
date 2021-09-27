@@ -37,6 +37,8 @@ export const useSubscribeToGroupInserts = () => {
         })
         .subscribe();
 
+    subscribeToGroupInserts();
+
     return () => {
       supabase.removeSubscription(subscribeToGroupInserts());
     };
