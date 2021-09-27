@@ -8,29 +8,29 @@ import {
 } from '@chakra-ui/react';
 import { faBone, faPoop } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AvatarGroup, AvatarUpload } from '../components/Avatar';
+import { AvatarUpload } from '../components/Avatar';
 import {
   DeleteGroupButton,
   EditButtons,
   PenButton,
 } from '../components/Buttons';
 import {
-  LogsContainer,
   FoodLogsContainer,
+  LogsContainer,
 } from '../components/Containers';
-import { Name } from '../components/Headers';
-import { MainLayout } from '../components/Layouts';
+import { HeaderAvatar, MainLayout } from '../components/Layouts';
 import {
-  HeaderAvatar,
-  NameAndAvatar,
-} from '../components/Layouts/Profile';
+  GroupNameAndAvatar,
+  GroupNameAndAvatarMiddle,
+} from '../components/Layouts/Group';
 import { MembersLink, MyGroupsLink } from '../components/Links';
+import { Skeleton } from '../components/Skeleton';
 import { useAuth, useGroup, useLogsView, ViewType } from '../context';
 import { useColors, useToast } from '../hooks';
-import { GroupPageDataType, StringOrUndefined } from '../types';
-import { Skeleton } from '../components/Skeleton';
+import { useFetchGroupData } from '../hooks/api';
+import { StringOrUndefined } from '../types';
 import { supabase } from '../utils/supabaseClient';
 
 interface RouteParams {
@@ -40,25 +40,23 @@ interface RouteParams {
 export const GroupPage: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
-  const [old_group_name, setOldGroupname] = useState('');
-
   const {
     groupname,
     setGroupname,
     creator_id,
-    setCreatorId,
     group_avatar_url,
     setGroupAvatarUrl,
+    old_groupname,
+    setOldGroupname,
   } = useGroup();
-
-  const [isEditable, setIsEditable] = useState(false);
-  const [isGroupdataLoading, setIsGroupdataLoading] = useState(true);
-  const { showToast } = useToast();
-  const { defaultColor } = useColors();
   const { view, setView } = useLogsView();
 
+  const { showToast } = useToast();
+  const { defaultColor } = useColors();
+  const [isEditable, setIsEditable] = useState(false);
+
   const cancelSave = () => {
-    setGroupname(old_group_name);
+    setGroupname(old_groupname);
     setIsEditable(false);
   };
   const submitSave = async () => {
@@ -70,7 +68,7 @@ export const GroupPage: React.FC = () => {
       updated_at: new Date(),
     };
 
-    if (groupname !== old_group_name) {
+    if (groupname !== old_groupname) {
       try {
         let { error } = await supabase.from('groups').upsert(updates, {
           returning: 'minimal', // Don't return the value after inserting
@@ -88,43 +86,7 @@ export const GroupPage: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchGroupData = async () => {
-      try {
-        setIsGroupdataLoading(true);
-        let { data, error } = await supabase
-          .from('groups')
-          .select(
-            `
-            id,
-            group_name,
-            avatar_url,
-            creator_id,
-            profiles (id, username, avatar_url)
-        `,
-          )
-          .eq('id', group_id)
-          .single();
-
-        let _groupData: GroupPageDataType = data;
-        const { avatar_url, group_name, creator_id } = _groupData;
-
-        setCreatorId(creator_id);
-        setGroupname(group_name);
-        setGroupAvatarUrl(avatar_url);
-        setOldGroupname(group_name);
-
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      } finally {
-        setIsGroupdataLoading(false);
-      }
-    };
-
-    fetchGroupData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { isLoading } = useFetchGroupData(group_id);
 
   const updateGroupPicture = async (avatar_url: StringOrUndefined) => {
     try {
@@ -156,7 +118,7 @@ export const GroupPage: React.FC = () => {
       leftSide={
         <Flex flexDir="column" w="100%" h="80%">
           <Skeleton
-            isLoading={isGroupdataLoading}
+            isLoading={isLoading}
             props={{
               borderRadius: 100,
             }}
@@ -173,11 +135,10 @@ export const GroupPage: React.FC = () => {
                       avatar_url={group_avatar_url}
                       avatar="Group"
                     />
-                    <Flex
+                    <Center
                       display={{ sm: 'flex', lg: 'none' }}
                       w="100%"
                       h="40%"
-                      justifyContent="center"
                     >
                       <DeleteGroupButton
                         user_id={user?.id}
@@ -185,7 +146,7 @@ export const GroupPage: React.FC = () => {
                         creator_id={creator_id}
                         isEditable={isEditable}
                       />
-                    </Flex>
+                    </Center>
                   </VStack>
                   <VStack>
                     <Input
@@ -216,11 +177,7 @@ export const GroupPage: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <NameAndAvatar
-                    title={groupname}
-                    avatar_url={group_avatar_url}
-                    avatar="Group"
-                  />
+                  <GroupNameAndAvatar />
                   {user?.id === creator_id && isEditable === false ? (
                     <PenButton onClick={() => setIsEditable(true)} />
                   ) : null}
@@ -228,19 +185,14 @@ export const GroupPage: React.FC = () => {
               )}
             </HeaderAvatar>
           </Skeleton>
-          <Flex
-            display={{ base: 'none', lg: 'flex' }}
-            w="100%"
-            h="40%"
-            justifyContent="center"
-          >
+          <Center display={{ base: 'none', lg: 'flex' }} w="100%" h="40%">
             <DeleteGroupButton
               user_id={user?.id}
               group_id={group_id}
               creator_id={creator_id}
               isEditable={isEditable}
             />
-          </Flex>
+          </Center>
         </Flex>
       }
       middle={
@@ -273,8 +225,6 @@ export const GroupPage: React.FC = () => {
                   {user?.id === creator_id ? (
                     <EditButtons
                       buttonGroupProps={{
-                        mt: { base: 0, sm: '2' },
-                        alignItems: 'center',
                         size: 'sm',
                       }}
                       onCrossClick={cancelSave}
@@ -284,27 +234,15 @@ export const GroupPage: React.FC = () => {
                 </VStack>
               </HStack>
             ) : (
-              <Flex
-                flexDirection="row"
-                display={{ base: 'flex', sm: 'none' }}
-                alignItems="center"
-              >
-                <Box mr={2}>
-                  <AvatarGroup src={group_avatar_url} />
-                </Box>
-
-                <Name
-                  title={groupname}
-                  textProps={{
-                    fontSize: '4xl',
-                  }}
-                />
+              <Center>
+                <GroupNameAndAvatarMiddle />
                 {user?.id === creator_id && isEditable === false ? (
                   <PenButton onClick={() => setIsEditable(true)} />
                 ) : null}
-              </Flex>
+              </Center>
             )}
           </Flex>
+
           <VStack spacing={4}>
             <HStack justifyContent="center">
               <Box

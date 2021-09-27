@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { LeaveGroupButton } from '../../components/Buttons';
 import { MembersContainer } from '../../components/Containers';
-import { MainLayout } from '../../components/Layouts';
-import { PageHeaderBack } from '../../components/Layouts/Pages';
 import {
   HeaderAvatar,
-  NameAndAvatar,
-  NameAndAvatarMiddle,
-} from '../../components/Layouts/Profile';
+  MainLayout,
+  PageHeaderBack,
+} from '../../components/Layouts';
+import {
+  GroupNameAndAvatar,
+  GroupNameAndAvatarMiddle,
+} from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
 import { AddNewMemberModal } from '../../components/Modals';
 import { Skeleton } from '../../components/Skeleton';
@@ -29,8 +31,7 @@ const Members: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
 
-  const { groupname, group_avatar_url, setMembers, creator_id } =
-    useGroup();
+  const { setMembers, creator_id } = useGroup();
 
   const { subscribetoMemberInserts } = useSubscribeToMemberInserts({
     group_id,
@@ -88,11 +89,7 @@ const Members: React.FC = () => {
           }}
         >
           <HeaderAvatar>
-            <NameAndAvatar
-              title={groupname}
-              avatar_url={group_avatar_url}
-              avatar="Group"
-            />
+            <GroupNameAndAvatar />
           </HeaderAvatar>
           <LeaveGroupButton
             user_id={user?.id}
@@ -103,14 +100,8 @@ const Members: React.FC = () => {
       }
       middle={
         <>
-          <NameAndAvatarMiddle
-            name={groupname}
-            avatar_url={group_avatar_url}
-            avatar="Group"
-          />
-
+          <GroupNameAndAvatarMiddle />
           <PageHeaderBack>Members</PageHeaderBack>
-
           <MembersContainer
             group_id={group_id}
             isLoading={isLoading}

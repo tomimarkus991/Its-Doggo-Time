@@ -1,24 +1,22 @@
-import { IconButton, VStack, Input, Box } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, IconButton, Input, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { useAuth } from '../../context';
-import { StringOrUndefined } from '../../types';
+import { useAuth, useGroup } from '../../context';
 import { supabase } from '../../utils/supabaseClient';
 import { AvatarUpload } from '../Avatar';
 import { AddLogCheckboxIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
 const CreateGroupContainer: React.FC = () => {
-  const [group_name, setGroupname] = useState<StringOrUndefined>();
-  const [group_avatar_url, setGroupAvatarUrl] =
-    useState<StringOrUndefined>();
+  const { groupname, setGroupname, group_avatar_url, setGroupAvatarUrl } =
+    useGroup();
   const { user } = useAuth();
   const router = useHistory();
 
   const createGroup = async () => {
     try {
       const updates = {
-        group_name,
+        group_name: groupname,
         avatar_url: group_avatar_url,
         creator_id: user?.id,
         updated_at: new Date(),
@@ -95,7 +93,7 @@ const CreateGroupContainer: React.FC = () => {
         <Input
           variant={'removeDefault'}
           autoCapitalize="off"
-          value={group_name}
+          value={groupname}
           onChange={e => setGroupname(e.target.value)}
           isRequired
           size="lg"

@@ -7,8 +7,8 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
-  onCrossClick: any;
-  onCheckClick: any;
+  onCrossClick: () => void;
+  onCheckClick: () => void;
   buttonGroupProps?: ButtonGroupProps;
 }
 

@@ -1,15 +1,17 @@
-import { Box, Flex, HStack, Input, VStack } from '@chakra-ui/react';
+import { Center, Flex, HStack, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
+import { AvatarUpload } from '../../components/Avatar';
 import { EditButtons, PenButton } from '../../components/Buttons';
 import { MyProfileContainer } from '../../components/Containers';
-import { Name } from '../../components/Headers';
 import { Invites } from '../../components/Invites';
-import { MainLayout } from '../../components/Layouts';
-import { PageHeader } from '../../components/Layouts/Pages';
 import {
   HeaderAvatar,
-  NameAndAvatar,
+  MainLayout,
+  PageHeader,
+} from '../../components/Layouts';
+import {
+  ProfileNameAndAvatar,
+  ProfileNameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
 import { Skeleton } from '../../components/Skeleton';
@@ -116,7 +118,7 @@ const Profile: React.FC = () => {
         >
           <HeaderAvatar>
             {isEditable ? (
-              <VStack>
+              <HStack flexDirection={{ sm: 'row', lg: 'column' }}>
                 <AvatarUpload
                   onUpload={(url: string) => {
                     setUserAvatarUrl(url);
@@ -137,26 +139,21 @@ const Profile: React.FC = () => {
                     size="lg"
                     mt="4"
                     bg="white"
-                    width={{ base: '3xs', xl: '2xs' }}
+                    width={{ sm: '3xs', xl: '2xs' }}
                   />
                   <EditButtons
                     buttonGroupProps={{
-                      mt: { base: 0, sm: '2' },
-                      alignItems: 'center',
+                      mt: 2,
                       size: 'sm',
                     }}
                     onCrossClick={cancelSave}
                     onCheckClick={submitSave}
                   />
                 </VStack>
-              </VStack>
+              </HStack>
             ) : (
               <>
-                <NameAndAvatar
-                  title={username}
-                  avatar_url={user_avatar_url}
-                  avatar="User"
-                />
+                <ProfileNameAndAvatar />
                 <PenButton onClick={() => setIsEditable(true)} />
               </>
             )}
@@ -189,13 +186,11 @@ const Profile: React.FC = () => {
                     size="lg"
                     mt="4"
                     bg="white"
-                    width={{ base: '3xs', xl: '2xs' }}
+                    width="3xs"
                   />
 
                   <EditButtons
                     buttonGroupProps={{
-                      mt: { base: 0, sm: '2' },
-                      alignItems: 'center',
                       size: 'sm',
                     }}
                     onCrossClick={cancelSave}
@@ -204,28 +199,13 @@ const Profile: React.FC = () => {
                 </VStack>
               </HStack>
             ) : (
-              <Flex
-                flexDirection="row"
-                display={{ base: 'flex', sm: 'none' }}
-                alignItems="center"
-              >
-                <Box mr={2}>
-                  <AvatarProfile src={user_avatar_url} />
-                </Box>
-
-                <Name
-                  title={username}
-                  textProps={{
-                    fontSize: '4xl',
-                  }}
-                />
+              <Center>
+                <ProfileNameAndAvatarMiddle />
                 <PenButton onClick={() => setIsEditable(true)} />
-              </Flex>
+              </Center>
             )}
           </Flex>
-
           <PageHeader>My Profile</PageHeader>
-
           <MyProfileContainer isLoading={isAvatarLoading} />
         </>
       }

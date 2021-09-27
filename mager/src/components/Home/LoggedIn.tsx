@@ -6,18 +6,16 @@ import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
 import { supabase } from '../../utils/supabaseClient';
 import { GroupsContainer } from '../Containers';
 import { Invites } from '../Invites';
-import { MainLayout } from '../Layouts';
-import { PageHeader } from '../Layouts/Pages';
+import { HeaderAvatar, MainLayout, PageHeader } from '../Layouts';
 import {
-  HeaderAvatar,
-  NameAndAvatar,
-  NameAndAvatarMiddle,
+  ProfileNameAndAvatar,
+  ProfileNameAndAvatarMiddle,
 } from '../Layouts/Profile';
 import { ProfileLink } from '../Links';
 import { Skeleton } from '../Skeleton';
 
 const LoggedIn: React.FC = () => {
-  const { username, user_avatar_url, setUsername } = useUser();
+  const { setUsername } = useUser();
 
   useSubscribeToGroupInserts();
   const { user } = useAuth();
@@ -75,21 +73,13 @@ const LoggedIn: React.FC = () => {
           }}
         >
           <HeaderAvatar>
-            <NameAndAvatar
-              title={username}
-              avatar_url={user_avatar_url}
-              avatar="User"
-            />
+            <ProfileNameAndAvatar />
           </HeaderAvatar>
         </Skeleton>
       }
       middle={
         <>
-          <NameAndAvatarMiddle
-            name={username}
-            avatar_url={user_avatar_url}
-            avatar="User"
-          />
+          <ProfileNameAndAvatarMiddle />
 
           <PageHeader>Groups</PageHeader>
           <GroupsContainer isLoading={isLoading} />

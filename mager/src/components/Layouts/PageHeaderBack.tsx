@@ -1,6 +1,6 @@
 import { Center, Grid, Heading } from '@chakra-ui/react';
 import React from 'react';
-import { BackIcon } from '../../Icons';
+import { BackIcon } from '../Icons';
 
 const PageHeaderBack: React.FC = ({ children }) => {
   return (

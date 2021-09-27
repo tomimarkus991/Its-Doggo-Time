@@ -1,12 +1,11 @@
 import { Text, TextProps } from '@chakra-ui/react';
-import { StringOrUndefined } from '../../types';
 
 interface Props {
-  title: StringOrUndefined;
+  name: string;
   textProps?: TextProps;
 }
 
-const Name: React.FC<Props> = ({ title, textProps }) => {
+const Name: React.FC<Props> = ({ name, textProps }) => {
   return (
     <Text
       textAlign="center"
@@ -14,7 +13,7 @@ const Name: React.FC<Props> = ({ title, textProps }) => {
       maxW={{ base: '16rem', sm: '20rem', md: '16rem' }}
       {...textProps}
     >
-      {title}
+      {name}
     </Text>
   );
 };
