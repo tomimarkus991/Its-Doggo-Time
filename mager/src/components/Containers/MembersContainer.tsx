@@ -1,37 +1,30 @@
-import { Box, IconButton, SimpleGrid } from '@chakra-ui/react';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import useMembersPlaceholder from '../../hooks/placeholders/useMembersPlaceholder';
-import { ProfileType, StringOrUndefined } from '../../types';
-import { MemberCard } from '../Cards';
-import { ProfileIcon } from '../Icons/Navbar';
-import MainContainerLayout from '../Layouts/Containers';
 import { CheckIcon } from '@chakra-ui/icons';
-import { useAuth } from '../../context/authContext/AuthContext';
-import useColors from '../../hooks/useColors';
+import { Box, IconButton, SimpleGrid } from '@chakra-ui/react';
+import React from 'react';
+import { useState } from 'react';
+import { useAuth, useGroup } from '../../context';
+import { useMembersPlaceholder } from '../../hooks/placeholders';
+import { MemberType, StringOrUndefined } from '../../types';
+import { PenButton } from '../Buttons';
+import { MemberCard } from '../Cards';
+import { ProfileIcon } from '../Icons';
+import { MainContainerLayout } from '../Layouts';
+
 interface Props {
-  members: ProfileType[] | undefined;
-  isEditable: boolean;
-  setIsEditable: React.Dispatch<React.SetStateAction<boolean>>;
   group_id: StringOrUndefined;
-  creator_id: StringOrUndefined;
   isLoading: boolean;
   AddNewMember: any;
 }
 
-export const MembersContainer: React.FC<Props> = ({
-  members,
-  isEditable,
-  setIsEditable,
+const MembersContainer: React.FC<Props> = ({
   group_id,
-  creator_id,
   isLoading,
   AddNewMember,
 }) => {
-  const { placeholders } = useMembersPlaceholder(members);
   const { user } = useAuth();
-  const { penColor } = useColors();
+  const { members, creator_id } = useGroup();
+  const { placeholders } = useMembersPlaceholder(members);
+  const [isEditable, setIsEditable] = useState(false);
 
   return (
     <MainContainerLayout
@@ -43,15 +36,17 @@ export const MembersContainer: React.FC<Props> = ({
           base: 'xs',
           sm: 'md',
           sm2: 'lg',
-          md: 'xl',
-          lg: 'lg',
-          xl: 'xl',
+          md: 'lg',
+          lg: 'xl',
         },
-        h: { base: 'md', sm: 'sm' },
+        h: { base: 'md', sm: 'sm', md: 'sm' },
       }}
     >
-      <SimpleGrid columns={{ base: 2, sm: 3 }} spacing={10}>
-        {members?.map((member: ProfileType, index: number) => (
+      <SimpleGrid
+        columns={{ base: 2, sm: 3 }}
+        spacing={{ base: 10, sm: 10, md: 10, lg: 10 }}
+      >
+        {members?.map((member: MemberType, index: number) => (
           <MemberCard
             key={index}
             member={member}
@@ -73,29 +68,20 @@ export const MembersContainer: React.FC<Props> = ({
         ))}
         <Box position="absolute" right="0" top="0">
           <Box position="relative" float="right" right="2" top="2">
-            {user?.id === creator_id && isEditable === false ? (
-              <IconButton
-                onClick={() => setIsEditable(true)}
-                aria-label="Edit"
-                bgColor="transparent"
-                _hover={{ bgColor: 'transparent' }}
-                icon={
-                  <FontAwesomeIcon
-                    icon={faPen}
-                    size={'lg'}
-                    color={penColor}
+            {user?.id === creator_id ? (
+              <>
+                {isEditable === false ? (
+                  <PenButton onClick={() => setIsEditable(true)} />
+                ) : (
+                  <IconButton
+                    borderRadius="50"
+                    onClick={() => setIsEditable(false)}
+                    aria-label="Save"
+                    colorScheme="green"
+                    icon={<CheckIcon color="white" />}
                   />
-                }
-              />
-            ) : null}
-            {user?.id === creator_id && isEditable ? (
-              <IconButton
-                borderRadius="50"
-                onClick={() => setIsEditable(false)}
-                aria-label="Save"
-                colorScheme="green"
-                icon={<CheckIcon color="white" />}
-              />
+                )}
+              </>
             ) : null}
           </Box>
         </Box>
@@ -103,3 +89,5 @@ export const MembersContainer: React.FC<Props> = ({
     </MainContainerLayout>
   );
 };
+
+export default MembersContainer;

@@ -5,15 +5,13 @@ import {
   DefaultPrivateLayoutRoute,
 } from '../components/Routes';
 import AddLog from './AddLog';
-
-import CreateGroup from './CreateGroup/CreateGroup';
+import CreateGroup from './CreateGroup';
 import EditLog from './EditLog';
-import Error from './Error';
 import ForgotPassword from './ForgotPassword';
-import GroupPage from './Group';
+import GroupPage from './GroupPage';
 import Home from './Home';
 import Login from './Login';
-import MembersPage from './Members';
+import Members from './Members';
 import Profile from './Profile';
 import Register from './Register';
 
@@ -40,7 +38,7 @@ const Router: React.FC = () => {
       <DefaultPrivateLayoutRoute
         exact
         path="/group/:group_id/members"
-        component={MembersPage}
+        component={Members}
       />
       <DefaultPrivateLayoutRoute
         exact

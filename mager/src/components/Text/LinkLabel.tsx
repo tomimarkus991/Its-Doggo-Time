@@ -5,7 +5,7 @@ interface Props {
   label: string;
 }
 
-export const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
+const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
   return (
     <FormLabel
       htmlFor={htmlFor}
@@ -19,3 +19,5 @@ export const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
     </FormLabel>
   );
 };
+
+export default LinkLabel;

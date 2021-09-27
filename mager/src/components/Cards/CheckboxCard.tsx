@@ -1,7 +1,7 @@
 import { Box, useCheckbox } from '@chakra-ui/react';
-import { PeeIcon, PoopIcon } from '../Icons/Logs';
+import { PeeIcon, PoopIcon } from '../Icons';
 
-export const CheckboxCard = (props: any) => {
+const CheckboxCard = (props: any) => {
   const { getInputProps, getCheckboxProps } = useCheckbox(props);
 
   const input = getInputProps();
@@ -30,3 +30,5 @@ export const CheckboxCard = (props: any) => {
     </Box>
   );
 };
+
+export default CheckboxCard;

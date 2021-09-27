@@ -2,10 +2,7 @@ import { useHistory } from 'react-router';
 import { StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useLeaveGroup = (
-  user_id: StringOrUndefined,
-  group_id: string,
-) => {
+const useLeaveGroup = (user_id: StringOrUndefined, group_id: string) => {
   const router = useHistory();
 
   const leaveGroup = async () => {
@@ -28,3 +25,5 @@ export const useLeaveGroup = (
 
   return leaveGroup;
 };
+
+export default useLeaveGroup;

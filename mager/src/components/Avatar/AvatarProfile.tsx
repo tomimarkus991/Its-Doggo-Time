@@ -1,11 +1,11 @@
-import { Avatar } from './Avatar';
-import ProfileAvatarIcon from '../Icons/Avatar/Profile';
+import { Avatar } from '.';
+import { ProfileAvatarIcon } from '../Icons';
 import { StringOrUndefined } from '../../types';
 interface Props {
   src: StringOrUndefined;
 }
 
-export const AvatarProfile: React.FC<Props> = ({ src }) => {
+const AvatarProfile: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       src={src}
@@ -19,3 +19,5 @@ export const AvatarProfile: React.FC<Props> = ({ src }) => {
     />
   );
 };
+
+export default AvatarProfile;

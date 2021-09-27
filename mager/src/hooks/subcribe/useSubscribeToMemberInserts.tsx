@@ -1,13 +1,13 @@
-import { ProfileType } from '../../types';
+import { useGroup } from '../../context';
+import { MemberType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 export const useSubscribeToMemberInserts = ({
   group_id,
-  setProfiles,
 }: {
   group_id: string;
-  setProfiles: React.Dispatch<React.SetStateAction<ProfileType[]>>;
 }) => {
+  const { setMembers } = useGroup();
   return {
     subscribetoMemberInserts: () =>
       // when you are inserted to members
@@ -28,15 +28,15 @@ export const useSubscribeToMemberInserts = ({
             .eq('id', payload.new.profile_id)
             .single();
 
-          const { id, username, avatar_url } = profile as ProfileType;
+          const { id, username, avatar_url } = profile as MemberType;
 
-          const newProfile: ProfileType = {
+          const newProfile: MemberType = {
             id,
             username,
             avatar_url,
           };
           // update frontend with new data
-          setProfiles((oldData: any) => [...oldData, newProfile]);
+          setMembers((oldData: any) => [...oldData, newProfile]);
         })
         .subscribe(),
   };

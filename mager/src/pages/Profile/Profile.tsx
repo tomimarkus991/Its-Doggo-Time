@@ -1,54 +1,48 @@
-import {
-  Box,
-  Flex,
-  HStack,
-  IconButton,
-  Input,
-  VStack,
-} from '@chakra-ui/react';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { AvatarProfile } from '../../components/Avatar';
-import AvatarUpload from '../../components/Avatar/AvatarUpload/AvatarUpload';
-import EditButtons from '../../components/Buttons/EditButtons';
-import MyProfileContainer from '../../components/Containers/MyProfileContainer';
+import { Box, Flex, HStack, Input, VStack } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { AvatarProfile, AvatarUpload } from '../../components/Avatar';
+import { EditButtons, PenButton } from '../../components/Buttons';
+import { MyProfileContainer } from '../../components/Containers';
 import { Name } from '../../components/Headers';
-import Invites from '../../components/Invites';
-import MainLayout from '../../components/Layouts/MainLayout';
-import PageHeader from '../../components/Layouts/Pages/PageHeader';
+import { Invites } from '../../components/Invites';
+import { MainLayout } from '../../components/Layouts';
+import { PageHeader } from '../../components/Layouts/Pages';
 import {
   HeaderAvatar,
   NameAndAvatar,
 } from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
-import Skeleton from '../../components/Skeleton';
-import { useAuth } from '../../context/authContext/AuthContext';
-import useColors from '../../hooks/useColors';
-import useToast from '../../hooks/useToast';
-import { InviteDataType, StringOrUndefined } from '../../types';
+import { Skeleton } from '../../components/Skeleton';
+import { useAuth } from '../../context';
+import { useUser } from '../../context/UserContext';
+import { useToast } from '../../hooks';
+import { useFetchUserProfile } from '../../hooks/api';
+import { StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
+  const {
+    username,
+    setUsername,
+    user_avatar_url,
+    setUserAvatarUrl,
+    old_username,
+    setOldUsername,
+  } = useUser();
 
-  const [username, setUsername] = useState<StringOrUndefined>();
-  const [old_username, setOldUsername] = useState<StringOrUndefined>();
-  const [avatar_url, setAvatarUrl] = useState<StringOrUndefined>();
-  const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isUserdataLoading, setIsUserdataLoading] =
-    useState<boolean>(true);
+  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
+
   const { showToast } = useToast();
-  // const [areInvitesLoading, setAreInvitesLoading] =
-  //   useState<boolean>(true);
   const [isEditable, setIsEditable] = useState(false);
-  const { penColor } = useColors();
+
+  const { isLoading } = useFetchUserProfile();
 
   const cancelSave = () => {
     setUsername(old_username);
     setIsEditable(false);
   };
+
   const submitSave = async () => {
     setIsEditable(false);
     const profile_updates = {
@@ -56,50 +50,38 @@ const Profile: React.FC = () => {
       username,
       updated_at: new Date(),
     };
+    if (username !== old_username) {
+      try {
+        // update username
+        await supabase.from('profiles').upsert(profile_updates, {
+          returning: 'minimal',
+        });
 
-    try {
-      // update username
-      await supabase.from('profiles').upsert(profile_updates, {
-        returning: 'minimal',
-      });
-      // update all receivers usernames
-      await supabase
-        .from('invites')
-        .update(
-          { receiver: username },
-          {
-            returning: 'minimal',
-          },
-        )
-        .eq('receiver', old_username);
+        // delete all invites for that user
+        await supabase
+          .from('invites')
+          .delete()
+          .eq('sender', old_username)
+          .eq('receiver', old_username);
 
-      // update all senders usernames
-      await supabase
-        .from('invites')
-        .update(
-          { sender: username },
-          {
-            returning: 'minimal',
-          },
-        )
-        .eq('sender', old_username);
-      setOldUsername(username);
-    } catch (error) {
-      throw error;
-    } finally {
-      showToast({
-        title: 'Group Updated',
-        description: 'Your Group has been updated.',
-      });
+        setOldUsername(username);
+      } catch (error) {
+        throw error;
+      } finally {
+        showToast({
+          title: 'Group Updated',
+          description: 'Your Group has been updated.',
+        });
+      }
     }
   };
 
-  const updateAvatar = async (avatar_url: StringOrUndefined) => {
+  const updateAvatar = async (user_avatar_url: StringOrUndefined) => {
     try {
-      setIsLoading(true);
+      setIsAvatarLoading(true);
       const updates = {
         id: user?.id,
-        avatar_url,
+        avatar_url: user_avatar_url,
         updated_at: new Date(),
       };
 
@@ -113,7 +95,7 @@ const Profile: React.FC = () => {
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false);
+      setIsAvatarLoading(false);
       showToast({
         title: 'Photo Updated',
         description: 'Your Profile Photo has been updated.',
@@ -121,43 +103,11 @@ const Profile: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUserdata = async () => {
-      try {
-        setIsUserdataLoading(true);
-
-        let { data, error } = await supabase
-          .from('profiles')
-          .select(
-            `
-            id,
-            username,
-            avatar_url
-        `,
-          )
-          .eq('id', user?.id)
-          .single();
-
-        setOldUsername(data.username);
-        setUsername(data.username);
-        setAvatarUrl(data.avatar_url);
-
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      } finally {
-        setIsUserdataLoading(false);
-      }
-    };
-
-    fetchUserdata();
-  }, []);
-
   return (
     <MainLayout
       leftSide={
         <Skeleton
-          isLoading={isUserdataLoading}
+          isLoading={isLoading}
           props={{
             borderRadius: 100,
             w: { sm: '95%', md: '90%', lg: 'initial' },
@@ -169,10 +119,10 @@ const Profile: React.FC = () => {
               <VStack>
                 <AvatarUpload
                   onUpload={(url: string) => {
-                    setAvatarUrl(url);
+                    setUserAvatarUrl(url);
                     updateAvatar(url);
                   }}
-                  avatar_url={avatar_url}
+                  avatar_url={user_avatar_url}
                   avatar="User"
                 />
                 <VStack>
@@ -204,22 +154,10 @@ const Profile: React.FC = () => {
               <>
                 <NameAndAvatar
                   title={username}
-                  avatar_url={avatar_url}
+                  avatar_url={user_avatar_url}
                   avatar="User"
                 />
-                <IconButton
-                  onClick={() => setIsEditable(true)}
-                  aria-label="Edit"
-                  bgColor="transparent"
-                  _hover={{ bgColor: 'transparent' }}
-                  icon={
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size={'lg'}
-                      color={penColor}
-                    />
-                  }
-                />
+                <PenButton onClick={() => setIsEditable(true)} />
               </>
             )}
           </HeaderAvatar>
@@ -232,10 +170,10 @@ const Profile: React.FC = () => {
               <HStack>
                 <AvatarUpload
                   onUpload={(url: string) => {
-                    setAvatarUrl(url);
+                    setUserAvatarUrl(url);
                     updateAvatar(url);
                   }}
-                  avatar_url={avatar_url}
+                  avatar_url={user_avatar_url}
                   avatar="User"
                 />
 
@@ -272,7 +210,7 @@ const Profile: React.FC = () => {
                 alignItems="center"
               >
                 <Box mr={2}>
-                  <AvatarProfile src={avatar_url} />
+                  <AvatarProfile src={user_avatar_url} />
                 </Box>
 
                 <Name
@@ -281,35 +219,19 @@ const Profile: React.FC = () => {
                     fontSize: '4xl',
                   }}
                 />
-                <IconButton
-                  onClick={() => setIsEditable(true)}
-                  aria-label="Edit"
-                  bgColor="transparent"
-                  _hover={{ bgColor: 'transparent' }}
-                  icon={
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      size={'lg'}
-                      color={penColor}
-                    />
-                  }
-                />
+                <PenButton onClick={() => setIsEditable(true)} />
               </Flex>
             )}
           </Flex>
 
           <PageHeader>My Profile</PageHeader>
 
-          <MyProfileContainer isLoading={isLoading} />
+          <MyProfileContainer isLoading={isAvatarLoading} />
         </>
       }
       rightSide={
         <>
-          <Invites
-            userInvites={userInvites}
-            setUserInvites={setUserInvites}
-            currentUsername={username}
-          />
+          <Invites />
           <MyGroupsLink />
         </>
       }

@@ -1,13 +1,21 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import AuthDetailsProvider from '../context/authContext';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
 import '@fontsource/viga';
 import type {} from '@mui/lab/themeAugmentation';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
+
+import {
+  UserDetailsProvider,
+  GroupDetailsProvider,
+  AuthDetailsProvider,
+  LogsDetailsProvider,
+  LogsViewProvider,
+  InviteDetailsProvider,
+} from '../context';
 // import { useEffect } from 'react';
 
 function SafeHydrate({ children }: any) {
@@ -58,14 +66,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={materialTheme}>
         <ChakraProvider resetCSS theme={theme}>
           <AuthDetailsProvider>
-            <Head>
-              <title>It&#39;s Doggo Time</title>
-              <meta
-                name="viewport"
-                content="initial-scale=1, width=device-width"
-              />
-            </Head>
-            <Component {...pageProps} />
+            <UserDetailsProvider>
+              <GroupDetailsProvider>
+                <LogsDetailsProvider>
+                  <LogsViewProvider>
+                    <InviteDetailsProvider>
+                      <Head>
+                        <title>It&#39;s Doggo Time</title>
+                        <meta
+                          name="viewport"
+                          content="initial-scale=1, width=device-width"
+                        />
+                      </Head>
+                      <Component {...pageProps} />
+                    </InviteDetailsProvider>
+                  </LogsViewProvider>
+                </LogsDetailsProvider>
+              </GroupDetailsProvider>
+            </UserDetailsProvider>
           </AuthDetailsProvider>
         </ChakraProvider>
       </ThemeProvider>

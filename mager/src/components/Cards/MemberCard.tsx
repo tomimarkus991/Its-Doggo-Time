@@ -2,18 +2,18 @@ import { Box, Text, VStack } from '@chakra-ui/react';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { ProfileType, StringOrUndefined } from '../../types';
+import { ProfileAvatarCard } from '.';
+import { MemberType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { ProfileAvatarCard } from '../Avatar/Cards';
 
 interface Props {
-  member: ProfileType;
+  member: MemberType;
   isEditable: boolean;
   group_id: StringOrUndefined;
   creator_id: StringOrUndefined;
 }
 
-export const MemberCard: React.FC<Props> = ({
+const MemberCard: React.FC<Props> = ({
   member,
   isEditable,
   group_id,
@@ -65,3 +65,5 @@ export const MemberCard: React.FC<Props> = ({
     </VStack>
   );
 };
+
+export default MemberCard;

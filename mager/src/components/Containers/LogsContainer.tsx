@@ -1,117 +1,87 @@
 import {
+  Box,
   Center,
   Heading,
+  IconButton,
   SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import useLogsPlaceholder from '../../hooks/placeholders/useLogsPlaceholder';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useLogs } from '../../context';
+import { useColors } from '../../hooks';
+import { useFetchExcrementLogs } from '../../hooks/api';
+import { useLogsPlaceholder } from '../../hooks/placeholders';
 import { useSubscribeToLogInserts } from '../../hooks/subcribe';
+import { useCountRenders } from '../../hooks/useCountRenders';
 import { LogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
-import { AddNewLogIconButton } from '../Buttons';
 import { LogCard } from '../Cards';
-import { AddLogIcon } from '../Icons/Doggo';
-import { DefaultPeeAndPoopIcon } from '../Icons/Logs';
-
-import MainContainerLayout from '../Layouts/Containers';
+import { AddLogIcon, DefaultPeeAndPoopIcon } from '../Icons';
+import { MainContainerLayout } from '../Layouts';
 
 interface Props {}
 interface RouteParams {
   group_id: string;
 }
 
-export const LogsContainer: React.FC<Props> = ({}) => {
-  const [logsdata, setLogsdata] = useState<LogsdataType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const LogsContainer: React.FC<Props> = () => {
   const { group_id } = useParams<RouteParams>();
-  const { placeholders } = useLogsPlaceholder(logsdata);
-  const { subscribeToLogInserts } = useSubscribeToLogInserts({
+  const { containerItemColor } = useColors();
+  const { isLoading } = useFetchExcrementLogs(group_id);
+  const { excrementLogs } = useLogs();
+  const { placeholders } = useLogsPlaceholder(excrementLogs);
+
+  useSubscribeToLogInserts({
     group_id,
-    setLogsdata,
   });
 
-  useEffect(() => {
-    const getLogsdata = async () => {
-      try {
-        setIsLoading(true);
-        // gets the 4 most recent logs
-        const { data } = await supabase
-          .from('logs')
-          .select(
-            `
-        id,
-        pee,
-        poop,
-        created_at
-        `,
-          )
-          .eq('group_id', group_id)
-          .order('created_at', { ascending: false })
-          .limit(4);
-        let _data = data as LogsdataType[];
-
-        const sortedData = _data.sort(
-          (a, b) =>
-            new Date(a.created_at).valueOf() -
-            new Date(b.created_at).valueOf(),
-        );
-
-        setLogsdata(sortedData);
-        return;
-      } catch (error) {
-        throw error;
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    subscribeToLogInserts();
-
-    getLogsdata();
-    return () => {
-      supabase.removeSubscription(subscribeToLogInserts());
-    };
-  }, []);
+  useCountRenders();
 
   return (
     <MainContainerLayout
       mainH={{ base: 'xs', sm: 'sm', md: 'sm' }}
       isLoading={isLoading}
       button={
-        <AddNewLogIconButton
-          to={`/group/${group_id}/add-log`}
-          icon={
-            <AddLogIcon
-              fontSize={{
-                base: '5rem',
-                md: '6rem',
-                lg: '7rem',
-              }}
-            />
-          }
-          ariaLabel="Add new Log"
-          isDisabled={false}
-        />
+        <Link to={`/group/${group_id}/add-log`}>
+          <Box
+            as={IconButton}
+            aria-label="Add new Log"
+            h="100%"
+            bgColor="transparent"
+            _hover={{ bgColor: 'transparent' }}
+            isDisabled={false}
+            icon={
+              <AddLogIcon
+                fontSize={{
+                  base: '5rem',
+                  md: '6rem',
+                  lg: '7rem',
+                }}
+              />
+            }
+          />
+        </Link>
       }
       containerProps={{
         w: {
           base: 'xs',
           sm: 'sm',
           sm2: 'lg',
-          md: '2xl',
+          md: 'xl',
           lg: 'xl',
-          xl: '2xl',
+          xl: 'xl',
         },
         h: { base: '22rem', sm: 'sm', md: 'md' },
       }}
     >
       {isLoading ? null : (
         <>
-          {logsdata === null ||
-          logsdata === undefined ||
-          logsdata.length === 0 ? (
+          {excrementLogs === null ||
+          excrementLogs === undefined ||
+          excrementLogs.length === 0 ? (
             <Center h="100%">
               <VStack textAlign="center">
                 <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
@@ -139,7 +109,7 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                 px={{ base: 4, md: 12, lg: 16 }}
                 py={{ base: 4, md: 6, lg: 8 }}
               >
-                {logsdata.map((log: LogsdataType, index: number) => (
+                {excrementLogs.map((log: LogsdataType, index: number) => (
                   <LogCard key={index} log={log} group_id={group_id} />
                 ))}
                 {placeholders?.map((_, index: number) => (
@@ -163,6 +133,24 @@ export const LogsContainer: React.FC<Props> = ({}) => {
                     </VStack>
                   </Center>
                 ))}
+                <Box position="absolute" right="0" top="0">
+                  <Link to={`/group/${group_id}/summary`}>
+                    <Box
+                      position="relative"
+                      cursor="pointer"
+                      float="right"
+                      right={{ base: 2, sm: 4 }}
+                      top={{ base: 2, sm: 4 }}
+                      p={{ base: 2, sm: 3, md: 4 }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faEllipsisV}
+                        size="2x"
+                        color={containerItemColor}
+                      />
+                    </Box>
+                  </Link>
+                </Box>
               </SimpleGrid>
             </Center>
           )}
@@ -171,3 +159,5 @@ export const LogsContainer: React.FC<Props> = ({}) => {
     </MainContainerLayout>
   );
 };
+
+export default LogsContainer;

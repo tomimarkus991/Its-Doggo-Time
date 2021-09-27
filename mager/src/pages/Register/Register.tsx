@@ -1,5 +1,5 @@
 import { Heading, VStack } from '@chakra-ui/react';
-import RegisterAuth from '../../components/Auth/Register';
+import { RegisterAuth } from '../../components/Auth';
 
 const Register: React.FC = () => {
   return (

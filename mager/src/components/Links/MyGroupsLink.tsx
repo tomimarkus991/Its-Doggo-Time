@@ -1,10 +1,10 @@
 import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MyGroupsIcon } from '../Icons/Navbar';
+import { MyGroupsIcon } from '../Icons';
 import { LinkLabel } from '../Text';
 
-export const MyGroupsLink: React.FC = () => {
+const MyGroupsLink: React.FC = () => {
   return (
     <Link to="/">
       <VStack>
@@ -14,3 +14,5 @@ export const MyGroupsLink: React.FC = () => {
     </Link>
   );
 };
+
+export default MyGroupsLink;

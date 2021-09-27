@@ -1,35 +1,13 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Spacer,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { HeaderBackgroundDark } from '../Icons/DarkMode';
-import { DoggoIcon } from '../Icons/Doggo';
-import { HeaderBackgroundLight } from '../Icons/LightMode';
-const Header: React.FC = () => {
-  const { colorMode } = useColorMode();
+import { HeaderBackground, DoggoIcon } from '../Icons';
 
+const Header: React.FC = () => {
   return (
     <>
-      {colorMode === 'dark' ? (
-        <>
-          <HeaderBackgroundDark
-            h="100%"
-            display={{ base: 'none', lg: 'block' }}
-          />
-        </>
-      ) : (
-        <>
-          <HeaderBackgroundLight
-            h="100%"
-            display={{ base: 'none', lg: 'block' }}
-          />
-        </>
-      )}
+      <HeaderBackground h="100%" display={{ base: 'none', lg: 'block' }} />
+
       <Flex position="sticky" justifyContent="center" alignItems="center">
         <Flex
           flex={1}

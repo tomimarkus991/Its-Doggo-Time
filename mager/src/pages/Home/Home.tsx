@@ -1,10 +1,10 @@
 import { Grid, GridItem, Box } from '@chakra-ui/react';
 import React from 'react';
 import { Header2 } from '../../components/Header';
-import DefaultLayout from '../../components/Layouts/DefaultLayout';
-import LoggedIn from '../../components/LoggedIn';
-import LoggedOut from '../../components/LoggedOut';
-import { useAuth } from '../../context/authContext/AuthContext';
+import { DefaultLayout } from '../../components/Layouts';
+import { LoggedIn } from '../../components/Home';
+import { LoggedOut } from '../../components/Home';
+import { useAuth } from '../../context';
 
 const Home: React.FC = () => {
   const { user } = useAuth();

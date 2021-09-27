@@ -1,33 +1,30 @@
 import {
   HStack,
-  IconButton,
+  Box,
   useCheckboxGroup,
   VStack,
+  IconButton,
 } from '@chakra-ui/react';
 import {
   MuiPickersUtilsProvider,
   TimePicker as MTimePicker,
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
-// import { LocalizationProvider, TimePicker } from '@mui/lab';
-// import DateAdapter from '@mui/lab/AdapterMoment';
-// import { TextField } from '@mui/material';
-// import moment from 'moment';
-// import { BrowserView, MobileView } from 'react-device-detect';
 import 'moment/locale/et';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useAuth } from '../../context/authContext/AuthContext';
+import { useAuth } from '../../context';
 import { CreateLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { CheckboxCard } from '../Cards';
-import { AddLogCheckboxIcon } from '../Icons/Logs';
-import MainContainerLayout from '../Layouts/Containers';
+import { AddLogCheckboxIcon } from '../Icons';
+import { MainContainerLayout } from '../Layouts';
+
 interface RouteParams {
   group_id: string;
 }
 
-export const AddLogContainer: React.FC = () => {
+const AddLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { user } = useAuth();
   const router = useHistory();
@@ -83,9 +80,9 @@ export const AddLogContainer: React.FC = () => {
         h: 'xs',
       }}
       button={
-        <IconButton
+        <Box
+          as={IconButton}
           onClick={() => addLog()}
-          mt={4}
           h="100%"
           aria-label="Add Log Button"
           bgColor="transparent"
@@ -154,3 +151,5 @@ export const AddLogContainer: React.FC = () => {
     </MainContainerLayout>
   );
 };
+
+export default AddLogContainer;

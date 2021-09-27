@@ -1,36 +1,15 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Spacer,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  HeaderBackgroundDark,
-  SmallHeaderBgDark,
-} from '../Icons/DarkMode';
-import {
-  HeaderBackgroundLight,
-  SmallHeaderBgLight,
-} from '../Icons/LightMode';
-export const Header2: React.FC = () => {
-  const { colorMode } = useColorMode();
+import { HeaderBackground, HeaderBackgroundSmall } from '../Icons';
 
+export const Header2: React.FC = () => {
   return (
     <>
-      {colorMode === 'dark' ? (
-        <>
-          <SmallHeaderBgDark display={{ base: 'block', sm: 'none' }} />
-          <HeaderBackgroundDark display={{ base: 'none', sm: 'block' }} />
-        </>
-      ) : (
-        <>
-          <SmallHeaderBgLight display={{ base: 'block', sm: 'none' }} />
-          <HeaderBackgroundLight display={{ base: 'none', sm: 'block' }} />
-        </>
-      )}
+      <>
+        <HeaderBackgroundSmall display={{ base: 'block', sm: 'none' }} />
+        <HeaderBackground display={{ base: 'none', sm: 'block' }} />
+      </>
 
       <Flex
         position="sticky"

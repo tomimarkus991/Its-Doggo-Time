@@ -12,35 +12,29 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import { useAuth } from '../../context/authContext/AuthContext';
+import { useAuth } from '../../context';
+import { useUser } from '../../context/UserContext';
+import { useFetchInvites } from '../../hooks/api';
 import { useSubscribeToInviteInserts } from '../../hooks/subcribe';
 import useColors from '../../hooks/useColors';
-import { InviteDataType, StringOrUndefined } from '../../types';
+import { InviteDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import { GradientButton } from '../Buttons';
+import GradientButton from '../Buttons/GradientButton';
 import { InviteCard } from '../Cards';
-import { InvitesIcon } from '../Icons/Navbar';
+import { InvitesIcon } from '../Icons';
 import { GradientButtonText, LinkLabel } from '../Text';
 
-interface Props {
-  userInvites: InviteDataType[];
-  setUserInvites: React.Dispatch<React.SetStateAction<InviteDataType[]>>;
-  currentUsername: StringOrUndefined;
-}
+interface Props {}
 
-const Invites: React.FC<Props> = ({
-  userInvites,
-  setUserInvites,
-  currentUsername,
-}) => {
+const Invites: React.FC<Props> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth();
+  const { userInvites, setUserInvites } = useUser();
 
   const { defaultColor } = useColors();
-  const { subscribeToInviteInserts } = useSubscribeToInviteInserts({
-    username: currentUsername,
-    setUserInvites,
-  });
+
+  useSubscribeToInviteInserts();
+  useFetchInvites();
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
@@ -66,42 +60,10 @@ const Invites: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    const fetchInvites = async (_username: StringOrUndefined) => {
-      try {
-        const { data: invitesdata, error } = await supabase
-          .from('invites')
-          .select(
-            `
-              id,
-              receiver,
-              sender,
-              group_id,
-              groups (id, group_name, avatar_url)
-            `,
-          )
-          .eq('receiver', _username);
-        const _invitesdata = invitesdata as InviteDataType[];
-        setUserInvites(_invitesdata);
-        // _invitesdata.forEach(invite => {
-        // listenForInviteDeletes(invite);
-        // });
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      }
-    };
-
-    subscribeToInviteInserts();
-    fetchInvites(currentUsername);
-    return () => {
-      supabase.removeSubscription(subscribeToInviteInserts());
-    };
-  }, [currentUsername]);
-
-  useEffect(() => {
     if (userInvites?.length === 0) {
       onClose();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInvites]);
 
   return (

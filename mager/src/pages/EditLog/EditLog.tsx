@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import EditLogContainer from '../../components/Containers/EditLogContainer';
-import MainLayout from '../../components/Layouts';
-import PageHeaderBack from '../../components/Layouts/Pages/PageHeaderBack';
+import { EditLogContainer } from '../../components/Containers';
+import { MainLayout } from '../../components/Layouts';
+import { PageHeaderBack } from '../../components/Layouts/Pages';
 import {
   HeaderAvatar,
   NameAndAvatar,
   NameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
-import ProfileAndMyGroups from '../../components/Links/Layout/ProfileAndMyGroups';
-import Skeleton from '../../components/Skeleton';
+import { ProfileAndMyGroups } from '../../components/Links';
+import { Skeleton } from '../../components/Skeleton';
 import { GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -50,6 +50,7 @@ const EditLog: React.FC = () => {
     };
 
     fetchGroupData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

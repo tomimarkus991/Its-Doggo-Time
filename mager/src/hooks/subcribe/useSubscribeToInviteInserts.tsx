@@ -1,15 +1,13 @@
-import { InviteDataType, StringOrUndefined } from '../../types';
+import { useEffect } from 'react';
+import { useUser } from '../../context';
+import { InviteDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useSubscribeToInviteInserts = ({
-  username,
-  setUserInvites,
-}: {
-  username: StringOrUndefined;
-  setUserInvites: React.Dispatch<React.SetStateAction<InviteDataType[]>>;
-}) => {
-  return {
-    subscribeToInviteInserts: () =>
+export const useSubscribeToInviteInserts = () => {
+  const { username } = useUser();
+  const { setUserInvites } = useUser();
+  useEffect(() => {
+    const subscribeToInviteInserts = () =>
       supabase
         // only listen to updates that have your username in it
         .from(`invites:receiver=eq.${username}`)
@@ -21,10 +19,10 @@ export const useSubscribeToInviteInserts = ({
             .from('groups')
             .select(
               `
-            id,
-            group_name,
-            avatar_url
-        `,
+        id,
+        group_name,
+        avatar_url
+    `,
             )
             .eq('id', group_id)
             .single();
@@ -38,6 +36,10 @@ export const useSubscribeToInviteInserts = ({
           };
           setUserInvites(oldData => [...oldData, newInvite]);
         })
-        .subscribe(),
-  };
+        .subscribe();
+    return () => {
+      supabase.removeSubscription(subscribeToInviteInserts());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
 };

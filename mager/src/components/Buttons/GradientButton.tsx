@@ -1,10 +1,9 @@
+import React from 'react';
 import { Button, ButtonProps } from '@chakra-ui/react';
-import styles from '../../styles/GradientButton.module.css';
 
-export const GradientButton = (props: ButtonProps) => {
+const GradientButton = (props: ButtonProps) => {
   return (
     <Button
-      className={styles.btnGrad}
       p={7}
       bgGradient="linear(to-r, beez.500, beez.700)"
       borderRadius={100}
@@ -22,3 +21,5 @@ export const GradientButton = (props: ButtonProps) => {
     </Button>
   );
 };
+
+export default GradientButton;

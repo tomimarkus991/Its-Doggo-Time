@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router';
 import { supabase } from '../../utils/supabaseClient';
 
-export const useDeleteGroup = (group_id: string) => {
+const useDeleteGroup = (group_id: string) => {
   const router = useHistory();
   const deleteGroup = async () => {
     // delete all invites related to id
@@ -42,3 +42,5 @@ export const useDeleteGroup = (group_id: string) => {
   };
   return deleteGroup;
 };
+
+export default useDeleteGroup;

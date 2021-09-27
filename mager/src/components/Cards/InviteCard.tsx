@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Center, Text } from '@chakra-ui/react';
 import React from 'react';
 import { InviteDataType } from '../../types';
 import { AvatarInvite } from '../Avatar';
@@ -10,7 +10,7 @@ interface Props {
   acceptInvite: (group_id: string, invite_id: string) => void;
 }
 
-export const InviteCard: React.FC<Props> = ({
+const InviteCard: React.FC<Props> = ({
   invite,
   declineInvite,
   acceptInvite,
@@ -19,12 +19,14 @@ export const InviteCard: React.FC<Props> = ({
   const { avatar_url, group_name } = groups;
   return (
     <Box
+      id="InviteCard"
       boxSizing="border-box"
       layerStyle="shadow-and-bg"
       borderRadius={20}
       py="4"
+      w="100%"
     >
-      <Flex flexDirection="column" alignItems="center">
+      <Center flexDirection="column">
         <AvatarInvite src={avatar_url} />
         <Box my="4" textAlign="center">
           <Text fontSize={20}>
@@ -40,7 +42,9 @@ export const InviteCard: React.FC<Props> = ({
           onCrossClick={() => declineInvite(id)}
           onCheckClick={() => acceptInvite(groups.id, id)}
         />
-      </Flex>
+      </Center>
     </Box>
   );
 };
+
+export default InviteCard;

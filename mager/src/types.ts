@@ -37,6 +37,11 @@ export interface ProfileType {
   username: string;
   avatar_url: string;
 }
+export interface MemberType {
+  id: string;
+  username: string;
+  avatar_url: string;
+}
 
 export interface ProfileAndGroupsType {
   id: string;

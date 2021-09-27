@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useColors from '../../hooks/useColors';
 import { AvatarIconType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
-import Skeleton from '../Skeleton';
+import { Skeleton } from '../Skeleton';
 
 interface Props {
   src: StringOrUndefined;
@@ -13,13 +13,7 @@ interface Props {
   textProps?: BoxProps;
 }
 
-export const Avatar: React.FC<Props> = ({
-  src,
-  w,
-  h,
-  icon,
-  textProps,
-}) => {
+const Avatar: React.FC<Props> = ({ src, w, h, icon, textProps }) => {
   const { defaultColor } = useColors();
   const [avatarUrl, setAvatarUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -41,11 +35,17 @@ export const Avatar: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (src) {
+    let isSubscribed = true;
+    if (src && isSubscribed) {
       downloadImage(src);
     } else {
-      setIsLoading(false);
+      if (isSubscribed) {
+        setIsLoading(false);
+      }
     }
+    return () => {
+      isSubscribed = false;
+    };
   }, [src]);
 
   return (
@@ -71,3 +71,5 @@ export const Avatar: React.FC<Props> = ({
     </Skeleton>
   );
 };
+
+export default Avatar;

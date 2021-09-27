@@ -4,13 +4,12 @@ interface Props {
   fontSize: number;
 }
 
-export const GradientButtonText: React.FC<Props> = ({
-  children,
-  fontSize,
-}) => {
+const GradientButtonText: React.FC<Props> = ({ children, fontSize }) => {
   return (
     <Text fontSize={fontSize} color="gray.800" casing="uppercase">
       {children}
     </Text>
   );
 };
+
+export default GradientButtonText;

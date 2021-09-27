@@ -1,5 +1,7 @@
-import { AddLogIcon } from '../Icons/Doggo';
+import { AddLogIcon } from '../Icons';
 
-export const AddLogLink: React.FC = () => {
+const AddLogLink: React.FC = () => {
   return <AddLogIcon fontSize={{ lg: '7rem' }} />;
 };
+
+export default AddLogLink;

@@ -1,15 +1,16 @@
+import { useEffect } from 'react';
+import { useLogs } from '../../context';
 import { LogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 export const useSubscribeToLogInserts = ({
   group_id,
-  setLogsdata,
 }: {
   group_id: string;
-  setLogsdata: React.Dispatch<React.SetStateAction<LogsdataType[]>>;
 }) => {
-  return {
-    subscribeToLogInserts: () =>
+  const { setExcrementLogs } = useLogs();
+  useEffect(() => {
+    const subscribeToLogInserts = () =>
       supabase
         .from(`logs:group_id=eq.${group_id}`)
         .on('INSERT', payload => {
@@ -25,7 +26,7 @@ export const useSubscribeToLogInserts = ({
             poop,
           };
 
-          setLogsdata(oldData => {
+          setExcrementLogs(oldData => {
             if (oldData.length <= 3) {
               return [...oldData, newLog];
             } else {
@@ -34,6 +35,13 @@ export const useSubscribeToLogInserts = ({
             }
           });
         })
-        .subscribe(),
-  };
+        .subscribe();
+
+    subscribeToLogInserts();
+
+    return () => {
+      supabase.removeSubscription(subscribeToLogInserts());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

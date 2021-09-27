@@ -1,8 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
-import { useAuth } from '../../context/authContext/AuthContext';
+import { useAuth } from '../../context';
 import DefaultLayout from '../Layouts/DefaultLayout';
 
-export const DefaultPrivateLayoutRoute = ({
+const DefaultPrivateLayoutRoute = ({
   component: Component,
   ...rest
 }: any) => {
@@ -26,3 +26,5 @@ export const DefaultPrivateLayoutRoute = ({
     />
   );
 };
+
+export default DefaultPrivateLayoutRoute;
