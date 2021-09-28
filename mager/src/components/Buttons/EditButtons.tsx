@@ -3,8 +3,7 @@ import {
   ButtonGroupProps,
   IconButton,
 } from '@chakra-ui/react';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CheckIcon, CrossIcon } from '../Icons';
 
 interface Props {
   onCrossClick: () => void;
@@ -25,7 +24,7 @@ const EditButtons: React.FC<Props> = ({
         borderRadius="100"
         bg="red.500"
         colorScheme="red"
-        icon={<FontAwesomeIcon icon={faTimes} color="white" size="lg" />}
+        icon={<CrossIcon fontSize="1rem" />}
       />
       <IconButton
         aria-label="Save"
@@ -33,7 +32,7 @@ const EditButtons: React.FC<Props> = ({
         borderRadius="100"
         bg="green.500"
         colorScheme="green"
-        icon={<FontAwesomeIcon icon={faCheck} color="white" size="1x" />}
+        icon={<CheckIcon fontSize="1rem" />}
       />
     </ButtonGroup>
   );

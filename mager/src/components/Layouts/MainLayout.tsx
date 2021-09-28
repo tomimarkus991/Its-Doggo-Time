@@ -1,6 +1,5 @@
 import { Grid, HStack, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { LeftsidePawsIcon } from '../Icons';
 
 interface Props {
   leftSide: any;
@@ -36,7 +35,7 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
         }}
         display={{ base: 'none', sm: 'flex' }}
       >
-        <LeftsidePawsIcon />
+        {/* <LeftsidePawsIcon /> */}
         {leftSide}
       </VStack>
 

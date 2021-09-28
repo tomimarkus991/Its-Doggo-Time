@@ -1,4 +1,3 @@
-import { CheckIcon } from '@chakra-ui/icons';
 import { Box, IconButton, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import { useState } from 'react';
@@ -7,7 +6,7 @@ import { useMembersPlaceholder } from '../../hooks/placeholders';
 import { MemberType, StringOrUndefined } from '../../types';
 import { PenButton } from '../Buttons';
 import { MemberCard } from '../Cards';
-import { ProfileIcon } from '../Icons';
+import { CheckIcon, ProfileIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
 interface Props {
@@ -78,7 +77,7 @@ const MembersContainer: React.FC<Props> = ({
                     onClick={() => setIsEditable(false)}
                     aria-label="Save"
                     colorScheme="green"
-                    icon={<CheckIcon color="white" />}
+                    icon={<CheckIcon fontSize="1.3rem" />}
                   />
                 )}
               </>

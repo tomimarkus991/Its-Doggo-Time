@@ -52,6 +52,7 @@ const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
           textAlign="center"
           fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
           minH="3rem"
+          maxW={{ sm: '8rem', md: '10rem' }}
         >
           {moment(created_at).local().calendar(null, {
             lastDay: '[Yesterday at] HH:mm',
