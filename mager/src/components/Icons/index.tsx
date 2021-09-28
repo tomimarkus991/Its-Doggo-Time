@@ -22,3 +22,7 @@ export { default as HeaderBackground } from './HeaderBackground';
 export { default as HeaderBackgroundSmall } from './HeaderBackgroundSmall';
 export { default as FoodIcon } from './FoodIcon';
 export { default as DefaultFoodIcon } from './DefaultFoodIcon';
+export { default as RightsidePawsIcon } from './RightsidePawsIcon';
+export { default as LeftsidePawsIcon } from './LeftsidePawsIcon';
+export { default as ExcrementViewIcon } from './ExcrementViewIcon';
+export { default as FoodViewIcon } from './FoodViewIcon';

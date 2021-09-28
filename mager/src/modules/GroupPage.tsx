@@ -1,24 +1,16 @@
-import {
-  Box,
-  Center,
-  Flex,
-  HStack,
-  Input,
-  VStack,
-} from '@chakra-ui/react';
-import { faBone, faPoop } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Center, Flex, HStack, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AvatarUpload } from '../components/Avatar';
 import {
+  ChangeLogsView,
   DeleteGroupButton,
   EditButtons,
   PenButton,
 } from '../components/Buttons';
 import {
-  FoodLogsContainer,
   ExcrementLogsContainer,
+  FoodLogsContainer,
 } from '../components/Containers';
 import { HeaderAvatar, MainLayout } from '../components/Layouts';
 import {
@@ -28,7 +20,7 @@ import {
 import { MembersLink, MyGroupsLink } from '../components/Links';
 import { Skeleton } from '../components/Skeleton';
 import { useAuth, useGroup, useLogsView, ViewType } from '../context';
-import { useColors, useToast } from '../hooks';
+import { useToast } from '../hooks';
 import { useFetchGroupData } from '../hooks/api';
 import { StringOrUndefined } from '../types';
 import { supabase } from '../utils/supabaseClient';
@@ -49,10 +41,9 @@ export const GroupPage: React.FC = () => {
     old_groupname,
     setOldGroupname,
   } = useGroup();
-  const { view, setView } = useLogsView();
+  const { view } = useLogsView();
 
   const { showToast } = useToast();
-  const { defaultColor } = useColors();
   const [isEditable, setIsEditable] = useState(false);
 
   const cancelSave = () => {
@@ -244,32 +235,7 @@ export const GroupPage: React.FC = () => {
           </Flex>
 
           <VStack spacing={4}>
-            <HStack justifyContent="center">
-              <Box
-                as={FontAwesomeIcon}
-                onClick={() => setView(ViewType.Excrement)}
-                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
-                icon={faPoop}
-                color="beez.700"
-                cursor="pointer"
-                bgColor={defaultColor}
-                py="2"
-                px="2"
-                borderRadius="100"
-              />
-              <Box
-                as={FontAwesomeIcon}
-                onClick={() => setView(ViewType.Food)}
-                fontSize={{ base: '3rem', sm: '3.5rem', md: '4rem' }}
-                icon={faBone}
-                color="beez.700"
-                cursor="pointer"
-                bgColor={defaultColor}
-                py="2"
-                px="2"
-                borderRadius="100"
-              />
-            </HStack>
+            <ChangeLogsView />
             {isEditable ? (
               <Center display={{ base: 'flex', sm: 'none' }}>
                 <DeleteGroupButton
