@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
+import 'moment/locale/et';
 import Head from 'next/head';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
@@ -7,7 +8,7 @@ import '@fontsource/viga';
 import type {} from '@mui/lab/themeAugmentation';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
-
+import MomentUtils from '@date-io/moment';
 import {
   UserDetailsProvider,
   GroupDetailsProvider,
@@ -18,6 +19,7 @@ import {
 } from '../context';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 function SafeHydrate({ children }: any) {
   return (
@@ -51,6 +53,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         main: '#DDCDBF',
         contrastText: '#2A2828',
       },
+    },
+    typography: {
+      fontFamily: 'Viga',
     },
     // @ts-ignore
     overrides: {
@@ -92,14 +97,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                   <LogsDetailsProvider>
                     <LogsViewProvider>
                       <InviteDetailsProvider>
-                        <Head>
-                          <title>It&#39;s Doggo Time</title>
-                          <meta
-                            name="viewport"
-                            content="initial-scale=1, width=device-width"
-                          />
-                        </Head>
-                        <Component {...pageProps} />
+                        <MuiPickersUtilsProvider utils={MomentUtils}>
+                          <Head>
+                            <title>It&#39;s Doggo Time</title>
+                            <meta
+                              name="viewport"
+                              content="initial-scale=1, width=device-width"
+                            />
+                          </Head>
+                          <Component {...pageProps} />
+                        </MuiPickersUtilsProvider>
                       </InviteDetailsProvider>
                     </LogsViewProvider>
                   </LogsDetailsProvider>

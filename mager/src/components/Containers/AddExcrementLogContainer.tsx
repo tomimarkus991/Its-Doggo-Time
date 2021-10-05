@@ -1,10 +1,4 @@
-import { Center, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import MomentUtils from '@date-io/moment';
-import {
-  MuiPickersUtilsProvider,
-  TimePicker as MTimePicker,
-} from '@material-ui/pickers';
-import 'moment/locale/et';
+import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
@@ -13,6 +7,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
+import { DefaultTimePicker } from '../TimePicker';
 
 interface RouteParams {
   group_id: string;
@@ -31,7 +26,7 @@ const AddExcrementLogContainer: React.FC = () => {
     onChange: setLogData,
   });
 
-  const [time, setTime] = useState<any>(new Date());
+  const [time, setTime] = useState(new Date());
 
   const addLog = async () => {
     let pee: boolean;
@@ -90,14 +85,12 @@ const AddExcrementLogContainer: React.FC = () => {
             );
           })}
         </Center>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <MTimePicker
-            ampm={false}
-            value={time}
-            onChange={(newTime: any) => setTime(newTime)}
-            color="primary"
+        <Flex w="50%">
+          <DefaultTimePicker
+            time={time}
+            onChange={(newTime: Date) => setTime(newTime)}
           />
-        </MuiPickersUtilsProvider>
+        </Flex>
       </VStack>
     </MainContainerLayout>
   );

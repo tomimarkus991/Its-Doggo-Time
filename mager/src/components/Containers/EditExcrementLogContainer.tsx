@@ -1,11 +1,5 @@
-import { Center, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import MomentUtils from '@date-io/moment';
-import {
-  MuiPickersUtilsProvider,
-  TimePicker as MTimePicker,
-} from '@material-ui/pickers';
-import 'moment/locale/et';
-import React, { useEffect, useState } from 'react';
+import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
 import { ExcrementLogsdataType } from '../../types';
@@ -13,6 +7,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
+import { DefaultTimePicker } from '../TimePicker';
 
 interface RouteParams {
   group_id: string;
@@ -33,7 +28,7 @@ const EditExcrementLogContainer: React.FC = () => {
     value: logData,
   });
 
-  const [time, setTime] = useState<Date | null | undefined>(new Date());
+  const [time, setTime] = useState<Date>(new Date());
   const [isLogdataLoading, setIsLogdataLoading] = useState(true);
 
   const editLog = async () => {
@@ -92,7 +87,7 @@ const EditExcrementLogContainer: React.FC = () => {
 
         const { created_at, pee, poop } = _logData;
 
-        setTime(created_at);
+        setTime(created_at as Date);
 
         if (pee) {
           setLogData((oldData: any) => [...oldData, 'pee']);
@@ -137,14 +132,12 @@ const EditExcrementLogContainer: React.FC = () => {
             );
           })}
         </Center>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <MTimePicker
-            ampm={false}
-            value={time}
-            onChange={(newTime: any) => setTime(newTime)}
-            color="primary"
+        <Flex w="50%">
+          <DefaultTimePicker
+            time={time}
+            onChange={(newTime: Date) => setTime(newTime)}
           />
-        </MuiPickersUtilsProvider>
+        </Flex>
       </VStack>
     </MainContainerLayout>
   );

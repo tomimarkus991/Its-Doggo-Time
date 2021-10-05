@@ -1,10 +1,4 @@
-import { Center, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import MomentUtils from '@date-io/moment';
-import {
-  MuiPickersUtilsProvider,
-  TimePicker as MTimePicker,
-} from '@material-ui/pickers';
-import 'moment/locale/et';
+import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
@@ -13,6 +7,7 @@ import { supabase } from '../../utils/supabaseClient';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
+import { DefaultTimePicker } from '../TimePicker';
 
 interface RouteParams {
   group_id: string;
@@ -33,7 +28,7 @@ const EditFoodLogContainer: React.FC = () => {
     value: logData,
   });
 
-  const [time, setTime] = useState<Date | null | undefined>(new Date());
+  const [time, setTime] = useState<Date>(new Date());
   const [isLogdataLoading, setIsLogdataLoading] = useState(true);
 
   const editLog = async () => {
@@ -84,7 +79,7 @@ const EditFoodLogContainer: React.FC = () => {
 
         const { created_at, food } = _logData;
 
-        setTime(created_at);
+        setTime(created_at as Date);
 
         if (food) {
           setLogData((oldData: any) => [...oldData, 'food']);
@@ -126,14 +121,12 @@ const EditFoodLogContainer: React.FC = () => {
             );
           })}
         </Center>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <MTimePicker
-            ampm={false}
-            value={time}
-            onChange={(newTime: any) => setTime(newTime)}
-            color="primary"
+        <Flex w="50%">
+          <DefaultTimePicker
+            time={time}
+            onChange={(newTime: Date) => setTime(newTime)}
           />
-        </MuiPickersUtilsProvider>
+        </Flex>
       </VStack>
     </MainContainerLayout>
   );
