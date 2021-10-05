@@ -2,6 +2,8 @@ import { Box, IconButton, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useCreateGroup } from '../../hooks/mutations';
+import { useUser } from '../../hooks/queries';
+import { GroupType } from '../../types';
 import { AvatarUpload } from '../Avatar';
 import { AddLogCheckboxIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
@@ -12,10 +14,9 @@ const CreateGroupContainer: React.FC = () => {
 
   const router = useHistory();
 
-  const { mutate, isSuccess } = useCreateGroup(
-    groupname,
-    group_avatar_url,
-  );
+  const { mutate, isSuccess } = useCreateGroup();
+  const { data } = useUser();
+  const groups = data?.groups as GroupType[];
 
   if (isSuccess) {
     router.push('/');
@@ -31,13 +32,13 @@ const CreateGroupContainer: React.FC = () => {
       button={
         <Box
           as={IconButton}
-          onClick={() => mutate()}
+          onClick={() => mutate({ groupname, group_avatar_url })}
           mt={4}
           h="100%"
           aria-label="Create Group Button"
           bgColor="transparent"
           _hover={{ bgColor: 'transparent' }}
-          // isDisabled={if you already have 4 groups}
+          isDisabled={groups?.length >= 4}
           icon={
             <AddLogCheckboxIcon
               fontSize={{
