@@ -13,13 +13,10 @@ import {
   GroupNameAndAvatarMiddle,
 } from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
-import { useAuth } from '../../context';
-import { useGroup } from '../../context/GroupContext';
 import {
   useSubscribeToMemberDeletes,
   useSubscribeToMemberInserts,
 } from '../../hooks/subcribe';
-import { GroupPageDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
 interface RouteParams {
@@ -27,15 +24,12 @@ interface RouteParams {
 }
 const Members: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-  const { user } = useAuth();
-
-  const { setMembers, creator_id } = useGroup();
 
   useSubscribeToMemberInserts(group_id);
 
   const fetchUpdatedMembers = async () => {
     try {
-      let { data, error } = await supabase
+      let { error } = await supabase
         .from('groups')
         .select(
           `
@@ -45,10 +39,10 @@ const Members: React.FC = () => {
         )
         .eq('id', group_id)
         .single();
-      let _groupData: GroupPageDataType = data;
-      const { profiles } = _groupData;
+      // let _groupData: GroupPageDataType = data;
+      // const { profiles } = _groupData;
 
-      setMembers(profiles);
+      // setMembers(profiles);
 
       if (error) throw error.message;
     } catch (error) {
@@ -77,11 +71,7 @@ const Members: React.FC = () => {
           <HeaderAvatar>
             <GroupNameAndAvatar group_id={group_id} />
           </HeaderAvatar>
-          <LeaveGroupButton
-            user_id={user?.id}
-            group_id={group_id}
-            creator_id={creator_id}
-          />
+          <LeaveGroupButton group_id={group_id} />
         </VStack>
       }
       middle={

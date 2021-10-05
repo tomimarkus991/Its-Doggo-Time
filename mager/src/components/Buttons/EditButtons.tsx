@@ -21,7 +21,7 @@ const EditButtons: React.FC<Props> = ({
       <IconButton
         aria-label="Cancel"
         onClick={() => onCrossClick()}
-        borderRadius="100"
+        isRound
         bg="red.500"
         colorScheme="red"
         icon={<CrossIcon fontSize="1rem" />}
@@ -29,7 +29,7 @@ const EditButtons: React.FC<Props> = ({
       <IconButton
         aria-label="Save"
         onClick={() => onCheckClick()}
-        borderRadius="100"
+        isRound
         bg="green.500"
         colorScheme="green"
         icon={<CheckIcon fontSize="1rem" />}

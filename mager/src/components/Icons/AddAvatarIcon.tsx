@@ -15,6 +15,8 @@ const AddAvatarIcon: React.FC = () => {
         py="2"
         px="2"
         borderRadius="100"
+        border="2px"
+        borderColor="beez.700"
         position="absolute"
         cursor="pointer"
         right="0%"

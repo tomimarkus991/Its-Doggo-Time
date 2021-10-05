@@ -5,6 +5,7 @@ const useColors = () => {
   const defaultReversedColor = useColorModeValue('gray.800', '#fff');
   const penColor = useColorModeValue('#2A2828', '#E5E0D5');
   const containerItemColor = useColorModeValue('#DDCDBF', '#DDCDBF');
+  const containerBackgroundColor = useColorModeValue('#fff', '#4B4949');
   const backIconColor = useColorModeValue('#2A2828', '#E5E0D5');
 
   const headerBackground3Color = useColorModeValue('#DDCDBF', '#373636');
@@ -21,6 +22,7 @@ const useColors = () => {
     defaultReversedColor,
     penColor,
     containerItemColor,
+    containerBackgroundColor,
     backIconColor,
     headerBackground3Color,
     headerBackground2Color,

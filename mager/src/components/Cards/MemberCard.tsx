@@ -1,8 +1,7 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import { DeleteIcon } from '@chakra-ui/icons';
+import { IconButton, Text, VStack } from '@chakra-ui/react';
 import { ProfileAvatarCard } from '.';
+import { useColors } from '../../hooks';
 import { MemberType, StringOrUndefined } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -20,6 +19,7 @@ const MemberCard: React.FC<Props> = ({
   creator_id,
 }) => {
   const { id, username, avatar_url } = member;
+  const { containerBackgroundColor } = useColors();
 
   const removeUser = async () => {
     try {
@@ -36,30 +36,25 @@ const MemberCard: React.FC<Props> = ({
   return (
     <VStack spacing={0} position="relative">
       <ProfileAvatarCard src={avatar_url} />
-      <Text fontSize={{ base: '20', sm: '24', md: '28', lg: '28' }}>
+      <Text fontSize={{ base: '23', sm: '24', md: '28', lg: '28' }}>
         {username}
       </Text>
 
-      {creator_id !== id && isEditable && (
-        <Box
-          as={FontAwesomeIcon}
-          color="red"
-          fontSize={{
-            base: '2.1rem',
-            sm: '2.2rem',
-            md: '2.3rem',
-            lg: '2.5rem',
-          }}
-          icon={faTrash}
-          bgColor="white"
-          py="2"
-          px="2"
+      {creator_id == id && isEditable && (
+        <IconButton
+          aria-label="Remove"
+          colorScheme="red"
+          size="md"
+          icon={<DeleteIcon color="red.500" fontSize={'1.3rem'} />}
+          bgColor={containerBackgroundColor}
+          border="2px"
+          borderColor="beez.700"
           position="absolute"
           cursor="pointer"
           onClick={() => removeUser()}
-          right="0%"
+          right={{ base: '0', sm: '5%' }}
           bottom="25%"
-          borderRadius="100"
+          isRound
         />
       )}
     </VStack>

@@ -8,12 +8,10 @@ const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       path={src}
-      w={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
-      h={{ base: '5rem', sm: '5.5rem', md: '6rem', lg: '7rem' }}
+      w={{ base: '6rem', lg: '7rem' }}
+      h={{ base: '6rem', lg: '7rem' }}
       icon={
-        <ProfileAvatarIcon
-          fontSize={{ base: '3.5rem', md: '4rem', lg: '4.8rem' }}
-        />
+        <ProfileAvatarIcon fontSize={{ base: '4rem', lg: '4.8rem' }} />
       }
       type="User"
     />
