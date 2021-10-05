@@ -30,7 +30,6 @@ const DefaultTimePicker: React.FC<Props> = ({ time, onChange }) => {
                 borderColor: defaultReversedColor,
                 fontSize: '2rem',
                 cursor: 'pointer',
-                padding: 0,
                 caretColor: 'transparent',
               },
             }}
