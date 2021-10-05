@@ -1,7 +1,7 @@
+import { Center } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useUser } from '../../context/UserContext';
-import { useFetchUserData } from '../../hooks/api';
 import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
 import { supabase } from '../../utils/supabaseClient';
 import { GroupsContainer } from '../Containers';
@@ -12,14 +12,12 @@ import {
   ProfileNameAndAvatarMiddle,
 } from '../Layouts/Profile';
 import { ProfileLink } from '../Links';
-import { Skeleton } from '../Skeleton';
 
 const LoggedIn: React.FC = () => {
   const { setUsername } = useUser();
 
   useSubscribeToGroupInserts();
   const { user } = useAuth();
-  const { isLoading } = useFetchUserData();
 
   useEffect(() => {
     const updateOAuthData = async () => {
@@ -65,24 +63,17 @@ const LoggedIn: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Skeleton
-          isLoading={isLoading}
-          props={{
-            borderRadius: 100,
-            w: { sm: '95%', md: '90%', lg: 'initial' },
-          }}
-        >
-          <HeaderAvatar>
-            <ProfileNameAndAvatar />
-          </HeaderAvatar>
-        </Skeleton>
+        <HeaderAvatar>
+          <ProfileNameAndAvatar />
+        </HeaderAvatar>
       }
       middle={
         <>
           <ProfileNameAndAvatarMiddle />
-
-          <PageHeader>Groups</PageHeader>
-          <GroupsContainer isLoading={isLoading} />
+          <Center my={{ md: 4, lg: 0 }}>
+            <PageHeader>Groups</PageHeader>
+          </Center>
+          <GroupsContainer />
         </>
       }
       rightSide={

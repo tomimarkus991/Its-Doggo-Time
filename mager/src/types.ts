@@ -16,7 +16,14 @@ export type AvatarIconType = React.ReactElement<
 >;
 
 export type StringOrUndefined = string | undefined;
+export type BooleanOrUndefined = boolean | undefined;
 
+export interface UserType {
+  id: string;
+  username: string;
+  avatar_url: string;
+  groups: GroupType[];
+}
 export interface GroupType {
   id: string;
   group_name: string;
@@ -43,34 +50,27 @@ export interface MemberType {
   avatar_url: string;
 }
 
-export interface ProfileAndGroupsType {
-  id: string;
-  username: string;
-  avatar_url: string;
-  groups: GroupType[];
-}
-
 export interface GroupPageDataType {
-  id: string;
+  id: StringOrUndefined;
   group_name: string;
-  avatar_url: string;
-  creator_id: string;
-  profiles: ProfileType[];
+  avatar_url: StringOrUndefined;
+  creator_id: StringOrUndefined;
+  profiles: ProfileType[] | undefined;
 }
 
 export interface ExcrementLogsdataType {
-  id?: string;
-  pee: boolean;
-  poop: boolean;
-  group_id: string;
-  creator_id: string;
-  created_at: Date | null;
+  id?: StringOrUndefined;
+  pee: BooleanOrUndefined;
+  poop: BooleanOrUndefined;
+  group_id: StringOrUndefined;
+  creator_id: StringOrUndefined;
+  created_at: Date | null | undefined;
 }
 
 export interface FoodLogsdataType {
-  id?: string;
-  food: boolean;
-  group_id: string;
-  creator_id: string;
-  created_at: Date | null;
+  id?: StringOrUndefined;
+  food: BooleanOrUndefined;
+  group_id: StringOrUndefined;
+  creator_id: StringOrUndefined;
+  created_at: Date | null | undefined;
 }

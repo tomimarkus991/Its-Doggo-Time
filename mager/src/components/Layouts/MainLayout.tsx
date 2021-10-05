@@ -54,7 +54,7 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       <HStack
         id="rightSide"
         gridArea="rightSide"
-        py={{ base: '4', lg: '0' }}
+        pb={{ base: '4', lg: '0' }}
         h={{ base: '100%', lg: 'fit-content' }}
         alignItems="flex-end"
         spacing="6"

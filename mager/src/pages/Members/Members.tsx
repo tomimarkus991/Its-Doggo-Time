@@ -1,3 +1,4 @@
+import { VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { LeaveGroupButton } from '../../components/Buttons';
@@ -12,11 +13,8 @@ import {
   GroupNameAndAvatarMiddle,
 } from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
-import { AddNewMemberModal } from '../../components/Modals';
-import { Skeleton } from '../../components/Skeleton';
 import { useAuth } from '../../context';
 import { useGroup } from '../../context/GroupContext';
-import { useFetchGroupData } from '../../hooks/api';
 import {
   useSubscribeToMemberDeletes,
   useSubscribeToMemberInserts,
@@ -34,8 +32,6 @@ const Members: React.FC = () => {
   const { setMembers, creator_id } = useGroup();
 
   useSubscribeToMemberInserts(group_id);
-
-  const { isLoading } = useFetchGroupData(group_id);
 
   const fetchUpdatedMembers = async () => {
     try {
@@ -59,6 +55,7 @@ const Members: React.FC = () => {
       throw error;
     }
   };
+
   const { subscribeToMemberDeletes } = useSubscribeToMemberDeletes({
     group_id,
     fetchUpdatedMembers,
@@ -76,33 +73,22 @@ const Members: React.FC = () => {
   return (
     <MainLayout
       leftSide={
-        <Skeleton
-          isLoading={isLoading}
-          props={{
-            borderRadius: 100,
-            w: { sm: '95%', md: '90%', lg: 'initial' },
-            h: '80%',
-          }}
-        >
+        <VStack h="80%" w="100%">
           <HeaderAvatar>
-            <GroupNameAndAvatar />
+            <GroupNameAndAvatar group_id={group_id} />
           </HeaderAvatar>
           <LeaveGroupButton
             user_id={user?.id}
             group_id={group_id}
             creator_id={creator_id}
           />
-        </Skeleton>
+        </VStack>
       }
       middle={
         <>
-          <GroupNameAndAvatarMiddle />
+          <GroupNameAndAvatarMiddle group_id={group_id} />
           <PageHeaderBack>Members</PageHeaderBack>
-          <MembersContainer
-            group_id={group_id}
-            isLoading={isLoading}
-            AddNewMember={<AddNewMemberModal group_id={group_id} />}
-          />
+          <MembersContainer group_id={group_id} />
         </>
       }
       rightSide={<ProfileAndMyGroups />}

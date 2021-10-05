@@ -6,3 +6,4 @@ export { default as CheckboxCard } from './CheckboxCard';
 export { default as GroupAvatarCard } from './GroupAvatarCard';
 export { default as ProfileAvatarCard } from './ProfileAvatarCard';
 export { default as FoodLogCard } from './FoodLogCard';
+export { default as CardDateText } from './CardDateText';

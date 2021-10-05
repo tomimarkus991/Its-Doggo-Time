@@ -1,69 +1,59 @@
 import {
-  Box,
   Center,
   Heading,
-  IconButton,
   SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useGroup } from '../../context/GroupContext';
-import { useUser } from '../../context/UserContext';
 import useGroupsPlaceholder from '../../hooks/placeholders/useGroupsPlaceholder';
+import { useUser } from '../../hooks/queries';
 import { GroupType } from '../../types';
+import { CreateGroupContainerButton } from '../Buttons';
 import { GroupCard } from '../Cards';
-import { AddGroupIcon, DogPaw } from '../Icons';
+import { DogPaw } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
-interface Props {
-  isLoading: boolean;
-}
+interface Props {}
 
-const GroupsContainer: React.FC<Props> = ({ isLoading }) => {
-  const { groups } = useGroup();
-  const { username } = useUser();
-  const { placeholders, isAddDoggoGroupDisabled } =
-    useGroupsPlaceholder(groups);
+const GroupsContainer: React.FC<Props> = () => {
+  const { data, isLoading } = useUser();
+  const { placeholders, isAddDoggoGroupDisabled } = useGroupsPlaceholder(
+    data?.groups,
+  );
 
   return (
     <MainContainerLayout
-      mainH="sm"
       isLoading={isLoading}
       button={
-        <Link to="/group/create-group">
-          <Box
-            as={IconButton}
-            aria-label="Add new doggo group"
-            h="100%"
-            bgColor="transparent"
-            _hover={{ bgColor: 'transparent' }}
-            isDisabled={isAddDoggoGroupDisabled || username === null}
-            icon={
-              <AddGroupIcon
-                fontSize={{
-                  base: '5rem',
-                  md: '6rem',
-                  lg: '7rem',
-                }}
-              />
-            }
-          />
-        </Link>
+        <CreateGroupContainerButton
+          isAddDoggoGroupDisabled={isAddDoggoGroupDisabled}
+        />
       }
       containerProps={{
         w: {
           base: 'xs',
           sm: 'sm',
-          md: 'md',
-          lg: 'md',
-          xl: 'lg',
+          md: 'lg',
         },
-        h: 'sm',
+        h: { base: 'sm', md: 'md' },
       }}
     >
-      {groups === null || groups === undefined || groups.length === 0 ? (
+      {data && !!data?.groups.length ? (
+        <SimpleGrid
+          id="GroupsGrid"
+          columns={2}
+          spacingY={10}
+          spacingX={{ base: 10, sm: 50, md: 85 }}
+        >
+          {data?.groups.map((group: GroupType, index: number) => (
+            <GroupCard key={index} group={group} />
+          ))}
+          {placeholders?.map((_, index: number) => (
+            <DogPaw key={index} fontSize={{ base: '6rem', lg: '8rem' }} />
+          ))}
+        </SimpleGrid>
+      ) : (
         <Center h="100%" px={{ base: '8', sm: 0 }}>
           <VStack textAlign="center">
             <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
@@ -75,19 +65,6 @@ const GroupsContainer: React.FC<Props> = ({ isLoading }) => {
             </Text>
           </VStack>
         </Center>
-      ) : (
-        <SimpleGrid
-          id="10"
-          columns={{ base: 2 }}
-          spacing={{ base: 10, lg: 10 }}
-        >
-          {groups.map((group: GroupType, index: number) => (
-            <GroupCard key={index} group={group} />
-          ))}
-          {placeholders?.map((_, index: number) => (
-            <DogPaw key={index} fontSize={{ base: '6rem', lg: '8rem' }} />
-          ))}
-        </SimpleGrid>
       )}
     </MainContainerLayout>
   );

@@ -1,26 +1,36 @@
+import { Center } from '@chakra-ui/react';
 import { Redirect, Route } from 'react-router-dom';
-import { useAuth } from '../../context';
+import { useUser } from '../../hooks/queries';
 import DefaultLayout from '../Layouts/DefaultLayout';
+import { DefaultSpinner } from '../Spinners';
 
 const DefaultPrivateLayoutRoute = ({
   component: Component,
   ...rest
 }: any) => {
-  const { user } = useAuth();
-  // console.log('user', user);
+  const { isLoading, isError } = useUser();
+
+  // when useUser is authenticating
+  if (isLoading) {
+    return (
+      <Center h="100vh">
+        <DefaultSpinner />
+      </Center>
+    );
+  }
 
   return (
     <Route
       {...rest}
       render={props =>
-        // Renders the page only if `user` is present (user is authenticated)
-        // Otherwise, redirect to the login page
-        user ? (
+        // If Error redirect to the login page
+        // Otherwise, render the page
+        isError ? (
+          <Redirect to="/login" />
+        ) : (
           <DefaultLayout>
             <Component {...props} />
           </DefaultLayout>
-        ) : (
-          <Redirect to="/login" />
         )
       }
     />

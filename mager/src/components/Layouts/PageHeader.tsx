@@ -3,7 +3,7 @@ import React from 'react';
 
 const PageHeader: React.FC = ({ children }) => {
   return (
-    <Center>
+    <Center id="Page Header">
       <Heading fontSize="4xl">{children}</Heading>
     </Center>
   );

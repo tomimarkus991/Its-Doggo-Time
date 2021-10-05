@@ -1,6 +1,6 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
-const DefaultPeeAndPoopIcon = (props: IconProps): JSX.Element => (
+const DefaultExcrementIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 514 508" {...props}>
     <path
       d="M23.006 298.254c-.225 25.598 5.79 50.857 17.515 73.54 11.03 21.917 27.393 40.63 47.547 54.375 19.089 13.221 41.676 20.303 64.807 20.319 23.281-.05 46.02-7.124 65.308-20.319 20.359-13.652 36.901-32.378 48.036-54.375 11.771-22.676 17.871-47.926 17.765-73.54 0-17.171-4.254-37.49-13.011-61.245a373.265 373.265 0 00-31.527-65.826c-11.009-16.312-24.02-34.344-39.036-53.797-15.015-19.454-41.276-49.516-47.289-56.384L121.096 97.92a433.574 433.574 0 00-44.793 59.528 457.25 457.25 0 00-37.282 72.979c-11.011 26.043-16.015 48.652-16.015 67.827z"
@@ -112,4 +112,4 @@ const DefaultPeeAndPoopIcon = (props: IconProps): JSX.Element => (
   </Icon>
 );
 
-export default DefaultPeeAndPoopIcon;
+export default DefaultExcrementIcon;

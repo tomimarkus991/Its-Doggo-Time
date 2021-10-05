@@ -1,6 +1,6 @@
-import { Center, Text } from '@chakra-ui/react';
-import moment from 'moment';
+import { Center } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { CardDateText } from '.';
 import { ExcrementLogsdataType } from '../../types';
 import { PeeAndPoopIcon, PeeIcon, PoopIcon } from '../Icons';
 
@@ -48,19 +48,7 @@ const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
             }}
           />
         )}
-        <Text
-          textAlign="center"
-          fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
-          minH="3rem"
-          maxW={{ sm: '8rem', md: '10rem' }}
-        >
-          {moment(created_at).local().calendar(null, {
-            lastDay: '[Yesterday at] HH:mm',
-            sameDay: '[Today at] HH:mm',
-            lastWeek: 'DD.MM [at] HH:mm',
-            sameElse: 'DD.MM [at] HH:mm',
-          })}
-        </Text>
+        <CardDateText created_at={created_at} />
       </Center>
     </Link>
   );

@@ -16,7 +16,8 @@ import {
   LogsViewProvider,
   InviteDetailsProvider,
 } from '../context';
-// import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 function SafeHydrate({ children }: any) {
   return (
@@ -61,33 +62,55 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
     },
   });
+  // const { showErrorToast } = useToast();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 0,
+        refetchOnMount: false,
+        // onError: e => {
+        //   const error = e as Error;
+        //   console.log('error', error);
+
+        //   showErrorToast({
+        //     title: 'Error useFetchGroupData',
+        //     description: error.message,
+        //   });
+        //   throw new Error(error.message);
+        // },
+      },
+    },
+  });
   return (
-    <SafeHydrate>
-      <ThemeProvider theme={materialTheme}>
-        <ChakraProvider resetCSS theme={theme}>
-          <AuthDetailsProvider>
-            <UserDetailsProvider>
-              <GroupDetailsProvider>
-                <LogsDetailsProvider>
-                  <LogsViewProvider>
-                    <InviteDetailsProvider>
-                      <Head>
-                        <title>It&#39;s Doggo Time</title>
-                        <meta
-                          name="viewport"
-                          content="initial-scale=1, width=device-width"
-                        />
-                      </Head>
-                      <Component {...pageProps} />
-                    </InviteDetailsProvider>
-                  </LogsViewProvider>
-                </LogsDetailsProvider>
-              </GroupDetailsProvider>
-            </UserDetailsProvider>
-          </AuthDetailsProvider>
-        </ChakraProvider>
-      </ThemeProvider>
-    </SafeHydrate>
+    <QueryClientProvider client={queryClient}>
+      <SafeHydrate>
+        <ThemeProvider theme={materialTheme}>
+          <ChakraProvider resetCSS theme={theme}>
+            <AuthDetailsProvider>
+              <UserDetailsProvider>
+                <GroupDetailsProvider>
+                  <LogsDetailsProvider>
+                    <LogsViewProvider>
+                      <InviteDetailsProvider>
+                        <Head>
+                          <title>It&#39;s Doggo Time</title>
+                          <meta
+                            name="viewport"
+                            content="initial-scale=1, width=device-width"
+                          />
+                        </Head>
+                        <Component {...pageProps} />
+                      </InviteDetailsProvider>
+                    </LogsViewProvider>
+                  </LogsDetailsProvider>
+                </GroupDetailsProvider>
+              </UserDetailsProvider>
+            </AuthDetailsProvider>
+          </ChakraProvider>
+        </ThemeProvider>
+      </SafeHydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 export default MyApp;

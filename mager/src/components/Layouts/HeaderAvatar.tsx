@@ -4,10 +4,10 @@ import { DoggoIcon } from '../Icons';
 const HeaderAvatar: React.FC = ({ children }) => {
   return (
     <Flex
-      id="flex1"
-      mx={{ sm: '6', lg: 'none' }}
-      mt={{ sm: '6', lg: 'none' }}
-      minW="16rem"
+      id="HeaderAvatar"
+      px={{ sm: '6', lg: 'none' }}
+      pt={{ sm: '6', lg: 'none' }}
+      w="100%"
       justifyContent={{ sm: 'flex-start', lg: 'center' }}
       alignItems="center"
       flexDirection={{ sm: 'row', lg: 'column' }}
@@ -15,8 +15,13 @@ const HeaderAvatar: React.FC = ({ children }) => {
       {children}
       <Spacer display={{ sm: 'initial', lg: 'none' }} />
       <DoggoIcon
-        display={{ sm: 'none', sm2: 'initial', lg: 'none' }}
-        fontSize={{ sm: 'none', sm2: '10rem', md: '12rem' }}
+        display={{ base: 'none', sm: 'initial', lg: 'none' }}
+        fontSize={{
+          base: 'none',
+          sm: '8rem',
+          sm2: '10rem',
+          md: '12rem',
+        }}
       />
     </Flex>
   );

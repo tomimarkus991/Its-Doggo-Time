@@ -40,7 +40,7 @@ const MemberCard: React.FC<Props> = ({
         {username}
       </Text>
 
-      {creator_id !== id && isEditable ? (
+      {creator_id !== id && isEditable && (
         <Box
           as={FontAwesomeIcon}
           color="red"
@@ -61,7 +61,7 @@ const MemberCard: React.FC<Props> = ({
           bottom="25%"
           borderRadius="100"
         />
-      ) : null}
+      )}
     </VStack>
   );
 };

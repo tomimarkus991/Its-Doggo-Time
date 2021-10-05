@@ -1,10 +1,4 @@
-import {
-  Box,
-  HStack,
-  IconButton,
-  useCheckboxGroup,
-  VStack,
-} from '@chakra-ui/react';
+import { HStack, useCheckboxGroup, VStack } from '@chakra-ui/react';
 import MomentUtils from '@date-io/moment';
 import {
   MuiPickersUtilsProvider,
@@ -16,8 +10,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../context';
 import { FoodLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
+import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
-import { AddLogCheckboxIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
 interface RouteParams {
@@ -29,12 +23,13 @@ const AddFoodLogContainer: React.FC = () => {
   const { user } = useAuth();
   const router = useHistory();
 
-  const [logData, setLogData] = useState<any>([]);
+  const [logData, setLogData] = useState<any>(['food']);
 
   const businesses = ['food'];
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
+    value: logData,
   });
 
   const [time, setTime] = useState<any>(new Date());
@@ -66,30 +61,15 @@ const AddFoodLogContainer: React.FC = () => {
 
   return (
     <MainContainerLayout
-      mainH="xs"
       isLoading={false}
       containerProps={{
         w: { base: 'xs', sm: 'sm' },
         h: 'xs',
       }}
       button={
-        <Box
-          as={IconButton}
+        <EditOrAddLogContainerButton
+          logData={logData}
           onClick={() => addLog()}
-          h="100%"
-          aria-label="Add Food Log Button"
-          bgColor="transparent"
-          _hover={{ bgColor: 'transparent' }}
-          isDisabled={logData?.length === 0}
-          icon={
-            <AddLogCheckboxIcon
-              fontSize={{
-                base: '5rem',
-                md: '6rem',
-                lg: '7rem',
-              }}
-            />
-          }
         />
       }
     >

@@ -1,7 +1,7 @@
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Provider } from '@supabase/gotrue-js';
-import { useAuth } from '../../context';
+import { useOAuth } from '../../hooks/mutations';
 
 interface Props {
   icon: IconDefinition;
@@ -9,21 +9,13 @@ interface Props {
 }
 
 const OAuthButton: React.FC<Props> = ({ provider, icon }) => {
-  const { signIn } = useAuth();
-  const handleOAuthLogin = async () => {
-    try {
-      await signIn({
-        provider,
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const { mutate } = useOAuth(provider);
+
   return (
     <FontAwesomeIcon
       cursor="pointer"
       icon={icon}
-      onClick={handleOAuthLogin}
+      onClick={() => mutate()}
       size="3x"
       color="#DDCDBF"
     />

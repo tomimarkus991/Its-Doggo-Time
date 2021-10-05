@@ -4,7 +4,7 @@ import { BackIcon } from '../Icons';
 
 const PageHeaderBack: React.FC = ({ children }) => {
   return (
-    <Center>
+    <Center py="4">
       <Grid
         flex={1}
         templateColumns="0.1fr 1fr"

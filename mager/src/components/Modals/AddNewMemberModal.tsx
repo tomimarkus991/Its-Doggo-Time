@@ -14,7 +14,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useGroup, useInvite } from '../../context';
 import { useColors } from '../../hooks';
-import { getCurrentUser } from '../../utils/getCurrentUser';
+import { useUser } from '../../hooks/queries';
 import { supabase } from '../../utils/supabaseClient';
 import { MembersAlert } from '../Alerts';
 import { GradientButton } from '../Buttons';
@@ -40,6 +40,7 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
     useState<boolean>(false);
 
   const { defaultColor } = useColors();
+  const { data: userData } = useUser();
 
   useEffect(() => {
     const howManyMembersGroupHas = () => {
@@ -51,8 +52,6 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
   }, [members]);
   const sendInvite = async () => {
     try {
-      const { username } = await getCurrentUser();
-
       // finds if there are any members with {inviteReceiver} username
       const { data, error } = await supabase
         .from('profiles')
@@ -63,7 +62,7 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
       } else {
         const values = {
           receiver: inviteReceiver,
-          sender: username,
+          sender: userData?.username,
           group_id,
         };
 
@@ -117,7 +116,7 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {isInviteInvalid ? <MembersAlert /> : null}
+            {isInviteInvalid && <MembersAlert />}
 
             <Input
               variant={'removeDefault'}

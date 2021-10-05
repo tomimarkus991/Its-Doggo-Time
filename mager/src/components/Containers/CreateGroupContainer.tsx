@@ -1,60 +1,28 @@
 import { Box, IconButton, Input, VStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useAuth, useGroup } from '../../context';
-import { supabase } from '../../utils/supabaseClient';
+import { useCreateGroup } from '../../hooks/mutations';
 import { AvatarUpload } from '../Avatar';
 import { AddLogCheckboxIcon } from '../Icons';
 import { MainContainerLayout } from '../Layouts';
 
 const CreateGroupContainer: React.FC = () => {
-  const { groupname, setGroupname, group_avatar_url, setGroupAvatarUrl } =
-    useGroup();
-  const { user } = useAuth();
+  const [groupname, setGroupname] = useState('');
+  const [group_avatar_url, setGroupAvatarUrl] = useState('');
+
   const router = useHistory();
 
-  const createGroup = async () => {
-    try {
-      const updates = {
-        group_name: groupname,
-        avatar_url: group_avatar_url,
-        creator_id: user?.id,
-        updated_at: new Date(),
-      };
+  const { mutate, isSuccess } = useCreateGroup(
+    groupname,
+    group_avatar_url,
+  );
 
-      let { data, error } = await supabase
-        .from('groups')
-        .insert(updates, {
-          returning: 'representation',
-        })
-        .single();
-      try {
-        const memberUpdates = {
-          profile_id: user?.id,
-          group_id: data.id,
-        };
-
-        let { error } = await supabase
-          .from('members')
-          .insert(memberUpdates, {
-            returning: 'minimal',
-          });
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      }
-
-      if (error) throw error.message;
-    } catch (error) {
-      throw error;
-    } finally {
-      router.push('/');
-    }
-  };
+  if (isSuccess) {
+    router.push('/');
+  }
 
   return (
     <MainContainerLayout
-      mainH={{ base: 'xs', md: 'sm' }}
       isLoading={false}
       containerProps={{
         w: { base: 'xs', sm: 'sm', lg: 'md' },
@@ -63,10 +31,10 @@ const CreateGroupContainer: React.FC = () => {
       button={
         <Box
           as={IconButton}
-          onClick={() => createGroup()}
+          onClick={() => mutate()}
           mt={4}
           h="100%"
-          aria-label="Add Log Button"
+          aria-label="Create Group Button"
           bgColor="transparent"
           _hover={{ bgColor: 'transparent' }}
           // isDisabled={if you already have 4 groups}

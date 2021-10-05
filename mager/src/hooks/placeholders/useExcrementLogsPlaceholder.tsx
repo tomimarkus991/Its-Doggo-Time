@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ExcrementLogsdataType } from '../../types';
 
-const useExcrementLogsPlaceholder = (
-  logsdata: ExcrementLogsdataType[] | undefined,
-) => {
+const useExcrementLogsPlaceholder = (logsdata: any) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {

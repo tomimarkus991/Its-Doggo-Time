@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 
 interface Props {
-  isLoading: boolean;
+  isLoading: boolean | undefined;
   props?: SkeletonProps;
 }
 
@@ -19,6 +19,7 @@ const Skeleton: React.FC<Props> = ({
       startColor="beez.100"
       endColor="beez.700"
       isLoaded={!isLoading}
+      borderRadius={100}
       {...props}
     >
       {children}

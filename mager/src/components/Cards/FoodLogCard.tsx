@@ -1,6 +1,6 @@
-import { Center, Text } from '@chakra-ui/react';
-import moment from 'moment';
+import { Center } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { CardDateText } from '.';
 import { FoodLogsdataType } from '../../types';
 import { FoodIcon } from '../Icons';
 
@@ -14,7 +14,7 @@ const FoodLogCard: React.FC<Props> = ({ log, group_id }) => {
 
   return (
     <Link to={`/group/${group_id}/log/${id}`}>
-      <Center id="LogCard" h="100%" flexDirection="column">
+      <Center id="FoodLogCard" h="100%" flexDirection="column">
         <FoodIcon
           fontSize={{
             base: '6rem',
@@ -24,19 +24,7 @@ const FoodLogCard: React.FC<Props> = ({ log, group_id }) => {
             xl: '7.5rem',
           }}
         />
-
-        <Text
-          textAlign="center"
-          fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
-          minH="3rem"
-        >
-          {moment(created_at).local().calendar(null, {
-            lastDay: '[Yesterday at] HH:mm',
-            sameDay: '[Today at] HH:mm',
-            lastWeek: 'DD.MM [at] HH:mm',
-            sameElse: 'DD.MM [at] HH:mm',
-          })}
-        </Text>
+        <CardDateText created_at={created_at} />
       </Center>
     </Link>
   );

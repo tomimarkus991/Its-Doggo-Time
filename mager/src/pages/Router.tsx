@@ -7,6 +7,7 @@ import {
 import AddLog from './AddLog';
 import CreateGroup from './CreateGroup';
 import EditLog from './EditLog';
+import Error from './Error';
 import ForgotPassword from './ForgotPassword';
 import GroupPage from './GroupPage';
 import Home from './Home';

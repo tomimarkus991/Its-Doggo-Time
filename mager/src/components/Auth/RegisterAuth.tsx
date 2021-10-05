@@ -10,20 +10,14 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { OAuthSection, RerouteLoginRegister } from '.';
-import { useAuth } from '../../context';
-import { useErrorToast, useForm } from '../../hooks';
-import { supabase } from '../../utils/supabaseClient';
+import { useForm } from '../../hooks';
+import { useCreateUser } from '../../hooks/mutations';
 import SignUpAlert from '../Alerts/SignUpAlert';
 import { GradientButton } from '../Buttons';
 import { ColorMode } from '../ColorMode';
 import { GradientButtonText } from '../Text';
 
 const RegisterAuth: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isAuthError, setIsAuthError] = useState<boolean>(false);
-  const [isSignupSuccessful, setIsSignupSuccessful] =
-    useState<boolean>(false);
-
   const { username, email, password, handleChange } = useForm({
     username: '',
     email: '',
@@ -32,66 +26,15 @@ const RegisterAuth: React.FC = () => {
 
   const [show, setShow] = useState(false);
 
-  const { signUp } = useAuth();
-
-  const { showToast } = useErrorToast();
-
-  const updateProfile = async (userid: any) => {
-    try {
-      setIsLoading(true);
-      const updates = {
-        id: userid,
-        username,
-        updated_at: new Date(),
-      };
-
-      let { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal',
-      });
-
-      if (error) {
-        showToast({ title: 'Error', description: error.message });
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const signUserUp = async () => {
-    let isError = false;
-    try {
-      setIsLoading(true);
-      let { data, error }: { data: any; error: Error | null } =
-        await signUp({
-          email,
-          password,
-        });
-
-      if (error) {
-        isError = true;
-        setIsAuthError(true);
-        showToast({ title: 'Error', description: error.message });
-      } else {
-        updateProfile(data?.id);
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsLoading(false);
-
-      // when there isn't error
-      if (!isError) {
-        setIsAuthError(false);
-        setIsSignupSuccessful(true);
-      }
-    }
-  };
+  const { isSuccess, isError, isLoading, mutate } = useCreateUser({
+    username,
+    email,
+    password,
+  });
 
   return (
     <>
-      {isSignupSuccessful ? (
+      {isSuccess ? (
         <SignUpAlert />
       ) : (
         <Box w={300}>
@@ -107,7 +50,7 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              // isInvalid={isAuthError}
+              isInvalid={isError}
             />
             <Input
               variant={'removeDefault'}
@@ -120,7 +63,7 @@ const RegisterAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              isInvalid={isAuthError}
+              isInvalid={isError}
             />
             <InputGroup justifyContent="center" alignItems="center">
               <Input
@@ -135,7 +78,7 @@ const RegisterAuth: React.FC = () => {
                 size="lg"
                 fontSize="2xl"
                 borderRadius="25"
-                isInvalid={isAuthError}
+                isInvalid={isError}
               />
               <InputRightElement id="input roigs" width="3rem" h="100%">
                 {show ? (
@@ -156,10 +99,7 @@ const RegisterAuth: React.FC = () => {
               </InputRightElement>
             </InputGroup>
             <GradientButton
-              onClick={e => {
-                e.preventDefault();
-                signUserUp();
-              }}
+              onClick={() => mutate()}
               isLoading={isLoading}
               loadingText="Loading"
             >

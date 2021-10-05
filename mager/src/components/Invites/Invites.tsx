@@ -1,6 +1,5 @@
 import {
   Box,
-  Icon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,14 +13,15 @@ import {
 import React, { useEffect } from 'react';
 import { useAuth } from '../../context';
 import { useUser } from '../../context/UserContext';
-import { useFetchInvites } from '../../hooks/api';
+import { useFetchInvites } from '../../hooks/queries';
 import { useSubscribeToInviteInserts } from '../../hooks/subcribe';
 import useColors from '../../hooks/useColors';
 import { InviteDataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import GradientButton from '../Buttons/GradientButton';
 import { InviteCard } from '../Cards';
-import { InvitesIcon } from '../Icons';
+import { InviteNotificationIcon, InvitesIcon } from '../Icons';
+import { Skeleton } from '../Skeleton';
 import { GradientButtonText, LinkLabel } from '../Text';
 
 interface Props {}
@@ -29,12 +29,12 @@ interface Props {}
 const Invites: React.FC<Props> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useAuth();
-  const { userInvites, setUserInvites } = useUser();
+  const { setUserInvites } = useUser();
 
   const { defaultColor } = useColors();
 
   useSubscribeToInviteInserts();
-  useFetchInvites();
+  const { data: userInvites, isLoading } = useFetchInvites();
 
   const declineInvite = async (invite_id: string) => {
     // delete invite with that id
@@ -67,25 +67,12 @@ const Invites: React.FC<Props> = () => {
   }, [userInvites]);
 
   return (
-    <>
+    <Skeleton isLoading={isLoading}>
       <VStack cursor="pointer" onClick={onOpen}>
         <Box position="relative">
           <InvitesIcon id="Invites" fontSize="4rem" />
-          {userInvites.length >= 1 && (
-            <Icon
-              position="absolute"
-              bottom={-2}
-              right={-2}
-              viewBox="0 0 200 200"
-              fontSize="1.5rem"
-              color="green.500"
-            >
-              <path
-                fill="currentColor"
-                d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-              />
-            </Icon>
-          )}
+          {/* if user has invites show green dot */}
+          {!!userInvites?.length && <InviteNotificationIcon />}
         </Box>
         <LinkLabel htmlFor="Invites" label="Invites" />
       </VStack>
@@ -123,7 +110,7 @@ const Invites: React.FC<Props> = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Skeleton>
   );
 };
 export default Invites;

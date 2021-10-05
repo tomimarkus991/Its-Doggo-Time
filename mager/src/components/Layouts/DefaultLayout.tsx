@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import React from 'react';
 import Header from '../Header';
 import { HeaderBackground, HeaderBackgroundSmall } from '../Icons';
 
@@ -16,21 +15,19 @@ const DefaultLayout = ({
       templateAreas={{ base: '"main"', lg: '"header" "main"' }}
       h="100vh"
     >
-      <>
-        <HeaderBackgroundSmall display={{ base: 'block', sm: 'none' }} />
-        <HeaderBackground
-          h="100%"
-          display={{ base: 'none', sm: 'block', lg: 'none' }}
-        />
-      </>
+      <HeaderBackgroundSmall display={{ base: 'block', sm: 'none' }} />
+      <HeaderBackground
+        h="100%"
+        display={{ base: 'none', sm: 'block', lg: 'none' }}
+      />
 
       <GridItem
-        display={{ base: 'none', lg: 'initial' }}
         gridArea="header"
+        display={{ base: 'none', lg: 'initial' }}
       >
         <Header />
       </GridItem>
-      <GridItem zIndex={2} id="1" gridArea="main" h="100%">
+      <GridItem id="1" gridArea="main" zIndex={2} h="100%">
         <Box zIndex={2} id="2" h="100%">
           {children}
         </Box>

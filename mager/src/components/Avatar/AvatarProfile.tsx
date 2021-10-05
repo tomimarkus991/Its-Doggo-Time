@@ -1,14 +1,13 @@
 import { Avatar } from '.';
 import { ProfileAvatarIcon } from '../Icons';
-import { StringOrUndefined } from '../../types';
 interface Props {
-  src: StringOrUndefined;
+  src: string | undefined;
 }
 
 const AvatarProfile: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
-      src={src}
+      path={src}
       w={{ base: '7rem', sm: '7rem', md: '9rem' }}
       h={{ base: '7rem', sm: '7rem', md: '9rem' }}
       icon={
@@ -16,6 +15,7 @@ const AvatarProfile: React.FC<Props> = ({ src }) => {
           fontSize={{ base: '5rem', sm: '5rem', md: '6rem' }}
         />
       }
+      type="User"
     />
   );
 };

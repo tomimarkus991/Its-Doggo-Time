@@ -14,151 +14,73 @@ import {
   ProfileNameAndAvatarMiddle,
 } from '../../components/Layouts/Profile';
 import { MyGroupsLink } from '../../components/Links';
-import { Skeleton } from '../../components/Skeleton';
-import { useAuth } from '../../context';
-import { useUser } from '../../context/UserContext';
-import { useToast } from '../../hooks';
-import { useFetchUserProfile } from '../../hooks/api';
-import { StringOrUndefined } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import {
+  useUpdateUserAvatar,
+  useUpdateUsername,
+} from '../../hooks/mutations';
+import { useUser } from '../../hooks/queries';
 
 const Profile: React.FC = () => {
-  const { user } = useAuth();
-  const {
-    username,
-    setUsername,
-    user_avatar_url,
-    setUserAvatarUrl,
-    old_username,
-    setOldUsername,
-  } = useUser();
-
-  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
-
-  const { showToast } = useToast();
   const [isEditable, setIsEditable] = useState(false);
-
-  const { isLoading } = useFetchUserProfile();
+  const { data } = useUser();
+  const [username, setUsername] = useState(data?.username);
 
   const cancelSave = () => {
-    setUsername(old_username);
     setIsEditable(false);
+    updateUsername.reset();
+    updateUserAvatar.reset();
   };
 
-  const submitSave = async () => {
-    setIsEditable(false);
-    const profile_updates = {
-      id: user?.id,
-      username,
-      updated_at: new Date(),
-    };
-    if (username !== old_username) {
-      try {
-        // update username
-        await supabase.from('profiles').upsert(profile_updates, {
-          returning: 'minimal',
-        });
-
-        // delete all invites for that user
-        await supabase
-          .from('invites')
-          .delete()
-          .eq('sender', old_username)
-          .eq('receiver', old_username);
-
-        setOldUsername(username);
-      } catch (error) {
-        throw error;
-      } finally {
-        showToast({
-          title: 'Group Updated',
-          description: 'Your Group has been updated.',
-        });
-      }
-    }
-  };
-
-  const updateAvatar = async (user_avatar_url: StringOrUndefined) => {
-    try {
-      setIsAvatarLoading(true);
-      const updates = {
-        id: user?.id,
-        avatar_url: user_avatar_url,
-        updated_at: new Date(),
-      };
-
-      let { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal',
-      });
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsAvatarLoading(false);
-      showToast({
-        title: 'Photo Updated',
-        description: 'Your Profile Photo has been updated.',
-      });
-    }
-  };
+  const updateUserAvatar = useUpdateUserAvatar();
+  const updateUsername = useUpdateUsername();
 
   return (
     <MainLayout
       leftSide={
-        <Skeleton
-          isLoading={isLoading}
-          props={{
-            borderRadius: 100,
-            w: { sm: '95%', md: '90%', lg: 'initial' },
-            h: 'fit-content',
-          }}
-        >
-          <HeaderAvatar>
-            {isEditable ? (
-              <HStack flexDirection={{ sm: 'row', lg: 'column' }}>
-                <AvatarUpload
-                  onUpload={(url: string) => {
-                    setUserAvatarUrl(url);
-                    updateAvatar(url);
-                  }}
-                  avatar_url={user_avatar_url}
-                  avatar="User"
+        <HeaderAvatar>
+          {isEditable ? (
+            <HStack flexDirection={{ sm: 'row', lg: 'column' }}>
+              <AvatarUpload
+                onUpload={(url: string) => {
+                  updateUserAvatar.mutate(url);
+                }}
+                avatar_url={data?.avatar_url}
+                avatar="User"
+              />
+              <VStack>
+                <Input
+                  variant={'removeDefault'}
+                  autoCapitalize="off"
+                  onChange={e => setUsername(e.target.value)}
+                  defaultValue={data?.username}
+                  isDisabled={!isEditable}
+                  borderRadius="50"
+                  fontSize="3xl"
+                  size="lg"
+                  mt="4"
+                  bg="white"
+                  width={{ sm: '3xs', xl: '2xs' }}
                 />
-                <VStack>
-                  <Input
-                    variant={'removeDefault'}
-                    autoCapitalize="off"
-                    onChange={e => setUsername(e.target.value)}
-                    value={username}
-                    isDisabled={!isEditable}
-                    borderRadius="50"
-                    fontSize="3xl"
-                    size="lg"
-                    mt="4"
-                    bg="white"
-                    width={{ sm: '3xs', xl: '2xs' }}
-                  />
-                  <EditButtons
-                    buttonGroupProps={{
-                      mt: 2,
-                      size: 'sm',
-                    }}
-                    onCrossClick={cancelSave}
-                    onCheckClick={submitSave}
-                  />
-                </VStack>
-              </HStack>
-            ) : (
-              <>
-                <ProfileNameAndAvatar />
-                <PenButton onClick={() => setIsEditable(true)} />
-              </>
-            )}
-          </HeaderAvatar>
-        </Skeleton>
+                <EditButtons
+                  buttonGroupProps={{
+                    mt: 2,
+                    size: 'sm',
+                  }}
+                  onCrossClick={cancelSave}
+                  onCheckClick={() => {
+                    setIsEditable(false);
+                    updateUsername.mutate(username);
+                  }}
+                />
+              </VStack>
+            </HStack>
+          ) : (
+            <>
+              <ProfileNameAndAvatar />
+              <PenButton onClick={() => setIsEditable(true)} />
+            </>
+          )}
+        </HeaderAvatar>
       }
       middle={
         <>
@@ -167,10 +89,9 @@ const Profile: React.FC = () => {
               <HStack>
                 <AvatarUpload
                   onUpload={(url: string) => {
-                    setUserAvatarUrl(url);
-                    updateAvatar(url);
+                    updateUserAvatar.mutate(url);
                   }}
-                  avatar_url={user_avatar_url}
+                  avatar_url={data?.avatar_url}
                   avatar="User"
                 />
 
@@ -179,7 +100,7 @@ const Profile: React.FC = () => {
                     variant={'removeDefault'}
                     autoCapitalize="off"
                     onChange={e => setUsername(e.target.value)}
-                    value={username}
+                    defaultValue={data?.username}
                     isDisabled={!isEditable}
                     borderRadius="50"
                     fontSize="3xl"
@@ -194,7 +115,10 @@ const Profile: React.FC = () => {
                       size: 'sm',
                     }}
                     onCrossClick={cancelSave}
-                    onCheckClick={submitSave}
+                    onCheckClick={() => {
+                      setIsEditable(false);
+                      updateUsername.mutate(username);
+                    }}
                   />
                 </VStack>
               </HStack>
@@ -206,7 +130,7 @@ const Profile: React.FC = () => {
             )}
           </Flex>
           <PageHeader>My Profile</PageHeader>
-          <MyProfileContainer isLoading={isAvatarLoading} />
+          <MyProfileContainer />
         </>
       }
       rightSide={

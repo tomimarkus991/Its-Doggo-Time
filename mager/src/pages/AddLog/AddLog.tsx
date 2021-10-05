@@ -14,9 +14,7 @@ import {
   GroupNameAndAvatarMiddle,
 } from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
-import { Skeleton } from '../../components/Skeleton';
 import { useLogsView, ViewType } from '../../context';
-import { useFetchGroupProfile } from '../../hooks/api';
 
 interface RouteParams {
   group_id: string;
@@ -24,27 +22,18 @@ interface RouteParams {
 
 const AddLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-  const { isLoading } = useFetchGroupProfile(group_id);
   const { view } = useLogsView();
 
   return (
     <MainLayout
       leftSide={
-        <Skeleton
-          isLoading={isLoading}
-          props={{
-            borderRadius: 50,
-            w: '100%',
-          }}
-        >
-          <HeaderAvatar>
-            <GroupNameAndAvatar />
-          </HeaderAvatar>
-        </Skeleton>
+        <HeaderAvatar>
+          <GroupNameAndAvatar group_id={group_id} />
+        </HeaderAvatar>
       }
       middle={
         <>
-          <GroupNameAndAvatarMiddle />
+          <GroupNameAndAvatarMiddle group_id={group_id} />
           <PageHeaderBack>Add Log</PageHeaderBack>
           {view === ViewType.Excrement ? (
             <AddExcrementLogContainer />

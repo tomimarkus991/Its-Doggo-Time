@@ -9,51 +9,34 @@ import {
 } from '@chakra-ui/react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { OAuthSection, RerouteLoginRegister } from '.';
-import { useAuth } from '../../context';
+import { useLogin } from '../../hooks/mutations';
 import useForm from '../../hooks/useForm';
 import { GradientButton } from '../Buttons';
 import { ColorMode } from '../ColorMode';
 import { GradientButtonText } from '../Text';
 
 const LoginAuth: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isAuthError, setIsAuthError] = useState<boolean>(false);
   const [show, setShow] = useState(false);
   const { email, password, handleChange } = useForm({
     email: '',
     password: '',
   });
+
   const router = useHistory();
-  const { signIn } = useAuth();
 
-  const signUserIn = async () => {
-    let isError = false;
-    try {
-      setIsLoading(true);
-      let { error } = await signIn({
-        email,
-        password,
-      });
+  const { isSuccess, isLoading, isError, mutate } = useLogin({
+    email,
+    password,
+  });
 
-      if (error) {
-        isError = true;
-        setIsAuthError(true);
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      setIsLoading(false);
-
-      // when there isn't error
-      if (!isError) {
-        setIsAuthError(false);
-        router.push('/');
-      }
+  useEffect(() => {
+    if (isSuccess) {
+      router.push('/');
     }
-  };
+  }, [isSuccess]);
 
   return (
     <Box w={300}>
@@ -69,7 +52,7 @@ const LoginAuth: React.FC = () => {
           fontSize="2xl"
           size="lg"
           borderRadius="25"
-          isInvalid={isAuthError}
+          isInvalid={isError}
         />
         <Box w="100%">
           <InputGroup justifyContent="center" alignItems="center">
@@ -85,7 +68,7 @@ const LoginAuth: React.FC = () => {
               size="lg"
               fontSize="2xl"
               borderRadius="25"
-              isInvalid={isAuthError}
+              isInvalid={isError}
             />
             <InputRightElement width="3rem" h="100%">
               {show ? (
@@ -114,10 +97,7 @@ const LoginAuth: React.FC = () => {
           </Flex>
         </Box>
         <GradientButton
-          onClick={(e: any) => {
-            e.preventDefault();
-            signUserIn();
-          }}
+          onClick={() => mutate()}
           isLoading={isLoading}
           loadingText="Logging in"
         >

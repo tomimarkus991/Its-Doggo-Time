@@ -1,7 +1,7 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
 interface Props {
-  name: string;
+  name: string | undefined;
   textProps?: TextProps;
 }
 

@@ -18,12 +18,12 @@ import {
   GroupNameAndAvatarMiddle,
 } from '../components/Layouts/Group';
 import { MembersLink, MyGroupsLink } from '../components/Links';
-import { Skeleton } from '../components/Skeleton';
-import { useAuth, useGroup, useLogsView, ViewType } from '../context';
-import { useToast } from '../hooks';
-import { useFetchGroupData } from '../hooks/api';
-import { StringOrUndefined } from '../types';
-import { supabase } from '../utils/supabaseClient';
+import { useLogsView, ViewType } from '../context';
+import {
+  useUpdateGroupname,
+  useUpdateGroupPicture,
+} from '../hooks/mutations';
+import { useFetchGroupData, useUser } from '../hooks/queries';
 
 interface RouteParams {
   group_id: string;
@@ -31,156 +31,100 @@ interface RouteParams {
 
 export const GroupPage: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-  const { user } = useAuth();
-  const {
-    groupname,
-    setGroupname,
-    creator_id,
-    group_avatar_url,
-    setGroupAvatarUrl,
-    old_groupname,
-    setOldGroupname,
-  } = useGroup();
+  const { data: user } = useUser();
   const { view } = useLogsView();
 
-  const { showToast } = useToast();
   const [isEditable, setIsEditable] = useState(false);
+  const { data } = useFetchGroupData(group_id);
+
+  const [groupname, setGroupname] = useState(data?.group_name);
 
   const cancelSave = () => {
-    setGroupname(old_groupname);
     setIsEditable(false);
-  };
-  const submitSave = async () => {
-    setIsEditable(false);
-    const updates = {
-      id: group_id,
-      group_name: groupname,
-      avatar_url: group_avatar_url,
-      updated_at: new Date(),
-    };
-
-    if (groupname !== old_groupname) {
-      try {
-        let { error } = await supabase.from('groups').upsert(updates, {
-          returning: 'minimal', // Don't return the value after inserting
-        });
-        setOldGroupname(groupname);
-        if (error) throw error.message;
-      } catch (error) {
-        throw error;
-      } finally {
-        showToast({
-          title: 'Group Updated',
-          description: 'Your Group has been updated.',
-        });
-      }
-    }
+    updateGroupname.reset();
+    updateGroupPicture.reset();
   };
 
-  const { isLoading } = useFetchGroupData(group_id);
-
-  const updateGroupPicture = async (avatar_url: StringOrUndefined) => {
-    try {
-      const updates = {
-        id: group_id,
-        avatar_url,
-        updated_at: new Date(),
-      };
-
-      let { error } = await supabase.from('groups').upsert(updates, {
-        returning: 'minimal', // Don't return the value after inserting
-      });
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      showToast({
-        title: 'Group Picture Updated',
-        description: 'Your Group Picture has been updated.',
-      });
-    }
-  };
+  const updateGroupPicture = useUpdateGroupPicture(group_id);
+  const updateGroupname = useUpdateGroupname(group_id);
 
   return (
     <MainLayout
       leftSide={
         <Flex flexDir="column" w="100%" h="80%">
-          <Skeleton
-            isLoading={isLoading}
-            props={{
-              borderRadius: 100,
-            }}
-          >
-            <HeaderAvatar>
-              {isEditable ? (
-                <>
-                  <VStack>
-                    <AvatarUpload
-                      onUpload={(url: string) => {
-                        setGroupAvatarUrl(url);
-                        updateGroupPicture(url);
+          <HeaderAvatar>
+            {isEditable ? (
+              <>
+                <VStack>
+                  <AvatarUpload
+                    onUpload={(url: string) => {
+                      updateGroupPicture.mutate(url);
+                    }}
+                    avatar_url={data?.avatar_url}
+                    avatar="Group"
+                  />
+                  <Center
+                    display={{ sm: 'flex', lg: 'none' }}
+                    w="100%"
+                    h="40%"
+                  >
+                    <DeleteGroupButton
+                      user_id={user?.id}
+                      group_id={group_id}
+                      creator_id={data?.creator_id}
+                      isEditable={isEditable}
+                    />
+                  </Center>
+                </VStack>
+                <VStack>
+                  <Input
+                    variant={'removeDefault'}
+                    autoCapitalize="off"
+                    onChange={e => setGroupname(e.target.value)}
+                    isDisabled={!isEditable}
+                    borderRadius="50"
+                    fontSize="3xl"
+                    size="lg"
+                    mt="4"
+                    bg="white"
+                    defaultValue={data?.group_name}
+                    width={{ base: '3xs', xl: '2xs' }}
+                  />
+                  {user?.id === data?.creator_id && (
+                    <EditButtons
+                      buttonGroupProps={{
+                        mt: { base: 0, sm: '2' },
+                        alignItems: 'center',
+                        size: 'sm',
                       }}
-                      avatar_url={group_avatar_url}
-                      avatar="Group"
+                      onCrossClick={cancelSave}
+                      onCheckClick={() => {
+                        setIsEditable(false);
+                        updateGroupname.mutate(groupname);
+                      }}
                     />
-                    <Center
-                      display={{ sm: 'flex', lg: 'none' }}
-                      w="100%"
-                      h="40%"
-                    >
-                      <DeleteGroupButton
-                        user_id={user?.id}
-                        group_id={group_id}
-                        creator_id={creator_id}
-                        isEditable={isEditable}
-                      />
-                    </Center>
-                  </VStack>
-                  <VStack>
-                    <Input
-                      variant={'removeDefault'}
-                      autoCapitalize="off"
-                      onChange={e => setGroupname(e.target.value)}
-                      value={groupname}
-                      isDisabled={!isEditable}
-                      borderRadius="50"
-                      fontSize="3xl"
-                      size="lg"
-                      mt="4"
-                      bg="white"
-                      width={{ base: '3xs', xl: '2xs' }}
-                    />
-                    {user?.id === creator_id ? (
-                      <EditButtons
-                        buttonGroupProps={{
-                          mt: { base: 0, sm: '2' },
-                          alignItems: 'center',
-                          size: 'sm',
-                        }}
-                        onCrossClick={cancelSave}
-                        onCheckClick={submitSave}
-                      />
-                    ) : null}
-                  </VStack>
-                </>
-              ) : (
-                <>
-                  <GroupNameAndAvatar />
-                  {user?.id === creator_id && isEditable === false ? (
-                    <PenButton onClick={() => setIsEditable(true)} />
-                  ) : null}
-                </>
-              )}
-            </HeaderAvatar>
-          </Skeleton>
+                  )}
+                </VStack>
+              </>
+            ) : (
+              <>
+                <GroupNameAndAvatar
+                  group_id={group_id}
+                  isGroupnameLoading={updateGroupname.isLoading}
+                  isGroupPictureLoading={updateGroupPicture.isLoading}
+                />
+                {user?.id === data?.creator_id && isEditable === false && (
+                  <PenButton onClick={() => setIsEditable(true)} />
+                )}
+              </>
+            )}
+          </HeaderAvatar>
+
           <Center display={{ base: 'none', lg: 'flex' }} w="100%" h="40%">
             <DeleteGroupButton
               user_id={user?.id}
               group_id={group_id}
-              creator_id={creator_id}
+              creator_id={data?.creator_id}
               isEditable={isEditable}
             />
           </Center>
@@ -193,10 +137,9 @@ export const GroupPage: React.FC = () => {
               <HStack>
                 <AvatarUpload
                   onUpload={(url: string) => {
-                    setGroupAvatarUrl(url);
-                    updateGroupPicture(url);
+                    updateGroupPicture.mutate(url);
                   }}
-                  avatar_url={group_avatar_url}
+                  avatar_url={data?.avatar_url}
                   avatar="Group"
                 />
                 <VStack>
@@ -204,48 +147,54 @@ export const GroupPage: React.FC = () => {
                     variant={'removeDefault'}
                     autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
-                    value={groupname}
                     isDisabled={!isEditable}
                     borderRadius="50"
                     fontSize="3xl"
                     size="lg"
                     mt="4"
                     bg="white"
+                    defaultValue={data?.group_name}
                     width={{ base: '3xs', xl: '2xs' }}
                   />
-                  {user?.id === creator_id ? (
+                  {user?.id === data?.creator_id && (
                     <EditButtons
                       buttonGroupProps={{
                         size: 'sm',
                       }}
                       onCrossClick={cancelSave}
-                      onCheckClick={submitSave}
+                      onCheckClick={() =>
+                        updateGroupname.mutate(groupname)
+                      }
                     />
-                  ) : null}
+                  )}
                 </VStack>
               </HStack>
             ) : (
               <Center>
-                <GroupNameAndAvatarMiddle />
-                {user?.id === creator_id && isEditable === false ? (
+                <GroupNameAndAvatarMiddle
+                  group_id={group_id}
+                  isGroupnameLoading={updateGroupname.isLoading}
+                  isGroupPictureLoading={updateGroupPicture.isLoading}
+                />
+                {user?.id === data?.creator_id && isEditable === false && (
                   <PenButton onClick={() => setIsEditable(true)} />
-                ) : null}
+                )}
               </Center>
             )}
           </Flex>
 
           <VStack spacing={4}>
             <ChangeLogsView />
-            {isEditable ? (
+            {isEditable && (
               <Center display={{ base: 'flex', sm: 'none' }}>
                 <DeleteGroupButton
                   user_id={user?.id}
                   group_id={group_id}
-                  creator_id={creator_id}
+                  creator_id={data?.creator_id}
                   isEditable={isEditable}
                 />
               </Center>
-            ) : null}
+            )}
           </VStack>
           {view === ViewType.Excrement ? (
             <ExcrementLogsContainer />

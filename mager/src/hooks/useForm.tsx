@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 const useForm = (initialValues: {
-  password: string;
   username?: string;
-  email?: string;
+  email: string;
+  password: string;
 }) => {
   const [values, setValues] = useState(initialValues);
 

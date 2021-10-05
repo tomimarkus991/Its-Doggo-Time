@@ -18,18 +18,18 @@ const CheckboxCard = (props: any) => {
           opacity: 1,
           color: 'white',
         }}
-        px={5}
+        px={3}
         py={3}
       >
-        {props.children === 'pee' ? (
-          <PeeIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
-        ) : null}
-        {props.children === 'poop' ? (
-          <PoopIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
-        ) : null}
-        {props.children === 'food' ? (
-          <FoodIcon fontSize={{ base: '6rem', md: '7rem', lg: '8rem' }} />
-        ) : null}
+        {props.children === 'pee' && (
+          <PeeIcon fontSize={{ base: '7.5rem', sm: '8rem' }} />
+        )}
+        {props.children === 'poop' && (
+          <PoopIcon fontSize={{ base: '7.5rem', sm: '8rem' }} />
+        )}
+        {props.children === 'food' && (
+          <FoodIcon fontSize={{ base: '7.5rem', sm: '8rem' }} />
+        )}
       </Box>
     </Box>
   );
