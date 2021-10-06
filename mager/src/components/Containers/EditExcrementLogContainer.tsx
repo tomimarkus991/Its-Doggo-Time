@@ -1,7 +1,7 @@
 import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useAuth } from '../../context';
+import { useParams } from 'react-router-dom';
+import { useEditExcrementLog } from '../../hooks/mutations';
 import { ExcrementLogsdataType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
 import { EditOrAddLogContainerButton } from '../Buttons';
@@ -16,8 +16,6 @@ interface RouteParams {
 
 const EditExcrementLogContainer: React.FC = () => {
   const { group_id, log_id } = useParams<RouteParams>();
-  const { user } = useAuth();
-  const router = useHistory();
 
   const [logData, setLogData] = useState<any>([]);
 
@@ -31,40 +29,7 @@ const EditExcrementLogContainer: React.FC = () => {
   const [time, setTime] = useState<Date>(new Date());
   const [isLogdataLoading, setIsLogdataLoading] = useState(true);
 
-  const editLog = async () => {
-    let pee: boolean;
-    let poop: boolean;
-    if (logData?.includes('pee')) {
-      pee = true;
-    } else {
-      pee = false;
-    }
-    if (logData?.includes('poop')) {
-      poop = true;
-    } else {
-      poop = false;
-    }
-
-    const values: ExcrementLogsdataType = {
-      pee,
-      poop,
-      creator_id: user?.id as string,
-      group_id,
-      created_at: time,
-    };
-    try {
-      await supabase
-        .from('excrement_logs')
-        .update(values, {
-          returning: 'minimal',
-        })
-        .eq('id', log_id);
-    } catch (error) {
-      alert(error);
-    } finally {
-      router.push(`/group/${group_id}`);
-    }
-  };
+  const { mutate } = useEditExcrementLog(group_id);
 
   useEffect(() => {
     const fetchLogData = async () => {
@@ -75,9 +40,9 @@ const EditExcrementLogContainer: React.FC = () => {
           .select(
             `
             id,
-            created_at,
             pee,
             poop
+            created_at,
         `,
           )
           .eq('id', log_id)
@@ -115,7 +80,7 @@ const EditExcrementLogContainer: React.FC = () => {
       button={
         <EditOrAddLogContainerButton
           logData={logData}
-          onClick={() => editLog()}
+          onClick={() => mutate({ logData, time, log_id })}
         />
       }
     >
