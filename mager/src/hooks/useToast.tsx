@@ -1,13 +1,18 @@
-import { useToast as useChakraToast } from '@chakra-ui/react';
+import {
+  useToast as useChakraToast,
+  ToastPositionWithLogical,
+} from '@chakra-ui/react';
 const useToast = () => {
   const toast = useChakraToast();
   return {
     showSuccessToast: ({
       title,
       description,
+      position,
     }: {
       title: string;
       description: string;
+      position?: ToastPositionWithLogical;
     }) =>
       toast({
         title,
@@ -15,14 +20,16 @@ const useToast = () => {
         status: 'success',
         duration: 2000,
         isClosable: true,
-        position: 'bottom',
+        position: position || 'bottom',
       }),
     showErrorToast: ({
       title,
       description,
+      position,
     }: {
       title: string;
       description: string;
+      position?: ToastPositionWithLogical;
     }) =>
       toast({
         title,
@@ -30,7 +37,7 @@ const useToast = () => {
         status: 'error',
         duration: 8000,
         isClosable: true,
-        position: 'top',
+        position: position || 'top',
       }),
   };
 };

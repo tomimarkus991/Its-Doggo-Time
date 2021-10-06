@@ -2,13 +2,13 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import { IconButton, Text, VStack } from '@chakra-ui/react';
 import { ProfileAvatarCard } from '.';
 import { useColors } from '../../hooks';
+import { useRemoveGroupMember } from '../../hooks/mutations';
 import { MemberType, StringOrUndefined } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
 
 interface Props {
   member: MemberType;
   isEditable: boolean;
-  group_id: StringOrUndefined;
+  group_id: string;
   creator_id: StringOrUndefined;
 }
 
@@ -18,20 +18,10 @@ const MemberCard: React.FC<Props> = ({
   group_id,
   creator_id,
 }) => {
-  const { id, username, avatar_url } = member;
+  const { id: user_id, username, avatar_url } = member;
   const { containerBackgroundColor } = useColors();
 
-  const removeUser = async () => {
-    try {
-      await supabase
-        .from('members')
-        .delete()
-        .eq('profile_id', id)
-        .eq('group_id', group_id);
-    } catch (error) {
-      throw error;
-    }
-  };
+  const { mutate } = useRemoveGroupMember();
 
   return (
     <VStack spacing={0} position="relative">
@@ -40,7 +30,7 @@ const MemberCard: React.FC<Props> = ({
         {username}
       </Text>
 
-      {creator_id == id && isEditable && (
+      {creator_id !== user_id && isEditable && (
         <IconButton
           aria-label="Remove"
           colorScheme="red"
@@ -51,7 +41,7 @@ const MemberCard: React.FC<Props> = ({
           borderColor="beez.700"
           position="absolute"
           cursor="pointer"
-          onClick={() => removeUser()}
+          onClick={() => mutate({ user_id, group_id })}
           right={{ base: '0', sm: '5%' }}
           bottom="25%"
           isRound

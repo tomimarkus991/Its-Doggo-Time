@@ -10,3 +10,4 @@ export { default as useUpdateGroupPicture } from './useUpdateGroupPicture';
 export { default as useUpdateGroupname } from './useUpdateGroupname';
 export { default as useUpdateUsername } from './useUpdateUsername';
 export { default as useUpdateUserAvatar } from './useUpdateUserAvatar';
+export { default as useRemoveGroupMember } from './useRemoveGroupMember';
