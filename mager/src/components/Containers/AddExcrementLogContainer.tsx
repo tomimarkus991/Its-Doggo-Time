@@ -1,9 +1,7 @@
 import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useAuth } from '../../context';
-import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAddExcrementLog } from '../../hooks/mutations';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
@@ -15,8 +13,6 @@ interface RouteParams {
 
 const AddExcrementLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
-  const { user } = useAuth();
-  const router = useHistory();
 
   const [logData, setLogData] = useState<any>([]);
 
@@ -28,37 +24,7 @@ const AddExcrementLogContainer: React.FC = () => {
 
   const [time, setTime] = useState(new Date());
 
-  const addLog = async () => {
-    let pee: boolean;
-    let poop: boolean;
-    if (logData?.includes('pee')) {
-      pee = true;
-    } else {
-      pee = false;
-    }
-    if (logData?.includes('poop')) {
-      poop = true;
-    } else {
-      poop = false;
-    }
-
-    const values: ExcrementLogsdataType = {
-      pee,
-      poop,
-      creator_id: user?.id as string,
-      group_id,
-      created_at: time,
-    };
-    try {
-      await supabase.from('excrement_logs').insert(values, {
-        returning: 'minimal',
-      });
-    } catch (error) {
-      alert(error);
-    } finally {
-      router.push(`/group/${group_id}`);
-    }
-  };
+  const { mutate } = useAddExcrementLog(group_id);
 
   return (
     <MainContainerLayout
@@ -70,7 +36,7 @@ const AddExcrementLogContainer: React.FC = () => {
       button={
         <EditOrAddLogContainerButton
           logData={logData}
-          onClick={() => addLog()}
+          onClick={() => mutate({ logData, time })}
         />
       }
     >
