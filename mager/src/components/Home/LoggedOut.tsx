@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Text, VStack } from '@chakra-ui/react';
+import { Box, Center, HStack, Text, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import GradientButton from '../Buttons/GradientButton';
 import { DoggoIcon } from '../Icons';
@@ -6,61 +6,53 @@ import { GradientButtonText } from '../Text';
 
 const LoggedOut: React.FC = () => {
   return (
-    <Center
-      h="100%"
-      id="center"
-      flexDirection={{ base: 'column', lg: 'row' }}
-    >
-      <VStack textAlign="center">
-        <Text
-          fontSize={{ base: '3xl' }}
-          maxW="md"
-          display={{ base: 'none', md: 'block' }}
-        >
-          Is your family member constantly asking about your dogs
-          peeing/pooping times?
-        </Text>
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          flexDirection={{ base: 'column', md: 'row' }}
-        >
-          <Box mr={{ base: 0, md: '4' }}>
-            <Link to="/login">
-              <GradientButton>
-                <GradientButtonText fontSize={25}>
-                  Log in
-                </GradientButtonText>
-              </GradientButton>
-            </Link>
-          </Box>
-          <Box mt={{ base: '6', md: '0' }}>
-            <Link to="/register">
-              <GradientButton>
-                <GradientButtonText fontSize={25}>
-                  Sign Up
-                </GradientButtonText>
-              </GradientButton>
-            </Link>
-          </Box>
-        </Flex>
-      </VStack>
-      <Box
-        id="whitespace box"
-        display={{ base: 'none', md: 'block' }}
-        w={{ sm: '2rem', md: '2rem', lg: '4rem', xl: '7rem' }}
-      ></Box>
-      <Box>
+    <Center h="100%">
+      <HStack
+        flexDirection={{ base: 'column', lg: 'row' }}
+        spacing={{ base: 0, lg: '40', xl: '60' }}
+      >
+        <VStack textAlign="center">
+          <Text
+            fontSize={{ base: '3xl' }}
+            maxW="md"
+            display={{ base: 'none', md: 'block' }}
+          >
+            {/* Is your family member constantly asking about your dogs
+          peeing/pooping times? */}
+            Start monitoring your dogs excrement and food data
+          </Text>
+          <Center flexDirection={{ base: 'column', md: 'row' }}>
+            <Box mr={{ base: 0, md: '4' }}>
+              <Link to="/login">
+                <GradientButton>
+                  <GradientButtonText fontSize={25}>
+                    Log in
+                  </GradientButtonText>
+                </GradientButton>
+              </Link>
+            </Box>
+            <Box mt={{ base: '6', md: '0' }}>
+              <Link to="/register">
+                <GradientButton>
+                  <GradientButtonText fontSize={25}>
+                    Sign Up
+                  </GradientButtonText>
+                </GradientButton>
+              </Link>
+            </Box>
+          </Center>
+        </VStack>
+
         <DoggoIcon
           fontSize={{
             base: '20rem',
             sm: '24rem',
             md: '20rem',
             lg: '24rem',
-            xl: '32rem',
+            xl: '30rem',
           }}
         />
-      </Box>
+      </HStack>
     </Center>
   );
 };
