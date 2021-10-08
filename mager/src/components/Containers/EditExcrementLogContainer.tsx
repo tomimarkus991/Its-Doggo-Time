@@ -1,9 +1,9 @@
 import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLogs } from '../../context';
 import { useEditExcrementLog } from '../../hooks/mutations';
-import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { useFetchExcrementLog } from '../../hooks/queries';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
@@ -17,62 +17,34 @@ interface RouteParams {
 const EditExcrementLogContainer: React.FC = () => {
   const { group_id, log_id } = useParams<RouteParams>();
 
-  const [logData, setLogData] = useState<any>([]);
+  const {
+    logCheckboxData: logData,
+    setLogCheckboxData: setLogData,
+    time,
+    setTime,
+  } = useLogs();
 
   let businesses = ['pee', 'poop'];
+  const { isLoading, refetch, isRefetching } = useFetchExcrementLog(
+    log_id,
+    group_id,
+  );
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
     value: logData,
   });
 
-  const [time, setTime] = useState<Date>(new Date());
-  const [isLogdataLoading, setIsLogdataLoading] = useState(true);
-
   const { mutate } = useEditExcrementLog(group_id);
 
   useEffect(() => {
-    const fetchLogData = async () => {
-      try {
-        setIsLogdataLoading(true);
-        let { data } = await supabase
-          .from('excrement_logs')
-          .select(
-            `
-            id,
-            pee,
-            poop
-            created_at,
-        `,
-          )
-          .eq('id', log_id)
-          .single();
-
-        let _logData: ExcrementLogsdataType = data;
-
-        const { created_at, pee, poop } = _logData;
-
-        setTime(created_at as Date);
-
-        if (pee) {
-          setLogData((oldData: any) => [...oldData, 'pee']);
-        }
-        if (poop) {
-          setLogData((oldData: any) => [...oldData, 'poop']);
-        }
-      } catch (error) {
-        throw error;
-      } finally {
-        setIsLogdataLoading(false);
-      }
-    };
-    fetchLogData();
+    refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <MainContainerLayout
-      isLoading={isLogdataLoading}
+      isLoading={isLoading || isRefetching}
       containerProps={{
         w: { base: 'xs', sm: 'sm' },
         h: 'xs',

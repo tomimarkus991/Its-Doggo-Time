@@ -1,9 +1,9 @@
 import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useLogs } from '../../context';
 import { useEditFoodLog } from '../../hooks/mutations';
-import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { useFetchFoodLog } from '../../hooks/queries';
 import { EditOrAddLogContainerButton } from '../Buttons';
 import { CheckboxCard } from '../Cards';
 import { MainContainerLayout } from '../Layouts';
@@ -17,7 +17,12 @@ interface RouteParams {
 const EditFoodLogContainer: React.FC = () => {
   const { group_id, log_id } = useParams<RouteParams>();
 
-  const [logData, setLogData] = useState<any>([]);
+  const {
+    logCheckboxData: logData,
+    setLogCheckboxData: setLogData,
+    time,
+    setTime,
+  } = useLogs();
 
   let businesses = ['food'];
 
@@ -26,49 +31,21 @@ const EditFoodLogContainer: React.FC = () => {
     value: logData,
   });
 
-  const [time, setTime] = useState<Date>(new Date());
-  const [isLogdataLoading, setIsLogdataLoading] = useState(true);
+  const { isLoading, refetch, isRefetching } = useFetchFoodLog(
+    log_id,
+    group_id,
+  );
 
   const { mutate } = useEditFoodLog(group_id);
 
   useEffect(() => {
-    const fetchLogData = async () => {
-      try {
-        setIsLogdataLoading(true);
-        let { data } = await supabase
-          .from('food_logs')
-          .select(
-            `
-            id,
-            created_at,
-            food
-        `,
-          )
-          .eq('id', log_id)
-          .single();
-
-        let _logData: FoodLogsdataType = data;
-
-        const { created_at, food } = _logData;
-
-        setTime(created_at as Date);
-
-        if (food) {
-          setLogData((oldData: any) => [...oldData, 'food']);
-        }
-      } catch (error) {
-        throw error;
-      } finally {
-        setIsLogdataLoading(false);
-      }
-    };
-    fetchLogData();
+    refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <MainContainerLayout
-      isLoading={isLogdataLoading}
+      isLoading={isLoading || isRefetching}
       containerProps={{
         w: { base: 'xs', sm: 'sm' },
         h: 'xs',

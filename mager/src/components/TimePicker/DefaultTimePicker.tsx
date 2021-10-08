@@ -3,7 +3,7 @@ import { TimePicker as MTimePicker } from '@material-ui/pickers';
 import { useColors } from '../../hooks';
 
 interface Props {
-  time: Date;
+  time: Date | null | undefined;
   onChange: (newTime: any) => void;
 }
 

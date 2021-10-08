@@ -12,7 +12,7 @@ const useEditExcrementLog = (group_id: string) => {
 
   const editExcrementLog = async (
     logData: any,
-    time: Date,
+    time: Date | null | undefined,
     log_id: string,
   ) => {
     let pee: boolean;
@@ -57,7 +57,7 @@ const useEditExcrementLog = (group_id: string) => {
       log_id,
     }: {
       logData: any;
-      time: Date;
+      time: Date | null | undefined;
       log_id: string;
     }) => editExcrementLog(logData, time, log_id),
     {

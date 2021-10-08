@@ -1,13 +1,19 @@
 import { createContext, useState, useContext } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+} from 'styled-jsx/node_modules/@types/react';
 import { ExcrementLogsdataType, FoodLogsdataType } from '../types';
 
 type InitialContextType = {
   excrementLogs: ExcrementLogsdataType[];
-  setExcrementLogs: React.Dispatch<
-    React.SetStateAction<ExcrementLogsdataType[]>
-  >;
+  setExcrementLogs: Dispatch<SetStateAction<ExcrementLogsdataType[]>>;
   foodLogs: FoodLogsdataType[];
-  setFoodLogs: React.Dispatch<React.SetStateAction<FoodLogsdataType[]>>;
+  setFoodLogs: Dispatch<SetStateAction<FoodLogsdataType[]>>;
+  logCheckboxData: any;
+  setLogCheckboxData: any;
+  time: Date | null | undefined;
+  setTime: Dispatch<SetStateAction<Date | null | undefined>>;
 };
 
 const initialContext: InitialContextType = {
@@ -15,6 +21,10 @@ const initialContext: InitialContextType = {
   setExcrementLogs: () => {},
   foodLogs: [],
   setFoodLogs: () => {},
+  logCheckboxData: [],
+  setLogCheckboxData: () => {},
+  time: new Date(),
+  setTime: () => {},
 };
 
 const LogsContext = createContext(initialContext);
@@ -26,12 +36,18 @@ const LogsDetailsProvider = ({ children }: any) => {
     ExcrementLogsdataType[]
   >([]);
   const [foodLogs, setFoodLogs] = useState<FoodLogsdataType[]>([]);
+  const [logCheckboxData, setLogCheckboxData] = useState<any>([]);
+  const [time, setTime] = useState<Date | null | undefined>(new Date());
 
   const value = {
     excrementLogs,
     setExcrementLogs,
     foodLogs,
     setFoodLogs,
+    logCheckboxData,
+    setLogCheckboxData,
+    time,
+    setTime,
   };
 
   return (

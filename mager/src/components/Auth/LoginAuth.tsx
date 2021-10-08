@@ -36,6 +36,7 @@ const LoginAuth: React.FC = () => {
     if (isSuccess) {
       router.push('/');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (

@@ -10,7 +10,11 @@ const useEditFoodLog = (group_id: string) => {
   const router = useHistory();
   const { showErrorToast } = useToast();
 
-  const editFoodLog = async (logData: any, time: Date, log_id: string) => {
+  const editFoodLog = async (
+    logData: any,
+    time: Date | null | undefined,
+    log_id: string,
+  ) => {
     let food: boolean;
     if (logData?.includes('food')) {
       food = true;
@@ -46,7 +50,7 @@ const useEditFoodLog = (group_id: string) => {
       log_id,
     }: {
       logData: any;
-      time: Date;
+      time: Date | null | undefined;
       log_id: string;
     }) => editFoodLog(logData, time, log_id),
     {
