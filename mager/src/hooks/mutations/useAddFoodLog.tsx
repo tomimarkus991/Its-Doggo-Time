@@ -31,7 +31,10 @@ const useAddFoodLog = (group_id: string) => {
     });
 
     if (error) {
-      showErrorToast({ title: 'Error', description: error.message });
+      showErrorToast({
+        title: 'Add Food Log Error',
+        description: error.message,
+      });
       throw error;
     }
   };

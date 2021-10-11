@@ -18,7 +18,7 @@ const useLogin = ({
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Login Error',
         description: error.message,
       });
       throw new Error(error.message);

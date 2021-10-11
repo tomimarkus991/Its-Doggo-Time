@@ -13,7 +13,7 @@ const useOAuth = (provider: Provider) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'OAuth Error',
         description: error.message,
       });
       throw new Error(error.message);

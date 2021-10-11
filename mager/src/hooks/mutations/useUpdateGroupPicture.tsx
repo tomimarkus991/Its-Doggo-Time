@@ -19,10 +19,10 @@ const useUpdateGroupPicture = (id: string) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Update Group Picture Error',
         description: error.message,
       });
-      throw error;
+      throw new Error(error.message);
     }
   };
 
@@ -31,11 +31,14 @@ const useUpdateGroupPicture = (id: string) => {
     (url: any) => updateGroupPicture(url),
     {
       onSuccess: () => {
-        queryClient.refetchQueries('group' + id);
         showSuccessToast({
           title: 'Group Picture Updated',
           description: 'Your Group Picture has been updated.',
         });
+      },
+      // Refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries('group' + id);
       },
     },
   );

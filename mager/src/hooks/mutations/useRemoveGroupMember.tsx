@@ -4,6 +4,7 @@ import { supabase } from '../../utils/supabaseClient';
 
 const useRemoveGroupMember = () => {
   const { showErrorToast, showSuccessToast } = useToast();
+
   const removeGroupMember = async (user_id: string, group_id: string) => {
     const { error } = await supabase
       .from('members')
@@ -12,8 +13,11 @@ const useRemoveGroupMember = () => {
       .eq('group_id', group_id);
 
     if (error) {
-      showErrorToast({ title: 'Error', description: error.message });
-      throw error;
+      showErrorToast({
+        title: 'Remove Group Member Error',
+        description: error.message,
+      });
+      throw new Error(error.message);
     }
   };
 

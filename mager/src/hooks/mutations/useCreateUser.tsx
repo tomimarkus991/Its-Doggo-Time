@@ -24,7 +24,7 @@ const useCreateUser = (user: User) => {
       // error:
       // User with username exists
       showErrorToast({
-        title: 'Error',
+        title: 'Create User Error',
         description: 'User with username exists',
       });
       throw new Error('User with username exists');
@@ -39,7 +39,7 @@ const useCreateUser = (user: User) => {
     // when error, throw it
     if (signUpError) {
       showErrorToast({
-        title: 'Error',
+        title: 'Create User Error',
         description: signUpError.message,
       });
 
@@ -63,7 +63,7 @@ const useCreateUser = (user: User) => {
         .insert({ id: _data?.id, username: user.username });
       if (insertError) {
         showErrorToast({
-          title: 'Error',
+          title: 'Create User Error',
           description: insertError.message,
         });
         throw insertError;

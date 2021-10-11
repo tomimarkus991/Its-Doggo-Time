@@ -1,27 +1,29 @@
 import { useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import { useAuth, useGroup } from '../../context';
 import { GroupType } from '../../types';
 import { supabase } from '../../utils/supabaseClient';
+import { useUser } from '../queries';
 
 export const useSubscribeToGroupInserts = () => {
-  const { setGroups } = useGroup();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const subscribeToGroupInserts = () =>
       supabase
         .from(`members:profile_id=eq.${user?.id}`)
+        // you get the group_id from payload
         .on('INSERT', async payload => {
-          // you get the group_id from payload
-          // and get group_name and avatar_url
+          // get group_name and avatar_url
           let { data: group } = await supabase
             .from('groups')
             .select(
               `
-      id,
-      group_name,
-      avatar_url
-  `,
+              id,
+              group_name,
+              avatar_url
+          `,
             )
             .eq('id', payload.new.group_id)
             .single();
@@ -32,14 +34,30 @@ export const useSubscribeToGroupInserts = () => {
             group_name,
             avatar_url,
           };
+          // await queryClient.cancelQueries('groups');
+
+          // const previousUserState = queryClient.getQueryData('user');
           // update frontend with new data
-          setGroups(oldData => [...oldData, newGroup]);
+          const asi = queryClient.setQueryData(
+            'userGroups',
+            (oldData: any) => {
+              console.log(oldData);
+
+              return [...oldData, newGroup];
+            },
+          );
+
+          console.log('asiasiais', asi);
+
+          // return { previousUserState };
         })
         .subscribe();
 
     subscribeToGroupInserts();
 
     return () => {
+      console.log('remove');
+
       supabase.removeSubscription(subscribeToGroupInserts());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

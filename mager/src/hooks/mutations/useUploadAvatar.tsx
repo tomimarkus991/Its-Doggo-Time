@@ -25,10 +25,10 @@ const useUploadAvatar = (onUpload: (url: string) => void) => {
 
     if (uploadError) {
       showErrorToast({
-        title: 'Error',
+        title: 'Upload Avatar Error',
         description: uploadError.message,
       });
-      throw uploadError;
+      throw new Error(uploadError.message);
     }
 
     onUpload(filePath);

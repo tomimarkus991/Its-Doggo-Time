@@ -20,10 +20,10 @@ const useUpdateGroupname = (id: string) => {
 
       if (error) {
         showErrorToast({
-          title: 'Error',
+          title: 'Update Groupname Error',
           description: error.message,
         });
-        throw error;
+        throw new Error(error.message);
       }
       return data;
     } else {
@@ -36,13 +36,16 @@ const useUpdateGroupname = (id: string) => {
     (groupname: string | undefined) => updateGroupname(groupname),
     {
       onSuccess: data => {
-        queryClient.refetchQueries('group' + id);
         if (data) {
           showSuccessToast({
             title: 'Group Updated',
             description: 'Your Group has been updated.',
           });
         }
+      },
+      // Refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries('group' + id);
       },
     },
   );

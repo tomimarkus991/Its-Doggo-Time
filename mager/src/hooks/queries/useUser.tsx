@@ -7,7 +7,7 @@ const useUser = () => {
   const user = supabase.auth.user();
   const { showErrorToast } = useToast();
 
-  const getUser = async () => {
+  const fetchUser = async () => {
     const { data: _data, error } = await supabase
       .from('profiles')
       .select(
@@ -15,17 +15,18 @@ const useUser = () => {
           id,
           username,
           avatar_url,
-          groups (id, group_name, avatar_url, creator_id)
+          groups (id, group_name, avatar_url, creator_id, created_at)
         `,
       )
       .eq('id', user?.id)
+      .order('created_at', { ascending: true, foreignTable: 'groups' })
       .single();
 
     const data = _data as UserType;
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Fetch User Error',
         description: error.message,
       });
       throw new Error(error.message);
@@ -33,7 +34,7 @@ const useUser = () => {
 
     if (!data) {
       showErrorToast({
-        title: 'Error',
+        title: 'Fetch User Error',
         description: 'User not found',
       });
       throw new Error('User not found');
@@ -42,7 +43,7 @@ const useUser = () => {
     return data;
   };
 
-  return useQuery('user', () => getUser());
+  return useQuery('user', () => fetchUser());
 };
 
 export default useUser;

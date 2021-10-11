@@ -24,7 +24,7 @@ const useFetchExcrementLogs = (group_id: string) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Fetch Excrement Logs Error',
         description: error.message,
       });
       throw new Error(error.message);

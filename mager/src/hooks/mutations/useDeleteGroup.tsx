@@ -1,9 +1,10 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useToast } from '..';
 import { supabase } from '../../utils/supabaseClient';
 
 const useDeleteGroup = (group_id: string) => {
   const { showErrorToast } = useToast();
+  const queryClient = useQueryClient();
 
   const deleteGroup = async () => {
     // delete all invites related to id
@@ -46,7 +47,7 @@ const useDeleteGroup = (group_id: string) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Delete Group Error',
         description: error.message,
       });
       throw new Error(error.message);
@@ -55,7 +56,11 @@ const useDeleteGroup = (group_id: string) => {
     return data;
   };
 
-  return useMutation('deleteGroup', () => deleteGroup());
+  return useMutation('deleteGroup', () => deleteGroup(), {
+    onSettled: () => {
+      queryClient.invalidateQueries('user');
+    },
+  });
 };
 
 export default useDeleteGroup;

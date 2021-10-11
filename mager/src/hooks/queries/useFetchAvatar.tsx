@@ -14,7 +14,7 @@ const useFetchAvatar = (path: string | undefined, queryKey: string) => {
 
       if (error) {
         showErrorToast({
-          title: 'Error',
+          title: 'Fetch Avatar Error',
           description: error.message,
         });
         throw new Error(error.message);

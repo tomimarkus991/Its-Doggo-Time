@@ -10,7 +10,7 @@ export const useSubscribeToInviteInserts = () => {
     const subscribeToInviteInserts = () =>
       supabase
         // only listen to updates that have your username in it
-        .from('invites:receiver=eq.' + username)
+        .from(`invites:receiver=eq.${username}`)
         // when someone invites you to group
         .on('INSERT', async payload => {
           // take the newly inserted data

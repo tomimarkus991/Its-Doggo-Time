@@ -16,7 +16,6 @@ import { ProfileLink } from '../Links';
 const LoggedIn: React.FC = () => {
   const { setUsername } = useUser();
 
-  useSubscribeToGroupInserts();
   const { user } = useAuth();
 
   useEffect(() => {

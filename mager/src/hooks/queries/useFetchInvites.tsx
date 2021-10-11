@@ -25,7 +25,7 @@ export const useFetchInvites = () => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Fetch Invites Error',
         description: error.message,
       });
       throw new Error(error.message);

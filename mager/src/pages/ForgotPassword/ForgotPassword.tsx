@@ -1,39 +1,15 @@
-import { Grid, Center, Heading, VStack, Input } from '@chakra-ui/react';
+import { Center, Grid, Heading, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { ForgotPasswordAlert } from '../../components/Alerts';
 import { GradientButton } from '../../components/Buttons';
 import { BackIcon } from '../../components/Icons';
 import { GradientButtonText } from '../../components/Text';
-import { supabase } from '../../utils/supabaseClient';
+import { useResetPassword } from '../../hooks/mutations';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(false);
-  const [isAuthError, setIsAuthError] = useState<boolean>(false);
+  const { isLoading, mutate, isSuccess, isError } = useResetPassword();
 
-  const sendResetPassword = async () => {
-    let isError = false;
-    try {
-      setIsLoading(true);
-      let { error } = await supabase.auth.api.resetPasswordForEmail(
-        email,
-        { redirectTo: '/profile' },
-      );
-      if (error) {
-        isError = true;
-        setIsAuthError(true);
-      }
-    } catch (error) {
-      alert(error);
-    } finally {
-      setIsLoading(false);
-      // when there isn't error
-      if (!isError) {
-        setIsEmailSent(true);
-      }
-    }
-  };
   return (
     <Grid h="90%" templateRows="0.4fr 1fr">
       <Center id="heading & back" w={{ base: 'xs', sm: 'md' }} m="auto">
@@ -49,7 +25,7 @@ const ForgotPassword: React.FC = () => {
           </Heading>
         </Grid>
       </Center>
-      {isEmailSent ? (
+      {isSuccess ? (
         <ForgotPasswordAlert />
       ) : (
         <Center
@@ -72,11 +48,11 @@ const ForgotPassword: React.FC = () => {
               fontSize="2xl"
               maxW={{ base: '16rem', sm: '20rem' }}
               borderRadius="25"
-              isInvalid={isAuthError}
+              isInvalid={isError}
             />
 
             <GradientButton
-              onClick={sendResetPassword}
+              onClick={() => mutate(email)}
               isLoading={isLoading}
               loadingText="Sending"
             >

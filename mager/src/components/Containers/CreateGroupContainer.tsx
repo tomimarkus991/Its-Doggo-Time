@@ -1,6 +1,5 @@
 import { Box, IconButton, Input, VStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import { useCreateGroup } from '../../hooks/mutations';
 import { useUser } from '../../hooks/queries';
 import { GroupType } from '../../types';
@@ -12,15 +11,9 @@ const CreateGroupContainer: React.FC = () => {
   const [groupname, setGroupname] = useState('');
   const [group_avatar_url, setGroupAvatarUrl] = useState('');
 
-  const router = useHistory();
-
-  const { mutate, isSuccess } = useCreateGroup();
+  const { mutate } = useCreateGroup();
   const { data } = useUser();
   const groups = data?.groups as GroupType[];
-
-  if (isSuccess) {
-    router.push('/');
-  }
 
   return (
     <MainContainerLayout

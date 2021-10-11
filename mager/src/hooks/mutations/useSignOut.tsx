@@ -11,7 +11,7 @@ const useSignOut = () => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Sign Out Error',
         description: error.message,
       });
       throw new Error(error.message);

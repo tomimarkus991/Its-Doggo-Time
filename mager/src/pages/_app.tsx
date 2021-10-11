@@ -1,25 +1,25 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import type { AppProps } from 'next/app';
-import 'moment/locale/et';
-import Head from 'next/head';
-import '../styles/globals.css';
-import { theme } from '../styles/theme';
-import '@fontsource/viga';
-import type {} from '@mui/lab/themeAugmentation';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
-import {
-  UserDetailsProvider,
-  GroupDetailsProvider,
-  AuthDetailsProvider,
-  LogsDetailsProvider,
-  LogsViewProvider,
-  InviteDetailsProvider,
-} from '../context';
+import '@fontsource/viga';
+import { createMuiTheme } from '@material-ui/core';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { ThemeProvider } from '@material-ui/styles';
+import type {} from '@mui/lab/themeAugmentation';
+import 'moment/locale/et';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {
+  AuthDetailsProvider,
+  GroupDetailsProvider,
+  InviteDetailsProvider,
+  LogsDetailsProvider,
+  LogsViewProvider,
+  UserDetailsProvider,
+} from '../context';
+import '../styles/globals.css';
+import { theme } from '../styles/theme';
 
 function SafeHydrate({ children }: any) {
   return (
@@ -47,6 +47,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   //     });
   //   }
   // }, []);
+
   const materialTheme = createMuiTheme({
     palette: {
       primary: {
@@ -67,6 +68,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
     },
   });
+
   // const { showErrorToast } = useToast();
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -86,6 +88,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       },
     },
   });
+
   return (
     <QueryClientProvider client={queryClient}>
       <SafeHydrate>

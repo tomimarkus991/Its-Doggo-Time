@@ -39,14 +39,14 @@ const GroupsContainer: React.FC<Props> = () => {
         h: { base: 'sm', md: 'md' },
       }}
     >
-      {data && !!data?.groups.length ? (
+      {data && !!data?.groups?.length ? (
         <SimpleGrid
           id="GroupsGrid"
           columns={2}
           spacingY={10}
           spacingX={{ base: 10, sm: 50, md: 85 }}
         >
-          {data?.groups.map((group: GroupType, index: number) => (
+          {data?.groups?.map((group: GroupType, index: number) => (
             <GroupCard key={index} group={group} />
           ))}
           {placeholders?.map((_, index: number) => (
@@ -54,7 +54,7 @@ const GroupsContainer: React.FC<Props> = () => {
           ))}
         </SimpleGrid>
       ) : (
-        <Center h="100%" px={{ base: '8', sm: 0 }}>
+        <Center h="100%" px="8">
           <VStack textAlign="center">
             <Heading fontSize={{ base: '2xl', lg: '4xl' }}>
               No groups created yet

@@ -39,7 +39,10 @@ const useAddExcrementLog = (group_id: string) => {
       });
 
     if (error) {
-      showErrorToast({ title: 'Error', description: error.message });
+      showErrorToast({
+        title: 'Add Excrement Log Error',
+        description: error.message,
+      });
       throw error;
     }
   };

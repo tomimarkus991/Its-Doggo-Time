@@ -44,7 +44,10 @@ const useEditExcrementLog = (group_id: string) => {
       .eq('id', log_id);
 
     if (error) {
-      showErrorToast({ title: 'Error', description: error.message });
+      showErrorToast({
+        title: 'Edit Excrement Log Error',
+        description: error.message,
+      });
       throw error;
     }
   };

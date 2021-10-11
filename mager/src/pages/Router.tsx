@@ -16,6 +16,7 @@ import LogsSummary from './LogsSummary';
 import Members from './Members';
 import Profile from './Profile';
 import Register from './Register';
+import ResetPassword from './ResetPassword';
 
 const Router: React.FC = () => {
   return (
@@ -26,6 +27,10 @@ const Router: React.FC = () => {
       <DefaultLayoutRoute
         path="/forgot-password"
         component={ForgotPassword}
+      />
+      <DefaultLayoutRoute
+        path="/reset-password"
+        component={ResetPassword}
       />
       <DefaultPrivateLayoutRoute path="/profile" component={Profile} />
       <DefaultPrivateLayoutRoute

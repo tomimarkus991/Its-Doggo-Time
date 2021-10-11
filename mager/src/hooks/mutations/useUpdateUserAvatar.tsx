@@ -21,10 +21,10 @@ const useUpdateUserAvatar = () => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Update User Avatar Error',
         description: error.message,
       });
-      throw error;
+      throw new Error(error.message);
     }
   };
 
@@ -33,11 +33,14 @@ const useUpdateUserAvatar = () => {
     (url: any) => updateUserAvatar(url),
     {
       onSuccess: () => {
-        queryClient.refetchQueries('user');
         showSuccessToast({
           title: 'Avatar Updated',
           description: 'Your Avatar has been updated.',
         });
+      },
+      // Refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries('user');
       },
     },
   );

@@ -3,9 +3,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
 const initAuthContext = {
-  signUp: (data: any) => supabase.auth.signUp(data),
-  signIn: (data: any) => supabase.auth.signIn(data),
-  signOut: () => supabase.auth.signOut(),
   user: supabase.auth.session()?.user,
 };
 
@@ -34,9 +31,6 @@ const AuthDetailsProvider = ({ children }: any) => {
   }, []);
 
   const value = {
-    signUp: (data: any) => supabase.auth.signUp(data),
-    signIn: (data: any) => supabase.auth.signIn(data),
-    signOut: () => supabase.auth.signOut(),
     user,
   };
   return (

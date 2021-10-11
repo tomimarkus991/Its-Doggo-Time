@@ -37,7 +37,10 @@ const useEditFoodLog = (group_id: string) => {
       .eq('id', log_id);
 
     if (error) {
-      showErrorToast({ title: 'Error', description: error.message });
+      showErrorToast({
+        title: 'Edit Food Log Error',
+        description: error.message,
+      });
       throw error;
     }
   };

@@ -19,7 +19,7 @@ const useLeaveGroup = (user_id: StringOrUndefined, group_id: string) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Leave Group Error',
         description: error.message,
       });
       throw new Error(error.message);

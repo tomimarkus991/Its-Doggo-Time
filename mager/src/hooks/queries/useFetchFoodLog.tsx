@@ -26,7 +26,7 @@ const useFetchFoodLog = (log_id: string, group_id: string) => {
 
     if (error) {
       showErrorToast({
-        title: 'Error',
+        title: 'Fetch Food Log Error',
         description: error.message,
       });
       throw new Error(error.message);

@@ -24,6 +24,7 @@ export interface UserType {
   avatar_url: string;
   groups: GroupType[];
 }
+
 export interface GroupType {
   id: string;
   group_name: string;
