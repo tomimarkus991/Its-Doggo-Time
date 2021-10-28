@@ -25,7 +25,9 @@ const Avatar: React.FC<Props> = ({
 
   const { data, isLoading, isSuccess } = useFetchAvatar(
     path,
-    type === 'User' ? path || 'userAvatar' : path || 'groupAvatar',
+    type === 'User'
+      ? ['userAvatar', path] || 'userAvatar'
+      : ['groupAvatar', path] || 'groupAvatar',
   );
 
   return (

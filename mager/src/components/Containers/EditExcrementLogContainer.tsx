@@ -1,6 +1,5 @@
 import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useLogs } from '../../context';
 import { useEditExcrementLog } from '../../hooks/mutations';
 import { useFetchExcrementLog } from '../../hooks/queries';
@@ -25,7 +24,7 @@ const EditExcrementLogContainer: React.FC = () => {
   } = useLogs();
 
   let businesses = ['pee', 'poop'];
-  const { isLoading, refetch, isRefetching } = useFetchExcrementLog(
+  const { isLoading, isRefetching } = useFetchExcrementLog(
     log_id,
     group_id,
   );
@@ -36,11 +35,6 @@ const EditExcrementLogContainer: React.FC = () => {
   });
 
   const { mutate } = useEditExcrementLog(group_id);
-
-  useEffect(() => {
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <MainContainerLayout

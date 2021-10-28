@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { useToast } from '..';
 import { GroupPageDataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useFetchGroupData = (group_id: string) => {
   const { showErrorToast } = useToast();
@@ -34,7 +34,7 @@ const useFetchGroupData = (group_id: string) => {
     return _groupData;
   };
 
-  return useQuery('group' + group_id, () => fetchGroupData());
+  return useQuery(['group', group_id], () => fetchGroupData());
 };
 
 export default useFetchGroupData;

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useToast } from '..';
 import { useAuth } from '../../context';
 import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useEditFoodLog = (group_id: string) => {
   const { user } = useAuth();
@@ -41,7 +41,7 @@ const useEditFoodLog = (group_id: string) => {
         title: 'Edit Food Log Error',
         description: error.message,
       });
-      throw error;
+      throw new Error(error.message);
     }
   };
 

@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
-import { useAuth, useGroup } from '../../context';
+import { useAuth } from '../../context';
 import { GroupType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
-import { useUser } from '../queries';
+import { supabase } from '../../utils';
 
 export const useSubscribeToGroupInserts = () => {
   const { user } = useAuth();
@@ -38,16 +37,9 @@ export const useSubscribeToGroupInserts = () => {
 
           // const previousUserState = queryClient.getQueryData('user');
           // update frontend with new data
-          const asi = queryClient.setQueryData(
-            'userGroups',
-            (oldData: any) => {
-              console.log(oldData);
-
-              return [...oldData, newGroup];
-            },
-          );
-
-          console.log('asiasiais', asi);
+          queryClient.setQueryData('userGroups', (oldData: any) => {
+            return [...oldData, newGroup];
+          });
 
           // return { previousUserState };
         })

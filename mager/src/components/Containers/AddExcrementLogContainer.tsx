@@ -15,14 +15,13 @@ const AddExcrementLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
 
   const [logData, setLogData] = useState<any>([]);
+  const [time, setTime] = useState(new Date());
 
   const businesses = ['pee', 'poop'];
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
   });
-
-  const [time, setTime] = useState(new Date());
 
   const { mutate } = useAddExcrementLog(group_id);
 

@@ -15,6 +15,7 @@ import {
 } from '../../components/Layouts/Group';
 import { ProfileAndMyGroups } from '../../components/Links';
 import { useLogsView, ViewType } from '../../context';
+import { useFetchExcrementLogs } from '../../hooks/queries';
 
 interface RouteParams {
   group_id: string;
@@ -23,6 +24,7 @@ interface RouteParams {
 const AddLog: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
   const { view } = useLogsView();
+  useFetchExcrementLogs(group_id);
 
   return (
     <MainLayout

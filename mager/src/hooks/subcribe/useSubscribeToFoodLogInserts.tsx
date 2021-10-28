@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { useLogs } from '../../context';
+import { useQueryClient } from 'react-query';
 import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { sortFoodLogs, supabase } from '../../utils';
 
 export const useSubscribeToFoodLogInserts = (group_id: string) => {
-  const { setFoodLogs } = useLogs();
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     const subscribeToLogInserts = () =>
       supabase
@@ -21,14 +22,12 @@ export const useSubscribeToFoodLogInserts = (group_id: string) => {
             food,
           };
 
-          setFoodLogs(oldData => {
-            if (oldData.length <= 3) {
-              return [...oldData, newLog];
-            } else {
-              const newData = oldData.slice(1);
-              return [...newData, newLog];
-            }
-          });
+          queryClient.setQueryData(
+            ['excrement_logs', group_id],
+            (oldData: any) => {
+              return sortFoodLogs({ oldData, newLog });
+            },
+          );
         })
         .subscribe();
 

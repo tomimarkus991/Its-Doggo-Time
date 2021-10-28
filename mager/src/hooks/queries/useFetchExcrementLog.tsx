@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useToast } from '..';
 import { useLogs } from '../../context';
 import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useFetchExcrementLog = (log_id: string, group_id: string) => {
   const { showErrorToast } = useToast();
@@ -36,7 +36,7 @@ const useFetchExcrementLog = (log_id: string, group_id: string) => {
     return data;
   };
   return useQuery(
-    'excrement_log' + log_id + group_id,
+    ['excrement_log', log_id, group_id],
     () => fetchExcrementLog(),
     {
       onSuccess: data => {

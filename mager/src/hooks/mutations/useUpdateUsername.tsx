@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useToast } from '..';
 import { useAuth } from '../../context';
 import { StringOrUndefined } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 import { useUser } from '../queries';
 
 const useUpdateUsername = () => {

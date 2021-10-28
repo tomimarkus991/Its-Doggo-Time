@@ -11,13 +11,13 @@ const ChangeLogsView: React.FC = () => {
       <Box
         as={ExcrementViewIcon}
         onClick={() => setView(ViewType.Excrement)}
-        fontSize={{ base: '5rem', sm: '5rem', md: '6rem' }}
+        fontSize={{ base: '5rem', md: '6rem' }}
         cursor="pointer"
       />
       <Box
         as={FoodViewIcon}
         onClick={() => setView(ViewType.Food)}
-        fontSize={{ base: '5rem', sm: '5rem', md: '6rem' }}
+        fontSize={{ base: '5rem', md: '6rem' }}
         cursor="pointer"
       />
     </HStack>

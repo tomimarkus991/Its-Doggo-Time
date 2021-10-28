@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { useToast } from '..';
 import { GroupType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 import { useUser } from '../queries';
 
 type CreateGroupType = {

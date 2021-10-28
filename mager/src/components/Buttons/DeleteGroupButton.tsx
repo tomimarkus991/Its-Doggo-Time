@@ -33,6 +33,7 @@ const DeleteGroupButton: React.FC<Props> = ({
           textTransform="uppercase"
           borderRadius="50"
           color="white"
+          isDisabled={false}
         >
           Delete group
         </Button>

@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useToast } from '..';
 import { useLogs } from '../../context';
 import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useFetchFoodLog = (log_id: string, group_id: string) => {
   const { showErrorToast } = useToast();
@@ -34,7 +34,7 @@ const useFetchFoodLog = (log_id: string, group_id: string) => {
 
     return data;
   };
-  return useQuery('food_log' + log_id + group_id, () => fetchFoodLog(), {
+  return useQuery(['food_log', log_id, group_id], () => fetchFoodLog(), {
     onSuccess: data => {
       setTime(data?.created_at as Date);
 

@@ -1,8 +1,11 @@
 import { useQuery } from 'react-query';
 import { useToast } from '..';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
-const useFetchAvatar = (path: string | undefined, queryKey: string) => {
+const useFetchAvatar = (
+  path: string | undefined,
+  queryKey: (string | undefined)[],
+) => {
   const { showErrorToast } = useToast();
 
   const fetchAvatar = async () => {

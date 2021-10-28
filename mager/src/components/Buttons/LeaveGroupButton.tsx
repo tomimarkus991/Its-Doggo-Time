@@ -34,6 +34,7 @@ const LeaveGroupButton: React.FC<Props> = ({ group_id }) => {
             textTransform="uppercase"
             borderRadius="50"
             color="white"
+            isDisabled={false}
           >
             Leave group
           </Button>

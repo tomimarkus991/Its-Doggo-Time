@@ -12,11 +12,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import {
   AuthDetailsProvider,
-  GroupDetailsProvider,
-  InviteDetailsProvider,
   LogsDetailsProvider,
   LogsViewProvider,
-  UserDetailsProvider,
 } from '../context';
 import '../styles/globals.css';
 import { theme } from '../styles/theme';
@@ -95,26 +92,20 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <ThemeProvider theme={materialTheme}>
           <ChakraProvider resetCSS theme={theme}>
             <AuthDetailsProvider>
-              <UserDetailsProvider>
-                <GroupDetailsProvider>
-                  <LogsDetailsProvider>
-                    <LogsViewProvider>
-                      <InviteDetailsProvider>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
-                          <Head>
-                            <title>It&#39;s Doggo Time</title>
-                            <meta
-                              name="viewport"
-                              content="initial-scale=1, width=device-width"
-                            />
-                          </Head>
-                          <Component {...pageProps} />
-                        </MuiPickersUtilsProvider>
-                      </InviteDetailsProvider>
-                    </LogsViewProvider>
-                  </LogsDetailsProvider>
-                </GroupDetailsProvider>
-              </UserDetailsProvider>
+              <LogsDetailsProvider>
+                <LogsViewProvider>
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <Head>
+                      <title>It&#39;s Doggo Time</title>
+                      <meta
+                        name="viewport"
+                        content="initial-scale=1, width=device-width"
+                      />
+                    </Head>
+                    <Component {...pageProps} />
+                  </MuiPickersUtilsProvider>
+                </LogsViewProvider>
+              </LogsDetailsProvider>
             </AuthDetailsProvider>
           </ChakraProvider>
         </ThemeProvider>

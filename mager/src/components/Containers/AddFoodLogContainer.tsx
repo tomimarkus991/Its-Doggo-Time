@@ -15,6 +15,7 @@ const AddFoodLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
 
   const [logData, setLogData] = useState<any>(['food']);
+  const [time, setTime] = useState<any>(new Date());
 
   const businesses = ['food'];
 
@@ -22,8 +23,6 @@ const AddFoodLogContainer: React.FC = () => {
     onChange: setLogData,
     value: logData,
   });
-
-  const [time, setTime] = useState<any>(new Date());
 
   const { mutate } = useAddFoodLog(group_id);
 

@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
-import { useLogs } from '../../context';
+import { useQueryClient } from 'react-query';
 import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { sortExcrementLogs } from '../../utils';
+import { supabase } from '../../utils';
 
 export const useSubscribeToExcrementLogInserts = (group_id: string) => {
-  const { setExcrementLogs } = useLogs();
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     const subscribeToLogInserts = () =>
       supabase
         .from(`excrement_logs:group_id=eq.${group_id}`)
-        .on('INSERT', payload => {
+        .on('INSERT', async payload => {
           const { created_at, creator_id, group_id, id, pee, poop } =
             payload.new as ExcrementLogsdataType;
 
@@ -22,14 +24,16 @@ export const useSubscribeToExcrementLogInserts = (group_id: string) => {
             poop,
           };
 
-          setExcrementLogs(oldData => {
-            if (oldData.length <= 3) {
-              return [...oldData, newLog];
-            } else {
-              const newData = oldData.slice(1);
-              return [...newData, newLog];
-            }
-          });
+          // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+          // await queryClient.cancelQueries(['excrement_logs', group_id]);
+
+          // Optimistically update to the new value
+          queryClient.setQueryData(
+            ['excrement_logs', group_id],
+            (oldData: any) => {
+              return sortExcrementLogs({ oldData, newLog });
+            },
+          );
         })
         .subscribe();
 

@@ -1,49 +1,74 @@
 import { useEffect } from 'react';
-import { useUser } from '../../context';
+import { useQueryClient } from 'react-query';
+import { useToast } from '..';
 import { InviteDataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
+import { useUser } from '../queries';
 
 export const useSubscribeToInviteInserts = () => {
-  const { username, setUserInvites } = useUser();
+  const queryClient = useQueryClient();
+  const { data } = useUser();
+  const { showErrorToast } = useToast();
 
   useEffect(() => {
-    const subscribeToInviteInserts = () =>
-      supabase
-        // only listen to updates that have your username in it
-        .from(`invites:receiver=eq.${username}`)
-        // when someone invites you to group
-        .on('INSERT', async payload => {
-          // take the newly inserted data
-          const { sender, receiver, id, group_id } = payload.new;
-
-          let { data } = await supabase
-            .from('groups')
-            .select(
-              `
+    const subscribeToInviteInserts = () => {
+      return (
+        supabase
+          // only listen to updates that have your username in it
+          .from(`invites:receiver=eq.${data?.username}`)
+          // when someone invites you to group
+          .on('INSERT', async payload => {
+            queryClient.invalidateQueries('invites');
+            // take the newly inserted data
+            const { sender, receiver, id, group_id } = payload.new;
+            console.log('payload', payload);
+            let { data, error } = await supabase
+              .from('groups')
+              .select(
+                `
               id,
               group_name,
               avatar_url
             `,
-            )
-            .eq('id', group_id)
-            .single();
+              )
+              .eq('id', group_id)
+              .single();
 
-          const newInvite: InviteDataType = {
-            id,
-            group_id,
-            sender,
-            receiver,
-            groups: data,
-          };
-          setUserInvites(oldData => [...oldData, newInvite]);
-        })
-        .subscribe();
+            if (error) {
+              showErrorToast({
+                title: 'Get Group Data Error',
+                description: error.message,
+              });
+
+              throw new Error(error.message);
+            }
+
+            const newInvite: InviteDataType = {
+              id,
+              group_id,
+              sender,
+              receiver,
+              groups: data,
+            };
+
+            queryClient.setQueryData('invites', (oldData: any) => {
+              console.log('sub oldData', oldData);
+
+              if (oldData === undefined) {
+                return [newInvite];
+              }
+              return [...oldData, newInvite];
+            });
+          })
+          .subscribe()
+      );
+    };
 
     subscribeToInviteInserts();
 
     return () => {
-      supabase.removeSubscription(subscribeToInviteInserts());
+      // supabase.removeSubscription(subscribeToInviteInserts());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username]);
+  }, [data?.username]);
 };

@@ -1,27 +1,58 @@
 import { useQuery } from 'react-query';
-import { useUser } from '.';
 import { useToast } from '..';
-import { InviteDataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { InviteDataType, UserType } from '../../types';
+import { supabase } from '../../utils';
 
 export const useFetchInvites = () => {
   const { showErrorToast } = useToast();
-  const { data: userData } = useUser();
+  const user = supabase.auth.user();
 
   const fetchInvites = async () => {
-    const { data, error } = await supabase
+    const { data: _data, error: fetchUserError } = await supabase
+      .from('profiles')
+      .select(
+        `
+        id,
+        username,
+        avatar_url,
+        groups (id, group_name, avatar_url, creator_id, created_at)
+      `,
+      )
+      .eq('id', user?.id)
+      .order('created_at', { ascending: true, foreignTable: 'groups' })
+      .single();
+
+    const userData = _data as UserType;
+
+    if (fetchUserError) {
+      showErrorToast({
+        title: 'Fetch User Error',
+        description: fetchUserError.message,
+      });
+      throw new Error(fetchUserError.message);
+    }
+
+    if (!userData) {
+      showErrorToast({
+        title: 'Fetch User Error',
+        description: 'User not found',
+      });
+      throw new Error('User not found');
+    }
+
+    const { data: _invitesdata, error } = await supabase
       .from('invites')
       .select(
         `
-              id,
-              receiver,
-              sender,
-              group_id,
-              groups (id, group_name, avatar_url)
-            `,
+        id,
+        receiver,
+        sender,
+        group_id,
+        groups (id, group_name, avatar_url)
+      `,
       )
       .eq('receiver', userData?.username);
-    const _invitesdata = data as InviteDataType[];
+    const data = _invitesdata as InviteDataType[];
 
     if (error) {
       showErrorToast({
@@ -30,13 +61,10 @@ export const useFetchInvites = () => {
       });
       throw new Error(error.message);
     }
-
-    return _invitesdata;
+    return data;
   };
 
-  return useQuery<InviteDataType[], Error>('invites', () =>
-    fetchInvites(),
-  );
+  return useQuery('invites', () => fetchInvites());
 };
 
 export default useFetchInvites;

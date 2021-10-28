@@ -1,14 +1,15 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { useToast } from '..';
 import { useAuth } from '../../context';
 import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useEditExcrementLog = (group_id: string) => {
   const { user } = useAuth();
   const router = useHistory();
   const { showErrorToast } = useToast();
+  const queryClient = useQueryClient();
 
   const editExcrementLog = async (
     logData: any,
@@ -48,7 +49,8 @@ const useEditExcrementLog = (group_id: string) => {
         title: 'Edit Excrement Log Error',
         description: error.message,
       });
-      throw error;
+
+      throw new Error(error.message);
     }
   };
 
@@ -66,6 +68,10 @@ const useEditExcrementLog = (group_id: string) => {
     {
       onSuccess: () => {
         router.push(`/group/${group_id}`);
+      },
+      // Refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries(['excrement_logs', group_id]);
       },
     },
   );

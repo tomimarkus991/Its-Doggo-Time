@@ -16,7 +16,6 @@ interface Props {
 
 const MembersContainer: React.FC<Props> = ({ group_id }) => {
   const { user } = useAuth();
-
   const { data, isLoading } = useFetchGroupData(group_id);
   const { placeholders } = useMembersPlaceholder(data?.profiles);
 

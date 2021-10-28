@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { useToast } from '..';
 import { StringOrUndefined } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 interface User {
   username: StringOrUndefined;

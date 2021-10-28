@@ -1,9 +1,8 @@
 import { Center } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import { useAuth } from '../../context/AuthContext';
-import { useUser } from '../../context/UserContext';
-import { useSubscribeToGroupInserts } from '../../hooks/subcribe';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 import { GroupsContainer } from '../Containers';
 import { Invites } from '../Invites';
 import { HeaderAvatar, MainLayout, PageHeader } from '../Layouts';
@@ -14,9 +13,8 @@ import {
 import { ProfileLink } from '../Links';
 
 const LoggedIn: React.FC = () => {
-  const { setUsername } = useUser();
-
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const updateOAuthData = async () => {
@@ -44,18 +42,17 @@ const LoggedIn: React.FC = () => {
           username: user?.user_metadata.full_name,
           updated_at: new Date(),
         };
-        const { data: updatedData } = await supabase
+        await supabase
           .from('profiles')
           .upsert(updates, {
             returning: 'representation', // Don't return the value after inserting
           })
           .single();
-        setUsername(updatedData.username);
       }
     };
 
     updateOAuthData();
-
+    queryClient.invalidateQueries('user');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

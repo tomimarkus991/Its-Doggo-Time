@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useToast } from '..';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils';
 
 const useSignOut = () => {
   const { showErrorToast } = useToast();

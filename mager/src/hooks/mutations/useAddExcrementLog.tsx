@@ -1,16 +1,22 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { useToast } from '..';
 import { useAuth } from '../../context';
 import { ExcrementLogsdataType } from '../../types';
-import { supabase } from '../../utils/supabaseClient';
+import { sortExcrementLogs, supabase } from '../../utils';
+
+type AddLogType = {
+  logData: any;
+  time: Date;
+};
 
 const useAddExcrementLog = (group_id: string) => {
   const { user } = useAuth();
   const router = useHistory();
   const { showErrorToast } = useToast();
+  const queryClient = useQueryClient();
 
-  const addExcrementLog = async (logData: any, time: Date) => {
+  const addExcrementLog = async ({ logData, time }: AddLogType) => {
     let pee: boolean;
     let poop: boolean;
     if (logData?.includes('pee')) {
@@ -32,28 +38,53 @@ const useAddExcrementLog = (group_id: string) => {
       created_at: time,
     };
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('excrement_logs')
-      .insert(values, {
-        returning: 'minimal',
-      });
+      .insert(values)
+      .single();
 
     if (error) {
       showErrorToast({
         title: 'Add Excrement Log Error',
         description: error.message,
       });
-      throw error;
+
+      throw new Error(error.message);
     }
+
+    return data;
   };
 
   return useMutation(
     'addExcrementLog',
-    ({ logData, time }: { logData: any; time: Date }) =>
-      addExcrementLog(logData, time),
+    ({ logData, time }: AddLogType) => addExcrementLog({ logData, time }),
     {
-      onSuccess: () => {
+      onMutate: (newLog: any) => {
+        const previousLogs = queryClient.getQueryData([
+          'excrement_logs',
+          group_id,
+        ]);
+
+        queryClient.setQueryData(
+          ['excrement_logs', group_id],
+          (oldData: any) => {
+            return sortExcrementLogs({ oldData, newLog });
+          },
+        );
+
         router.push(`/group/${group_id}`);
+
+        return { previousLogs };
+      },
+      onError: (_, __, context: any) => {
+        queryClient.setQueryData(
+          ['excrement_logs', group_id],
+          context.previousLogs,
+        );
+      },
+      // Refetch after error or success:
+      onSettled: () => {
+        queryClient.invalidateQueries(['excrement_logs', group_id]);
       },
     },
   );
