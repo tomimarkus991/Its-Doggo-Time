@@ -6,11 +6,13 @@
 
 ---
 
+https://itsdoggotime.com/
+
 ## Structure
 
 |     Codebase     | Description |
 | :--------------: | :---------: |
-| [tunduk](tunduk) |   Web App   |
+| [mager](mager) |   Web App   |
 
 ## Branches
 
