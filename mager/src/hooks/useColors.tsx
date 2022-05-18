@@ -1,6 +1,6 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
-const useColors = () => {
+export const useColors = () => {
   const defaultColor = useColorModeValue("#fff", "gray.800");
   const defaultReversedColor = useColorModeValue("gray.800", "#fff");
   const penColor = useColorModeValue("#2A2828", "#E5E0D5");
@@ -33,4 +33,3 @@ const useColors = () => {
     logViewIconAura2Color,
   };
 };
-export default useColors;

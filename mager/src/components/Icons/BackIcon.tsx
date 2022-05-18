@@ -2,7 +2,7 @@ import { Icon, IconProps } from "@chakra-ui/react";
 
 import { useHistory } from "react-router";
 
-import useColors from "hooks/useColors";
+import { useColors } from "hooks";
 
 const BackIcon = (props: IconProps): JSX.Element => {
   const { backIconColor } = useColors();

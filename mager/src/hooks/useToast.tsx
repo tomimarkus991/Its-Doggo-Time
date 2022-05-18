@@ -1,5 +1,6 @@
 import { useToast as useChakraToast, ToastPositionWithLogical } from "@chakra-ui/react";
-const useToast = () => {
+
+export const useToast = () => {
   const toast = useChakraToast();
   return {
     showSuccessToast: ({
@@ -38,4 +39,3 @@ const useToast = () => {
       }),
   };
 };
-export default useToast;

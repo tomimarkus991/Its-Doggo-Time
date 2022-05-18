@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CreateGroupContainer } from "components/Containers";
+import { CreateGroupContainer } from "components";
 import { HeaderAvatar, MainLayout, PageHeaderBack } from "components/Layouts";
 import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "components/Layouts/Profile";
 import { ProfileAndMyGroups } from "components/Links";

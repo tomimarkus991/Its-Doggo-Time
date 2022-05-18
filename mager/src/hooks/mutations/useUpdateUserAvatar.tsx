@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 
-import { useToast } from "..";
 import { useAuth } from "context";
 import { supabase } from "utils";
+
+import { useToast } from "..";
 
 const useUpdateUserAvatar = () => {
   const { showErrorToast, showSuccessToast } = useToast();

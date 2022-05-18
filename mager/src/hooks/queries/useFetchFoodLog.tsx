@@ -1,11 +1,12 @@
 import { useQuery } from "react-query";
 
-import { useToast } from "..";
 import { useLogs } from "context";
 import { FoodLogsdataType } from "types";
 import { supabase } from "utils";
 
-const useFetchFoodLog = (log_id: string, group_id: string) => {
+import { useToast } from "..";
+
+export const useFetchFoodLog = (log_id: string, group_id: string) => {
   const { showErrorToast } = useToast();
   const { setLogCheckboxData: setLogData, setTime } = useLogs();
 
@@ -45,4 +46,3 @@ const useFetchFoodLog = (log_id: string, group_id: string) => {
     },
   });
 };
-export default useFetchFoodLog;

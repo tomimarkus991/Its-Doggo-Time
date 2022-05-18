@@ -1,4 +1,5 @@
 import { StringOrUndefined } from "types";
+
 import { GroupAvatarIcon } from "../Icons";
 
 import { Avatar } from ".";

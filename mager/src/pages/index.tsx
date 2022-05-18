@@ -3,11 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 
 import Router from "./Router";
 
-const Index = () => {
+export const Index = () => {
   return (
     <BrowserRouter>
       <Router />
     </BrowserRouter>
   );
 };
-export default Index;

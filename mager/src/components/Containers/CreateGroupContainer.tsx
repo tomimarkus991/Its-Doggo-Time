@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useCreateGroup } from "hooks/mutations";
 import { useUser } from "hooks/queries";
 import { GroupType } from "types";
+
 import { AvatarUpload } from "../Avatar";
 import { AddLogCheckboxIcon } from "../Icons";
 import { MainContainerLayout } from "../Layouts";

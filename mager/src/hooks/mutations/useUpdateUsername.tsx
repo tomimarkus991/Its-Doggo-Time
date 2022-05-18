@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
 
-import { useToast } from "..";
 import { useAuth } from "context";
 import { StringOrUndefined } from "types";
 import { supabase } from "utils";
+
+import { useToast } from "..";
 import { useUser } from "../queries";
 
 const useUpdateUsername = () => {

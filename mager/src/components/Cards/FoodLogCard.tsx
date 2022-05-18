@@ -3,6 +3,7 @@ import { Center } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { FoodLogsdataType } from "types";
+
 import { FoodIcon } from "../Icons";
 
 import { CardDateText } from ".";

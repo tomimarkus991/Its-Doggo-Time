@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
 
-import { useToast } from "..";
 import { supabase } from "utils";
+
+import { useToast } from "..";
 
 type DeclineInviteType = {
   invite_id: string;

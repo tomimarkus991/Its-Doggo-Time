@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 
-import { useToast } from "..";
 import { ExcrementLogsdataType } from "types";
 import { supabase } from "utils";
 
-const useFetchExcrementLogs = (group_id: string) => {
+import { useToast } from "..";
+
+export const useFetchExcrementLogs = (group_id: string) => {
   const { showErrorToast } = useToast();
 
   const getExcrementLogsdata = async () => {
@@ -42,5 +43,3 @@ const useFetchExcrementLogs = (group_id: string) => {
 
   return useQuery(["excrement_logs", group_id], () => getExcrementLogsdata());
 };
-
-export default useFetchExcrementLogs;

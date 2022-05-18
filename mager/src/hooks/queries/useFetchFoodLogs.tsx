@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 
-import { useToast } from "..";
 import { FoodLogsdataType } from "types";
 import { supabase } from "utils";
 
-const useFetchFoodLogs = (group_id: string) => {
+import { useToast } from "..";
+
+export const useFetchFoodLogs = (group_id: string) => {
   const { showErrorToast } = useToast();
 
   const getFoodLogsdata = async () => {
@@ -40,5 +41,3 @@ const useFetchFoodLogs = (group_id: string) => {
 
   return useQuery(["food_logs", group_id], () => getFoodLogsdata());
 };
-
-export default useFetchFoodLogs;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { FoodLogsdataType } from "types";
 
-const useFoodLogsPlaceholder = (logsdata: FoodLogsdataType[] | undefined) => {
+export const useFoodLogsPlaceholder = (logsdata: FoodLogsdataType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
@@ -27,5 +27,3 @@ const useFoodLogsPlaceholder = (logsdata: FoodLogsdataType[] | undefined) => {
     placeholders,
   };
 };
-
-export default useFoodLogsPlaceholder;

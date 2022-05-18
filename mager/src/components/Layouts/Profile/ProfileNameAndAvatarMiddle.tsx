@@ -1,9 +1,7 @@
 import { Box, HStack } from "@chakra-ui/react";
 
+import { Skeleton, Name, AvatarProfile } from "components";
 import { useUser } from "hooks/queries";
-import { AvatarProfile } from "Avatar";
-import { Name } from "Headers";
-import { Skeleton } from "Skeleton";
 
 interface Props {
   isUsernameLoading?: boolean;

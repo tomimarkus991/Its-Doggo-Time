@@ -1,6 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
-import useColors from "hooks/useColors";
+import { useColors } from "hooks";
 
 const HeaderBackgroundSmall = (props: IconProps): JSX.Element => {
   const { headerBackground3Color, headerBackground2Color, headerBackground1Color } = useColors();

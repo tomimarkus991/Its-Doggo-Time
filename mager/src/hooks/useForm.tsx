@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useForm = (initialValues: { username?: string; email: string; password: string }) => {
+export const useForm = (initialValues: { username?: string; email: string; password: string }) => {
   const [values, setValues] = useState(initialValues);
 
   return {
@@ -9,5 +9,3 @@ const useForm = (initialValues: { username?: string; email: string; password: st
       setValues({ ...values, [e.target.name]: e.target.value }),
   };
 };
-
-export default useForm;

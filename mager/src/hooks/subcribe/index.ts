@@ -1,3 +1,4 @@
-export { useSubscribeToGroupInserts } from "./useSubscribeToGroupInserts";
-export { useSubscribeToExcrementLogInserts } from "./useSubscribeToExcrementLogInserts";
-export { useSubscribeToInviteInserts } from "./useSubscribeToInviteInserts";
+export * from "./useSubscribeToExcrementLogInserts";
+export * from "./useSubscribeToFoodLogInserts";
+export * from "./useSubscribeToGroupInserts";
+export * from "./useSubscribeToInviteInserts";

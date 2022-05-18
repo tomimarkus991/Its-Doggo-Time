@@ -5,6 +5,7 @@ import React from "react";
 import useGroupsPlaceholder from "hooks/placeholders/useGroupsPlaceholder";
 import { useUser } from "hooks/queries";
 import { GroupType } from "types";
+
 import { CreateGroupContainerButton } from "../Buttons";
 import { GroupCard } from "../Cards";
 import { DogPaw } from "../Icons";

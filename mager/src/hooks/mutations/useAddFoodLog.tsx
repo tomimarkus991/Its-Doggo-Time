@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router";
 
-import { useToast } from "..";
 import { useAuth } from "context";
 import { FoodLogsdataType } from "types";
 import { sortFoodLogs, supabase } from "utils";
+
+import { useToast } from "..";
 
 type AddLogType = {
   logData: any;

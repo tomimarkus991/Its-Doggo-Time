@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
 
-import { useToast } from "..";
 import { supabase } from "utils";
+
+import { useToast } from "..";
 import { useUser } from "../queries";
 
 type AcceptInviteType = {

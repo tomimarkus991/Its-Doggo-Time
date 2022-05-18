@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 
-import { useToast } from "..";
 import { UserType } from "types";
 import { supabase } from "utils";
 
-const useUser = () => {
+import { useToast } from "..";
+
+export const useUser = () => {
   const user = supabase.auth.user();
   const { showErrorToast } = useToast();
 
@@ -46,5 +47,3 @@ const useUser = () => {
 
   return useQuery("user", () => fetchUser());
 };
-
-export default useUser;

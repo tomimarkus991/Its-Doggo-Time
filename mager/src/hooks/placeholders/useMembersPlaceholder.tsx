@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { MemberType } from "types";
 
-const useMembersPlaceholder = (members: MemberType[] | undefined) => {
+export const useMembersPlaceholder = (members: MemberType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const useMembersPlaceholder = (members: MemberType[] | undefined) => {
     placeholders,
   };
 };
-
-export default useMembersPlaceholder;

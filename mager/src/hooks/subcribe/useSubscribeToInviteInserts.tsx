@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 
-import { useToast } from "..";
 import { InviteDataType } from "types";
 import { supabase } from "utils";
+
+import { useToast } from "..";
 import { useUser } from "../queries";
 
 export const useSubscribeToInviteInserts = () => {

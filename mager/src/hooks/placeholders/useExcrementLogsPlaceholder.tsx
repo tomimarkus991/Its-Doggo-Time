@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useExcrementLogsPlaceholder = (logsdata: any) => {
+export const useExcrementLogsPlaceholder = (logsdata: any) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const useExcrementLogsPlaceholder = (logsdata: any) => {
     placeholders,
   };
 };
-
-export default useExcrementLogsPlaceholder;
