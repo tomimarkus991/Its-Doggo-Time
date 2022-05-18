@@ -2,7 +2,7 @@ import { Provider } from "@supabase/gotrue-js";
 import { useMutation } from "react-query";
 
 import { useToast } from "..";
-import { supabase } from "../../utils";
+import { supabase } from "utils";
 
 const useOAuth = (provider: Provider) => {
   const { showErrorToast } = useToast();

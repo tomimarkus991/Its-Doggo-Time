@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 
 import { useToast } from "..";
-import { FoodLogsdataType } from "../../types";
-import { supabase } from "../../utils";
+import { FoodLogsdataType } from "types";
+import { supabase } from "utils";
 
 const useFetchFoodLogs = (group_id: string) => {
   const { showErrorToast } = useToast();

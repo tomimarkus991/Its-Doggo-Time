@@ -1,8 +1,8 @@
 import { Avatar as ChakraAvatar, Box, BoxProps } from "@chakra-ui/react";
 
-import { useFetchAvatar } from "../../hooks/queries";
-import useColors from "../../hooks/useColors";
-import { AvatarIconType } from "../../types";
+import { useFetchAvatar } from "hooks/queries";
+import useColors from "hooks/useColors";
+import { AvatarIconType } from "types";
 import { Skeleton } from "../Skeleton";
 
 interface Props {

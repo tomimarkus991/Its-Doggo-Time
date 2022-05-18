@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 
 import { useToast } from "..";
-import { supabase } from "../../utils";
+import { supabase } from "utils";
 
 const useUploadAvatar = (onUpload: (url: string) => void) => {
   const { showErrorToast } = useToast();

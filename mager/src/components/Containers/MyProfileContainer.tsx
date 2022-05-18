@@ -3,7 +3,7 @@ import { Center, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { useSignOut } from "../../hooks/mutations";
+import { useSignOut } from "hooks/mutations";
 import GradientButton from "../Buttons/GradientButton";
 import { ColorMode } from "../ColorMode";
 import { GradientButtonText } from "../Text";

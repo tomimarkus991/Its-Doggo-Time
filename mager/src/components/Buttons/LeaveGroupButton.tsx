@@ -2,9 +2,9 @@ import { Button, Flex } from "@chakra-ui/react";
 
 import { useHistory } from "react-router";
 
-import { useAuth } from "../../context";
-import { useLeaveGroup } from "../../hooks/mutations";
-import { useFetchGroupData } from "../../hooks/queries";
+import { useAuth } from "context";
+import { useLeaveGroup } from "hooks/mutations";
+import { useFetchGroupData } from "hooks/queries";
 
 interface Props {
   group_id: string;

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 
 import { useToast } from "..";
-import { supabase } from "../../utils";
+import { supabase } from "utils";
 
 const useFetchAvatar = (path: string | undefined, queryKey: (string | undefined)[]) => {
   const { showErrorToast } = useToast();

@@ -2,7 +2,7 @@ import { Heading, VStack } from "@chakra-ui/react";
 
 import React from "react";
 
-import { LoginAuth } from "../../components/Auth";
+import { LoginAuth } from "components/Auth";
 
 const Login: React.FC = () => {
   return (

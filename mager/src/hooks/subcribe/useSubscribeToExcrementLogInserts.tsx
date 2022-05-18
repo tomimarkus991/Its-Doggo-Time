@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 
-import { ExcrementLogsdataType } from "../../types";
-import { sortExcrementLogs, supabase } from "../../utils";
+import { ExcrementLogsdataType } from "types";
+import { sortExcrementLogs, supabase } from "utils";
 
 export const useSubscribeToExcrementLogInserts = (group_id: string) => {
   const queryClient = useQueryClient();

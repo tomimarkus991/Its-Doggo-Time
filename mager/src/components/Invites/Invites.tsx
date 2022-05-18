@@ -13,11 +13,11 @@ import {
 
 import React, { useEffect } from "react";
 
-import { useAcceptInvite, useDeclineInvite } from "../../hooks/mutations";
-import { useFetchInvites } from "../../hooks/queries";
-import { useSubscribeToInviteInserts } from "../../hooks/subcribe";
-import useColors from "../../hooks/useColors";
-import { InviteDataType } from "../../types";
+import { useAcceptInvite, useDeclineInvite } from "hooks/mutations";
+import { useFetchInvites } from "hooks/queries";
+import { useSubscribeToInviteInserts } from "hooks/subcribe";
+import useColors from "hooks/useColors";
+import { InviteDataType } from "types";
 import GradientButton from "../Buttons/GradientButton";
 import { InviteCard } from "../Cards";
 import { InviteNotificationIcon, InvitesIcon } from "../Icons";

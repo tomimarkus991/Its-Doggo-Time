@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 
 import { useToast } from "..";
-import { InviteDataType, UserType } from "../../types";
-import { supabase } from "../../utils";
+import { InviteDataType, UserType } from "types";
+import { supabase } from "utils";
 
 export const useFetchInvites = () => {
   const { showErrorToast } = useToast();

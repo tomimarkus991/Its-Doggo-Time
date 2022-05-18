@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 
 import { useToast } from "..";
-import { UserType } from "../../types";
-import { supabase } from "../../utils";
+import { UserType } from "types";
+import { supabase } from "utils";
 
 const useUser = () => {
   const user = supabase.auth.user();

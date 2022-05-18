@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { FoodLogsdataType } from "../../types";
+import { FoodLogsdataType } from "types";
 
 const useFoodLogsPlaceholder = (logsdata: FoodLogsdataType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();

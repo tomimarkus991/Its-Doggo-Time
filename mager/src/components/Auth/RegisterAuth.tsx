@@ -4,8 +4,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-import { useForm } from "../../hooks";
-import { useCreateUser } from "../../hooks/mutations";
+import { useForm } from "hooks";
+import { useCreateUser } from "hooks/mutations";
 import SignUpAlert from "../Alerts/SignUpAlert";
 import { GradientButton } from "../Buttons";
 import { ColorMode } from "../ColorMode";

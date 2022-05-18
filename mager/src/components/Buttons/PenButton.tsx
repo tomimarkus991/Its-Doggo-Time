@@ -3,7 +3,7 @@ import { IconButton } from "@chakra-ui/react";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import useColors from "../../hooks/useColors";
+import useColors from "hooks/useColors";
 
 interface Props {
   onClick: any;

@@ -3,8 +3,8 @@ import { Center } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useQueryClient } from "react-query";
 
-import { useAuth } from "../../context/AuthContext";
-import { supabase } from "../../utils";
+import { useAuth } from "context/AuthContext";
+import { supabase } from "utils";
 import { GroupsContainer } from "../Containers";
 import { Invites } from "../Invites";
 import { HeaderAvatar, MainLayout, PageHeader } from "../Layouts";

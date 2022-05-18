@@ -2,7 +2,7 @@ import { Box, Center, Text } from "@chakra-ui/react";
 
 import React from "react";
 
-import { InviteDataType } from "../../types";
+import { InviteDataType } from "types";
 import { AvatarInvite } from "../Avatar";
 import EditButtons from "../Buttons/EditButtons";
 

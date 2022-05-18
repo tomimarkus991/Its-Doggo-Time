@@ -2,15 +2,15 @@ import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
 
 import React, { useState } from "react";
 
-import { AvatarUpload } from "../../components/Avatar";
-import { EditButtons, PenButton } from "../../components/Buttons";
-import { MyProfileContainer } from "../../components/Containers";
-import { Invites } from "../../components/Invites";
-import { HeaderAvatar, MainLayout, PageHeader } from "../../components/Layouts";
-import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "../../components/Layouts/Profile";
-import { MyGroupsLink } from "../../components/Links";
-import { useUpdateUserAvatar, useUpdateUsername } from "../../hooks/mutations";
-import { useUser } from "../../hooks/queries";
+import { AvatarUpload } from "components/Avatar";
+import { EditButtons, PenButton } from "components/Buttons";
+import { MyProfileContainer } from "components/Containers";
+import { Invites } from "components/Invites";
+import { HeaderAvatar, MainLayout, PageHeader } from "components/Layouts";
+import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "components/Layouts/Profile";
+import { MyGroupsLink } from "components/Links";
+import { useUpdateUserAvatar, useUpdateUsername } from "hooks/mutations";
+import { useUser } from "hooks/queries";
 
 const Profile: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);

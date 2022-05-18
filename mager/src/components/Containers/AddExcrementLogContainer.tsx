@@ -3,7 +3,7 @@ import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useAddExcrementLog } from "../../hooks/mutations";
+import { useAddExcrementLog } from "hooks/mutations";
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";
 import { MainContainerLayout } from "../Layouts";

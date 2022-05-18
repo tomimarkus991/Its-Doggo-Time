@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 
 import { useToast } from "..";
-import { supabase } from "../../utils";
+import { supabase } from "utils";
 import { useFetchGroupData } from "../queries";
 
 const useUpdateGroupname = (id: string) => {

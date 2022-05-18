@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 
 import { useToast } from "..";
-import { supabase } from "../../utils";
+import { supabase } from "utils";
 
 const useRemoveGroupMember = () => {
   const { showErrorToast, showSuccessToast } = useToast();

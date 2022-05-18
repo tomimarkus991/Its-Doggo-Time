@@ -3,9 +3,9 @@ import { VStack, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Skeleton } from "../../components/Skeleton";
-import { useFetchGroupData } from "../../hooks/queries";
-import { GroupType } from "../../types";
+import { Skeleton } from "components/Skeleton";
+import { useFetchGroupData } from "hooks/queries";
+import { GroupType } from "types";
 
 import { GroupAvatarCard } from ".";
 

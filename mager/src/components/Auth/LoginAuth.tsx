@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { useLogin } from "../../hooks/mutations";
-import useForm from "../../hooks/useForm";
+import { useLogin } from "hooks/mutations";
+import useForm from "hooks/useForm";
 import { GradientButton } from "../Buttons";
 import { ColorMode } from "../ColorMode";
 import { GradientButtonText } from "../Text";

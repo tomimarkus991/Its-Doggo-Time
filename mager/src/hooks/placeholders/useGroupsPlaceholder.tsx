@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { GroupType } from "../../types";
+import { GroupType } from "types";
 
 const useGroupsPlaceholder = (userGroups: GroupType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();

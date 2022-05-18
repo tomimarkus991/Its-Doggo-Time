@@ -4,7 +4,7 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-import { useColors } from "../../hooks";
+import { useColors } from "hooks";
 
 interface Props {
   group_id: string;

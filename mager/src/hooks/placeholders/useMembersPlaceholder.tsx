@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { MemberType } from "../../types";
+import { MemberType } from "types";
 
 const useMembersPlaceholder = (members: MemberType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();

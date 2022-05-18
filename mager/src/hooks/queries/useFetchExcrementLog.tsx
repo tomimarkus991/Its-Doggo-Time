@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 
 import { useToast } from "..";
-import { useLogs } from "../../context";
-import { ExcrementLogsdataType } from "../../types";
-import { supabase } from "../../utils";
+import { useLogs } from "context";
+import { ExcrementLogsdataType } from "types";
+import { supabase } from "utils";
 
 const useFetchExcrementLog = (log_id: string, group_id: string) => {
   const { showErrorToast } = useToast();

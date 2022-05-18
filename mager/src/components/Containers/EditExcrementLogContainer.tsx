@@ -2,9 +2,9 @@ import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 
-import { useLogs } from "../../context";
-import { useEditExcrementLog } from "../../hooks/mutations";
-import { useFetchExcrementLog } from "../../hooks/queries";
+import { useLogs } from "context";
+import { useEditExcrementLog } from "hooks/mutations";
+import { useFetchExcrementLog } from "hooks/queries";
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";
 import { MainContainerLayout } from "../Layouts";
