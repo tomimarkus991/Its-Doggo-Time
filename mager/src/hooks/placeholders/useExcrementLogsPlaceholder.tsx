@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useExcrementLogsPlaceholder = (logsdata: any) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
-    let getPlaceholders = () => {
-      let max = 4;
+    const getPlaceholders = () => {
+      const max = 4;
       if (!logsdata) return;
 
       // gets how many placeholders to render
       const _placeholders = max - logsdata.length;
 
-      let placeholderArray: string[] = [];
+      const placeholderArray: string[] = [];
 
       for (let i = 1; i <= _placeholders; i++) {
-        placeholderArray.push('holder');
+        placeholderArray.push("holder");
       }
       setPlaceholders(placeholderArray);
     };

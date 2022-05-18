@@ -1,23 +1,13 @@
-import { Icon, IconProps } from '@chakra-ui/react';
-import { useColors } from '../../hooks';
+import { Icon, IconProps } from "@chakra-ui/react";
+
+import { useColors } from "../../hooks";
 const ExcrementViewIcon = (props: IconProps): JSX.Element => {
-  const {
-    logViewIconColor,
-    whiteToBeige,
-    logViewIconAuraColor,
-    logViewIconAura2Color,
-  } = useColors();
+  const { logViewIconColor, whiteToBeige, logViewIconAuraColor, logViewIconAura2Color } =
+    useColors();
   return (
     <Icon viewBox="0 0 70 61" {...props}>
       <defs>
-        <filter
-          id="prefix__e"
-          x={0}
-          y={0}
-          width={70}
-          height={61}
-          filterUnits="userSpaceOnUse"
-        >
+        <filter id="prefix__e" x={0} y={0} width={70} height={61} filterUnits="userSpaceOnUse">
           <feOffset dy={3} />
           <feGaussianBlur stdDeviation={3} result="blur" />
           <feFlood floodColor={logViewIconAuraColor} />

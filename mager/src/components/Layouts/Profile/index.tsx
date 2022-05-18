@@ -1,2 +1,2 @@
-export { default as ProfileNameAndAvatar } from './ProfileNameAndAvatar';
-export { default as ProfileNameAndAvatarMiddle } from './ProfileNameAndAvatarMiddle';
+export { default as ProfileNameAndAvatar } from "./ProfileNameAndAvatar";
+export { default as ProfileNameAndAvatarMiddle } from "./ProfileNameAndAvatarMiddle";

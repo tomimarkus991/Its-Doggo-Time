@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useContext,
-} from 'react';
+import { createContext, useState, Dispatch, SetStateAction, useContext } from "react";
 
 type InitialContextType = {
   isInviteInvalid: boolean;
@@ -16,7 +10,7 @@ type InitialContextType = {
 const initialContext: InitialContextType = {
   isInviteInvalid: false,
   setIsInviteInvalid: () => {},
-  inviteReceiver: '',
+  inviteReceiver: "",
   setInviteReceiver: () => {},
 };
 
@@ -26,7 +20,7 @@ export const useInvite = () => useContext(InviteContext);
 
 const InviteDetailsProvider = ({ children }: any) => {
   const [isInviteInvalid, setIsInviteInvalid] = useState(false);
-  const [inviteReceiver, setInviteReceiver] = useState('');
+  const [inviteReceiver, setInviteReceiver] = useState("");
 
   const value = {
     isInviteInvalid,
@@ -35,11 +29,7 @@ const InviteDetailsProvider = ({ children }: any) => {
     setInviteReceiver,
   };
 
-  return (
-    <InviteContext.Provider value={value}>
-      {children}
-    </InviteContext.Provider>
-  );
+  return <InviteContext.Provider value={value}>{children}</InviteContext.Provider>;
 };
 
 export default InviteDetailsProvider;

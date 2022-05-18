@@ -1,10 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const useForm = (initialValues: {
-  username?: string;
-  email: string;
-  password: string;
-}) => {
+const useForm = (initialValues: { username?: string; email: string; password: string }) => {
   const [values, setValues] = useState(initialValues);
 
   return {

@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
-import { MemberType } from '../../types';
+import { useEffect, useState } from "react";
+
+import { MemberType } from "../../types";
 
 const useMembersPlaceholder = (members: MemberType[] | undefined) => {
   const [placeholders, setPlaceholders] = useState<string[]>();
 
   useEffect(() => {
-    let getPlaceholders = () => {
-      let max = 6;
+    const getPlaceholders = () => {
+      const max = 6;
       if (!members) return;
       const _placeholders = max - members.length;
 
-      let placeholderArray: string[] = [];
+      const placeholderArray: string[] = [];
 
       for (let i = 1; i <= _placeholders; i++) {
-        placeholderArray.push('placeholder');
+        placeholderArray.push("placeholder");
       }
       setPlaceholders(placeholderArray);
     };

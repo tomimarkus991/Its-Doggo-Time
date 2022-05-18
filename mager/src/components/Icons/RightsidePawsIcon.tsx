@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 const RightsidePawsIcon = (props: IconProps): JSX.Element => (
   <Icon
     position="fixed"
@@ -6,7 +6,7 @@ const RightsidePawsIcon = (props: IconProps): JSX.Element => (
     width={233.757}
     height={513.44}
     zIndex={-4}
-    display={{ base: 'none', lg: 'initial' }}
+    display={{ base: "none", lg: "initial" }}
     {...props}
   >
     <path

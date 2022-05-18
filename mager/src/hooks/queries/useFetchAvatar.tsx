@@ -1,23 +1,19 @@
-import { useQuery } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useQuery } from "react-query";
 
-const useFetchAvatar = (
-  path: string | undefined,
-  queryKey: (string | undefined)[],
-) => {
+import { useToast } from "..";
+import { supabase } from "../../utils";
+
+const useFetchAvatar = (path: string | undefined, queryKey: (string | undefined)[]) => {
   const { showErrorToast } = useToast();
 
   const fetchAvatar = async () => {
     if (path) {
-      const { data: src, error } = await supabase.storage
-        .from('avatars')
-        .download(path);
+      const { data: src, error } = await supabase.storage.from("avatars").download(path);
       const data = URL.createObjectURL(src);
 
       if (error) {
         showErrorToast({
-          title: 'Fetch Avatar Error',
+          title: "Fetch Avatar Error",
           description: error.message,
         });
         throw new Error(error.message);

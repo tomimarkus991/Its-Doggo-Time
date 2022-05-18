@@ -1,4 +1,4 @@
-import { MyGroupsLink, ProfileLink } from '.';
+import { MyGroupsLink, ProfileLink } from ".";
 
 const ProfileAndMyGroups: React.FC = () => {
   return (

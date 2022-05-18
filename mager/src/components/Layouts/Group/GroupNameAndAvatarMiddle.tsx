@@ -1,8 +1,9 @@
-import { Box, HStack } from '@chakra-ui/react';
-import { useFetchGroupData } from '../../../hooks/queries';
-import { AvatarGroup } from '../../Avatar';
-import { Name } from '../../Headers';
-import { Skeleton } from '../../Skeleton';
+import { Box, HStack } from "@chakra-ui/react";
+
+import { useFetchGroupData } from "../../../hooks/queries";
+import { AvatarGroup } from "../../Avatar";
+import { Name } from "../../Headers";
+import { Skeleton } from "../../Skeleton";
 
 interface Props {
   group_id: string;
@@ -18,7 +19,7 @@ const GroupNameAndAvatarMiddle: React.FC<Props> = ({
   const { data, isLoading } = useFetchGroupData(group_id);
 
   return (
-    <HStack display={{ base: 'flex', sm: 'none' }}>
+    <HStack display={{ base: "flex", sm: "none" }}>
       <Skeleton isLoading={isLoading || isGroupPictureLoading}>
         <Box mr={2}>
           <AvatarGroup src={data?.avatar_url} />
@@ -28,7 +29,7 @@ const GroupNameAndAvatarMiddle: React.FC<Props> = ({
         <Name
           name={String(data?.group_name)}
           textProps={{
-            fontSize: '4xl',
+            fontSize: "4xl",
           }}
         />
       </Skeleton>

@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { supabase } from "../../utils";
 
 const useSignOut = () => {
   const { showErrorToast } = useToast();
@@ -11,14 +12,14 @@ const useSignOut = () => {
 
     if (error) {
       showErrorToast({
-        title: 'Sign Out Error',
+        title: "Sign Out Error",
         description: error.message,
       });
       throw new Error(error.message);
     }
   };
 
-  return useMutation('signOut', () => signOut(), {
+  return useMutation("signOut", () => signOut(), {
     onSuccess: () => {
       queryClient.removeQueries();
     },

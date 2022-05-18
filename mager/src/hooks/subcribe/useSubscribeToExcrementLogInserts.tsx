@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { ExcrementLogsdataType } from '../../types';
-import { sortExcrementLogs } from '../../utils';
-import { supabase } from '../../utils';
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
+
+import { ExcrementLogsdataType } from "../../types";
+import { sortExcrementLogs, supabase } from "../../utils";
 
 export const useSubscribeToExcrementLogInserts = (group_id: string) => {
   const queryClient = useQueryClient();
@@ -11,7 +11,7 @@ export const useSubscribeToExcrementLogInserts = (group_id: string) => {
     const subscribeToLogInserts = () =>
       supabase
         .from(`excrement_logs:group_id=eq.${group_id}`)
-        .on('INSERT', async payload => {
+        .on("INSERT", async payload => {
           const { created_at, creator_id, group_id, id, pee, poop } =
             payload.new as ExcrementLogsdataType;
 
@@ -28,12 +28,9 @@ export const useSubscribeToExcrementLogInserts = (group_id: string) => {
           // await queryClient.cancelQueries(['excrement_logs', group_id]);
 
           // Optimistically update to the new value
-          queryClient.setQueryData(
-            ['excrement_logs', group_id],
-            (oldData: any) => {
-              return sortExcrementLogs({ oldData, newLog });
-            },
-          );
+          queryClient.setQueryData(["excrement_logs", group_id], (oldData: any) => {
+            return sortExcrementLogs({ oldData, newLog });
+          });
         })
         .subscribe();
 

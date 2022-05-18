@@ -1,7 +1,8 @@
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Provider } from '@supabase/gotrue-js';
-import { useOAuth } from '../../hooks/mutations';
+import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Provider } from "@supabase/gotrue-js";
+
+import { useOAuth } from "../../hooks/mutations";
 
 interface Props {
   icon: IconDefinition;

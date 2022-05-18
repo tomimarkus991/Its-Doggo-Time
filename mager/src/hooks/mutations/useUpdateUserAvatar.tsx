@@ -1,7 +1,8 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { useAuth } from '../../context';
-import { supabase } from '../../utils';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { useAuth } from "../../context";
+import { supabase } from "../../utils";
 
 const useUpdateUserAvatar = () => {
   const { showErrorToast, showSuccessToast } = useToast();
@@ -15,34 +16,30 @@ const useUpdateUserAvatar = () => {
       updated_at: new Date(),
     };
 
-    let { error } = await supabase.from('profiles').upsert(updates, {
-      returning: 'minimal',
+    const { error } = await supabase.from("profiles").upsert(updates, {
+      returning: "minimal",
     });
 
     if (error) {
       showErrorToast({
-        title: 'Update User Avatar Error',
+        title: "Update User Avatar Error",
         description: error.message,
       });
       throw new Error(error.message);
     }
   };
 
-  return useMutation(
-    'updateUserAvatar',
-    (url: any) => updateUserAvatar(url),
-    {
-      onSuccess: () => {
-        showSuccessToast({
-          title: 'Avatar Updated',
-          description: 'Your Avatar has been updated.',
-        });
-      },
-      // Refetch after error or success:
-      onSettled: () => {
-        queryClient.invalidateQueries('user');
-      },
+  return useMutation("updateUserAvatar", (url: any) => updateUserAvatar(url), {
+    onSuccess: () => {
+      showSuccessToast({
+        title: "Avatar Updated",
+        description: "Your Avatar has been updated.",
+      });
     },
-  );
+    // Refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
 };
 export default useUpdateUserAvatar;

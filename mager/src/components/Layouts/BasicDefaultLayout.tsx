@@ -1,13 +1,11 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
-import React from 'react';
-import Header from '../Header';
-import { HeaderBackgroundSmall, HeaderBackground } from '../Icons';
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 
-const BasicDefaultLayout = ({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element => {
+import React from "react";
+
+import Header from "../Header";
+import { HeaderBackgroundSmall, HeaderBackground } from "../Icons";
+
+const BasicDefaultLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <Grid
       id="default grid"
@@ -16,11 +14,8 @@ const BasicDefaultLayout = ({
       templateAreas='"header" "main"'
       h="100vh"
     >
-      <HeaderBackgroundSmall display={{ base: 'block', sm: 'none' }} />
-      <HeaderBackground
-        h="100%"
-        display={{ base: 'none', sm: 'block', lg: 'none' }}
-      />
+      <HeaderBackgroundSmall display={{ base: "block", sm: "none" }} />
+      <HeaderBackground h="100%" display={{ base: "none", sm: "block", lg: "none" }} />
 
       <GridItem gridArea="header">
         <Header />

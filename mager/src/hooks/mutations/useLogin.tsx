@@ -1,30 +1,25 @@
-import { useMutation } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useMutation } from "react-query";
 
-const useLogin = ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
+import { useToast } from "..";
+import { supabase } from "../../utils";
+
+const useLogin = ({ email, password }: { email: string; password: string }) => {
   const { showErrorToast } = useToast();
   const login = async () => {
-    let { data, error } = await supabase.auth.signIn({
+    const { data, error } = await supabase.auth.signIn({
       email,
       password,
     });
 
     if (error) {
       showErrorToast({
-        title: 'Login Error',
+        title: "Login Error",
         description: error.message,
       });
       throw new Error(error.message);
     }
     return data;
   };
-  return useMutation('login', () => login());
+  return useMutation("login", () => login());
 };
 export default useLogin;

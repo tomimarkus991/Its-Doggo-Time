@@ -1,8 +1,10 @@
-import { Box, Center, Text } from '@chakra-ui/react';
-import React from 'react';
-import { InviteDataType } from '../../types';
-import { AvatarInvite } from '../Avatar';
-import EditButtons from '../Buttons/EditButtons';
+import { Box, Center, Text } from "@chakra-ui/react";
+
+import React from "react";
+
+import { InviteDataType } from "../../types";
+import { AvatarInvite } from "../Avatar";
+import EditButtons from "../Buttons/EditButtons";
 
 interface Props {
   invite: InviteDataType;
@@ -10,11 +12,7 @@ interface Props {
   acceptInvite: (group_id: string, invite_id: string) => void;
 }
 
-const InviteCard: React.FC<Props> = ({
-  invite,
-  declineInvite,
-  acceptInvite,
-}) => {
+const InviteCard: React.FC<Props> = ({ invite, declineInvite, acceptInvite }) => {
   const { id, groups, sender } = invite;
   const { avatar_url, group_name } = groups;
   return (
@@ -38,7 +36,7 @@ const InviteCard: React.FC<Props> = ({
           </Text>
         </Box>
         <EditButtons
-          buttonGroupProps={{ spacing: '7' }}
+          buttonGroupProps={{ spacing: "7" }}
           onCrossClick={() => declineInvite(id)}
           onCheckClick={() => acceptInvite(groups.id, id)}
         />

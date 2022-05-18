@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { InviteDataType } from '../../types';
-import { supabase } from '../../utils';
-import { useUser } from '../queries';
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { InviteDataType } from "../../types";
+import { supabase } from "../../utils";
+import { useUser } from "../queries";
 
 export const useSubscribeToInviteInserts = () => {
   const queryClient = useQueryClient();
@@ -17,26 +18,26 @@ export const useSubscribeToInviteInserts = () => {
           // only listen to updates that have your username in it
           .from(`invites:receiver=eq.${data?.username}`)
           // when someone invites you to group
-          .on('INSERT', async payload => {
-            queryClient.invalidateQueries('invites');
+          .on("INSERT", async payload => {
+            queryClient.invalidateQueries("invites");
             // take the newly inserted data
             const { sender, receiver, id, group_id } = payload.new;
-            console.log('payload', payload);
-            let { data, error } = await supabase
-              .from('groups')
+            console.log("payload", payload);
+            const { data, error } = await supabase
+              .from("groups")
               .select(
                 `
               id,
               group_name,
               avatar_url
-            `,
+            `
               )
-              .eq('id', group_id)
+              .eq("id", group_id)
               .single();
 
             if (error) {
               showErrorToast({
-                title: 'Get Group Data Error',
+                title: "Get Group Data Error",
                 description: error.message,
               });
 
@@ -51,8 +52,8 @@ export const useSubscribeToInviteInserts = () => {
               groups: data,
             };
 
-            queryClient.setQueryData('invites', (oldData: any) => {
-              console.log('sub oldData', oldData);
+            queryClient.setQueryData("invites", (oldData: any) => {
+              console.log("sub oldData", oldData);
 
               if (oldData === undefined) {
                 return [newInvite];

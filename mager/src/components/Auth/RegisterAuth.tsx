@@ -1,27 +1,23 @@
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
-import { OAuthSection, RerouteLoginRegister } from '.';
-import { useForm } from '../../hooks';
-import { useCreateUser } from '../../hooks/mutations';
-import SignUpAlert from '../Alerts/SignUpAlert';
-import { GradientButton } from '../Buttons';
-import { ColorMode } from '../ColorMode';
-import { GradientButtonText } from '../Text';
+import { Box, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
+
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+
+import { useForm } from "../../hooks";
+import { useCreateUser } from "../../hooks/mutations";
+import SignUpAlert from "../Alerts/SignUpAlert";
+import { GradientButton } from "../Buttons";
+import { ColorMode } from "../ColorMode";
+import { GradientButtonText } from "../Text";
+
+import { OAuthSection, RerouteLoginRegister } from ".";
 
 const RegisterAuth: React.FC = () => {
   const { username, email, password, handleChange } = useForm({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const [show, setShow] = useState(false);
@@ -40,7 +36,7 @@ const RegisterAuth: React.FC = () => {
         <Box w={300}>
           <VStack spacing="4">
             <Input
-              variant={'removeDefault'}
+              variant={"removeDefault"}
               name="username"
               autoCapitalize="off"
               type="text"
@@ -53,7 +49,7 @@ const RegisterAuth: React.FC = () => {
               isInvalid={isError}
             />
             <Input
-              variant={'removeDefault'}
+              variant={"removeDefault"}
               name="email"
               type="email"
               placeholder="Email"
@@ -67,9 +63,9 @@ const RegisterAuth: React.FC = () => {
             />
             <InputGroup justifyContent="center" alignItems="center">
               <Input
-                variant={'removeDefault'}
+                variant={"removeDefault"}
                 name="password"
-                type={show ? 'text' : 'password'}
+                type={show ? "text" : "password"}
                 value={password}
                 onChange={handleChange}
                 autoComplete="off"
@@ -98,24 +94,14 @@ const RegisterAuth: React.FC = () => {
                 )}
               </InputRightElement>
             </InputGroup>
-            <GradientButton
-              onClick={() => mutate()}
-              isLoading={isLoading}
-              loadingText="Loading"
-            >
-              <GradientButtonText fontSize={25}>
-                Sign up
-              </GradientButtonText>
+            <GradientButton onClick={() => mutate()} isLoading={isLoading} loadingText="Loading">
+              <GradientButtonText fontSize={25}>Sign up</GradientButtonText>
             </GradientButton>
             <Box>
               <Text fontSize="lg">Or</Text>
             </Box>
             <OAuthSection />
-            <RerouteLoginRegister
-              title="Already have an account?"
-              to="/login"
-              action="Sign In"
-            />
+            <RerouteLoginRegister title="Already have an account?" to="/login" action="Sign In" />
             <ColorMode />
           </VStack>
         </Box>

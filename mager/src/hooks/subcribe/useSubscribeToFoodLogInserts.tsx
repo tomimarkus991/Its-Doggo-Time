@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { FoodLogsdataType } from '../../types';
-import { sortFoodLogs, supabase } from '../../utils';
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
+
+import { FoodLogsdataType } from "../../types";
+import { sortFoodLogs, supabase } from "../../utils";
 
 export const useSubscribeToFoodLogInserts = (group_id: string) => {
   const queryClient = useQueryClient();
@@ -10,9 +11,8 @@ export const useSubscribeToFoodLogInserts = (group_id: string) => {
     const subscribeToLogInserts = () =>
       supabase
         .from(`food_logs:group_id=eq.${group_id}`)
-        .on('INSERT', payload => {
-          const { id, created_at, creator_id, group_id, food } =
-            payload.new as FoodLogsdataType;
+        .on("INSERT", payload => {
+          const { id, created_at, creator_id, group_id, food } = payload.new as FoodLogsdataType;
 
           const newLog: FoodLogsdataType = {
             id,
@@ -22,12 +22,9 @@ export const useSubscribeToFoodLogInserts = (group_id: string) => {
             food,
           };
 
-          queryClient.setQueryData(
-            ['excrement_logs', group_id],
-            (oldData: any) => {
-              return sortFoodLogs({ oldData, newLog });
-            },
-          );
+          queryClient.setQueryData(["excrement_logs", group_id], (oldData: any) => {
+            return sortFoodLogs({ oldData, newLog });
+          });
         })
         .subscribe();
 

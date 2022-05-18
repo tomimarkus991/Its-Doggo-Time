@@ -1,10 +1,11 @@
-import { Grid, GridItem, Box } from '@chakra-ui/react';
-import React from 'react';
-import { Header2 } from '../../components/Header';
-import { DefaultLayout } from '../../components/Layouts';
-import { LoggedIn } from '../../components/Home';
-import { LoggedOut } from '../../components/Home';
-import { useAuth } from '../../context';
+import { Grid, GridItem, Box } from "@chakra-ui/react";
+
+import React from "react";
+
+import { Header2 } from "../../components/Header";
+import { LoggedIn, LoggedOut } from "../../components/Home";
+import { DefaultLayout } from "../../components/Layouts";
+import { useAuth } from "../../context";
 
 const Home: React.FC = () => {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ const Home: React.FC = () => {
       ) : (
         <Grid
           templateColumns="1fr"
-          templateRows={{ base: '0.5fr 1fr', sm: '0.3fr 1fr' }}
+          templateRows={{ base: "0.5fr 1fr", sm: "0.3fr 1fr" }}
           templateAreas='"header" "main"'
           h="100vh"
         >

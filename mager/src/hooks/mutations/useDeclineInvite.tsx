@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { supabase } from "../../utils";
 
 type DeclineInviteType = {
   invite_id: string;
@@ -11,15 +12,11 @@ const useDeclineInvite = () => {
   const queryClient = useQueryClient();
 
   const declineInvite = async ({ invite_id }: DeclineInviteType) => {
-    let { data, error } = await supabase
-      .from('invites')
-      .delete()
-      .eq('id', invite_id)
-      .single();
+    const { data, error } = await supabase.from("invites").delete().eq("id", invite_id).single();
 
     if (error) {
       showErrorToast({
-        title: 'Decline Invite Error',
+        title: "Decline Invite Error",
         description: error.message,
       });
 
@@ -30,7 +27,7 @@ const useDeclineInvite = () => {
   };
 
   return useMutation(
-    'declineInvite',
+    "declineInvite",
     ({ invite_id }: DeclineInviteType) => declineInvite({ invite_id }),
     {
       // onSuccess: async () => {
@@ -44,9 +41,9 @@ const useDeclineInvite = () => {
       // },
       // Refetch after error or success:
       onSettled: () => {
-        queryClient.invalidateQueries('invites');
+        queryClient.invalidateQueries("invites");
       },
-    },
+    }
   );
 };
 export default useDeclineInvite;

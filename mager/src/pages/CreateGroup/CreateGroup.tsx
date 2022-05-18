@@ -1,19 +1,11 @@
-import React from 'react';
-import { CreateGroupContainer } from '../../components/Containers';
-import {
-  HeaderAvatar,
-  MainLayout,
-  PageHeaderBack,
-} from '../../components/Layouts';
-import {
-  ProfileNameAndAvatar,
-  ProfileNameAndAvatarMiddle,
-} from '../../components/Layouts/Profile';
-import { ProfileAndMyGroups } from '../../components/Links';
+import React from "react";
 
-interface Props {}
+import { CreateGroupContainer } from "../../components/Containers";
+import { HeaderAvatar, MainLayout, PageHeaderBack } from "../../components/Layouts";
+import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "../../components/Layouts/Profile";
+import { ProfileAndMyGroups } from "../../components/Links";
 
-const CreateGroup: React.FC<Props> = () => {
+const CreateGroup = () => {
   return (
     <MainLayout
       leftSide={

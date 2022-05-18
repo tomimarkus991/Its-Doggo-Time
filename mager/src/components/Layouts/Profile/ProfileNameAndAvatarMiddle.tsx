@@ -1,8 +1,9 @@
-import { Box, HStack } from '@chakra-ui/react';
-import { useUser } from '../../../hooks/queries';
-import { AvatarProfile } from '../../Avatar';
-import { Name } from '../../Headers';
-import { Skeleton } from '../../Skeleton';
+import { Box, HStack } from "@chakra-ui/react";
+
+import { useUser } from "../../../hooks/queries";
+import { AvatarProfile } from "../../Avatar";
+import { Name } from "../../Headers";
+import { Skeleton } from "../../Skeleton";
 
 interface Props {
   isUsernameLoading?: boolean;
@@ -16,7 +17,7 @@ const ProfileNameAndAvatarMiddle: React.FC<Props> = ({
   const { data, isLoading } = useUser();
 
   return (
-    <HStack id="profile middle" display={{ base: 'flex', sm: 'none' }}>
+    <HStack id="profile middle" display={{ base: "flex", sm: "none" }}>
       <Skeleton isLoading={isLoading || isUserAvatarLoading}>
         <Box mr={2}>
           <AvatarProfile src={data?.avatar_url} />
@@ -26,7 +27,7 @@ const ProfileNameAndAvatarMiddle: React.FC<Props> = ({
         <Name
           name={String(data?.username)}
           textProps={{
-            fontSize: '4xl',
+            fontSize: "4xl",
           }}
         />
       </Skeleton>

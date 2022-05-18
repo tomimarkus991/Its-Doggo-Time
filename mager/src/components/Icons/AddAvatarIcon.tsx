@@ -1,7 +1,9 @@
-import { Box } from '@chakra-ui/react';
-import { faImage } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useColors from '../../hooks/useColors';
+import { Box } from "@chakra-ui/react";
+
+import { faImage } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import useColors from "../../hooks/useColors";
 
 const AddAvatarIcon: React.FC = () => {
   const { defaultColor } = useColors();
@@ -9,7 +11,7 @@ const AddAvatarIcon: React.FC = () => {
     <Box position="relative">
       <Box
         as={FontAwesomeIcon}
-        fontSize={{ base: '2rem', sm: '2.5rem', md: '3rem' }}
+        fontSize={{ base: "2rem", sm: "2.5rem", md: "3rem" }}
         icon={faImage}
         bgColor={defaultColor}
         py="2"

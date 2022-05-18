@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { supabase } from "../../utils";
 
 const useUpdateGroupPicture = (id: string) => {
   const { showErrorToast, showSuccessToast } = useToast();
@@ -13,34 +14,30 @@ const useUpdateGroupPicture = (id: string) => {
       updated_at: new Date(),
     };
 
-    let { error } = await supabase.from('groups').upsert(updates, {
-      returning: 'minimal', // Don't return the value after inserting
+    const { error } = await supabase.from("groups").upsert(updates, {
+      returning: "minimal", // Don't return the value after inserting
     });
 
     if (error) {
       showErrorToast({
-        title: 'Update Group Picture Error',
+        title: "Update Group Picture Error",
         description: error.message,
       });
       throw new Error(error.message);
     }
   };
 
-  return useMutation(
-    'updateGroupPicture',
-    (url: any) => updateGroupPicture(url),
-    {
-      onSuccess: () => {
-        showSuccessToast({
-          title: 'Group Picture Updated',
-          description: 'Your Group Picture has been updated.',
-        });
-      },
-      // Refetch after error or success:
-      onSettled: () => {
-        queryClient.invalidateQueries('group' + id);
-      },
+  return useMutation("updateGroupPicture", (url: any) => updateGroupPicture(url), {
+    onSuccess: () => {
+      showSuccessToast({
+        title: "Group Picture Updated",
+        description: "Your Group Picture has been updated.",
+      });
     },
-  );
+    // Refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries("group" + id);
+    },
+  });
 };
 export default useUpdateGroupPicture;

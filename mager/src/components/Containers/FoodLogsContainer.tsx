@@ -1,21 +1,21 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useFoodLogsPlaceholder } from '../../hooks/placeholders';
-import { useFetchFoodLogs } from '../../hooks/queries';
-import { useSubscribeToFoodLogInserts } from '../../hooks/subcribe/useSubscribeToFoodLogInserts';
-import { FoodLogsdataType } from '../../types';
-import { AddNewLogContainerButton, LogSummaryButton } from '../Buttons';
-import { FoodLogCard } from '../Cards';
-import { LogGrid } from '../Grids';
-import { MainContainerLayout } from '../Layouts';
-import { FoodLogPlaceholder, LogEmptyPlaceholder } from '../Placeholders';
+import React from "react";
+import { useParams } from "react-router-dom";
 
-interface Props {}
+import { useFoodLogsPlaceholder } from "../../hooks/placeholders";
+import { useFetchFoodLogs } from "../../hooks/queries";
+import { useSubscribeToFoodLogInserts } from "../../hooks/subcribe/useSubscribeToFoodLogInserts";
+import { FoodLogsdataType } from "../../types";
+import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";
+import { FoodLogCard } from "../Cards";
+import { LogGrid } from "../Grids";
+import { MainContainerLayout } from "../Layouts";
+import { FoodLogPlaceholder, LogEmptyPlaceholder } from "../Placeholders";
+
 interface RouteParams {
   group_id: string;
 }
 
-const FoodLogsContainer: React.FC<Props> = ({}) => {
+const FoodLogsContainer = () => {
   const { group_id } = useParams<RouteParams>();
   const { data, isLoading } = useFetchFoodLogs(group_id);
   const { placeholders } = useFoodLogsPlaceholder(data);
@@ -28,13 +28,13 @@ const FoodLogsContainer: React.FC<Props> = ({}) => {
       button={<AddNewLogContainerButton group_id={group_id} />}
       containerProps={{
         w: {
-          base: 'xs',
-          sm: 'sm',
-          sm2: 'md',
-          md: 'lg',
-          xl: 'xl',
+          base: "xs",
+          sm: "sm",
+          sm2: "md",
+          md: "lg",
+          xl: "xl",
         },
-        h: { base: '22rem', sm: 'sm', md: 'md' },
+        h: { base: "22rem", sm: "sm", md: "md" },
       }}
     >
       {data && !!data?.length ? (

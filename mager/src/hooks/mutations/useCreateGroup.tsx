@@ -1,9 +1,10 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useHistory } from 'react-router';
-import { useToast } from '..';
-import { GroupType } from '../../types';
-import { supabase } from '../../utils';
-import { useUser } from '../queries';
+import { useMutation, useQueryClient } from "react-query";
+import { useHistory } from "react-router";
+
+import { useToast } from "..";
+import { GroupType } from "../../types";
+import { supabase } from "../../utils";
+import { useUser } from "../queries";
 
 type CreateGroupType = {
   groupname: string;
@@ -16,10 +17,7 @@ const useCreateGroup = () => {
   const router = useHistory();
   const queryClient = useQueryClient();
 
-  const createGroup = async ({
-    groupname,
-    group_avatar_url,
-  }: CreateGroupType) => {
+  const createGroup = async ({ groupname, group_avatar_url }: CreateGroupType) => {
     const updates = {
       group_name: groupname,
       avatar_url: group_avatar_url,
@@ -27,14 +25,11 @@ const useCreateGroup = () => {
       updated_at: new Date(),
     };
 
-    let { data, error: groupsError } = await supabase
-      .from('groups')
-      .insert(updates)
-      .single();
+    const { data, error: groupsError } = await supabase.from("groups").insert(updates).single();
 
     if (groupsError) {
       showErrorToast({
-        title: 'Create Group Error',
+        title: "Create Group Error",
         description: groupsError.message,
       });
 
@@ -46,15 +41,13 @@ const useCreateGroup = () => {
       group_id: data.id,
     };
 
-    let { error: membersError } = await supabase
-      .from('members')
-      .insert(memberUpdates, {
-        returning: 'minimal',
-      });
+    const { error: membersError } = await supabase.from("members").insert(memberUpdates, {
+      returning: "minimal",
+    });
 
     if (membersError) {
       showErrorToast({
-        title: 'Create Group Error',
+        title: "Create Group Error",
         description: membersError.message,
       });
 
@@ -64,27 +57,27 @@ const useCreateGroup = () => {
   };
 
   return useMutation(
-    'createGroup',
+    "createGroup",
     ({ groupname, group_avatar_url }: CreateGroupType) =>
       createGroup({ groupname, group_avatar_url }),
     {
       onSuccess: async (newGroup: GroupType) => {
         // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-        await queryClient.cancelQueries('user');
+        await queryClient.cancelQueries("user");
 
         // Optimistically update to the new value
-        queryClient.setQueryData('user', (oldData: any) => {
+        queryClient.setQueryData("user", (oldData: any) => {
           return [...oldData.groups, newGroup];
         });
 
         // Push user to home page
-        router.push('/');
+        router.push("/");
       },
       // Refetch after error or success:
       onSettled: () => {
-        queryClient.invalidateQueries('user');
+        queryClient.invalidateQueries("user");
       },
-    },
+    }
   );
 };
 export default useCreateGroup;

@@ -1,8 +1,10 @@
-import { Button, Flex } from '@chakra-ui/react';
-import { useHistory } from 'react-router';
-import { useAuth } from '../../context';
-import { useLeaveGroup } from '../../hooks/mutations';
-import { useFetchGroupData } from '../../hooks/queries';
+import { Button, Flex } from "@chakra-ui/react";
+
+import { useHistory } from "react-router";
+
+import { useAuth } from "../../context";
+import { useLeaveGroup } from "../../hooks/mutations";
+import { useFetchGroupData } from "../../hooks/queries";
 
 interface Props {
   group_id: string;
@@ -15,16 +17,11 @@ const LeaveGroupButton: React.FC<Props> = ({ group_id }) => {
   const { data } = useFetchGroupData(group_id);
 
   if (isSuccess) {
-    router.push('/');
+    router.push("/");
   }
 
   return (
-    <Flex
-      display={{ sm: 'none', lg: 'flex' }}
-      w="100%"
-      h="40%"
-      justifyContent="center"
-    >
+    <Flex display={{ sm: "none", lg: "flex" }} w="100%" h="40%" justifyContent="center">
       <Flex alignSelf="flex-end">
         {user?.id !== data?.creator_id && (
           <Button

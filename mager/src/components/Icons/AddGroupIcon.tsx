@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const AddGroupIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 148 149" {...props}>
@@ -30,18 +30,8 @@ const AddGroupIcon = (props: IconProps): JSX.Element => (
       d="M42.277 95.936L57.3171 72.474C59.3884 69.9967 62.0909 68.1257 65.1388 67.059C69.7258 65.705 75.6681 67.059 75.6681 67.059C77.2306 67.3063 78.7324 67.845 80.0959 68.647C81.8596 69.7586 83.5104 71.0403 85.0241 72.474L94.0168 86.01L100.361 96.096C100.361 96.096 103.191 104.934 100.332 110.949C97.4732 116.964 88.6032 120.001 88.6032 120.001H55.5129C52.118 119.276 48.9204 117.824 46.1398 115.746C44.4218 114.376 43.318 111.663 42.277 109.773C38.967 103.758 42.277 95.936 42.277 95.936Z"
       fill="#2A2828"
     />
-    <path
-      d="M61.001 96.6089H84.061"
-      stroke="#DDCDBF"
-      strokeWidth="7"
-      strokeLinecap="round"
-    />
-    <path
-      d="M72.53 84.999V108.059"
-      stroke="#DDCDBF"
-      strokeWidth="7"
-      strokeLinecap="round"
-    />
+    <path d="M61.001 96.6089H84.061" stroke="#DDCDBF" strokeWidth="7" strokeLinecap="round" />
+    <path d="M72.53 84.999V108.059" stroke="#DDCDBF" strokeWidth="7" strokeLinecap="round" />
     <defs>
       <linearGradient
         id="paint0_linear"

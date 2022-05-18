@@ -1,2 +1,2 @@
-export { default as DefaultLayoutRoute } from './DefaultLayoutRoute';
-export { default as DefaultPrivateLayoutRoute } from './DefaultPrivateLayoutRoute';
+export { default as DefaultLayoutRoute } from "./DefaultLayoutRoute";
+export { default as DefaultPrivateLayoutRoute } from "./DefaultPrivateLayoutRoute";

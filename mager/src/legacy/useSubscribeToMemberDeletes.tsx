@@ -1,4 +1,4 @@
-import { supabase } from '../utils';
+import { supabase } from "../utils";
 
 export const useSubscribeToMemberDeletes = ({
   group_id,
@@ -11,7 +11,7 @@ export const useSubscribeToMemberDeletes = ({
     subscribeToMemberDeletes: () =>
       supabase
         .from(`members:group_id=eq.${group_id}`)
-        .on('DELETE', () => {
+        .on("DELETE", () => {
           fetchUpdatedMembers();
         })
         .subscribe(),

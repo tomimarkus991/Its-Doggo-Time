@@ -1,5 +1,6 @@
-import { Grid, HStack, VStack } from '@chakra-ui/react';
-import React from 'react';
+import { Grid, HStack, VStack } from "@chakra-ui/react";
+
+import React from "react";
 
 interface Props {
   leftSide: any;
@@ -11,11 +12,11 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
   return (
     <Grid
       templateRows={{
-        base: '1fr 0.1fr',
-        sm: '0.4fr 1fr 0.2fr',
-        lg: '1fr',
+        base: "1fr 0.1fr",
+        sm: "0.4fr 1fr 0.2fr",
+        lg: "1fr",
       }}
-      templateColumns={{ base: '1fr 1fr', lg: '1fr 2fr 1fr' }}
+      templateColumns={{ base: "1fr 1fr", lg: "1fr 2fr 1fr" }}
       templateAreas={{
         base: '"middle middle" "rightSide rightSide" ',
         sm: '"leftSide leftSide" "middle middle" "rightSide rightSide" ',
@@ -30,10 +31,10 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
         gridArea="leftSide"
         h="100%"
         alignItems={{
-          sm: 'flex-start',
-          lg: 'flex-end',
+          sm: "flex-start",
+          lg: "flex-end",
         }}
-        display={{ base: 'none', sm: 'flex' }}
+        display={{ base: "none", sm: "flex" }}
       >
         {/* <LeftsidePawsIcon /> */}
         {leftSide}
@@ -41,10 +42,10 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
 
       <VStack id="middle" gridArea="middle" h="100%">
         <Grid
-          h={{ base: '100%', sm: '90%' }}
+          h={{ base: "100%", sm: "90%" }}
           templateRows={{
-            base: '0.4fr 0.1fr 1fr',
-            sm: '0.2fr 1fr',
+            base: "0.4fr 0.1fr 1fr",
+            sm: "0.2fr 1fr",
           }}
         >
           {middle}
@@ -54,11 +55,11 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
       <HStack
         id="rightSide"
         gridArea="rightSide"
-        pb={{ base: '4', lg: '0' }}
-        h={{ base: '100%', lg: 'fit-content' }}
+        pb={{ base: "4", lg: "0" }}
+        h={{ base: "100%", lg: "fit-content" }}
         alignItems="flex-end"
         spacing="6"
-        justifyContent={{ base: 'space-evenly', lg: 'normal' }}
+        justifyContent={{ base: "space-evenly", lg: "normal" }}
         // position={{ base: 'fixed', lg: 'unset' }}
         // bgColor="white"
         // bottom={{ base: 0, lg: 'unset' }}

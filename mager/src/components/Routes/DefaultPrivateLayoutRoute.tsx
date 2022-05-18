@@ -1,13 +1,12 @@
-import { Center } from '@chakra-ui/react';
-import { Redirect, Route } from 'react-router-dom';
-import { useUser } from '../../hooks/queries';
-import DefaultLayout from '../Layouts/DefaultLayout';
-import { DefaultSpinner } from '../Spinners';
+import { Center } from "@chakra-ui/react";
 
-const DefaultPrivateLayoutRoute = ({
-  component: Component,
-  ...rest
-}: any) => {
+import { Redirect, Route } from "react-router-dom";
+
+import { useUser } from "../../hooks/queries";
+import DefaultLayout from "../Layouts/DefaultLayout";
+import { DefaultSpinner } from "../Spinners";
+
+const DefaultPrivateLayoutRoute = ({ component: Component, ...rest }: any) => {
   const { isLoading, isError } = useUser();
 
   // when useUser is authenticating

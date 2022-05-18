@@ -1,4 +1,4 @@
-import { FormLabel } from '@chakra-ui/react';
+import { FormLabel } from "@chakra-ui/react";
 
 interface Props {
   htmlFor: string;
@@ -9,7 +9,7 @@ const LinkLabel: React.FC<Props> = ({ htmlFor, label }) => {
   return (
     <FormLabel
       htmlFor={htmlFor}
-      display={{ base: 'none', lg: 'block' }}
+      display={{ base: "none", lg: "block" }}
       textAlign="center"
       fontSize="md"
       cursor="pointer"

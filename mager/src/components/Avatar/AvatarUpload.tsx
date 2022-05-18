@@ -1,38 +1,26 @@
-import { Box, Flex, FormLabel } from '@chakra-ui/react';
-import React from 'react';
-import {
-  AvatarGroup,
-  AvatarGroupLoading,
-  AvatarProfile,
-  AvatarProfileLoading,
-} from '.';
-import { useUploadAvatar } from '../../hooks/mutations';
-import { StringOrUndefined } from '../../types';
-import { AddAvatarIcon } from '../Icons';
+import { Box, Flex, FormLabel } from "@chakra-ui/react";
+
+import React from "react";
+
+import { useUploadAvatar } from "../../hooks/mutations";
+import { StringOrUndefined } from "../../types";
+import { AddAvatarIcon } from "../Icons";
+
+import { AvatarGroup, AvatarGroupLoading, AvatarProfile, AvatarProfileLoading } from ".";
 
 interface Props {
   onUpload: (url: string) => void;
   avatar_url: StringOrUndefined;
-  avatar: 'User' | 'Group';
+  avatar: "User" | "Group";
 }
 
-const AvatarUpload: React.FC<Props> = ({
-  onUpload,
-  avatar_url,
-  avatar,
-}) => {
+const AvatarUpload: React.FC<Props> = ({ onUpload, avatar_url, avatar }) => {
   const { mutate, isLoading } = useUploadAvatar(onUpload);
 
   return (
     <Flex id="editable avatar box" cursor="pointer">
       {isLoading ? (
-        <>
-          {avatar === 'User' ? (
-            <AvatarProfileLoading />
-          ) : (
-            <AvatarGroupLoading />
-          )}
-        </>
+        <>{avatar === "User" ? <AvatarProfileLoading /> : <AvatarGroupLoading />}</>
       ) : (
         <>
           <Box
@@ -44,7 +32,7 @@ const AvatarUpload: React.FC<Props> = ({
             m={0}
             _hover={{ opacity: 0.6 }}
           >
-            {avatar === 'User' ? (
+            {avatar === "User" ? (
               <AvatarProfile src={avatar_url} />
             ) : (
               <AvatarGroup src={avatar_url} />
@@ -53,9 +41,9 @@ const AvatarUpload: React.FC<Props> = ({
           </Box>
           <input
             style={{
-              visibility: 'hidden',
-              position: 'absolute',
-              width: '0px',
+              visibility: "hidden",
+              position: "absolute",
+              width: "0px",
             }}
             type="file"
             id="uploadInput"

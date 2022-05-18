@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const InvitesIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 120 70" {...props}>

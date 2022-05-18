@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { useEffect } from 'react';
-import { useGroup } from '../context';
-import { MemberType } from '../types';
-import { supabase } from '../utils';
+import { useEffect } from "react";
+
+import { useGroup } from "../context";
+import { MemberType } from "../types";
+import { supabase } from "../utils";
 
 export const useSubscribeToMemberInserts = (group_id: string) => {
   const { setMembers } = useGroup();
@@ -13,17 +14,17 @@ export const useSubscribeToMemberInserts = (group_id: string) => {
       supabase
         // only show it to members with this group_id
         .from(`members:group_id=eq.${group_id}`)
-        .on('INSERT', async payload => {
-          let { data } = await supabase
-            .from('profiles')
+        .on("INSERT", async payload => {
+          const { data } = await supabase
+            .from("profiles")
             .select(
               `
           id,
           username,
           avatar_url
-      `,
+      `
             )
-            .eq('id', payload.new.profile_id)
+            .eq("id", payload.new.profile_id)
             .single();
 
           const { id, username, avatar_url } = data as MemberType;
@@ -43,5 +44,6 @@ export const useSubscribeToMemberInserts = (group_id: string) => {
     return () => {
       supabase.removeSubscription(subscribeToMemberInserts());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

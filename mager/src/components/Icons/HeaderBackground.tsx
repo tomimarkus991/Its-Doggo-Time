@@ -1,21 +1,11 @@
-import { Icon, IconProps } from '@chakra-ui/react';
-import useColors from '../../hooks/useColors';
+import { Icon, IconProps } from "@chakra-ui/react";
+
+import useColors from "../../hooks/useColors";
 
 const HeaderBackground = (props: IconProps): JSX.Element => {
-  const {
-    headerBackground3Color,
-    headerBackground2Color,
-    headerBackground1Color,
-  } = useColors();
+  const { headerBackground3Color, headerBackground2Color, headerBackground1Color } = useColors();
   return (
-    <Icon
-      width="1920"
-      height="351"
-      viewBox="0 0 1920 351"
-      position="fixed"
-      top="-14%"
-      {...props}
-    >
+    <Icon width="1920" height="351" viewBox="0 0 1920 351" position="fixed" top="-14%" {...props}>
       <g clipPath="url(#clip6)">
         <path
           d="M954.123 -195.835C1712.62 -195.835 2327.51 -73.274 2327.51 77.913C2327.51 229.1 1712.62 351.665 954.123 351.665C195.622 351.665 -419.265 229.1 -419.265 77.913C-419.265 -73.274 195.622 -195.835 954.123 -195.835Z"

@@ -1,17 +1,9 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const DoggoIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 558.582 360.706" {...props}>
-    <g
-      id="Group_304"
-      data-name="Group 304"
-      transform="translate(-979.076 -569.393)"
-    >
-      <g
-        id="Layer_1"
-        data-name="Layer 1"
-        transform="translate(981.59 571.911)"
-      >
+    <g id="Group_304" data-name="Group 304" transform="translate(-979.076 -569.393)">
+      <g id="Layer_1" data-name="Layer 1" transform="translate(981.59 571.911)">
         <g id="Group_295" data-name="Group 295" transform="translate(0 0)">
           <g id="Group_293" data-name="Group 293">
             <path
@@ -329,11 +321,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           </g>
         </g>
       </g>
-      <g
-        id="Layer_3"
-        data-name="Layer 3"
-        transform="translate(1025.934 708.338)"
-      >
+      <g id="Layer_3" data-name="Layer 3" transform="translate(1025.934 708.338)">
         <g id="Group_297" data-name="Group 297" transform="translate(0 0)">
           <g id="Group_296" data-name="Group 296" transform="translate(0)">
             <path
@@ -393,11 +381,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           strokeWidth="1"
         />
       </g>
-      <g
-        id="vasak_kõrv"
-        data-name="vasak kõrv"
-        transform="translate(1124.438 572.061)"
-      >
+      <g id="vasak_kõrv" data-name="vasak kõrv" transform="translate(1124.438 572.061)">
         <path
           id="Path_222"
           data-name="Path 222"
@@ -406,11 +390,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           fill="none"
         />
       </g>
-      <g
-        id="parem_kürv_1"
-        data-name="parem kürv 1"
-        transform="translate(981.594 655.375)"
-      >
+      <g id="parem_kürv_1" data-name="parem kürv 1" transform="translate(981.594 655.375)">
         <path
           id="Path_223"
           data-name="Path 223"
@@ -430,11 +410,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           strokeWidth="1"
         />
       </g>
-      <g
-        id="ees_parem_jalg"
-        data-name="ees parem jalg"
-        transform="translate(1017.504 795.81)"
-      >
+      <g id="ees_parem_jalg" data-name="ees parem jalg" transform="translate(1017.504 795.81)">
         <path
           id="Path_224"
           data-name="Path 224"
@@ -450,11 +426,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           fill="none"
         />
       </g>
-      <g
-        id="ees_vasak_jalg"
-        data-name="ees vasak jalg"
-        transform="translate(1038.988 871.24)"
-      >
+      <g id="ees_vasak_jalg" data-name="ees vasak jalg" transform="translate(1038.988 871.24)">
         <path
           id="Path_226"
           data-name="Path 226"
@@ -483,11 +455,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           strokeWidth="1"
         />
       </g>
-      <g
-        id="taga_pasrem_jalg"
-        data-name="taga pasrem jalg"
-        transform="translate(1387.709 713.168)"
-      >
+      <g id="taga_pasrem_jalg" data-name="taga pasrem jalg" transform="translate(1387.709 713.168)">
         <path
           id="Path_229"
           data-name="Path 229"
@@ -503,11 +471,7 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
           fill="none"
         />
       </g>
-      <g
-        id="taga_vasak_jalg"
-        data-name="taga vasak jalg"
-        transform="translate(1446.104 703.812)"
-      >
+      <g id="taga_vasak_jalg" data-name="taga vasak jalg" transform="translate(1446.104 703.812)">
         <path
           id="Path_231"
           data-name="Path 231"

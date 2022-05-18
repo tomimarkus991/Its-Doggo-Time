@@ -1,20 +1,11 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import {
-  EditExcrementLogContainer,
-  EditFoodLogContainer,
-} from '../../components/Containers';
-import {
-  HeaderAvatar,
-  MainLayout,
-  PageHeaderBack,
-} from '../../components/Layouts';
-import {
-  GroupNameAndAvatar,
-  GroupNameAndAvatarMiddle,
-} from '../../components/Layouts/Group';
-import { ProfileAndMyGroups } from '../../components/Links';
-import { useLogsView, ViewType } from '../../context';
+import React from "react";
+import { useParams } from "react-router-dom";
+
+import { EditExcrementLogContainer, EditFoodLogContainer } from "../../components/Containers";
+import { HeaderAvatar, MainLayout, PageHeaderBack } from "../../components/Layouts";
+import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "../../components/Layouts/Group";
+import { ProfileAndMyGroups } from "../../components/Links";
+import { useLogsView, ViewType } from "../../context";
 
 interface RouteParams {
   group_id: string;
@@ -36,11 +27,7 @@ const EditLog: React.FC = () => {
           <GroupNameAndAvatarMiddle group_id={group_id} />
           <PageHeaderBack>Edit Log</PageHeaderBack>
 
-          {view === ViewType.Excrement ? (
-            <EditExcrementLogContainer />
-          ) : (
-            <EditFoodLogContainer />
-          )}
+          {view === ViewType.Excrement ? <EditExcrementLogContainer /> : <EditFoodLogContainer />}
         </>
       }
       rightSide={<ProfileAndMyGroups />}

@@ -1,20 +1,20 @@
-import { Center, VStack } from '@chakra-ui/react';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSignOut } from '../../hooks/mutations';
-import GradientButton from '../Buttons/GradientButton';
-import { ColorMode } from '../ColorMode';
-import { GradientButtonText } from '../Text';
+import { Center, VStack } from "@chakra-ui/react";
 
-interface Props {}
+import React from "react";
+import { useHistory } from "react-router-dom";
 
-const MyProfileContainer: React.FC<Props> = () => {
+import { useSignOut } from "../../hooks/mutations";
+import GradientButton from "../Buttons/GradientButton";
+import { ColorMode } from "../ColorMode";
+import { GradientButtonText } from "../Text";
+
+const MyProfileContainer = () => {
   const { isSuccess, mutate, isLoading } = useSignOut();
 
   const router = useHistory();
 
   if (isSuccess) {
-    router.push('/');
+    router.push("/");
   }
 
   return (
@@ -29,11 +29,7 @@ const MyProfileContainer: React.FC<Props> = () => {
       >
         <ColorMode />
 
-        <GradientButton
-          onClick={() => mutate()}
-          isLoading={isLoading}
-          loadingText="Signing out"
-        >
+        <GradientButton onClick={() => mutate()} isLoading={isLoading} loadingText="Signing out">
           <GradientButtonText fontSize={20}>Sign Out</GradientButtonText>
         </GradientButton>
       </VStack>

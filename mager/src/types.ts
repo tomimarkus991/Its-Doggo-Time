@@ -1,19 +1,16 @@
 export type AvatarSizeType =
-  | (string & {})
-  | '2xs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | '2xl'
-  | 'full'
+  | (string & Record<string, unknown>)
+  | "2xs"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "full"
   | undefined;
 
-export type AvatarIconType = React.ReactElement<
-  any,
-  string | React.JSXElementConstructor<any>
->;
+export type AvatarIconType = React.ReactElement<any, string | React.JSXElementConstructor<any>>;
 
 export type StringOrUndefined = string | undefined;
 export type BooleanOrUndefined = boolean | undefined;

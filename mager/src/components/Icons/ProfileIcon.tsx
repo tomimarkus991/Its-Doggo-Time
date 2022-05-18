@@ -1,12 +1,8 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const ProfileIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 92 95" {...props}>
-    <g
-      id="Group_390"
-      data-name="Group 390"
-      transform="translate(-1702 -812)"
-    >
+    <g id="Group_390" data-name="Group 390" transform="translate(-1702 -812)">
       <path
         id="Subtraction_31"
         data-name="Subtraction 31"

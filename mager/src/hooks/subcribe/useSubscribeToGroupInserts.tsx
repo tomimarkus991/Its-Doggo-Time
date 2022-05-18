@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { useAuth } from '../../context';
-import { GroupType } from '../../types';
-import { supabase } from '../../utils';
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
+
+import { useAuth } from "../../context";
+import { GroupType } from "../../types";
+import { supabase } from "../../utils";
 
 export const useSubscribeToGroupInserts = () => {
   const { user } = useAuth();
@@ -13,18 +14,18 @@ export const useSubscribeToGroupInserts = () => {
       supabase
         .from(`members:profile_id=eq.${user?.id}`)
         // you get the group_id from payload
-        .on('INSERT', async payload => {
+        .on("INSERT", async payload => {
           // get group_name and avatar_url
-          let { data: group } = await supabase
-            .from('groups')
+          const { data: group } = await supabase
+            .from("groups")
             .select(
               `
               id,
               group_name,
               avatar_url
-          `,
+          `
             )
-            .eq('id', payload.new.group_id)
+            .eq("id", payload.new.group_id)
             .single();
           const { id, group_name, avatar_url } = group as GroupType;
 
@@ -37,7 +38,7 @@ export const useSubscribeToGroupInserts = () => {
 
           // const previousUserState = queryClient.getQueryData('user');
           // update frontend with new data
-          queryClient.setQueryData('userGroups', (oldData: any) => {
+          queryClient.setQueryData("userGroups", (oldData: any) => {
             return [...oldData, newGroup];
           });
 
@@ -48,7 +49,7 @@ export const useSubscribeToGroupInserts = () => {
     subscribeToGroupInserts();
 
     return () => {
-      console.log('remove');
+      console.log("remove");
 
       supabase.removeSubscription(subscribeToGroupInserts());
     };

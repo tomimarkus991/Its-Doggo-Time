@@ -1,4 +1,4 @@
-import { Center } from '@chakra-ui/react';
+import { Center } from "@chakra-ui/react";
 
 const LogsSummary: React.FC = () => {
   return <Center>Logs Summary</Center>;

@@ -1,7 +1,8 @@
-import { Provider } from '@supabase/gotrue-js';
-import { useMutation } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { Provider } from "@supabase/gotrue-js";
+import { useMutation } from "react-query";
+
+import { useToast } from "..";
+import { supabase } from "../../utils";
 
 const useOAuth = (provider: Provider) => {
   const { showErrorToast } = useToast();
@@ -13,7 +14,7 @@ const useOAuth = (provider: Provider) => {
 
     if (error) {
       showErrorToast({
-        title: 'OAuth Error',
+        title: "OAuth Error",
         description: error.message,
       });
       throw new Error(error.message);
@@ -21,6 +22,6 @@ const useOAuth = (provider: Provider) => {
     return data;
   };
 
-  return useMutation('oAuth', () => OAuth());
+  return useMutation("oAuth", () => OAuth());
 };
 export default useOAuth;

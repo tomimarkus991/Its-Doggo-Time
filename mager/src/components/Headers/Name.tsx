@@ -1,4 +1,4 @@
-import { Text, TextProps } from '@chakra-ui/react';
+import { Text, TextProps } from "@chakra-ui/react";
 
 interface Props {
   name: string | undefined;
@@ -10,7 +10,7 @@ const Name: React.FC<Props> = ({ name, textProps }) => {
     <Text
       textAlign="center"
       fontSize={{ base: 50, sm: 40, sm2: 35, lg: 52 }}
-      maxW={{ base: '16rem', sm: '20rem', md: '16rem' }}
+      maxW={{ base: "16rem", sm: "20rem", md: "16rem" }}
       {...textProps}
     >
       {name}

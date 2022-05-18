@@ -1,6 +1,7 @@
-import { TextField } from '@material-ui/core';
-import { TimePicker as MTimePicker } from '@material-ui/pickers';
-import { useColors } from '../../hooks';
+import { TextField } from "@material-ui/core";
+import { TimePicker as MTimePicker } from "@material-ui/pickers";
+
+import { useColors } from "../../hooks";
 
 interface Props {
   time: Date | null | undefined;
@@ -25,12 +26,12 @@ const DefaultTimePicker: React.FC<Props> = ({ time, onChange }) => {
             id="time"
             inputProps={{
               style: {
-                textAlign: 'center',
+                textAlign: "center",
                 color: defaultReversedColor,
                 borderColor: defaultReversedColor,
-                fontSize: '2rem',
-                cursor: 'pointer',
-                caretColor: 'transparent',
+                fontSize: "2rem",
+                cursor: "pointer",
+                caretColor: "transparent",
               },
             }}
             InputProps={{ disableUnderline: true }}

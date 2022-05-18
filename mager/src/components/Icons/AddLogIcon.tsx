@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const AddLogIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 148 148" {...props}>
@@ -35,18 +35,8 @@ const AddLogIcon = (props: IconProps): JSX.Element => (
         d="M111.362 119.432C111.399 116.27 111.239 113.109 110.883 109.967C110.637 107.086 110.03 104.247 109.075 101.518C108.546 99.495 107.658 97.5831 106.455 95.873C105.893 94.7901 105.084 93.8549 104.094 93.143C105.161 93.7752 106.141 94.5444 107.009 95.431C108.393 96.5794 109.576 97.9513 110.509 99.49C111.713 101.278 112.656 103.229 113.309 105.283C114.199 107.156 114.773 109.163 115.009 111.223C115.398 113.944 115.62 116.686 115.673 119.434L111.362 119.432Z"
         fill="#1A1818"
       />
-      <path
-        d="M24 74.08H47.06"
-        stroke="#2A2828"
-        strokeWidth="7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M35.5291 62.47V85.53"
-        stroke="#2A2828"
-        strokeWidth="7"
-        strokeLinecap="round"
-      />
+      <path d="M24 74.08H47.06" stroke="#2A2828" strokeWidth="7" strokeLinecap="round" />
+      <path d="M35.5291 62.47V85.53" stroke="#2A2828" strokeWidth="7" strokeLinecap="round" />
     </g>
     <defs>
       <linearGradient

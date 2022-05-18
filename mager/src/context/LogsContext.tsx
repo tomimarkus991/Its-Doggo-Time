@@ -1,9 +1,6 @@
-import { createContext, useState, useContext } from 'react';
-import {
-  Dispatch,
-  SetStateAction,
-} from 'styled-jsx/node_modules/@types/react';
-import { ExcrementLogsdataType, FoodLogsdataType } from '../types';
+import { createContext, useState, useContext, SetStateAction, Dispatch } from "react";
+
+import { ExcrementLogsdataType, FoodLogsdataType } from "../types";
 
 type InitialContextType = {
   excrementLogs: ExcrementLogsdataType[];
@@ -32,9 +29,7 @@ const LogsContext = createContext(initialContext);
 export const useLogs = () => useContext(LogsContext);
 
 const LogsDetailsProvider = ({ children }: any) => {
-  const [excrementLogs, setExcrementLogs] = useState<
-    ExcrementLogsdataType[]
-  >([]);
+  const [excrementLogs, setExcrementLogs] = useState<ExcrementLogsdataType[]>([]);
   const [foodLogs, setFoodLogs] = useState<FoodLogsdataType[]>([]);
   const [logCheckboxData, setLogCheckboxData] = useState<any>([]);
   const [time, setTime] = useState<Date | null | undefined>(new Date());
@@ -50,9 +45,7 @@ const LogsDetailsProvider = ({ children }: any) => {
     setTime,
   };
 
-  return (
-    <LogsContext.Provider value={value}>{children}</LogsContext.Provider>
-  );
+  return <LogsContext.Provider value={value}>{children}</LogsContext.Provider>;
 };
 
 export default LogsDetailsProvider;

@@ -1,35 +1,36 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 const colors = {
   beez: {
-    100: '#FBF0E5',
-    500: '#E5E0D5',
-    700: '#DDCDBF',
-    900: '#AD9480',
+    100: "#FBF0E5",
+    500: "#E5E0D5",
+    700: "#DDCDBF",
+    900: "#AD9480",
   },
   gray: {
-    800: '#2A2828',
+    800: "#2A2828",
   },
   green: {
-    100: '#48BB78', // siis kui on dark theme
-    500: '#48BB78', // siis kui on light theme
+    100: "#48BB78", // siis kui on dark theme
+    500: "#48BB78", // siis kui on light theme
   },
 };
 
 const breakpoints = createBreakpoints({
-  base2: '25em',
-  sm: '30em',
-  sm2: '39em',
-  md: '48em',
-  lg: '62em',
-  '2lg': '74em',
-  xl: '80em',
-  '2xl': '90em',
+  base2: "25em",
+  sm: "30em",
+  sm2: "39em",
+  md: "48em",
+  lg: "62em",
+  "2lg": "74em",
+  xl: "80em",
+  "2xl": "90em",
 });
 
 const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: "light",
   useSystemColorMode: false,
 };
 
@@ -38,16 +39,16 @@ export const theme = extendTheme({
   colors,
   breakpoints,
   fonts: {
-    heading: 'Viga',
-    body: 'Viga',
+    heading: "Viga",
+    body: "Viga",
   },
   layerStyles: {
-    'shadow-and-bg': {
-      boxShadow: '1px 1px 8px 2px #DDCDBF',
-      bg: '#ffffff',
-      '.chakra-ui-dark &': {
-        bg: '#4B4949',
-        boxShadow: '1px 1px 8px 2px #4B4949',
+    "shadow-and-bg": {
+      boxShadow: "1px 1px 8px 2px #DDCDBF",
+      bg: "#ffffff",
+      ".chakra-ui-dark &": {
+        bg: "#4B4949",
+        boxShadow: "1px 1px 8px 2px #4B4949",
       },
     },
   },
@@ -57,16 +58,16 @@ export const theme = extendTheme({
         // borderRadius
         // size
         field: {
-          bg: '#ffffff',
-          color: 'gray.800',
-          _placeholder: { color: '#2A2828' },
-          borderColor: 'beez.700',
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          '.chakra-ui-dark &': {
-            bg: 'gray.800',
-            color: '#DDCDBF',
-            _placeholder: { color: '#DDCDBF' },
+          bg: "#ffffff",
+          color: "gray.800",
+          _placeholder: { color: "#2A2828" },
+          borderColor: "beez.700",
+          borderWidth: "2px",
+          borderStyle: "solid",
+          ".chakra-ui-dark &": {
+            bg: "gray.800",
+            color: "#DDCDBF",
+            _placeholder: { color: "#DDCDBF" },
           },
         },
       },
@@ -75,14 +76,14 @@ export const theme = extendTheme({
       sizes: {
         xl: {
           container: {
-            width: '3em',
-            height: '3em',
+            width: "3em",
+            height: "3em",
           },
         },
-        '3xl': {
+        "3xl": {
           container: {
-            width: '9em',
-            height: '9em',
+            width: "9em",
+            height: "9em",
           },
         },
       },
@@ -90,12 +91,12 @@ export const theme = extendTheme({
     Button: {
       baseStyle: {
         _focus: {
-          boxShadow: 'none',
+          boxShadow: "none",
         },
         _active: {
-          bg: '#FBF0E5',
-          bgColor: '#FBF0E5',
-          borderColor: '#FBF0E5',
+          bg: "#FBF0E5",
+          bgColor: "#FBF0E5",
+          borderColor: "#FBF0E5",
         },
       },
     },

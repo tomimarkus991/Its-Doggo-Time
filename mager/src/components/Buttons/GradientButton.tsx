@@ -1,5 +1,6 @@
-import React from 'react';
-import { Button, ButtonProps } from '@chakra-ui/react';
+import { Button, ButtonProps } from "@chakra-ui/react";
+
+import React from "react";
 
 const GradientButton = (props: ButtonProps) => {
   return (
@@ -8,7 +9,7 @@ const GradientButton = (props: ButtonProps) => {
       bgGradient="linear(to-r, beez.500, beez.700)"
       borderRadius={100}
       _hover={{
-        bgGradient: 'linear(to-r, beez.500, beez.700)',
+        bgGradient: "linear(to-r, beez.500, beez.700)",
       }}
       // _focus={{
       //   // bgGradient: 'linear(to-r, beez.500, beez.700)',

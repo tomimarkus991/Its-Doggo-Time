@@ -1,7 +1,8 @@
-import { useMutation } from 'react-query';
-import { useToast } from '..';
-import { StringOrUndefined } from '../../types';
-import { supabase } from '../../utils';
+import { useMutation } from "react-query";
+
+import { useToast } from "..";
+import { StringOrUndefined } from "../../types";
+import { supabase } from "../../utils";
 
 interface User {
   username: StringOrUndefined;
@@ -14,9 +15,9 @@ const useCreateUser = (user: User) => {
   const createUser = async (user: User) => {
     // Check if username exists
     const { data: userWithUsername } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('username', user.username)
+      .from("profiles")
+      .select("*")
+      .eq("username", user.username)
       .single();
 
     // when is, throw error
@@ -24,22 +25,21 @@ const useCreateUser = (user: User) => {
       // error:
       // User with username exists
       showErrorToast({
-        title: 'Create User Error',
-        description: 'User with username exists',
+        title: "Create User Error",
+        description: "User with username exists",
       });
-      throw new Error('User with username exists');
+      throw new Error("User with username exists");
     }
 
     // sign user up
-    const { user: signUpData, error: signUpError } =
-      await supabase.auth.signUp({
-        email: user.email,
-        password: user.password,
-      });
+    const { user: signUpData, error: signUpError } = await supabase.auth.signUp({
+      email: user.email,
+      password: user.password,
+    });
     // when error, throw it
     if (signUpError) {
       showErrorToast({
-        title: 'Create User Error',
+        title: "Create User Error",
         description: signUpError.message,
       });
 
@@ -54,16 +54,16 @@ const useCreateUser = (user: User) => {
     return signUpData;
   };
 
-  return useMutation('createUser', () => createUser(user), {
+  return useMutation("createUser", () => createUser(user), {
     // errors:
     // new row for relation "profiles" violates check constraint "username_length"
     onSuccess: async _data => {
-      let { data: insertData, error: insertError } = await supabase
-        .from('profiles')
+      const { data: insertData, error: insertError } = await supabase
+        .from("profiles")
         .insert({ id: _data?.id, username: user.username });
       if (insertError) {
         showErrorToast({
-          title: 'Create User Error',
+          title: "Create User Error",
           description: insertError.message,
         });
         throw insertError;

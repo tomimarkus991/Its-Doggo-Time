@@ -1,8 +1,11 @@
-import { Center } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { CardDateText } from '.';
-import { ExcrementLogsdataType } from '../../types';
-import { PeeAndPoopIcon, PeeIcon, PoopIcon } from '../Icons';
+import { Center } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
+
+import { ExcrementLogsdataType } from "../../types";
+import { PeeAndPoopIcon, PeeIcon, PoopIcon } from "../Icons";
+
+import { CardDateText } from ".";
 
 interface Props {
   log: ExcrementLogsdataType;
@@ -18,33 +21,33 @@ const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
         {pee && poop === false && (
           <PeeIcon
             fontSize={{
-              base: '6rem',
-              sm2: '6.5rem',
-              md: '7.5rem',
-              lg: '7rem',
-              xl: '7.5rem',
+              base: "6rem",
+              sm2: "6.5rem",
+              md: "7.5rem",
+              lg: "7rem",
+              xl: "7.5rem",
             }}
           />
         )}
         {poop && pee === false && (
           <PoopIcon
             fontSize={{
-              base: '6rem',
-              sm2: '6.5rem',
-              md: '7.5rem',
-              lg: '7rem',
-              xl: '7.5rem',
+              base: "6rem",
+              sm2: "6.5rem",
+              md: "7.5rem",
+              lg: "7rem",
+              xl: "7.5rem",
             }}
           />
         )}
         {poop && pee && (
           <PeeAndPoopIcon
             fontSize={{
-              base: '6rem',
-              sm2: '6.5rem',
-              md: '7.5rem',
-              lg: '7rem',
-              xl: '7.5rem',
+              base: "6rem",
+              sm2: "6.5rem",
+              md: "7.5rem",
+              lg: "7rem",
+              xl: "7.5rem",
             }}
           />
         )}

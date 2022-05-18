@@ -1,8 +1,10 @@
-import { VStack } from '@chakra-ui/react';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { MyGroupsIcon } from '../Icons';
-import { LinkLabel } from '../Text';
+import { VStack } from "@chakra-ui/react";
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { MyGroupsIcon } from "../Icons";
+import { LinkLabel } from "../Text";
 
 const MyGroupsLink: React.FC = () => {
   return (

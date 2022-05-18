@@ -1,6 +1,8 @@
-import { Icon, IconProps } from '@chakra-ui/react';
-import { useHistory } from 'react-router';
-import useColors from '../../hooks/useColors';
+import { Icon, IconProps } from "@chakra-ui/react";
+
+import { useHistory } from "react-router";
+
+import useColors from "../../hooks/useColors";
 
 const BackIcon = (props: IconProps): JSX.Element => {
   const { backIconColor } = useColors();
@@ -9,7 +11,7 @@ const BackIcon = (props: IconProps): JSX.Element => {
     <Icon
       viewBox="0 0 32 50"
       {...props}
-      fontSize={{ base: '2rem', sm: '2.3rem', md: '2.75rem' }}
+      fontSize={{ base: "2rem", sm: "2.3rem", md: "2.75rem" }}
       cursor="pointer"
       onClick={() => router.goBack()}
     >

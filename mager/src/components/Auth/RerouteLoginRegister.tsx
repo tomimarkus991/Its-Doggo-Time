@@ -1,10 +1,11 @@
-import { HStack, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { HStack, Text } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
-  to: '/register' | '/login';
-  action: 'Sign Up' | 'Sign In';
+  to: "/register" | "/login";
+  action: "Sign Up" | "Sign In";
 }
 
 const RerouteLoginRegister: React.FC<Props> = ({ title, to, action }) => {

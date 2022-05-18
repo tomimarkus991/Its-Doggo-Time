@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { supabase } from '../../utils';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { supabase } from "../../utils";
 
 const useDeleteGroup = (group_id: string) => {
   const { showErrorToast } = useToast();
@@ -13,41 +14,35 @@ const useDeleteGroup = (group_id: string) => {
     // delete all members related to id
     // delete group
     const { data, error } = await supabase
-      .from('invites')
+      .from("invites")
       .delete()
-      .eq('group_id', group_id)
+      .eq("group_id", group_id)
       .then(
         async () =>
           await supabase
-            .from('excrement_logs')
+            .from("excrement_logs")
             .delete()
-            .eq('group_id', group_id)
+            .eq("group_id", group_id)
             .then(
               async () =>
                 await supabase
-                  .from('food_logs')
+                  .from("food_logs")
                   .delete()
-                  .eq('group_id', group_id)
+                  .eq("group_id", group_id)
                   .then(
                     async () =>
                       await supabase
-                        .from('members')
+                        .from("members")
                         .delete()
-                        .eq('group_id', group_id)
-                        .then(
-                          async () =>
-                            await supabase
-                              .from('groups')
-                              .delete()
-                              .eq('id', group_id),
-                        ),
-                  ),
-            ),
+                        .eq("group_id", group_id)
+                        .then(async () => await supabase.from("groups").delete().eq("id", group_id))
+                  )
+            )
       );
 
     if (error) {
       showErrorToast({
-        title: 'Delete Group Error',
+        title: "Delete Group Error",
         description: error.message,
       });
       throw new Error(error.message);
@@ -56,9 +51,9 @@ const useDeleteGroup = (group_id: string) => {
     return data;
   };
 
-  return useMutation('deleteGroup', () => deleteGroup(), {
+  return useMutation("deleteGroup", () => deleteGroup(), {
     onSettled: () => {
-      queryClient.invalidateQueries('user');
+      queryClient.invalidateQueries("user");
     },
   });
 };

@@ -1,28 +1,23 @@
-import {
-  Box,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { OAuthSection, RerouteLoginRegister } from '.';
-import { useLogin } from '../../hooks/mutations';
-import useForm from '../../hooks/useForm';
-import { GradientButton } from '../Buttons';
-import { ColorMode } from '../ColorMode';
-import { GradientButtonText } from '../Text';
+import { Box, Flex, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
+
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+
+import { useLogin } from "../../hooks/mutations";
+import useForm from "../../hooks/useForm";
+import { GradientButton } from "../Buttons";
+import { ColorMode } from "../ColorMode";
+import { GradientButtonText } from "../Text";
+
+import { OAuthSection, RerouteLoginRegister } from ".";
 
 const LoginAuth: React.FC = () => {
   const [show, setShow] = useState(false);
   const { email, password, handleChange } = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const router = useHistory();
@@ -34,7 +29,7 @@ const LoginAuth: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/');
+      router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
@@ -43,12 +38,12 @@ const LoginAuth: React.FC = () => {
     <Box w={300}>
       <VStack spacing="4">
         <Input
-          variant={'removeDefault'}
+          variant={"removeDefault"}
           name="email"
           autoCapitalize="off"
           type="email"
           placeholder="Email"
-          value={email || ''}
+          value={email || ""}
           onChange={handleChange}
           fontSize="2xl"
           size="lg"
@@ -58,10 +53,10 @@ const LoginAuth: React.FC = () => {
         <Box w="100%">
           <InputGroup justifyContent="center" alignItems="center">
             <Input
-              variant={'removeDefault'}
+              variant={"removeDefault"}
               name="password"
-              type={show ? 'text' : 'password'}
-              value={password || ''}
+              type={show ? "text" : "password"}
+              value={password || ""}
               onChange={handleChange}
               autoComplete="off"
               autoCapitalize="off"
@@ -97,22 +92,14 @@ const LoginAuth: React.FC = () => {
             </Link>
           </Flex>
         </Box>
-        <GradientButton
-          onClick={() => mutate()}
-          isLoading={isLoading}
-          loadingText="Logging in"
-        >
+        <GradientButton onClick={() => mutate()} isLoading={isLoading} loadingText="Logging in">
           <GradientButtonText fontSize={25}>Sign in</GradientButtonText>
         </GradientButton>
         <Box>
           <Text fontSize="lg">Or</Text>
         </Box>
         <OAuthSection />
-        <RerouteLoginRegister
-          title="New to Doggo time?"
-          to="/register"
-          action="Sign Up"
-        />
+        <RerouteLoginRegister title="New to Doggo time?" to="/register" action="Sign Up" />
         <ColorMode />
       </VStack>
     </Box>

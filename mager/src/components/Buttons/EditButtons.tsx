@@ -1,9 +1,6 @@
-import {
-  ButtonGroup,
-  ButtonGroupProps,
-  IconButton,
-} from '@chakra-ui/react';
-import { CheckIcon, CrossIcon } from '../Icons';
+import { ButtonGroup, ButtonGroupProps, IconButton } from "@chakra-ui/react";
+
+import { CheckIcon, CrossIcon } from "../Icons";
 
 interface Props {
   onCrossClick: () => void;
@@ -11,11 +8,7 @@ interface Props {
   buttonGroupProps?: ButtonGroupProps;
 }
 
-const EditButtons: React.FC<Props> = ({
-  onCrossClick,
-  onCheckClick,
-  buttonGroupProps,
-}) => {
+const EditButtons: React.FC<Props> = ({ onCrossClick, onCheckClick, buttonGroupProps }) => {
   return (
     <ButtonGroup {...buttonGroupProps}>
       <IconButton

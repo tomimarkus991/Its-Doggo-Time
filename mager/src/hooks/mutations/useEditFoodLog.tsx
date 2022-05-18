@@ -1,22 +1,19 @@
-import { useMutation } from 'react-query';
-import { useHistory } from 'react-router';
-import { useToast } from '..';
-import { useAuth } from '../../context';
-import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils';
+import { useMutation } from "react-query";
+import { useHistory } from "react-router";
+
+import { useToast } from "..";
+import { useAuth } from "../../context";
+import { FoodLogsdataType } from "../../types";
+import { supabase } from "../../utils";
 
 const useEditFoodLog = (group_id: string) => {
   const { user } = useAuth();
   const router = useHistory();
   const { showErrorToast } = useToast();
 
-  const editFoodLog = async (
-    logData: any,
-    time: Date | null | undefined,
-    log_id: string,
-  ) => {
+  const editFoodLog = async (logData: any, time: Date | null | undefined, log_id: string) => {
     let food: boolean;
-    if (logData?.includes('food')) {
+    if (logData?.includes("food")) {
       food = true;
     } else {
       food = false;
@@ -30,15 +27,15 @@ const useEditFoodLog = (group_id: string) => {
     };
 
     const { error } = await supabase
-      .from('food_logs')
+      .from("food_logs")
       .update(values, {
-        returning: 'minimal',
+        returning: "minimal",
       })
-      .eq('id', log_id);
+      .eq("id", log_id);
 
     if (error) {
       showErrorToast({
-        title: 'Edit Food Log Error',
+        title: "Edit Food Log Error",
         description: error.message,
       });
       throw new Error(error.message);
@@ -46,21 +43,14 @@ const useEditFoodLog = (group_id: string) => {
   };
 
   return useMutation(
-    'editFoodLog',
-    ({
-      logData,
-      time,
-      log_id,
-    }: {
-      logData: any;
-      time: Date | null | undefined;
-      log_id: string;
-    }) => editFoodLog(logData, time, log_id),
+    "editFoodLog",
+    ({ logData, time, log_id }: { logData: any; time: Date | null | undefined; log_id: string }) =>
+      editFoodLog(logData, time, log_id),
     {
       onSuccess: () => {
         router.push(`/group/${group_id}`);
       },
-    },
+    }
   );
 };
 export default useEditFoodLog;

@@ -1,7 +1,9 @@
-import { Button, Flex } from '@chakra-ui/react';
-import { useHistory } from 'react-router';
-import { useDeleteGroup } from '../../hooks/mutations';
-import { StringOrUndefined } from '../../types';
+import { Button, Flex } from "@chakra-ui/react";
+
+import { useHistory } from "react-router";
+
+import { useDeleteGroup } from "../../hooks/mutations";
+import { StringOrUndefined } from "../../types";
 
 interface Props {
   user_id: StringOrUndefined;
@@ -10,17 +12,12 @@ interface Props {
   isEditable: boolean;
 }
 
-const DeleteGroupButton: React.FC<Props> = ({
-  user_id,
-  group_id,
-  creator_id,
-  isEditable,
-}) => {
+const DeleteGroupButton: React.FC<Props> = ({ user_id, group_id, creator_id, isEditable }) => {
   const router = useHistory();
   const { mutate, isSuccess } = useDeleteGroup(group_id);
 
   if (isSuccess) {
-    router.push('/');
+    router.push("/");
   }
 
   return (

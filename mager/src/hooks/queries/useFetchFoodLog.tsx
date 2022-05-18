@@ -1,8 +1,9 @@
-import { useQuery } from 'react-query';
-import { useToast } from '..';
-import { useLogs } from '../../context';
-import { FoodLogsdataType } from '../../types';
-import { supabase } from '../../utils';
+import { useQuery } from "react-query";
+
+import { useToast } from "..";
+import { useLogs } from "../../context";
+import { FoodLogsdataType } from "../../types";
+import { supabase } from "../../utils";
 
 const useFetchFoodLog = (log_id: string, group_id: string) => {
   const { showErrorToast } = useToast();
@@ -10,23 +11,23 @@ const useFetchFoodLog = (log_id: string, group_id: string) => {
 
   const fetchFoodLog = async () => {
     setLogData([]);
-    let { data: _data, error } = await supabase
-      .from('food_logs')
+    const { data: _data, error } = await supabase
+      .from("food_logs")
       .select(
         `
       id,
       created_at,
       food
-  `,
+  `
       )
-      .eq('id', log_id)
+      .eq("id", log_id)
       .single();
 
-    let data: FoodLogsdataType = _data;
+    const data: FoodLogsdataType = _data;
 
     if (error) {
       showErrorToast({
-        title: 'Fetch Food Log Error',
+        title: "Fetch Food Log Error",
         description: error.message,
       });
       throw new Error(error.message);
@@ -34,12 +35,12 @@ const useFetchFoodLog = (log_id: string, group_id: string) => {
 
     return data;
   };
-  return useQuery(['food_log', log_id, group_id], () => fetchFoodLog(), {
+  return useQuery(["food_log", log_id, group_id], () => fetchFoodLog(), {
     onSuccess: data => {
       setTime(data?.created_at as Date);
 
       if (data?.food) {
-        setLogData((oldData: any) => [...oldData, 'food']);
+        setLogData((oldData: any) => [...oldData, "food"]);
       }
     },
   });

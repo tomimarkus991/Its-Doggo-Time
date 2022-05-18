@@ -1,19 +1,19 @@
-const withPWA = require('next-pwa');
+const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   pwa: {
-    dest: 'public',
+    dest: "public",
     register: true,
     skipWaiting: true,
   },
   reactStrictMode: true,
-  target: 'serverless',
+  target: "serverless",
   async rewrites() {
     return [
       // Rewrite everything to `pages/index`
       {
-        source: '/:any*',
-        destination: '/',
+        source: "/:any*",
+        destination: "/",
       },
     ];
   },

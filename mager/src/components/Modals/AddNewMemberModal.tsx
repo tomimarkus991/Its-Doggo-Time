@@ -10,14 +10,16 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useColors } from '../../hooks';
-import { useInviteUser } from '../../hooks/mutations';
-import { useFetchGroupData } from '../../hooks/queries';
-import { GradientButton } from '../Buttons';
-import { AddMemberIcon } from '../Icons';
-import { GradientButtonText } from '../Text';
+} from "@chakra-ui/react";
+
+import React, { useEffect, useState } from "react";
+
+import { useColors } from "../../hooks";
+import { useInviteUser } from "../../hooks/mutations";
+import { useFetchGroupData } from "../../hooks/queries";
+import { GradientButton } from "../Buttons";
+import { AddMemberIcon } from "../Icons";
+import { GradientButtonText } from "../Text";
 
 interface Props {
   group_id: string;
@@ -27,7 +29,7 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [isAddMemberDisabled, setIsAddMemberDisabled] = useState(false);
-  const [inviteReceiver, setInviteReceiver] = useState('');
+  const [inviteReceiver, setInviteReceiver] = useState("");
 
   const { defaultColor } = useColors();
 
@@ -51,14 +53,14 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
         aria-label="Add new member"
         h="100%"
         bgColor="transparent"
-        _hover={{ bgColor: 'transparent' }}
+        _hover={{ bgColor: "transparent" }}
         isDisabled={isAddMemberDisabled}
         icon={
           <AddMemberIcon
             fontSize={{
-              base: '5rem',
-              md: '6rem',
-              lg: '7rem',
+              base: "5rem",
+              md: "6rem",
+              lg: "7rem",
             }}
           />
         }
@@ -78,7 +80,7 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
           <ModalCloseButton />
           <ModalBody>
             <Input
-              variant={'removeDefault'}
+              variant={"removeDefault"}
               autoCapitalize="off"
               errorBorderColor="crimson"
               placeholder="Nickname"

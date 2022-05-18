@@ -1,30 +1,24 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import MomentUtils from '@date-io/moment';
-import '@fontsource/viga';
-import { createMuiTheme } from '@material-ui/core';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { ThemeProvider } from '@material-ui/styles';
-import type {} from '@mui/lab/themeAugmentation';
-import 'moment/locale/et';
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import {
-  AuthDetailsProvider,
-  LogsDetailsProvider,
-  LogsViewProvider,
-} from '../context';
-import '../styles/globals.css';
-import { theme } from '../styles/theme';
+import { ChakraProvider } from "@chakra-ui/react";
 
-function SafeHydrate({ children }: any) {
-  return (
-    <div suppressHydrationWarning>
-      {typeof window === 'undefined' ? null : children}
-    </div>
-  );
-}
+import MomentUtils from "@date-io/moment";
+import "@fontsource/viga";
+import { createMuiTheme } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { ThemeProvider } from "@material-ui/styles";
+import type {} from "@mui/lab/themeAugmentation";
+import "moment/locale/et";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+import { AuthDetailsProvider, LogsDetailsProvider, LogsViewProvider } from "../context";
+import "../styles/globals.css";
+import { theme } from "../styles/theme";
+
+const SafeHydrate = ({ children }: any) => {
+  return <div suppressHydrationWarning>{typeof window === "undefined" ? null : children}</div>;
+};
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   // useEffect(() => {
@@ -48,19 +42,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const materialTheme = createMuiTheme({
     palette: {
       primary: {
-        main: '#DDCDBF',
-        contrastText: '#2A2828',
+        main: "#DDCDBF",
+        contrastText: "#2A2828",
       },
     },
     typography: {
-      fontFamily: 'Viga',
+      fontFamily: "Viga",
     },
     // @ts-ignore
     overrides: {
       // @ts-ignore
       MuiPickersToolbar: {
         toolbar: {
-          backgroundColor: '#DDCDBF',
+          backgroundColor: "#DDCDBF",
         },
       },
     },
@@ -97,10 +91,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <Head>
                       <title>It&#39;s Doggo Time</title>
-                      <meta
-                        name="viewport"
-                        content="initial-scale=1, width=device-width"
-                      />
+                      <meta name="viewport" content="initial-scale=1, width=device-width" />
                     </Head>
                     <Component {...pageProps} />
                   </MuiPickersUtilsProvider>

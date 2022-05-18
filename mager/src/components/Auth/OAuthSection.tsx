@@ -1,10 +1,8 @@
-import { HStack } from '@chakra-ui/react';
-import {
-  faGoogle,
-  faFacebook,
-  faGithub,
-} from '@fortawesome/free-brands-svg-icons';
-import { OAuthButton } from '../Buttons';
+import { HStack } from "@chakra-ui/react";
+
+import { faGoogle, faFacebook, faGithub } from "@fortawesome/free-brands-svg-icons";
+
+import { OAuthButton } from "../Buttons";
 
 const OAuthSection: React.FC = () => {
   return (

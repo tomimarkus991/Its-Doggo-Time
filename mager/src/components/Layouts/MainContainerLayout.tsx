@@ -1,6 +1,8 @@
-import { Box, Center, FlexProps } from '@chakra-ui/react';
-import React from 'react';
-import { Skeleton } from '../Skeleton';
+import { Box, Center, FlexProps } from "@chakra-ui/react";
+
+import React from "react";
+
+import { Skeleton } from "../Skeleton";
 
 interface Props {
   isLoading: boolean;
@@ -8,12 +10,7 @@ interface Props {
   containerProps?: FlexProps;
 }
 
-const MainContainerLayout: React.FC<Props> = ({
-  isLoading,
-  children,
-  button,
-  containerProps,
-}) => {
+const MainContainerLayout: React.FC<Props> = ({ isLoading, children, button, containerProps }) => {
   return (
     <Center>
       <Center
@@ -23,16 +20,13 @@ const MainContainerLayout: React.FC<Props> = ({
         position="relative"
         borderRadius={20}
       >
-        <Skeleton
-          isLoading={isLoading}
-          props={{ borderRadius: 20, h: '100%', w: '100%' }}
-        >
+        <Skeleton isLoading={isLoading} props={{ borderRadius: 20, h: "100%", w: "100%" }}>
           <Center h="100%">{children}</Center>
         </Skeleton>
         <Box
           position="absolute"
-          right={{ base: '+50', md: '-10' }}
-          bottom={{ base: '-10', md: '-10' }}
+          right={{ base: "+50", md: "-10" }}
+          bottom={{ base: "-10", md: "-10" }}
         >
           {button}
         </Box>

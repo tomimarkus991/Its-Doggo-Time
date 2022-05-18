@@ -1,5 +1,6 @@
-import { GroupAvatarIcon } from '../Icons';
-import { Avatar } from '.';
+import { GroupAvatarIcon } from "../Icons";
+
+import { Avatar } from ".";
 
 interface Props {
   src: string;
@@ -9,9 +10,9 @@ const AvatarInvite: React.FC<Props> = ({ src }) => {
   return (
     <Avatar
       path={src}
-      w={{ base: '6rem', md: '7rem' }}
-      h={{ base: '6rem', md: '7rem' }}
-      icon={<GroupAvatarIcon fontSize={{ base: '4.5rem', md: '5rem' }} />}
+      w={{ base: "6rem", md: "7rem" }}
+      h={{ base: "6rem", md: "7rem" }}
+      icon={<GroupAvatarIcon fontSize={{ base: "4.5rem", md: "5rem" }} />}
       type="Group"
     />
   );

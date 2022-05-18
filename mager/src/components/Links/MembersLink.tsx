@@ -1,8 +1,10 @@
-import { VStack } from '@chakra-ui/react';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { MembersIcon } from '../Icons';
-import { LinkLabel } from '../Text';
+import { VStack } from "@chakra-ui/react";
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { MembersIcon } from "../Icons";
+import { LinkLabel } from "../Text";
 
 interface Props {
   group_id: string;

@@ -1,11 +1,13 @@
-import { Flex, HStack, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAddFoodLog } from '../../hooks/mutations';
-import { EditOrAddLogContainerButton } from '../Buttons';
-import { CheckboxCard } from '../Cards';
-import { MainContainerLayout } from '../Layouts';
-import { DefaultTimePicker } from '../TimePicker';
+import { Flex, HStack, useCheckboxGroup, VStack } from "@chakra-ui/react";
+
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { useAddFoodLog } from "../../hooks/mutations";
+import { EditOrAddLogContainerButton } from "../Buttons";
+import { CheckboxCard } from "../Cards";
+import { MainContainerLayout } from "../Layouts";
+import { DefaultTimePicker } from "../TimePicker";
 
 interface RouteParams {
   group_id: string;
@@ -14,10 +16,10 @@ interface RouteParams {
 const AddFoodLogContainer: React.FC = () => {
   const { group_id } = useParams<RouteParams>();
 
-  const [logData, setLogData] = useState<any>(['food']);
+  const [logData, setLogData] = useState<any>(["food"]);
   const [time, setTime] = useState<any>(new Date());
 
-  const businesses = ['food'];
+  const businesses = ["food"];
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
@@ -30,14 +32,11 @@ const AddFoodLogContainer: React.FC = () => {
     <MainContainerLayout
       isLoading={false}
       containerProps={{
-        w: { base: 'xs', sm: 'sm' },
-        h: 'xs',
+        w: { base: "xs", sm: "sm" },
+        h: "xs",
       }}
       button={
-        <EditOrAddLogContainerButton
-          logData={logData}
-          onClick={() => mutate({ logData, time })}
-        />
+        <EditOrAddLogContainerButton logData={logData} onClick={() => mutate({ logData, time })} />
       }
     >
       <VStack>
@@ -52,10 +51,7 @@ const AddFoodLogContainer: React.FC = () => {
           })}
         </HStack>
         <Flex w="50%">
-          <DefaultTimePicker
-            time={time}
-            onChange={(newTime: Date) => setTime(newTime)}
-          />
+          <DefaultTimePicker time={time} onChange={(newTime: Date) => setTime(newTime)} />
         </Flex>
       </VStack>
     </MainContainerLayout>

@@ -1,14 +1,16 @@
-import { Box, IconButton, SimpleGrid } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useAuth } from '../../context';
-import { useMembersPlaceholder } from '../../hooks/placeholders';
-import { useFetchGroupData } from '../../hooks/queries';
-import { MemberType } from '../../types';
-import { PenButton } from '../Buttons';
-import { MemberCard } from '../Cards';
-import { CheckIcon, ProfileIcon } from '../Icons';
-import { MainContainerLayout } from '../Layouts';
-import { AddNewMemberModal } from '../Modals';
+import { Box, IconButton, SimpleGrid } from "@chakra-ui/react";
+
+import React, { useState } from "react";
+
+import { useAuth } from "../../context";
+import { useMembersPlaceholder } from "../../hooks/placeholders";
+import { useFetchGroupData } from "../../hooks/queries";
+import { MemberType } from "../../types";
+import { PenButton } from "../Buttons";
+import { MemberCard } from "../Cards";
+import { CheckIcon, ProfileIcon } from "../Icons";
+import { MainContainerLayout } from "../Layouts";
+import { AddNewMemberModal } from "../Modals";
 
 interface Props {
   group_id: string;
@@ -27,12 +29,12 @@ const MembersContainer: React.FC<Props> = ({ group_id }) => {
       button={<AddNewMemberModal group_id={group_id} />}
       containerProps={{
         w: {
-          base: 'xs',
-          sm: 'md',
-          sm2: 'lg',
-          lg: 'xl',
+          base: "xs",
+          sm: "md",
+          sm2: "lg",
+          lg: "xl",
         },
-        h: { base: 'md', sm: 'sm' },
+        h: { base: "md", sm: "sm" },
       }}
     >
       <SimpleGrid
@@ -53,9 +55,9 @@ const MembersContainer: React.FC<Props> = ({ group_id }) => {
           <ProfileIcon
             key={index}
             fontSize={{
-              base: '6rem',
-              md: '6rem',
-              xl: '6.5rem',
+              base: "6rem",
+              md: "6rem",
+              xl: "6.5rem",
             }}
           />
         ))}

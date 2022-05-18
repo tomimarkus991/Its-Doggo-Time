@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 export enum ViewType {
-  Excrement = 'Excrement',
-  Food = 'Food',
+  Excrement = "Excrement",
+  Food = "Food",
 }
 
 type InitContextType = {
@@ -26,11 +26,7 @@ const LogsViewProvider = ({ children }: any) => {
     view,
     setView,
   };
-  return (
-    <LogsViewContext.Provider value={value}>
-      {children}
-    </LogsViewContext.Provider>
-  );
+  return <LogsViewContext.Provider value={value}>{children}</LogsViewContext.Provider>;
 };
 
 export default LogsViewProvider;

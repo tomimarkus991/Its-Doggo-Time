@@ -1,9 +1,10 @@
-import { useMutation, useQueryClient } from 'react-query';
-import { useToast } from '..';
-import { useAuth } from '../../context';
-import { StringOrUndefined } from '../../types';
-import { supabase } from '../../utils';
-import { useUser } from '../queries';
+import { useMutation, useQueryClient } from "react-query";
+
+import { useToast } from "..";
+import { useAuth } from "../../context";
+import { StringOrUndefined } from "../../types";
+import { supabase } from "../../utils";
+import { useUser } from "../queries";
 
 const useUpdateUsername = () => {
   const { showErrorToast, showSuccessToast } = useToast();
@@ -21,22 +22,19 @@ const useUpdateUsername = () => {
     // Check if Username has value and it has changed
     if (username && username !== user?.username) {
       // update username
-      const { data, error } = await supabase
-        .from('profiles')
-        .upsert(profile_updates)
-        .single();
+      const { data, error } = await supabase.from("profiles").upsert(profile_updates).single();
 
-      if (error?.message.includes('duplicate key')) {
+      if (error?.message.includes("duplicate key")) {
         showErrorToast({
-          title: 'Update Username Error',
-          description: 'User with username exists',
+          title: "Update Username Error",
+          description: "User with username exists",
         });
-        throw new Error('User with username exists');
+        throw new Error("User with username exists");
       }
 
       if (error) {
         showErrorToast({
-          title: 'Update Username Error',
+          title: "Update Username Error",
           description: error.message,
         });
         throw new Error(error.message);
@@ -44,10 +42,10 @@ const useUpdateUsername = () => {
 
       // delete all invites for that user
       await supabase
-        .from('invites')
+        .from("invites")
         .delete()
-        .eq('sender', user?.username)
-        .eq('receiver', user?.username);
+        .eq("sender", user?.username)
+        .eq("receiver", user?.username);
 
       return data;
     } else {
@@ -55,32 +53,28 @@ const useUpdateUsername = () => {
     }
   };
 
-  return useMutation(
-    'updateUsername',
-    (username: StringOrUndefined) => updateUsername(username),
-    {
-      onSuccess: async data => {
-        if (data) {
-          // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-          // await queryClient.cancelQueries('user');
+  return useMutation("updateUsername", (username: StringOrUndefined) => updateUsername(username), {
+    onSuccess: async data => {
+      if (data) {
+        // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+        // await queryClient.cancelQueries('user');
 
-          // Optimistically update to the new value
-          // queryClient.setQueryData(
-          // 'user',
-          // (oldData: any) => (oldData.username = data.username),
-          // );
+        // Optimistically update to the new value
+        // queryClient.setQueryData(
+        // 'user',
+        // (oldData: any) => (oldData.username = data.username),
+        // );
 
-          showSuccessToast({
-            title: 'Profile Updated',
-            description: 'Your Profile has been updated.',
-          });
-        }
-      },
-      // Refetch after error or success:
-      onSettled: () => {
-        queryClient.invalidateQueries('user');
-      },
+        showSuccessToast({
+          title: "Profile Updated",
+          description: "Your Profile has been updated.",
+        });
+      }
     },
-  );
+    // Refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
 };
 export default useUpdateUsername;

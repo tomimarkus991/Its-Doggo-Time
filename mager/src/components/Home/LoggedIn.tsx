@@ -1,16 +1,15 @@
-import { Center } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { useAuth } from '../../context/AuthContext';
-import { supabase } from '../../utils';
-import { GroupsContainer } from '../Containers';
-import { Invites } from '../Invites';
-import { HeaderAvatar, MainLayout, PageHeader } from '../Layouts';
-import {
-  ProfileNameAndAvatar,
-  ProfileNameAndAvatarMiddle,
-} from '../Layouts/Profile';
-import { ProfileLink } from '../Links';
+import { Center } from "@chakra-ui/react";
+
+import React, { useEffect } from "react";
+import { useQueryClient } from "react-query";
+
+import { useAuth } from "../../context/AuthContext";
+import { supabase } from "../../utils";
+import { GroupsContainer } from "../Containers";
+import { Invites } from "../Invites";
+import { HeaderAvatar, MainLayout, PageHeader } from "../Layouts";
+import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "../Layouts/Profile";
+import { ProfileLink } from "../Links";
 
 const LoggedIn: React.FC = () => {
   const { user } = useAuth();
@@ -19,23 +18,21 @@ const LoggedIn: React.FC = () => {
   useEffect(() => {
     const updateOAuthData = async () => {
       // check if user has a profile
-      let { data, error } = await supabase
-        .from('profiles')
+      const { data, error } = await supabase
+        .from("profiles")
         .select(
           `
         id,
         username
-    `,
+    `
         )
-        .eq('id', user?.id)
+        .eq("id", user?.id)
         .single();
 
       // if such profile doesn't exist
       if (
         data == null &&
-        error?.message.includes(
-          'JSON object requested, multiple (or no) rows returned',
-        )
+        error?.message.includes("JSON object requested, multiple (or no) rows returned")
       ) {
         const updates = {
           id: user?.id,
@@ -43,16 +40,16 @@ const LoggedIn: React.FC = () => {
           updated_at: new Date(),
         };
         await supabase
-          .from('profiles')
+          .from("profiles")
           .upsert(updates, {
-            returning: 'representation', // Don't return the value after inserting
+            returning: "representation", // Don't return the value after inserting
           })
           .single();
       }
     };
 
     updateOAuthData();
-    queryClient.invalidateQueries('user');
+    queryClient.invalidateQueries("user");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

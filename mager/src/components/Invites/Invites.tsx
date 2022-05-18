@@ -9,22 +9,22 @@ import {
   ModalOverlay,
   useDisclosure,
   VStack,
-} from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useAcceptInvite, useDeclineInvite } from '../../hooks/mutations';
-import { useFetchInvites } from '../../hooks/queries';
-import { useSubscribeToInviteInserts } from '../../hooks/subcribe';
-import useColors from '../../hooks/useColors';
-import { InviteDataType } from '../../types';
-import GradientButton from '../Buttons/GradientButton';
-import { InviteCard } from '../Cards';
-import { InviteNotificationIcon, InvitesIcon } from '../Icons';
-import { Skeleton } from '../Skeleton';
-import { GradientButtonText, LinkLabel } from '../Text';
+} from "@chakra-ui/react";
 
-interface Props {}
+import React, { useEffect } from "react";
 
-const Invites: React.FC<Props> = () => {
+import { useAcceptInvite, useDeclineInvite } from "../../hooks/mutations";
+import { useFetchInvites } from "../../hooks/queries";
+import { useSubscribeToInviteInserts } from "../../hooks/subcribe";
+import useColors from "../../hooks/useColors";
+import { InviteDataType } from "../../types";
+import GradientButton from "../Buttons/GradientButton";
+import { InviteCard } from "../Cards";
+import { InviteNotificationIcon, InvitesIcon } from "../Icons";
+import { Skeleton } from "../Skeleton";
+import { GradientButtonText, LinkLabel } from "../Text";
+
+const Invites = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { defaultColor } = useColors();
@@ -59,22 +59,18 @@ const Invites: React.FC<Props> = () => {
           <ModalCloseButton />
           <ModalBody maxH="lg">
             <VStack my="8" spacing="16">
-              {userInvites?.map(
-                (invite: InviteDataType, index: number) => {
-                  return (
-                    <InviteCard
-                      key={index}
-                      invite={invite}
-                      declineInvite={async invite_id =>
-                        declineInvite({ invite_id })
-                      }
-                      acceptInvite={async (group_id, invite_id) =>
-                        acceptInvite({ group_id, invite_id })
-                      }
-                    />
-                  );
-                },
-              )}
+              {userInvites?.map((invite: InviteDataType, index: number) => {
+                return (
+                  <InviteCard
+                    key={index}
+                    invite={invite}
+                    declineInvite={async invite_id => declineInvite({ invite_id })}
+                    acceptInvite={async (group_id, invite_id) =>
+                      acceptInvite({ group_id, invite_id })
+                    }
+                  />
+                );
+              })}
             </VStack>
           </ModalBody>
 

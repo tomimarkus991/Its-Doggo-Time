@@ -1,29 +1,17 @@
-import { Center, Flex, HStack, Input, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { AvatarUpload } from '../components/Avatar';
-import {
-  ChangeLogsView,
-  DeleteGroupButton,
-  EditButtons,
-  PenButton,
-} from '../components/Buttons';
-import {
-  ExcrementLogsContainer,
-  FoodLogsContainer,
-} from '../components/Containers';
-import { HeaderAvatar, MainLayout } from '../components/Layouts';
-import {
-  GroupNameAndAvatar,
-  GroupNameAndAvatarMiddle,
-} from '../components/Layouts/Group';
-import { MembersLink, MyGroupsLink } from '../components/Links';
-import { useLogsView, ViewType } from '../context';
-import {
-  useUpdateGroupname,
-  useUpdateGroupPicture,
-} from '../hooks/mutations';
-import { useFetchGroupData, useUser } from '../hooks/queries';
+import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
+
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { AvatarUpload } from "../components/Avatar";
+import { ChangeLogsView, DeleteGroupButton, EditButtons, PenButton } from "../components/Buttons";
+import { ExcrementLogsContainer, FoodLogsContainer } from "../components/Containers";
+import { HeaderAvatar, MainLayout } from "../components/Layouts";
+import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "../components/Layouts/Group";
+import { MembersLink, MyGroupsLink } from "../components/Links";
+import { useLogsView, ViewType } from "../context";
+import { useUpdateGroupname, useUpdateGroupPicture } from "../hooks/mutations";
+import { useFetchGroupData, useUser } from "../hooks/queries";
 
 interface RouteParams {
   group_id: string;
@@ -63,11 +51,7 @@ export const GroupPage: React.FC = () => {
                     avatar_url={data?.avatar_url}
                     avatar="Group"
                   />
-                  <Center
-                    display={{ sm: 'flex', lg: 'none' }}
-                    w="100%"
-                    h="40%"
-                  >
+                  <Center display={{ sm: "flex", lg: "none" }} w="100%" h="40%">
                     <DeleteGroupButton
                       user_id={user?.id}
                       group_id={group_id}
@@ -78,7 +62,7 @@ export const GroupPage: React.FC = () => {
                 </VStack>
                 <VStack>
                   <Input
-                    variant={'removeDefault'}
+                    variant={"removeDefault"}
                     autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
                     isDisabled={!isEditable}
@@ -88,14 +72,14 @@ export const GroupPage: React.FC = () => {
                     mt="4"
                     bg="white"
                     defaultValue={data?.group_name}
-                    width={{ base: '3xs', xl: '2xs' }}
+                    width={{ base: "3xs", xl: "2xs" }}
                   />
                   {user?.id === data?.creator_id && (
                     <EditButtons
                       buttonGroupProps={{
-                        mt: { base: 0, sm: '2' },
-                        alignItems: 'center',
-                        size: 'sm',
+                        mt: { base: 0, sm: "2" },
+                        alignItems: "center",
+                        size: "sm",
                       }}
                       onCrossClick={cancelSave}
                       onCheckClick={() => {
@@ -120,7 +104,7 @@ export const GroupPage: React.FC = () => {
             )}
           </HeaderAvatar>
 
-          <Center display={{ base: 'none', lg: 'flex' }} w="100%" h="40%">
+          <Center display={{ base: "none", lg: "flex" }} w="100%" h="40%">
             <DeleteGroupButton
               user_id={user?.id}
               group_id={group_id}
@@ -132,7 +116,7 @@ export const GroupPage: React.FC = () => {
       }
       middle={
         <>
-          <Flex display={{ base: 'flex', sm: 'none' }} flexDirection="row">
+          <Flex display={{ base: "flex", sm: "none" }} flexDirection="row">
             {isEditable ? (
               <HStack>
                 <AvatarUpload
@@ -144,7 +128,7 @@ export const GroupPage: React.FC = () => {
                 />
                 <VStack>
                   <Input
-                    variant={'removeDefault'}
+                    variant={"removeDefault"}
                     autoCapitalize="off"
                     onChange={e => setGroupname(e.target.value)}
                     isDisabled={!isEditable}
@@ -154,17 +138,15 @@ export const GroupPage: React.FC = () => {
                     mt="4"
                     bg="white"
                     defaultValue={data?.group_name}
-                    width={{ base: '3xs', xl: '2xs' }}
+                    width={{ base: "3xs", xl: "2xs" }}
                   />
                   {user?.id === data?.creator_id && (
                     <EditButtons
                       buttonGroupProps={{
-                        size: 'sm',
+                        size: "sm",
                       }}
                       onCrossClick={cancelSave}
-                      onCheckClick={() =>
-                        updateGroupname.mutate(groupname)
-                      }
+                      onCheckClick={() => updateGroupname.mutate(groupname)}
                     />
                   )}
                 </VStack>
@@ -186,7 +168,7 @@ export const GroupPage: React.FC = () => {
           <VStack spacing={4}>
             <ChangeLogsView />
             {isEditable && (
-              <Center display={{ base: 'flex', sm: 'none' }}>
+              <Center display={{ base: "flex", sm: "none" }}>
                 <DeleteGroupButton
                   user_id={user?.id}
                   group_id={group_id}
@@ -196,11 +178,7 @@ export const GroupPage: React.FC = () => {
               </Center>
             )}
           </VStack>
-          {view === ViewType.Excrement ? (
-            <ExcrementLogsContainer />
-          ) : (
-            <FoodLogsContainer />
-          )}
+          {view === ViewType.Excrement ? <ExcrementLogsContainer /> : <FoodLogsContainer />}
         </>
       }
       rightSide={

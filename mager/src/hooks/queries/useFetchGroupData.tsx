@@ -1,14 +1,15 @@
-import { useQuery } from 'react-query';
-import { useToast } from '..';
-import { GroupPageDataType } from '../../types';
-import { supabase } from '../../utils';
+import { useQuery } from "react-query";
+
+import { useToast } from "..";
+import { GroupPageDataType } from "../../types";
+import { supabase } from "../../utils";
 
 const useFetchGroupData = (group_id: string) => {
   const { showErrorToast } = useToast();
 
   const fetchGroupData = async () => {
-    let { data, error } = await supabase
-      .from('groups')
+    const { data, error } = await supabase
+      .from("groups")
       .select(
         `
         id,
@@ -16,25 +17,25 @@ const useFetchGroupData = (group_id: string) => {
         avatar_url,
         creator_id,
         profiles (id, username, avatar_url)
-        `,
+        `
       )
-      .eq('id', group_id)
+      .eq("id", group_id)
       .single();
 
     if (error) {
       showErrorToast({
-        title: 'Fetch Group Data Error',
+        title: "Fetch Group Data Error",
         description: error.message,
       });
       throw new Error(error.message);
     }
 
-    let _groupData: GroupPageDataType = data;
+    const _groupData: GroupPageDataType = data;
 
     return _groupData;
   };
 
-  return useQuery(['group', group_id], () => fetchGroupData());
+  return useQuery(["group", group_id], () => fetchGroupData());
 };
 
 export default useFetchGroupData;

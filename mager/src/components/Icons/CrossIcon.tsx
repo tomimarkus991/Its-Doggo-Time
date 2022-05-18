@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, IconProps } from "@chakra-ui/react";
 
 const CrossIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 20 20" {...props}>
@@ -8,12 +8,7 @@ const CrossIcon = (props: IconProps): JSX.Element => (
       strokeWidth="3"
       strokeLinecap="round"
     />
-    <path
-      d="M15.25 4L4.00001 15.25"
-      stroke="white"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
+    <path d="M15.25 4L4.00001 15.25" stroke="white" strokeWidth="3" strokeLinecap="round" />
   </Icon>
 );
 

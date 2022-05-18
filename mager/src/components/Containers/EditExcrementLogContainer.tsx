@@ -1,12 +1,14 @@
-import { Center, Flex, useCheckboxGroup, VStack } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
-import { useLogs } from '../../context';
-import { useEditExcrementLog } from '../../hooks/mutations';
-import { useFetchExcrementLog } from '../../hooks/queries';
-import { EditOrAddLogContainerButton } from '../Buttons';
-import { CheckboxCard } from '../Cards';
-import { MainContainerLayout } from '../Layouts';
-import { DefaultTimePicker } from '../TimePicker';
+import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
+
+import { useParams } from "react-router-dom";
+
+import { useLogs } from "../../context";
+import { useEditExcrementLog } from "../../hooks/mutations";
+import { useFetchExcrementLog } from "../../hooks/queries";
+import { EditOrAddLogContainerButton } from "../Buttons";
+import { CheckboxCard } from "../Cards";
+import { MainContainerLayout } from "../Layouts";
+import { DefaultTimePicker } from "../TimePicker";
 
 interface RouteParams {
   group_id: string;
@@ -16,18 +18,10 @@ interface RouteParams {
 const EditExcrementLogContainer: React.FC = () => {
   const { group_id, log_id } = useParams<RouteParams>();
 
-  const {
-    logCheckboxData: logData,
-    setLogCheckboxData: setLogData,
-    time,
-    setTime,
-  } = useLogs();
+  const { logCheckboxData: logData, setLogCheckboxData: setLogData, time, setTime } = useLogs();
 
-  let businesses = ['pee', 'poop'];
-  const { isLoading, isRefetching } = useFetchExcrementLog(
-    log_id,
-    group_id,
-  );
+  const businesses = ["pee", "poop"];
+  const { isLoading, isRefetching } = useFetchExcrementLog(log_id, group_id);
 
   const { getCheckboxProps } = useCheckboxGroup({
     onChange: setLogData,
@@ -40,8 +34,8 @@ const EditExcrementLogContainer: React.FC = () => {
     <MainContainerLayout
       isLoading={isLoading || isRefetching}
       containerProps={{
-        w: { base: 'xs', sm: 'sm' },
-        h: 'xs',
+        w: { base: "xs", sm: "sm" },
+        h: "xs",
       }}
       button={
         <EditOrAddLogContainerButton
@@ -64,10 +58,7 @@ const EditExcrementLogContainer: React.FC = () => {
           })}
         </Center>
         <Flex w="50%">
-          <DefaultTimePicker
-            time={time}
-            onChange={(newTime: Date) => setTime(newTime)}
-          />
+          <DefaultTimePicker time={time} onChange={(newTime: Date) => setTime(newTime)} />
         </Flex>
       </VStack>
     </MainContainerLayout>

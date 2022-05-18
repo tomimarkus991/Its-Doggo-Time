@@ -1,11 +1,6 @@
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useContext,
-} from 'react';
-import { GroupType, MemberType } from '../types';
+import { createContext, useState, Dispatch, SetStateAction, useContext } from "react";
+
+import { GroupType, MemberType } from "../types";
 
 type InitialContextType = {
   groupname: string;
@@ -25,15 +20,15 @@ type InitialContextType = {
 };
 
 const initialContext: InitialContextType = {
-  groupname: '',
-  old_groupname: '',
-  group_avatar_url: '',
+  groupname: "",
+  old_groupname: "",
+  group_avatar_url: "",
   setGroupname: () => {},
   setOldGroupname: () => {},
   setGroupAvatarUrl: () => {},
   groups: [],
   setGroups: () => {},
-  creator_id: '',
+  creator_id: "",
   setCreatorId: () => {},
   members: [],
   setMembers: () => {},
@@ -46,11 +41,11 @@ const GroupContext = createContext(initialContext);
 export const useGroup = () => useContext(GroupContext);
 
 const GroupDetailsProvider = ({ children }: any) => {
-  const [groupname, setGroupname] = useState('');
-  const [old_groupname, setOldGroupname] = useState('');
-  const [group_avatar_url, setGroupAvatarUrl] = useState('');
+  const [groupname, setGroupname] = useState("");
+  const [old_groupname, setOldGroupname] = useState("");
+  const [group_avatar_url, setGroupAvatarUrl] = useState("");
   const [groups, setGroups] = useState<GroupType[]>([]);
-  const [creator_id, setCreatorId] = useState('');
+  const [creator_id, setCreatorId] = useState("");
   const [members, setMembers] = useState<MemberType[]>([]);
 
   const value = {
@@ -68,9 +63,7 @@ const GroupDetailsProvider = ({ children }: any) => {
     setOldGroupname,
   };
 
-  return (
-    <GroupContext.Provider value={value}>{children}</GroupContext.Provider>
-  );
+  return <GroupContext.Provider value={value}>{children}</GroupContext.Provider>;
 };
 
 export default GroupDetailsProvider;

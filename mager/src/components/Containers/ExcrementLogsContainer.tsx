@@ -1,24 +1,21 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useExcrementLogsPlaceholder } from '../../hooks/placeholders';
-import { useFetchExcrementLogs } from '../../hooks/queries';
-import { useSubscribeToExcrementLogInserts } from '../../hooks/subcribe';
-import { ExcrementLogsdataType } from '../../types';
-import { AddNewLogContainerButton, LogSummaryButton } from '../Buttons';
-import ExcrementLogCard from '../Cards/ExcrementLogCard';
-import { LogGrid } from '../Grids';
-import { MainContainerLayout } from '../Layouts';
-import {
-  ExcrementLogPlaceholder,
-  LogEmptyPlaceholder,
-} from '../Placeholders';
+import React from "react";
+import { useParams } from "react-router-dom";
 
-interface Props {}
+import { useExcrementLogsPlaceholder } from "../../hooks/placeholders";
+import { useFetchExcrementLogs } from "../../hooks/queries";
+import { useSubscribeToExcrementLogInserts } from "../../hooks/subcribe";
+import { ExcrementLogsdataType } from "../../types";
+import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";
+import ExcrementLogCard from "../Cards/ExcrementLogCard";
+import { LogGrid } from "../Grids";
+import { MainContainerLayout } from "../Layouts";
+import { ExcrementLogPlaceholder, LogEmptyPlaceholder } from "../Placeholders";
+
 interface RouteParams {
   group_id: string;
 }
 
-const ExcrementLogsContainer: React.FC<Props> = () => {
+const ExcrementLogsContainer = () => {
   const { group_id } = useParams<RouteParams>();
   const { data, isLoading } = useFetchExcrementLogs(group_id);
   const { placeholders } = useExcrementLogsPlaceholder(data);
@@ -31,13 +28,13 @@ const ExcrementLogsContainer: React.FC<Props> = () => {
       button={<AddNewLogContainerButton group_id={group_id} />}
       containerProps={{
         w: {
-          base: 'xs',
-          sm: 'sm',
-          sm2: 'md',
-          md: 'lg',
-          xl: 'xl',
+          base: "xs",
+          sm: "sm",
+          sm2: "md",
+          md: "lg",
+          xl: "xl",
         },
-        h: { base: '22rem', sm: 'sm', md: 'md' },
+        h: { base: "22rem", sm: "sm", md: "md" },
       }}
     >
       {data && !!data?.length ? (

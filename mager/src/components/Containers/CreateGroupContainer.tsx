@@ -1,15 +1,17 @@
-import { Box, IconButton, Input, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useCreateGroup } from '../../hooks/mutations';
-import { useUser } from '../../hooks/queries';
-import { GroupType } from '../../types';
-import { AvatarUpload } from '../Avatar';
-import { AddLogCheckboxIcon } from '../Icons';
-import { MainContainerLayout } from '../Layouts';
+import { Box, IconButton, Input, VStack } from "@chakra-ui/react";
+
+import React, { useState } from "react";
+
+import { useCreateGroup } from "../../hooks/mutations";
+import { useUser } from "../../hooks/queries";
+import { GroupType } from "../../types";
+import { AvatarUpload } from "../Avatar";
+import { AddLogCheckboxIcon } from "../Icons";
+import { MainContainerLayout } from "../Layouts";
 
 const CreateGroupContainer: React.FC = () => {
-  const [groupname, setGroupname] = useState('');
-  const [group_avatar_url, setGroupAvatarUrl] = useState('');
+  const [groupname, setGroupname] = useState("");
+  const [group_avatar_url, setGroupAvatarUrl] = useState("");
 
   const { mutate } = useCreateGroup();
   const { data } = useUser();
@@ -19,8 +21,8 @@ const CreateGroupContainer: React.FC = () => {
     <MainContainerLayout
       isLoading={false}
       containerProps={{
-        w: { base: 'xs', sm: 'sm', lg: 'md' },
-        h: { base: 'xs', md: 'sm' },
+        w: { base: "xs", sm: "sm", lg: "md" },
+        h: { base: "xs", md: "sm" },
       }}
       button={
         <Box
@@ -30,14 +32,14 @@ const CreateGroupContainer: React.FC = () => {
           h="100%"
           aria-label="Create Group Button"
           bgColor="transparent"
-          _hover={{ bgColor: 'transparent' }}
+          _hover={{ bgColor: "transparent" }}
           isDisabled={groups?.length >= 4}
           icon={
             <AddLogCheckboxIcon
               fontSize={{
-                base: '5rem',
-                md: '6rem',
-                lg: '7rem',
+                base: "5rem",
+                md: "6rem",
+                lg: "7rem",
               }}
             />
           }
@@ -53,7 +55,7 @@ const CreateGroupContainer: React.FC = () => {
           avatar="Group"
         />
         <Input
-          variant={'removeDefault'}
+          variant={"removeDefault"}
           autoCapitalize="off"
           value={groupname}
           onChange={e => setGroupname(e.target.value)}

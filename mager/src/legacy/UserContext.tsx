@@ -1,11 +1,6 @@
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useContext,
-} from 'react';
-import { InviteDataType } from '../types';
+import { createContext, useState, Dispatch, SetStateAction, useContext } from "react";
+
+import { InviteDataType } from "../types";
 
 type InitialContextType = {
   username: string;
@@ -21,9 +16,9 @@ type InitialContextType = {
 };
 
 const initUserContext: InitialContextType = {
-  username: '',
-  old_username: '',
-  user_avatar_url: '',
+  username: "",
+  old_username: "",
+  user_avatar_url: "",
   setUsername: () => {},
   setOldUsername: () => {},
   setUserAvatarUrl: () => {},
@@ -38,12 +33,11 @@ const UserContext = createContext(initUserContext);
 export const useUser = () => useContext(UserContext);
 
 const UserDetailsProvider = ({ children }: any) => {
-  const [username, setUsername] = useState('');
-  const [old_username, setOldUsername] = useState('');
-  const [user_avatar_url, setUserAvatarUrl] = useState('');
+  const [username, setUsername] = useState("");
+  const [old_username, setOldUsername] = useState("");
+  const [user_avatar_url, setUserAvatarUrl] = useState("");
   const [userInvites, setUserInvites] = useState<InviteDataType[]>([]);
-  const [isUserdataLoading, setIsUserdataLoading] =
-    useState<boolean>(true);
+  const [isUserdataLoading, setIsUserdataLoading] = useState<boolean>(true);
 
   const value = {
     username,
@@ -58,9 +52,7 @@ const UserDetailsProvider = ({ children }: any) => {
     setOldUsername,
   };
 
-  return (
-    <UserContext.Provider value={value}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export default UserDetailsProvider;

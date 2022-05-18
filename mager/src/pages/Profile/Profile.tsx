@@ -1,24 +1,16 @@
-import { Center, Flex, HStack, Input, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { AvatarUpload } from '../../components/Avatar';
-import { EditButtons, PenButton } from '../../components/Buttons';
-import { MyProfileContainer } from '../../components/Containers';
-import { Invites } from '../../components/Invites';
-import {
-  HeaderAvatar,
-  MainLayout,
-  PageHeader,
-} from '../../components/Layouts';
-import {
-  ProfileNameAndAvatar,
-  ProfileNameAndAvatarMiddle,
-} from '../../components/Layouts/Profile';
-import { MyGroupsLink } from '../../components/Links';
-import {
-  useUpdateUserAvatar,
-  useUpdateUsername,
-} from '../../hooks/mutations';
-import { useUser } from '../../hooks/queries';
+import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
+
+import React, { useState } from "react";
+
+import { AvatarUpload } from "../../components/Avatar";
+import { EditButtons, PenButton } from "../../components/Buttons";
+import { MyProfileContainer } from "../../components/Containers";
+import { Invites } from "../../components/Invites";
+import { HeaderAvatar, MainLayout, PageHeader } from "../../components/Layouts";
+import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "../../components/Layouts/Profile";
+import { MyGroupsLink } from "../../components/Links";
+import { useUpdateUserAvatar, useUpdateUsername } from "../../hooks/mutations";
+import { useUser } from "../../hooks/queries";
 
 const Profile: React.FC = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -39,7 +31,7 @@ const Profile: React.FC = () => {
       leftSide={
         <HeaderAvatar>
           {isEditable ? (
-            <HStack flexDirection={{ sm: 'row', lg: 'column' }}>
+            <HStack flexDirection={{ sm: "row", lg: "column" }}>
               <AvatarUpload
                 onUpload={(url: string) => {
                   updateUserAvatar.mutate(url);
@@ -49,7 +41,7 @@ const Profile: React.FC = () => {
               />
               <VStack>
                 <Input
-                  variant={'removeDefault'}
+                  variant={"removeDefault"}
                   autoCapitalize="off"
                   onChange={e => setUsername(e.target.value)}
                   defaultValue={data?.username}
@@ -59,12 +51,12 @@ const Profile: React.FC = () => {
                   size="lg"
                   mt="4"
                   bg="white"
-                  width={{ sm: '3xs', xl: '2xs' }}
+                  width={{ sm: "3xs", xl: "2xs" }}
                 />
                 <EditButtons
                   buttonGroupProps={{
                     mt: 2,
-                    size: 'sm',
+                    size: "sm",
                   }}
                   onCrossClick={cancelSave}
                   onCheckClick={() => {
@@ -84,7 +76,7 @@ const Profile: React.FC = () => {
       }
       middle={
         <>
-          <Flex flexDirection="row" display={{ base: 'flex', sm: 'none' }}>
+          <Flex flexDirection="row" display={{ base: "flex", sm: "none" }}>
             {isEditable ? (
               <HStack>
                 <AvatarUpload
@@ -97,7 +89,7 @@ const Profile: React.FC = () => {
 
                 <VStack>
                   <Input
-                    variant={'removeDefault'}
+                    variant={"removeDefault"}
                     autoCapitalize="off"
                     onChange={e => setUsername(e.target.value)}
                     defaultValue={data?.username}
@@ -112,7 +104,7 @@ const Profile: React.FC = () => {
 
                   <EditButtons
                     buttonGroupProps={{
-                      size: 'sm',
+                      size: "sm",
                     }}
                     onCrossClick={cancelSave}
                     onCheckClick={() => {
