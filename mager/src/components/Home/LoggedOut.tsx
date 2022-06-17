@@ -6,7 +6,7 @@ import GradientButton from "../Buttons/GradientButton";
 import { DoggoIcon } from "../Icons";
 import { GradientButtonText } from "../Text";
 
-const LoggedOut: React.FC = () => {
+export const LoggedOut = () => {
   return (
     <Center h="100%">
       <HStack
@@ -50,4 +50,3 @@ const LoggedOut: React.FC = () => {
     </Center>
   );
 };
-export default LoggedOut;

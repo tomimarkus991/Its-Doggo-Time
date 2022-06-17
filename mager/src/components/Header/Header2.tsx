@@ -1,11 +1,10 @@
 import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
-import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { HeaderBackground, HeaderBackgroundSmall } from "../Icons";
 
-export const Header2: React.FC = () => {
+export const Header2 = () => {
   return (
     <>
       <>

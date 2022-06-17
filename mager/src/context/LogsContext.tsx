@@ -28,7 +28,7 @@ const LogsContext = createContext(initialContext);
 
 export const useLogs = () => useContext(LogsContext);
 
-const LogsDetailsProvider = ({ children }: any) => {
+export const LogsDetailsProvider = ({ children }: any) => {
   const [excrementLogs, setExcrementLogs] = useState<ExcrementLogsdataType[]>([]);
   const [foodLogs, setFoodLogs] = useState<FoodLogsdataType[]>([]);
   const [logCheckboxData, setLogCheckboxData] = useState<any>([]);
@@ -47,5 +47,3 @@ const LogsDetailsProvider = ({ children }: any) => {
 
   return <LogsContext.Provider value={value}>{children}</LogsContext.Provider>;
 };
-
-export default LogsDetailsProvider;

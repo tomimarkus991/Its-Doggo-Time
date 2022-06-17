@@ -2,11 +2,9 @@ import { Box, Flex, Input, InputGroup, InputRightElement, Text, VStack } from "@
 
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useForm, { useLogin } from "hooks";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
-import { useLogin } from "hooks/mutations";
-import useForm from "hooks/useForm";
 
 import { GradientButton } from "../Buttons";
 import { ColorMode } from "../ColorMode";
@@ -14,7 +12,7 @@ import { GradientButtonText } from "../Text";
 
 import { OAuthSection, RerouteLoginRegister } from ".";
 
-const LoginAuth: React.FC = () => {
+export const LoginAuth = () => {
   const [show, setShow] = useState(false);
   const { email, password, handleChange } = useForm({
     email: "",
@@ -106,5 +104,3 @@ const LoginAuth: React.FC = () => {
     </Box>
   );
 };
-
-export default LoginAuth;

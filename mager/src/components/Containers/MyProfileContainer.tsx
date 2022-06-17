@@ -1,15 +1,13 @@
 import { Center, VStack } from "@chakra-ui/react";
 
-import React from "react";
-import { useHistory } from "react-router-dom";
-
 import { useSignOut } from "hooks/mutations";
+import { useHistory } from "react-router-dom";
 
 import GradientButton from "../Buttons/GradientButton";
 import { ColorMode } from "../ColorMode";
 import { GradientButtonText } from "../Text";
 
-const MyProfileContainer = () => {
+export const MyProfileContainer = () => {
   const { isSuccess, mutate, isLoading } = useSignOut();
 
   const router = useHistory();
@@ -37,4 +35,3 @@ const MyProfileContainer = () => {
     </Center>
   );
 };
-export default MyProfileContainer;

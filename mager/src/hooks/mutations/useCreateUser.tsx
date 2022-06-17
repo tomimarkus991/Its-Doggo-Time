@@ -1,5 +1,4 @@
 import { useMutation } from "react-query";
-
 import { StringOrUndefined } from "types";
 import { supabase } from "utils";
 
@@ -11,7 +10,7 @@ interface User {
   password: string;
 }
 
-const useCreateUser = (user: User) => {
+export const useCreateUser = (user: User) => {
   const { showErrorToast } = useToast();
   const createUser = async (user: User) => {
     // Check if username exists
@@ -73,4 +72,3 @@ const useCreateUser = (user: User) => {
     },
   });
 };
-export default useCreateUser;

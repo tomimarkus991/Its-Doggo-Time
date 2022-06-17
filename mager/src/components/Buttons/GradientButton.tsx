@@ -1,8 +1,6 @@
 import { Button, ButtonProps } from "@chakra-ui/react";
 
-import React from "react";
-
-const GradientButton = (props: ButtonProps) => {
+export const GradientButton = (props: ButtonProps) => {
   return (
     <Button
       p={7}
@@ -22,5 +20,3 @@ const GradientButton = (props: ButtonProps) => {
     </Button>
   );
 };
-
-export default GradientButton;

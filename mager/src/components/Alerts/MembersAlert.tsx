@@ -1,8 +1,6 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/react";
 
-import React from "react";
-
-const MembersAlert: React.FC = () => {
+export const MembersAlert = () => {
   return (
     <Alert
       status="error"
@@ -26,4 +24,3 @@ const MembersAlert: React.FC = () => {
     </Alert>
   );
 };
-export default MembersAlert;

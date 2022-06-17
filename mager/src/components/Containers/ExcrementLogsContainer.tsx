@@ -1,9 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-
 import { useExcrementLogsPlaceholder } from "hooks/placeholders";
 import { useFetchExcrementLogs } from "hooks/queries";
 import { useSubscribeToExcrementLogInserts } from "hooks/subcribe";
+import { useParams } from "react-router-dom";
 import { ExcrementLogsdataType } from "types";
 
 import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";
@@ -16,7 +14,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const ExcrementLogsContainer = () => {
+export const ExcrementLogsContainer = () => {
   const { group_id } = useParams<RouteParams>();
   const { data, isLoading } = useFetchExcrementLogs(group_id);
   const { placeholders } = useExcrementLogsPlaceholder(data);
@@ -54,5 +52,3 @@ const ExcrementLogsContainer = () => {
     </MainContainerLayout>
   );
 };
-
-export default ExcrementLogsContainer;

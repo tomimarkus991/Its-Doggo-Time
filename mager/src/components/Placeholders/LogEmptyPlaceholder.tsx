@@ -1,6 +1,6 @@
 import { Center, Heading, Text, VStack } from "@chakra-ui/react";
 
-const LogEmptyPlaceholder: React.FC = () => {
+export const LogEmptyPlaceholder = () => {
   return (
     <Center h="100%">
       <VStack textAlign="center">
@@ -12,4 +12,3 @@ const LogEmptyPlaceholder: React.FC = () => {
     </Center>
   );
 };
-export default LogEmptyPlaceholder;

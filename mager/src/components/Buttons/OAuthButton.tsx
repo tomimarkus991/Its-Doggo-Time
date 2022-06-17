@@ -1,7 +1,6 @@
 import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Provider } from "@supabase/gotrue-js";
-
 import { useOAuth } from "hooks/mutations";
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
   provider: Provider;
 }
 
-const OAuthButton: React.FC<Props> = ({ provider, icon }) => {
+export const OAuthButton = ({ provider, icon }: Props) => {
   const { mutate } = useOAuth(provider);
 
   return (
@@ -22,5 +21,3 @@ const OAuthButton: React.FC<Props> = ({ provider, icon }) => {
     />
   );
 };
-
-export default OAuthButton;

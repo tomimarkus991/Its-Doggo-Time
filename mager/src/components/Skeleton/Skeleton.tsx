@@ -5,7 +5,7 @@ interface Props {
   props?: SkeletonProps;
 }
 
-const Skeleton: React.FC<Props> = ({ children, isLoading, props }): JSX.Element => {
+export const Skeleton = ({ children, isLoading, props }: Props): JSX.Element => {
   return (
     <ChakraSkeleton
       id="skeleton"
@@ -19,4 +19,3 @@ const Skeleton: React.FC<Props> = ({ children, isLoading, props }): JSX.Element 
     </ChakraSkeleton>
   );
 };
-export default Skeleton;

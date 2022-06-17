@@ -1,17 +1,15 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-
 import { EditExcrementLogContainer, EditFoodLogContainer } from "components/Containers";
 import { HeaderAvatar, MainLayout, PageHeaderBack } from "components/Layouts";
 import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "components/Layouts/Group";
 import { ProfileAndMyGroups } from "components/Links";
 import { useLogsView, ViewType } from "context";
+import { useParams } from "react-router-dom";
 
 interface RouteParams {
   group_id: string;
 }
 
-const EditLog: React.FC = () => {
+export const EditLog = () => {
   const { group_id } = useParams<RouteParams>();
   const { view } = useLogsView();
 
@@ -34,4 +32,3 @@ const EditLog: React.FC = () => {
     />
   );
 };
-export default EditLog;

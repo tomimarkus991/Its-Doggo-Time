@@ -15,7 +15,7 @@ interface Props {
   creator_id: StringOrUndefined;
 }
 
-const MemberCard: React.FC<Props> = ({ member, isEditable, group_id, creator_id }) => {
+export const MemberCard = ({ member, isEditable, group_id, creator_id }: Props) => {
   const { id: user_id, username, avatar_url } = member;
   const { containerBackgroundColor } = useColors();
 
@@ -46,5 +46,3 @@ const MemberCard: React.FC<Props> = ({ member, isEditable, group_id, creator_id 
     </VStack>
   );
 };
-
-export default MemberCard;

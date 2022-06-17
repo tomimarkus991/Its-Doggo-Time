@@ -1,7 +1,5 @@
 import { Box, Center, FlexProps } from "@chakra-ui/react";
 
-import React from "react";
-
 import { Skeleton } from "../Skeleton";
 
 interface Props {
@@ -10,7 +8,7 @@ interface Props {
   containerProps?: FlexProps;
 }
 
-const MainContainerLayout: React.FC<Props> = ({ isLoading, children, button, containerProps }) => {
+export const MainContainerLayout = ({ isLoading, children, button, containerProps }: Props) => {
   return (
     <Center>
       <Center
@@ -34,4 +32,3 @@ const MainContainerLayout: React.FC<Props> = ({ isLoading, children, button, con
     </Center>
   );
 };
-export default MainContainerLayout;

@@ -8,7 +8,7 @@ interface Props {
   action: "Sign Up" | "Sign In";
 }
 
-const RerouteLoginRegister: React.FC<Props> = ({ title, to, action }) => {
+export const RerouteLoginRegister = ({ title, to, action }: Props) => {
   return (
     <HStack spacing={1}>
       <Text fontSize="lg">{title}</Text>
@@ -20,5 +20,3 @@ const RerouteLoginRegister: React.FC<Props> = ({ title, to, action }) => {
     </HStack>
   );
 };
-
-export default RerouteLoginRegister;

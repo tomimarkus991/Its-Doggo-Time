@@ -2,10 +2,9 @@ import { Box } from "@chakra-ui/react";
 
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { useColors } from "hooks";
 
-const AddAvatarIcon: React.FC = () => {
+export const AddAvatarIcon = () => {
   const { defaultColor } = useColors();
   return (
     <Box position="relative">
@@ -27,4 +26,3 @@ const AddAvatarIcon: React.FC = () => {
     </Box>
   );
 };
-export default AddAvatarIcon;

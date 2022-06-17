@@ -1,10 +1,9 @@
 import { useMutation } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useUploadAvatar = (onUpload: (url: string) => void) => {
+export const useUploadAvatar = (onUpload: (url: string) => void) => {
   const { showErrorToast } = useToast();
 
   const uploadAvatar = async (e: any) => {
@@ -36,5 +35,3 @@ const useUploadAvatar = (onUpload: (url: string) => void) => {
 
   return useMutation("uploadAvatar", e => uploadAvatar(e));
 };
-
-export default useUploadAvatar;

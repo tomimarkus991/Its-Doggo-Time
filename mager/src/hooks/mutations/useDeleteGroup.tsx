@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useDeleteGroup = (group_id: string) => {
+export const useDeleteGroup = (group_id: string) => {
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -58,5 +57,3 @@ const useDeleteGroup = (group_id: string) => {
     },
   });
 };
-
-export default useDeleteGroup;

@@ -1,10 +1,8 @@
+import { useToast } from "hooks";
 import { useMutation } from "react-query";
-
 import { supabase } from "utils";
 
-import { useToast } from "..";
-
-const useLogin = ({ email, password }: { email: string; password: string }) => {
+export const useLogin = ({ email, password }: { email: string; password: string }) => {
   const { showErrorToast } = useToast();
   const login = async () => {
     const { data, error } = await supabase.auth.signIn({
@@ -23,4 +21,3 @@ const useLogin = ({ email, password }: { email: string; password: string }) => {
   };
   return useMutation("login", () => login());
 };
-export default useLogin;

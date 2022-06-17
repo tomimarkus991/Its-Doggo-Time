@@ -5,7 +5,7 @@ interface Props {
   textProps?: TextProps;
 }
 
-const Name: React.FC<Props> = ({ name, textProps }) => {
+export const Name = ({ name, textProps }: Props) => {
   return (
     <Text
       textAlign="center"
@@ -17,5 +17,3 @@ const Name: React.FC<Props> = ({ name, textProps }) => {
     </Text>
   );
 };
-
-export default Name;

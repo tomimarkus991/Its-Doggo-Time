@@ -1,13 +1,12 @@
-import { useMutation, useQueryClient } from "react-query";
-
 import { useAuth } from "context";
+import { useMutation, useQueryClient } from "react-query";
 import { StringOrUndefined } from "types";
 import { supabase } from "utils";
 
 import { useToast } from "..";
 import { useUser } from "../queries";
 
-const useUpdateUsername = () => {
+export const useUpdateUsername = () => {
   const { showErrorToast, showSuccessToast } = useToast();
   const queryClient = useQueryClient();
   const { data: user } = useUser();
@@ -78,4 +77,3 @@ const useUpdateUsername = () => {
     },
   });
 };
-export default useUpdateUsername;

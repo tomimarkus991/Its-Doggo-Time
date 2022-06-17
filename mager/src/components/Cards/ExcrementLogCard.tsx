@@ -1,7 +1,6 @@
 import { Center } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-
 import { ExcrementLogsdataType } from "types";
 
 import { PeeAndPoopIcon, PeeIcon, PoopIcon } from "../Icons";
@@ -13,7 +12,7 @@ interface Props {
   group_id: string;
 }
 
-const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
+export const ExcrementLogCard = ({ log, group_id }: Props) => {
   const { id, pee, poop, created_at } = log;
 
   return (
@@ -57,5 +56,3 @@ const ExcrementLogCard: React.FC<Props> = ({ log, group_id }) => {
     </Link>
   );
 };
-
-export default ExcrementLogCard;

@@ -1,21 +1,20 @@
 import { useMutation } from "react-query";
-
 import { InviteDataType } from "types";
 import { supabase } from "utils";
 
 import { useToast } from "..";
 import { useUser } from "../queries";
 
-type InviteUserType = {
+interface InviteUser {
   inviteReceiver: string;
   group_id: string;
-};
+}
 
-const useInviteUser = () => {
+export const useInviteUser = () => {
   const { data: user } = useUser();
   const { showErrorToast, showSuccessToast } = useToast();
 
-  const inviteUser = async ({ inviteReceiver, group_id }: InviteUserType) => {
+  const inviteUser = async ({ inviteReceiver, group_id }: InviteUser) => {
     // finds if there are any members with {inviteReceiver} username
     const { data: findUserData, error: findUserError } = await supabase
       .from("profiles")
@@ -53,7 +52,7 @@ const useInviteUser = () => {
 
   return useMutation(
     "inviteUser",
-    ({ inviteReceiver, group_id }: InviteUserType) =>
+    ({ inviteReceiver, group_id }: InviteUser) =>
       inviteUser({
         inviteReceiver,
         group_id,
@@ -69,4 +68,3 @@ const useInviteUser = () => {
     }
   );
 };
-export default useInviteUser;

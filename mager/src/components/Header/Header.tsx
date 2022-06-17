@@ -1,11 +1,10 @@
 import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
-import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { HeaderBackground, DoggoIcon } from "../Icons";
 
-const Header: React.FC = () => {
+export const Header = () => {
   return (
     <>
       <HeaderBackground h="100%" display={{ base: "none", lg: "block" }} />
@@ -39,4 +38,3 @@ const Header: React.FC = () => {
     </>
   );
 };
-export default Header;

@@ -1,9 +1,8 @@
 import { Flex, HStack, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
+import { useAddFoodLog } from "hooks/mutations";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { useAddFoodLog } from "hooks/mutations";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";
@@ -14,7 +13,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const AddFoodLogContainer: React.FC = () => {
+export const AddFoodLogContainer = () => {
   const { group_id } = useParams<RouteParams>();
 
   const [logData, setLogData] = useState<any>(["food"]);
@@ -58,5 +57,3 @@ const AddFoodLogContainer: React.FC = () => {
     </MainContainerLayout>
   );
 };
-
-export default AddFoodLogContainer;

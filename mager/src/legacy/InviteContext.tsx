@@ -18,7 +18,7 @@ const InviteContext = createContext(initialContext);
 
 export const useInvite = () => useContext(InviteContext);
 
-const InviteDetailsProvider = ({ children }: any) => {
+export const InviteDetailsProvider = ({ children }: any) => {
   const [isInviteInvalid, setIsInviteInvalid] = useState(false);
   const [inviteReceiver, setInviteReceiver] = useState("");
 
@@ -31,5 +31,3 @@ const InviteDetailsProvider = ({ children }: any) => {
 
   return <InviteContext.Provider value={value}>{children}</InviteContext.Provider>;
 };
-
-export default InviteDetailsProvider;

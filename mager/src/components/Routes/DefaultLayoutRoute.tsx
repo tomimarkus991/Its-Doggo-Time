@@ -2,7 +2,7 @@ import { Route } from "react-router-dom";
 
 import BasicDefaultLayout from "../Layouts/BasicDefaultLayout";
 
-const DefaultLayoutRoute = ({ component: Component, ...rest }: any) => {
+export const DefaultLayoutRoute = ({ component: Component, ...rest }: any) => {
   return (
     <Route
       {...rest}
@@ -14,5 +14,3 @@ const DefaultLayoutRoute = ({ component: Component, ...rest }: any) => {
     />
   );
 };
-
-export default DefaultLayoutRoute;

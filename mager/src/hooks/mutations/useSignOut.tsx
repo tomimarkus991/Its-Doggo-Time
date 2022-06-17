@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useSignOut = () => {
+export const useSignOut = () => {
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -26,4 +25,3 @@ const useSignOut = () => {
     },
   });
 };
-export default useSignOut;

@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { StringOrUndefined } from "types";
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useLeaveGroup = (user_id: StringOrUndefined, group_id: string) => {
+export const useLeaveGroup = (user_id: StringOrUndefined, group_id: string) => {
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -34,5 +33,3 @@ const useLeaveGroup = (user_id: StringOrUndefined, group_id: string) => {
     },
   });
 };
-
-export default useLeaveGroup;

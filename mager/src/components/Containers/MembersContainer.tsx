@@ -1,10 +1,9 @@
 import { Box, IconButton, SimpleGrid } from "@chakra-ui/react";
 
-import React, { useState } from "react";
-
 import { useAuth } from "context";
 import { useMembersPlaceholder } from "hooks/placeholders";
 import { useFetchGroupData } from "hooks/queries";
+import React, { useState } from "react";
 import { MemberType } from "types";
 
 import { PenButton } from "../Buttons";
@@ -17,7 +16,7 @@ interface Props {
   group_id: string;
 }
 
-const MembersContainer: React.FC<Props> = ({ group_id }) => {
+export const MembersContainer = ({ group_id }: Props) => {
   const { user } = useAuth();
   const { data, isLoading } = useFetchGroupData(group_id);
   const { placeholders } = useMembersPlaceholder(data?.profiles);
@@ -86,5 +85,3 @@ const MembersContainer: React.FC<Props> = ({ group_id }) => {
     </MainContainerLayout>
   );
 };
-
-export default MembersContainer;

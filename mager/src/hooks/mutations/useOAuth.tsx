@@ -1,11 +1,10 @@
 import { Provider } from "@supabase/gotrue-js";
 import { useMutation } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useOAuth = (provider: Provider) => {
+export const useOAuth = (provider: Provider) => {
   const { showErrorToast } = useToast();
 
   const OAuth = async () => {
@@ -25,4 +24,3 @@ const useOAuth = (provider: Provider) => {
 
   return useMutation("oAuth", () => OAuth());
 };
-export default useOAuth;

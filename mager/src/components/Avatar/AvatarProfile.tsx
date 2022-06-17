@@ -5,7 +5,7 @@ interface Props {
   src: string | undefined;
 }
 
-const AvatarProfile: React.FC<Props> = ({ src }) => {
+export const AvatarProfile = ({ src }: Props) => {
   return (
     <Avatar
       path={src}
@@ -16,5 +16,3 @@ const AvatarProfile: React.FC<Props> = ({ src }) => {
     />
   );
 };
-
-export default AvatarProfile;

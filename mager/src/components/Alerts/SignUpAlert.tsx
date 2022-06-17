@@ -1,8 +1,6 @@
 import { Alert, AlertIcon, AlertTitle, AlertDescription, Text } from "@chakra-ui/react";
 
-import React from "react";
-
-const SignUpAlert: React.FC = () => {
+export const SignUpAlert = () => {
   return (
     <Alert
       status="success"
@@ -29,4 +27,3 @@ const SignUpAlert: React.FC = () => {
     </Alert>
   );
 };
-export default SignUpAlert;

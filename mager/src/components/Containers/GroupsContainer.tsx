@@ -1,7 +1,5 @@
 import { Center, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 
-import React from "react";
-
 import useGroupsPlaceholder from "hooks/placeholders/useGroupsPlaceholder";
 import { useUser } from "hooks/queries";
 import { GroupType } from "types";
@@ -11,7 +9,7 @@ import { GroupCard } from "../Cards";
 import { DogPaw } from "../Icons";
 import { MainContainerLayout } from "../Layouts";
 
-const GroupsContainer = () => {
+export const GroupsContainer = () => {
   const { data, isLoading } = useUser();
   const { placeholders, isAddDoggoGroupDisabled } = useGroupsPlaceholder(data?.groups);
 
@@ -56,5 +54,3 @@ const GroupsContainer = () => {
     </MainContainerLayout>
   );
 };
-
-export default GroupsContainer;

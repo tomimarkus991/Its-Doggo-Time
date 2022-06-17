@@ -1,13 +1,12 @@
+import { useAuth } from "context";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router";
-
-import { useAuth } from "context";
 import { FoodLogsdataType } from "types";
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useEditFoodLog = (group_id: string) => {
+export const useEditFoodLog = (group_id: string) => {
   const { user } = useAuth();
   const router = useHistory();
   const { showErrorToast } = useToast();
@@ -54,4 +53,3 @@ const useEditFoodLog = (group_id: string) => {
     }
   );
 };
-export default useEditFoodLog;

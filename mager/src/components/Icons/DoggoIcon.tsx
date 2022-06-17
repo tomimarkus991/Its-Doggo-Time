@@ -1,6 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
-const DoggoIcon = (props: IconProps): JSX.Element => (
+export const DoggoIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 558.582 360.706" {...props}>
     <g id="Group_304" data-name="Group 304" transform="translate(-979.076 -569.393)">
       <g id="Layer_1" data-name="Layer 1" transform="translate(981.59 571.911)">
@@ -540,5 +540,3 @@ const DoggoIcon = (props: IconProps): JSX.Element => (
     </g>
   </Icon>
 );
-
-export default DoggoIcon;

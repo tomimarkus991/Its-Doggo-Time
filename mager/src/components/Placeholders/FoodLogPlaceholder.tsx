@@ -2,7 +2,7 @@ import { Center, Text, VStack } from "@chakra-ui/react";
 
 import { DefaultFoodIcon } from "../Icons";
 
-const FoodLogPlaceholder: React.FC = () => {
+export const FoodLogPlaceholder = () => {
   return (
     <Center>
       <VStack>
@@ -22,4 +22,3 @@ const FoodLogPlaceholder: React.FC = () => {
     </Center>
   );
 };
-export default FoodLogPlaceholder;

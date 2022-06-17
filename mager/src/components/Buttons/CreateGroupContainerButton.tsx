@@ -8,7 +8,7 @@ interface Props {
   isAddDoggoGroupDisabled: boolean;
 }
 
-const CreateGroupContainerButton: React.FC<Props> = ({ isAddDoggoGroupDisabled }) => {
+export const CreateGroupContainerButton = ({ isAddDoggoGroupDisabled }: Props) => {
   return (
     <Link to="/group/create-group">
       <Box
@@ -31,4 +31,3 @@ const CreateGroupContainerButton: React.FC<Props> = ({ isAddDoggoGroupDisabled }
     </Link>
   );
 };
-export default CreateGroupContainerButton;

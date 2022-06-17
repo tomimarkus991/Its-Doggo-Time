@@ -1,14 +1,15 @@
 import { Box, Center } from "@chakra-ui/react";
 
-import { Skeleton, Name, AvatarProfile } from "components";
 import { useUser } from "hooks/queries";
+
+import { Skeleton, Name, AvatarProfile } from "components";
 
 interface Props {
   isUsernameLoading?: boolean;
   isUserAvatarLoading?: boolean;
 }
 
-const ProfileNameAndAvatar: React.FC<Props> = ({ isUsernameLoading, isUserAvatarLoading }) => {
+export const ProfileNameAndAvatar = ({ isUsernameLoading, isUserAvatarLoading }: Props) => {
   const { data, isLoading } = useUser();
 
   return (
@@ -29,5 +30,3 @@ const ProfileNameAndAvatar: React.FC<Props> = ({ isUsernameLoading, isUserAvatar
     </Center>
   );
 };
-
-export default ProfileNameAndAvatar;

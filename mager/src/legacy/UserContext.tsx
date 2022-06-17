@@ -32,7 +32,7 @@ const UserContext = createContext(initUserContext);
 
 export const useUser = () => useContext(UserContext);
 
-const UserDetailsProvider = ({ children }: any) => {
+export const UserDetailsProvider = ({ children }: any) => {
   const [username, setUsername] = useState("");
   const [old_username, setOldUsername] = useState("");
   const [user_avatar_url, setUserAvatarUrl] = useState("");
@@ -54,5 +54,3 @@ const UserDetailsProvider = ({ children }: any) => {
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
-
-export default UserDetailsProvider;

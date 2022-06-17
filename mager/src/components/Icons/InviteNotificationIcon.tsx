@@ -1,5 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
-const InviteNotificationIcon = (props: IconProps): JSX.Element => (
+
+export const InviteNotificationIcon = (props: IconProps): JSX.Element => (
   <Icon
     position="absolute"
     bottom={-2}
@@ -12,4 +13,3 @@ const InviteNotificationIcon = (props: IconProps): JSX.Element => (
     <path fill="currentColor" d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0" />
   </Icon>
 );
-export default InviteNotificationIcon;

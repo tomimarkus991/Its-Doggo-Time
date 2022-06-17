@@ -1,11 +1,9 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 
-import React from "react";
-
 import Header from "../Header";
 import { HeaderBackgroundSmall, HeaderBackground } from "../Icons";
 
-const BasicDefaultLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+export const BasicDefaultLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <Grid
       id="default grid"
@@ -26,4 +24,3 @@ const BasicDefaultLayout = ({ children }: { children: React.ReactNode }): JSX.El
     </Grid>
   );
 };
-export default BasicDefaultLayout;

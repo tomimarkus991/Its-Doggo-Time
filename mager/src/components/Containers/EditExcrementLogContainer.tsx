@@ -1,10 +1,9 @@
 import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
-import { useParams } from "react-router-dom";
-
 import { useLogs } from "context";
 import { useEditExcrementLog } from "hooks/mutations";
 import { useFetchExcrementLog } from "hooks/queries";
+import { useParams } from "react-router-dom";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";
@@ -16,7 +15,7 @@ interface RouteParams {
   log_id: string;
 }
 
-const EditExcrementLogContainer: React.FC = () => {
+export const EditExcrementLogContainer = () => {
   const { group_id, log_id } = useParams<RouteParams>();
 
   const { logCheckboxData: logData, setLogCheckboxData: setLogData, time, setTime } = useLogs();
@@ -65,5 +64,3 @@ const EditExcrementLogContainer: React.FC = () => {
     </MainContainerLayout>
   );
 };
-
-export default EditExcrementLogContainer;

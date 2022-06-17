@@ -2,9 +2,9 @@ import { HStack } from "@chakra-ui/react";
 
 import { faGoogle, faFacebook, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import { OAuthButton } from "../Buttons";
+import { OAuthButton } from "components";
 
-const OAuthSection: React.FC = () => {
+export const OAuthSection = () => {
   return (
     <HStack spacing="4">
       <OAuthButton provider="google" icon={faGoogle} />
@@ -13,4 +13,3 @@ const OAuthSection: React.FC = () => {
     </HStack>
   );
 };
-export default OAuthSection;

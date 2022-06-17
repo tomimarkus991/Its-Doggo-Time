@@ -1,16 +1,15 @@
 import { Box, IconButton, Input, VStack } from "@chakra-ui/react";
 
-import React, { useState } from "react";
-
 import { useCreateGroup } from "hooks/mutations";
 import { useUser } from "hooks/queries";
+import React, { useState } from "react";
 import { GroupType } from "types";
 
 import { AvatarUpload } from "../Avatar";
 import { AddLogCheckboxIcon } from "../Icons";
 import { MainContainerLayout } from "../Layouts";
 
-const CreateGroupContainer: React.FC = () => {
+export const CreateGroupContainer = () => {
   const [groupname, setGroupname] = useState("");
   const [group_avatar_url, setGroupAvatarUrl] = useState("");
 
@@ -71,4 +70,3 @@ const CreateGroupContainer: React.FC = () => {
     </MainContainerLayout>
   );
 };
-export default CreateGroupContainer;

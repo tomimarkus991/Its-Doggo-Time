@@ -2,15 +2,14 @@ import { Box } from "@chakra-ui/react";
 
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-
 import { useColors } from "hooks";
+import { Link } from "react-router-dom";
 
 interface Props {
   group_id: string;
 }
 
-const LogSummaryButton: React.FC<Props> = ({ group_id }) => {
+export const LogSummaryButton = ({ group_id }: Props) => {
   const { containerItemColor } = useColors();
   return (
     <Box position="absolute" right="0" top="0">
@@ -29,4 +28,3 @@ const LogSummaryButton: React.FC<Props> = ({ group_id }) => {
     </Box>
   );
 };
-export default LogSummaryButton;

@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
@@ -10,7 +9,7 @@ type AcceptInviteType = {
   invite_id: string;
 };
 
-const useAcceptInvite = () => {
+export const useAcceptInvite = () => {
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
   const { data: user } = useUser();
@@ -61,4 +60,3 @@ const useAcceptInvite = () => {
     }
   );
 };
-export default useAcceptInvite;

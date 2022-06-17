@@ -45,18 +45,34 @@ module.exports = {
             position: "before",
           },
           {
-            pattern: "framer-motion",
-            group: "external",
+            pattern: "pages",
+            group: "internal",
             position: "before",
           },
           {
-            pattern: "formik",
-            group: "external",
+            pattern: "context",
+            group: "internal",
+            position: "before",
+          },
+          {
+            pattern: "legacy",
+            group: "internal",
+            position: "before",
+          },
+          {
+            pattern: "hooks",
+            group: "internal",
             position: "before",
           },
           {
             pattern: "components",
             group: "internal",
+            position: "before",
+          },
+          {
+            pattern: "utils",
+            group: "internal",
+            position: "before",
           },
         ],
         pathGroupsExcludedImportTypes: ["react"],

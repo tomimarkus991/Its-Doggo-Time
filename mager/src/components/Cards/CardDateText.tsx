@@ -6,7 +6,7 @@ interface Props {
   created_at: Date | null | undefined;
 }
 
-const CardDateText: React.FC<Props> = ({ created_at }) => {
+export const CardDateText = ({ created_at }: Props) => {
   return (
     <Text
       textAlign="center"
@@ -23,4 +23,3 @@ const CardDateText: React.FC<Props> = ({ created_at }) => {
     </Text>
   );
 };
-export default CardDateText;

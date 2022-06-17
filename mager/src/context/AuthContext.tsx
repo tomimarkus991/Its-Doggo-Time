@@ -11,7 +11,7 @@ const AuthContext = createContext(initAuthContext);
 
 export const useAuth = () => useContext(AuthContext);
 
-const AuthDetailsProvider = ({ children }: any) => {
+export const AuthDetailsProvider = ({ children }: any) => {
   const [user, setUser] = useState<User | null>();
   const [loading, setLoading] = useState(true);
 
@@ -34,5 +34,3 @@ const AuthDetailsProvider = ({ children }: any) => {
   };
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 };
-
-export default AuthDetailsProvider;

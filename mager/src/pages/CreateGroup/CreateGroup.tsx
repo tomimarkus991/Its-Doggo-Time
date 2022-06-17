@@ -1,11 +1,14 @@
-import React from "react";
+import {
+  HeaderAvatar,
+  MainLayout,
+  PageHeaderBack,
+  ProfileNameAndAvatar,
+  ProfileNameAndAvatarMiddle,
+  ProfileAndMyGroups,
+  CreateGroupContainer,
+} from "components";
 
-import { CreateGroupContainer } from "components";
-import { HeaderAvatar, MainLayout, PageHeaderBack } from "components/Layouts";
-import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "components/Layouts/Profile";
-import { ProfileAndMyGroups } from "components/Links";
-
-const CreateGroup = () => {
+export const CreateGroup = () => {
   return (
     <MainLayout
       leftSide={
@@ -24,4 +27,3 @@ const CreateGroup = () => {
     />
   );
 };
-export default CreateGroup;

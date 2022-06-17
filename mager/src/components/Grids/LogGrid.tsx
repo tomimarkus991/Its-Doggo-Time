@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 
-const LogGrid: React.FC = ({ children }) => {
+export const LogGrid = ({ children }) => {
   return (
     <SimpleGrid
       id="LogGrid"
@@ -21,4 +21,3 @@ const LogGrid: React.FC = ({ children }) => {
     </SimpleGrid>
   );
 };
-export default LogGrid;

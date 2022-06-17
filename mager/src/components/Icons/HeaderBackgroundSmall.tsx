@@ -2,7 +2,7 @@ import { Icon, IconProps } from "@chakra-ui/react";
 
 import { useColors } from "hooks";
 
-const HeaderBackgroundSmall = (props: IconProps): JSX.Element => {
+export const HeaderBackgroundSmall = (props: IconProps): JSX.Element => {
   const { headerBackground3Color, headerBackground2Color, headerBackground1Color } = useColors();
   return (
     <Icon width="490" height="334" viewBox="0 0 490 334" position="fixed" zIndex={-3} {...props}>
@@ -28,5 +28,3 @@ const HeaderBackgroundSmall = (props: IconProps): JSX.Element => {
     </Icon>
   );
 };
-
-export default HeaderBackgroundSmall;

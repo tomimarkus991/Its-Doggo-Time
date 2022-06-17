@@ -1,7 +1,7 @@
-export { default as Avatar } from "./Avatar";
-export { default as AvatarGroup } from "./AvatarGroup";
-export { default as AvatarProfile } from "./AvatarProfile";
-export { default as AvatarInvite } from "./AvatarInvite";
-export { default as AvatarUpload } from "./AvatarUpload";
-export { default as AvatarGroupLoading } from "./AvatarGroupLoading";
-export { default as AvatarProfileLoading } from "./AvatarProfileLoading";
+export * from "./Avatar";
+export * from "./AvatarGroup";
+export * from "./AvatarProfile";
+export * from "./AvatarInvite";
+export * from "./AvatarUpload";
+export * from "./AvatarGroupLoading";
+export * from "./AvatarProfileLoading";

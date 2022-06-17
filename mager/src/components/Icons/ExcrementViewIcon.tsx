@@ -1,7 +1,8 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
 import { useColors } from "hooks";
-const ExcrementViewIcon = (props: IconProps): JSX.Element => {
+
+export const ExcrementViewIcon = (props: IconProps): JSX.Element => {
   const { logViewIconColor, whiteToBeige, logViewIconAuraColor, logViewIconAura2Color } =
     useColors();
   return (
@@ -59,4 +60,3 @@ const ExcrementViewIcon = (props: IconProps): JSX.Element => {
     </Icon>
   );
 };
-export default ExcrementViewIcon;

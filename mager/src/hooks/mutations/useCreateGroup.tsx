@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router";
-
 import { GroupType } from "types";
 import { supabase } from "utils";
 
@@ -12,7 +11,7 @@ type CreateGroupType = {
   group_avatar_url: string;
 };
 
-const useCreateGroup = () => {
+export const useCreateGroup = () => {
   const { showErrorToast } = useToast();
   const { data: user } = useUser();
   const router = useHistory();
@@ -81,4 +80,3 @@ const useCreateGroup = () => {
     }
   );
 };
-export default useCreateGroup;

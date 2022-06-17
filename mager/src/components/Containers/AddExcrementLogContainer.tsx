@@ -1,9 +1,8 @@
 import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
+import { useAddExcrementLog } from "hooks";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { useAddExcrementLog } from "hooks";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";
@@ -14,7 +13,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const AddExcrementLogContainer: React.FC = () => {
+export const AddExcrementLogContainer = () => {
   const { group_id } = useParams<RouteParams>();
 
   const [logData, setLogData] = useState<any>([]);
@@ -57,5 +56,3 @@ const AddExcrementLogContainer: React.FC = () => {
     </MainContainerLayout>
   );
 };
-
-export default AddExcrementLogContainer;

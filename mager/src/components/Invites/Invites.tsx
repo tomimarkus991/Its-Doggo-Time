@@ -11,12 +11,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import React, { useEffect } from "react";
-
 import { useColors } from "hooks";
 import { useAcceptInvite, useDeclineInvite } from "hooks/mutations";
 import { useFetchInvites } from "hooks/queries";
 import { useSubscribeToInviteInserts } from "hooks/subcribe";
+import React, { useEffect } from "react";
 import { InviteDataType } from "types";
 
 import GradientButton from "../Buttons/GradientButton";
@@ -25,7 +24,7 @@ import { InviteNotificationIcon, InvitesIcon } from "../Icons";
 import { Skeleton } from "../Skeleton";
 import { GradientButtonText, LinkLabel } from "../Text";
 
-const Invites = () => {
+export const Invites = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { defaultColor } = useColors();
@@ -85,4 +84,3 @@ const Invites = () => {
     </Skeleton>
   );
 };
-export default Invites;

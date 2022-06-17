@@ -8,7 +8,7 @@ interface Props {
   buttonGroupProps?: ButtonGroupProps;
 }
 
-const EditButtons: React.FC<Props> = ({ onCrossClick, onCheckClick, buttonGroupProps }) => {
+export const EditButtons = ({ onCrossClick, onCheckClick, buttonGroupProps }: Props) => {
   return (
     <ButtonGroup {...buttonGroupProps}>
       <IconButton
@@ -30,4 +30,3 @@ const EditButtons: React.FC<Props> = ({ onCrossClick, onCheckClick, buttonGroupP
     </ButtonGroup>
   );
 };
-export default EditButtons;

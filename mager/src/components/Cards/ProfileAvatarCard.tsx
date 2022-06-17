@@ -4,7 +4,7 @@ interface Props {
   src: string;
 }
 
-const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
+export const ProfileAvatarCard = ({ src }: Props) => {
   return (
     <Avatar
       path={src}
@@ -15,5 +15,3 @@ const ProfileAvatarCard: React.FC<Props> = ({ src }) => {
     />
   );
 };
-
-export default ProfileAvatarCard;

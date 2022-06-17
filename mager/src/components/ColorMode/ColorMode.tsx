@@ -2,9 +2,8 @@ import { useColorMode } from "@chakra-ui/react";
 
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
 
-const ColorMode: React.FC = () => {
+export const ColorMode = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
@@ -22,4 +21,3 @@ const ColorMode: React.FC = () => {
     </>
   );
 };
-export default ColorMode;

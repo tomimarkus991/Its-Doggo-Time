@@ -1,9 +1,8 @@
 import { Center } from "@chakra-ui/react";
 
+import { useAuth } from "context/AuthContext";
 import React, { useEffect } from "react";
 import { useQueryClient } from "react-query";
-
-import { useAuth } from "context/AuthContext";
 import { supabase } from "utils";
 
 import { GroupsContainer } from "../Containers";
@@ -12,7 +11,7 @@ import { HeaderAvatar, MainLayout, PageHeader } from "../Layouts";
 import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "../Layouts/Profile";
 import { ProfileLink } from "../Links";
 
-const LoggedIn: React.FC = () => {
+export const LoggedIn = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
 
@@ -79,4 +78,3 @@ const LoggedIn: React.FC = () => {
     />
   );
 };
-export default LoggedIn;

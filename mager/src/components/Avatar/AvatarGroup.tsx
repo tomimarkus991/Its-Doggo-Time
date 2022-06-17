@@ -1,13 +1,12 @@
 import { StringOrUndefined } from "types";
 
-import { GroupAvatarIcon } from "../Icons";
+import { GroupAvatarIcon, Avatar } from "components";
 
-import { Avatar } from ".";
 interface Props {
   src: StringOrUndefined;
 }
 
-const AvatarGroup: React.FC<Props> = ({ src }) => {
+export const AvatarGroup = ({ src }) => {
   return (
     <Avatar
       path={src}
@@ -18,5 +17,3 @@ const AvatarGroup: React.FC<Props> = ({ src }) => {
     />
   );
 };
-
-export default AvatarGroup;

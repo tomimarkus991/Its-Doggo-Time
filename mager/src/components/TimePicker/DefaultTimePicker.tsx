@@ -1,6 +1,5 @@
 import { TextField } from "@material-ui/core";
 import { TimePicker as MTimePicker } from "@material-ui/pickers";
-
 import { useColors } from "hooks";
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
   onChange: (newTime: any) => void;
 }
 
-const DefaultTimePicker: React.FC<Props> = ({ time, onChange }) => {
+export const DefaultTimePicker = ({ time, onChange }: Props) => {
   const { defaultReversedColor } = useColors();
 
   return (
@@ -43,4 +42,3 @@ const DefaultTimePicker: React.FC<Props> = ({ time, onChange }) => {
     />
   );
 };
-export default DefaultTimePicker;

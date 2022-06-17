@@ -1,7 +1,6 @@
 import { Center } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-
 import { FoodLogsdataType } from "types";
 
 import { FoodIcon } from "../Icons";
@@ -13,7 +12,7 @@ interface Props {
   group_id: string;
 }
 
-const FoodLogCard: React.FC<Props> = ({ log, group_id }) => {
+export const FoodLogCard = ({ log, group_id }: Props) => {
   const { id, created_at } = log;
 
   return (
@@ -33,5 +32,3 @@ const FoodLogCard: React.FC<Props> = ({ log, group_id }) => {
     </Link>
   );
 };
-
-export default FoodLogCard;

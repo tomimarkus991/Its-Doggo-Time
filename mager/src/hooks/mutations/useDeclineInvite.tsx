@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
@@ -8,7 +7,7 @@ type DeclineInviteType = {
   invite_id: string;
 };
 
-const useDeclineInvite = () => {
+export const useDeclineInvite = () => {
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -47,4 +46,3 @@ const useDeclineInvite = () => {
     }
   );
 };
-export default useDeclineInvite;

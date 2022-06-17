@@ -2,7 +2,7 @@ import { Center, Heading, Text, VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-const Error = (): JSX.Element => {
+export const Error = (): JSX.Element => {
   return (
     <Center w="100%" h="60%">
       <VStack>
@@ -16,5 +16,3 @@ const Error = (): JSX.Element => {
     </Center>
   );
 };
-
-export default Error;

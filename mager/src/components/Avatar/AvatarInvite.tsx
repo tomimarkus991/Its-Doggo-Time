@@ -6,7 +6,7 @@ interface Props {
   src: string;
 }
 
-const AvatarInvite: React.FC<Props> = ({ src }) => {
+export const AvatarInvite = ({ src }: Props) => {
   return (
     <Avatar
       path={src}
@@ -17,5 +17,3 @@ const AvatarInvite: React.FC<Props> = ({ src }) => {
     />
   );
 };
-
-export default AvatarInvite;

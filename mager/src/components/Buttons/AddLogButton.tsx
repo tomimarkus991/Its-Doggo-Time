@@ -7,7 +7,7 @@ interface Props {
   onClick: () => void;
 }
 
-const AddLogButton: React.FC<Props> = ({ logData, onClick }) => {
+export const AddLogButton = ({ logData, onClick }: Props) => {
   return (
     <Box
       as={IconButton}
@@ -29,4 +29,3 @@ const AddLogButton: React.FC<Props> = ({ logData, onClick }) => {
     />
   );
 };
-export default AddLogButton;

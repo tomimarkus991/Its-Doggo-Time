@@ -1,6 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
-const MembersIcon = (props: IconProps): JSX.Element => (
+export const MembersIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 150 80" {...props}>
     <g clipPath="url(#clip11)">
       <path
@@ -27,5 +27,3 @@ const MembersIcon = (props: IconProps): JSX.Element => (
     </defs>
   </Icon>
 );
-
-export default MembersIcon;

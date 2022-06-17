@@ -1,7 +1,8 @@
 import { Box, HStack } from "@chakra-ui/react";
 
-import { Skeleton, Name, AvatarGroup } from "components";
 import { useFetchGroupData } from "hooks/queries";
+
+import { Skeleton, Name, AvatarGroup } from "components";
 
 interface Props {
   group_id: string;
@@ -9,11 +10,11 @@ interface Props {
   isGroupPictureLoading?: boolean;
 }
 
-const GroupNameAndAvatarMiddle: React.FC<Props> = ({
+export const GroupNameAndAvatarMiddle = ({
   group_id,
   isGroupnameLoading,
   isGroupPictureLoading,
-}) => {
+}: Props) => {
   const { data, isLoading } = useFetchGroupData(group_id);
 
   return (
@@ -34,5 +35,3 @@ const GroupNameAndAvatarMiddle: React.FC<Props> = ({
     </HStack>
   );
 };
-
-export default GroupNameAndAvatarMiddle;

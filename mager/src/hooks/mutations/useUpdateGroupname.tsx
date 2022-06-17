@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 import { useFetchGroupData } from "../queries";
 
-const useUpdateGroupname = (id: string) => {
+export const useUpdateGroupname = (id: string) => {
   const { showErrorToast, showSuccessToast } = useToast();
   const queryClient = useQueryClient();
   const { data: group } = useFetchGroupData(id);
@@ -52,4 +51,3 @@ const useUpdateGroupname = (id: string) => {
     }
   );
 };
-export default useUpdateGroupname;

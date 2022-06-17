@@ -1,8 +1,6 @@
 import { Alert, Center, AlertIcon, AlertTitle, AlertDescription, Text } from "@chakra-ui/react";
 
-import React from "react";
-
-const ForgotPasswordAlert: React.FC = () => {
+export const ForgotPasswordAlert = () => {
   return (
     <Center>
       <Alert
@@ -30,4 +28,3 @@ const ForgotPasswordAlert: React.FC = () => {
     </Center>
   );
 };
-export default ForgotPasswordAlert;

@@ -2,14 +2,13 @@ import { IconButton } from "@chakra-ui/react";
 
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { useColors } from "hooks";
 
 interface Props {
   onClick: any;
 }
 
-const PenButton: React.FC<Props> = ({ onClick }) => {
+export const PenButton = ({ onClick }: Props) => {
   const { penColor } = useColors();
   return (
     <IconButton
@@ -21,4 +20,3 @@ const PenButton: React.FC<Props> = ({ onClick }) => {
     />
   );
 };
-export default PenButton;

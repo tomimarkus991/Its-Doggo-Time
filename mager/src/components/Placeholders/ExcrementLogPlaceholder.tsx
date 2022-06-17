@@ -2,7 +2,7 @@ import { Center, Text, VStack } from "@chakra-ui/react";
 
 import { DefaultExcrementIcon } from "../Icons";
 
-const ExcrementLogPlaceholder: React.FC = () => {
+export const ExcrementLogPlaceholder = () => {
   return (
     <Center>
       <VStack>
@@ -22,4 +22,3 @@ const ExcrementLogPlaceholder: React.FC = () => {
     </Center>
   );
 };
-export default ExcrementLogPlaceholder;

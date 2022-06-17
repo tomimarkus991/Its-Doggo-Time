@@ -1,7 +1,5 @@
 import { Box, Center, Text } from "@chakra-ui/react";
 
-import React from "react";
-
 import { InviteDataType } from "types";
 
 import { AvatarInvite } from "../Avatar";
@@ -13,7 +11,7 @@ interface Props {
   acceptInvite: (group_id: string, invite_id: string) => void;
 }
 
-const InviteCard: React.FC<Props> = ({ invite, declineInvite, acceptInvite }) => {
+export const InviteCard = ({ invite, declineInvite, acceptInvite }: Props) => {
   const { id, groups, sender } = invite;
   const { avatar_url, group_name } = groups;
   return (
@@ -45,5 +43,3 @@ const InviteCard: React.FC<Props> = ({ invite, declineInvite, acceptInvite }) =>
     </Box>
   );
 };
-
-export default InviteCard;

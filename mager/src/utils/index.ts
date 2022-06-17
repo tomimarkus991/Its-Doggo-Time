@@ -1,3 +1,3 @@
-export { sortExcrementLogs } from "./sortExcrementLogs";
-export { sortFoodLogs } from "./sortFoodLogs";
-export { supabase } from "./supabaseClient";
+export * from "./sortExcrementLogs";
+export * from "./sortFoodLogs";
+export * from "./supabaseClient";

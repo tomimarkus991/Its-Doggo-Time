@@ -8,7 +8,7 @@ interface Props {
   group_id: string;
 }
 
-const AddNewLogContainerButton: React.FC<Props> = ({ group_id }) => {
+export const AddNewLogContainerButton = ({ group_id }: Props) => {
   return (
     <Link to={`/group/${group_id}/add-log`}>
       <Box
@@ -31,4 +31,3 @@ const AddNewLogContainerButton: React.FC<Props> = ({ group_id }) => {
     </Link>
   );
 };
-export default AddNewLogContainerButton;

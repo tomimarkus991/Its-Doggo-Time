@@ -1,5 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
-const RightsidePawsIcon = (props: IconProps): JSX.Element => (
+
+export const RightsidePawsIcon = (props: IconProps): JSX.Element => (
   <Icon
     position="fixed"
     viewBox="0 0 233.757 513.44"
@@ -207,4 +208,3 @@ const RightsidePawsIcon = (props: IconProps): JSX.Element => (
     </g>
   </Icon>
 );
-export default RightsidePawsIcon;

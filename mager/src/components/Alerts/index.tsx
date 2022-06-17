@@ -1,3 +1,3 @@
-export { default as SignUpAlert } from "./SignUpAlert";
-export { default as MembersAlert } from "./MembersAlert";
-export { default as ForgotPasswordAlert } from "./ForgotPasswordAlert";
+export * from "./SignUpAlert";
+export * from "./MembersAlert";
+export * from "./ForgotPasswordAlert";

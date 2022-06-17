@@ -1,1 +1,1 @@
-export { default as AddNewMemberModal } from "./AddNewMemberModal";
+export * from "./AddNewMemberModal";

@@ -1,5 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
-const ProfileAvatarIcon = (props: IconProps): JSX.Element => (
+
+export const ProfileAvatarIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 143 148" {...props}>
     <g clipPath="url(#clip0)">
       <path
@@ -18,5 +19,3 @@ const ProfileAvatarIcon = (props: IconProps): JSX.Element => (
     </defs>
   </Icon>
 );
-
-export default ProfileAvatarIcon;

@@ -1,6 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
-const AddGroupIcon = (props: IconProps): JSX.Element => (
+export const AddGroupIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 148 149" {...props}>
     <path
       d="M73.9756 149C56.9029 148.989 40.359 143.037 27.1461 132.155C13.9332 121.272 4.86371 106.126 1.47391 89.2837C-1.9159 72.4411 0.582368 54.9368 8.54554 39.7358C16.5087 24.5349 29.4472 12.5719 45.1694 5.87316C63.2544 -1.81688 83.6336 -1.96055 101.824 5.47375C120.014 12.9081 134.525 27.3114 142.165 45.5151C149.805 63.7188 149.948 84.2318 142.562 102.542C135.176 120.851 120.867 135.458 102.782 143.148C93.6687 147.029 83.871 149.02 73.9756 149V149Z"
@@ -58,5 +58,3 @@ const AddGroupIcon = (props: IconProps): JSX.Element => (
     </defs>
   </Icon>
 );
-
-export default AddGroupIcon;

@@ -1,16 +1,15 @@
 import { Button, Flex } from "@chakra-ui/react";
 
-import { useHistory } from "react-router";
-
 import { useAuth } from "context";
 import { useLeaveGroup } from "hooks/mutations";
 import { useFetchGroupData } from "hooks/queries";
+import { useHistory } from "react-router";
 
 interface Props {
   group_id: string;
 }
 
-const LeaveGroupButton: React.FC<Props> = ({ group_id }) => {
+export const LeaveGroupButton = ({ group_id }: Props) => {
   const { user } = useAuth();
   const router = useHistory();
   const { mutate, isSuccess } = useLeaveGroup(user?.id, group_id);
@@ -40,4 +39,3 @@ const LeaveGroupButton: React.FC<Props> = ({ group_id }) => {
     </Flex>
   );
 };
-export default LeaveGroupButton;

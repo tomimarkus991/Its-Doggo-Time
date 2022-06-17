@@ -1,10 +1,9 @@
 import { useMutation } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useResetPassword = () => {
+export const useResetPassword = () => {
   const { showErrorToast } = useToast();
 
   const resetPassword = async (email: string) => {
@@ -21,4 +20,3 @@ const useResetPassword = () => {
   };
   return useMutation("resetPassword", (email: string) => resetPassword(email));
 };
-export default useResetPassword;

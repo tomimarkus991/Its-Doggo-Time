@@ -1,6 +1,5 @@
 import { VStack } from "@chakra-ui/react";
 
-import React from "react";
 import { Link } from "react-router-dom";
 
 import { MembersIcon } from "../Icons";
@@ -10,7 +9,7 @@ interface Props {
   group_id: string;
 }
 
-const MembersLink: React.FC<Props> = ({ group_id }) => {
+export const MembersLink = ({ group_id }: Props) => {
   return (
     <Link to={`/group/${group_id}/members`}>
       <VStack>
@@ -20,5 +19,3 @@ const MembersLink: React.FC<Props> = ({ group_id }) => {
     </Link>
   );
 };
-
-export default MembersLink;

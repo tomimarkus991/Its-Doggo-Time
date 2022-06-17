@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useUpdateGroupPicture = (id: string) => {
+export const useUpdateGroupPicture = (id: string) => {
   const { showErrorToast, showSuccessToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -41,4 +40,3 @@ const useUpdateGroupPicture = (id: string) => {
     },
   });
 };
-export default useUpdateGroupPicture;

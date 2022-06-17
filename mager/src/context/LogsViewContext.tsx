@@ -19,7 +19,7 @@ const LogsViewContext = createContext(initContextData);
 
 export const useLogsView = () => useContext(LogsViewContext);
 
-const LogsViewProvider = ({ children }: any) => {
+export const LogsViewProvider = ({ children }: any) => {
   const [view, setView] = useState<ViewType>(ViewType.Excrement);
 
   const value = {
@@ -28,5 +28,3 @@ const LogsViewProvider = ({ children }: any) => {
   };
   return <LogsViewContext.Provider value={value}>{children}</LogsViewContext.Provider>;
 };
-
-export default LogsViewProvider;

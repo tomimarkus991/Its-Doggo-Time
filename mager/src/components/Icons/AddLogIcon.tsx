@@ -1,6 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react";
 
-const AddLogIcon = (props: IconProps): JSX.Element => (
+export const AddLogIcon = (props: IconProps): JSX.Element => (
   <Icon viewBox="0 0 148 148" {...props}>
     <g clipPath="url(#clip3)">
       <path
@@ -67,5 +67,3 @@ const AddLogIcon = (props: IconProps): JSX.Element => (
     </defs>
   </Icon>
 );
-
-export default AddLogIcon;

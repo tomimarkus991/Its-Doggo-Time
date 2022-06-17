@@ -2,7 +2,7 @@ import { Center } from "@chakra-ui/react";
 
 import { DefaultSpinner } from "../Spinners";
 
-const AvatarProfileLoading = () => {
+export const AvatarProfileLoading = () => {
   return (
     <Center
       w={{ base: "7rem", sm: "7rem", md: "9rem" }}
@@ -13,4 +13,4 @@ const AvatarProfileLoading = () => {
   );
 };
 
-export default AvatarProfileLoading;
+AvatarProfileLoading;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { DefaultLayoutRoute, DefaultPrivateLayoutRoute } from "../components/Routes";
@@ -17,7 +16,7 @@ import Profile from "./Profile";
 import Register from "./Register";
 import ResetPassword from "./ResetPassword";
 
-const Router: React.FC = () => {
+export const Router = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -36,4 +35,3 @@ const Router: React.FC = () => {
     </Switch>
   );
 };
-export default Router;

@@ -40,7 +40,7 @@ const GroupContext = createContext(initialContext);
 
 export const useGroup = () => useContext(GroupContext);
 
-const GroupDetailsProvider = ({ children }: any) => {
+export const GroupDetailsProvider = ({ children }: any) => {
   const [groupname, setGroupname] = useState("");
   const [old_groupname, setOldGroupname] = useState("");
   const [group_avatar_url, setGroupAvatarUrl] = useState("");
@@ -65,5 +65,3 @@ const GroupDetailsProvider = ({ children }: any) => {
 
   return <GroupContext.Provider value={value}>{children}</GroupContext.Provider>;
 };
-
-export default GroupDetailsProvider;

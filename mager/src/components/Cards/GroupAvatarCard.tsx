@@ -5,7 +5,7 @@ interface Props {
   path: string | undefined;
 }
 
-const GroupAvatarCard: React.FC<Props> = ({ path }) => {
+export const GroupAvatarCard = ({ path }: Props) => {
   return (
     <Avatar
       path={path}
@@ -16,5 +16,3 @@ const GroupAvatarCard: React.FC<Props> = ({ path }) => {
     />
   );
 };
-
-export default GroupAvatarCard;

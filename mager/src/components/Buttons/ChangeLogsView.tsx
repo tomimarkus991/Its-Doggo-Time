@@ -1,12 +1,10 @@
 import { Box, HStack } from "@chakra-ui/react";
 
-import React from "react";
-
 import { useLogsView, ViewType } from "context";
 
 import { ExcrementViewIcon, FoodViewIcon } from "../Icons";
 
-const ChangeLogsView: React.FC = () => {
+export const ChangeLogsView = () => {
   const { setView } = useLogsView();
 
   return (
@@ -26,4 +24,3 @@ const ChangeLogsView: React.FC = () => {
     </HStack>
   );
 };
-export default ChangeLogsView;

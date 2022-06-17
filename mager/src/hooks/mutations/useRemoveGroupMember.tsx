@@ -1,10 +1,9 @@
 import { useMutation } from "react-query";
-
 import { supabase } from "utils";
 
 import { useToast } from "..";
 
-const useRemoveGroupMember = () => {
+export const useRemoveGroupMember = () => {
   const { showErrorToast, showSuccessToast } = useToast();
 
   const removeGroupMember = async (user_id: string, group_id: string) => {
@@ -38,4 +37,3 @@ const useRemoveGroupMember = () => {
     }
   );
 };
-export default useRemoveGroupMember;

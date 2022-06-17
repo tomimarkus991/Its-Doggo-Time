@@ -1,14 +1,12 @@
 import { Grid, HStack, VStack } from "@chakra-ui/react";
 
-import React from "react";
-
 interface Props {
   leftSide: any;
   middle: any;
   rightSide: any;
 }
 
-const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
+export const MainLayout = ({ leftSide, middle, rightSide }: Props) => {
   return (
     <Grid
       templateRows={{
@@ -70,4 +68,3 @@ const MainLayout: React.FC<Props> = ({ leftSide, middle, rightSide }) => {
     </Grid>
   );
 };
-export default MainLayout;

@@ -1,9 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-
 import { useFoodLogsPlaceholder } from "hooks/placeholders";
 import { useFetchFoodLogs } from "hooks/queries";
 import { useSubscribeToFoodLogInserts } from "hooks/subcribe/useSubscribeToFoodLogInserts";
+import { useParams } from "react-router-dom";
 import { FoodLogsdataType } from "types";
 
 import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";
@@ -16,7 +14,7 @@ interface RouteParams {
   group_id: string;
 }
 
-const FoodLogsContainer = () => {
+export const FoodLogsContainer = () => {
   const { group_id } = useParams<RouteParams>();
   const { data, isLoading } = useFetchFoodLogs(group_id);
   const { placeholders } = useFoodLogsPlaceholder(data);
@@ -54,5 +52,3 @@ const FoodLogsContainer = () => {
     </MainContainerLayout>
   );
 };
-
-export default FoodLogsContainer;

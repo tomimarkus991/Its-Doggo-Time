@@ -1,6 +1,6 @@
 import { MyGroupsLink, ProfileLink } from ".";
 
-const ProfileAndMyGroups: React.FC = () => {
+export const ProfileAndMyGroups = () => {
   return (
     <>
       <ProfileLink />
@@ -8,4 +8,3 @@ const ProfileAndMyGroups: React.FC = () => {
     </>
   );
 };
-export default ProfileAndMyGroups;

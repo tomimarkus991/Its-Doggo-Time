@@ -12,11 +12,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import React, { useEffect, useState } from "react";
-
 import { useColors } from "hooks";
 import { useInviteUser } from "hooks/mutations";
 import { useFetchGroupData } from "hooks/queries";
+import React, { useEffect, useState } from "react";
 
 import { GradientButton } from "../Buttons";
 import { AddMemberIcon } from "../Icons";
@@ -26,7 +25,7 @@ interface Props {
   group_id: string;
 }
 
-const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
+export const AddNewMemberModal = ({ group_id }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [isAddMemberDisabled, setIsAddMemberDisabled] = useState(false);
@@ -107,4 +106,3 @@ const AddNewMemberModal: React.FC<Props> = ({ group_id }) => {
     </>
   );
 };
-export default AddNewMemberModal;

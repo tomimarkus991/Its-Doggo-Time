@@ -1,8 +1,6 @@
 import { Box, Flex, FormLabel } from "@chakra-ui/react";
 
-import React from "react";
-
-import { useUploadAvatar } from "hooks/mutations";
+import { useUploadAvatar } from "hooks";
 import { StringOrUndefined } from "types";
 
 import { AddAvatarIcon } from "../Icons";
@@ -15,7 +13,7 @@ interface Props {
   avatar: "User" | "Group";
 }
 
-const AvatarUpload: React.FC<Props> = ({ onUpload, avatar_url, avatar }) => {
+export const AvatarUpload = ({ onUpload, avatar_url, avatar }: Props) => {
   const { mutate, isLoading } = useUploadAvatar(onUpload);
 
   return (
@@ -57,4 +55,3 @@ const AvatarUpload: React.FC<Props> = ({ onUpload, avatar_url, avatar }) => {
     </Flex>
   );
 };
-export default AvatarUpload;
