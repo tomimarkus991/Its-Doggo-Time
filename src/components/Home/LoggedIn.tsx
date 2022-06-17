@@ -1,9 +1,11 @@
 import { Center } from "@chakra-ui/react";
 
-import { useAuth } from "context/AuthContext";
 import React, { useEffect } from "react";
 import { useQueryClient } from "react-query";
+
 import { supabase } from "utils";
+
+import { useAuth } from "context/AuthContext";
 
 import { GroupsContainer } from "../Containers";
 import { Invites } from "../Invites";

@@ -12,10 +12,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
+import React, { useEffect, useState } from "react";
+
 import { useColors } from "hooks";
+
 import { useInviteUser } from "hooks/mutations";
 import { useFetchGroupData } from "hooks/queries";
-import React, { useEffect, useState } from "react";
 
 import { GradientButton } from "../Buttons";
 import { AddMemberIcon } from "../Icons";

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 
-import { FoodLogsdataType } from "types";
 import { sortFoodLogs, supabase } from "utils";
+
+import { FoodLogsdataType } from "types";
 
 export const useSubscribeToFoodLogInserts = (group_id: string) => {
   const queryClient = useQueryClient();

@@ -1,6 +1,7 @@
 import { Box, Flex, FormLabel } from "@chakra-ui/react";
 
 import { useUploadAvatar } from "hooks";
+
 import { StringOrUndefined } from "types";
 
 import { AddAvatarIcon } from "../Icons";

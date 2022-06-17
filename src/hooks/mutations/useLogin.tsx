@@ -1,5 +1,7 @@
-import { useToast } from "hooks";
 import { useMutation } from "react-query";
+
+import { useToast } from "hooks";
+
 import { supabase } from "utils";
 
 export const useLogin = ({ email, password }: { email: string; password: string }) => {

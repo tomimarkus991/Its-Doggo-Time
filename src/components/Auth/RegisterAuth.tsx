@@ -2,9 +2,11 @@ import { Box, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra
 
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useForm } from "hooks";
-import { useCreateUser } from "hooks/mutations";
 import React, { useState } from "react";
+
+import { useForm } from "hooks";
+
+import { useCreateUser } from "hooks/mutations";
 
 import SignUpAlert from "../Alerts/SignUpAlert";
 import { GradientButton } from "../Buttons";

@@ -1,12 +1,12 @@
-import { StringOrUndefined } from "types";
-
 import { GroupAvatarIcon, Avatar } from "components";
+
+import { StringOrUndefined } from "types";
 
 interface Props {
   src: StringOrUndefined;
 }
 
-export const AvatarGroup = ({ src }) => {
+export const AvatarGroup = ({ src }: Props) => {
   return (
     <Avatar
       path={src}

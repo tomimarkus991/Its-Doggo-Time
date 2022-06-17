@@ -1,6 +1,8 @@
 import { useMutation } from "react-query";
-import { StringOrUndefined } from "types";
+
 import { supabase } from "utils";
+
+import { StringOrUndefined } from "types";
 
 import { useToast } from "..";
 

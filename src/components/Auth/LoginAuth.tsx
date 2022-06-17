@@ -2,9 +2,10 @@ import { Box, Flex, Input, InputGroup, InputRightElement, Text, VStack } from "@
 
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useForm, { useLogin } from "hooks";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+
+import useForm, { useLogin } from "hooks";
 
 import { GradientButton } from "../Buttons";
 import { ColorMode } from "../ColorMode";

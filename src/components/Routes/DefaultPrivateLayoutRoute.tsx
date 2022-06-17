@@ -1,7 +1,8 @@
 import { Center } from "@chakra-ui/react";
 
-import { useUser } from "hooks/queries";
 import { Redirect, Route } from "react-router-dom";
+
+import { useUser } from "hooks/queries";
 
 import DefaultLayout from "../Layouts/DefaultLayout";
 import { DefaultSpinner } from "../Spinners";

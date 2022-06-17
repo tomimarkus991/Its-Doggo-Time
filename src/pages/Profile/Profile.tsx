@@ -1,5 +1,7 @@
 import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
 
+import { useState } from "react";
+
 import { AvatarUpload } from "components/Avatar";
 import { EditButtons, PenButton } from "components/Buttons";
 import { MyProfileContainer } from "components/Containers";
@@ -9,7 +11,6 @@ import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "components/Lay
 import { MyGroupsLink } from "components/Links";
 import { useUpdateUserAvatar, useUpdateUsername } from "hooks/mutations";
 import { useUser } from "hooks/queries";
-import { useState } from "react";
 
 export const Profile = () => {
   const [isEditable, setIsEditable] = useState(false);

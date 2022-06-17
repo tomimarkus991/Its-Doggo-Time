@@ -3,6 +3,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { IconButton, Text, VStack } from "@chakra-ui/react";
 
 import { useColors } from "hooks";
+
 import { useRemoveGroupMember } from "hooks/mutations";
 import { MemberType, StringOrUndefined } from "types";
 

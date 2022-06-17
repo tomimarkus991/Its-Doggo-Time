@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 
 import { useAuth } from "context";
-import { GroupType } from "types";
+
 import { supabase } from "utils";
+
+import { GroupType } from "types";
 
 export const useSubscribeToGroupInserts = () => {
   const { user } = useAuth();

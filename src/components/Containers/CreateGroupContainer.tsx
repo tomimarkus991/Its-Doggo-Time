@@ -1,8 +1,9 @@
 import { Box, IconButton, Input, VStack } from "@chakra-ui/react";
 
+import React, { useState } from "react";
+
 import { useCreateGroup } from "hooks/mutations";
 import { useUser } from "hooks/queries";
-import React, { useState } from "react";
 import { GroupType } from "types";
 
 import { AvatarUpload } from "../Avatar";

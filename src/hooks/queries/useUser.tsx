@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 
-import { UserType } from "types";
 import { supabase } from "utils";
+
+import { UserType } from "types";
 
 import { useToast } from "..";
 

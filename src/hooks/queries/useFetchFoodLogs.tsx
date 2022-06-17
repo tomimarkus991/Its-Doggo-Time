@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 
-import { FoodLogsdataType } from "types";
 import { supabase } from "utils";
+
+import { FoodLogsdataType } from "types";
 
 import { useToast } from "..";
 

@@ -1,6 +1,7 @@
 import { Skeleton as ChakraSkeleton, SkeletonProps } from "@chakra-ui/react";
 
 interface Props {
+  children: React.ReactNode;
   isLoading: boolean | undefined;
   props?: SkeletonProps;
 }

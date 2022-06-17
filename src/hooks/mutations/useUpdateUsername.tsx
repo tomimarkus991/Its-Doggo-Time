@@ -1,7 +1,10 @@
-import { useAuth } from "context";
 import { useMutation, useQueryClient } from "react-query";
-import { StringOrUndefined } from "types";
+
+import { useAuth } from "context";
+
 import { supabase } from "utils";
+
+import { StringOrUndefined } from "types";
 
 import { useToast } from "..";
 import { useUser } from "../queries";

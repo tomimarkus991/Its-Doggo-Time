@@ -1,8 +1,8 @@
 import { Box, Center } from "@chakra-ui/react";
 
-import { useUser } from "hooks/queries";
-
 import { Skeleton, Name, AvatarProfile } from "components";
+
+import { useUser } from "hooks/queries";
 
 interface Props {
   isUsernameLoading?: boolean;

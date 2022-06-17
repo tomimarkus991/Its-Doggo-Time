@@ -1,8 +1,10 @@
 import { useQuery } from "react-query";
 
 import { useLogs } from "context";
-import { ExcrementLogsdataType } from "types";
+
 import { supabase } from "utils";
+
+import { ExcrementLogsdataType } from "types";
 
 import { useToast } from "..";
 

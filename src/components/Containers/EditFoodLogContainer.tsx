@@ -1,10 +1,12 @@
 import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
-import { useLogs } from "context";
-import { useEditFoodLog } from "hooks/mutations";
-import { useFetchFoodLog } from "hooks/queries";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { useLogs } from "context";
+
+import { useEditFoodLog } from "hooks/mutations";
+import { useFetchFoodLog } from "hooks/queries";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";

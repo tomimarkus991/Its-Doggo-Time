@@ -1,9 +1,11 @@
 import { Box, IconButton, SimpleGrid } from "@chakra-ui/react";
 
+import React, { useState } from "react";
+
 import { useAuth } from "context";
+
 import { useMembersPlaceholder } from "hooks/placeholders";
 import { useFetchGroupData } from "hooks/queries";
-import React, { useState } from "react";
 import { MemberType } from "types";
 
 import { PenButton } from "../Buttons";

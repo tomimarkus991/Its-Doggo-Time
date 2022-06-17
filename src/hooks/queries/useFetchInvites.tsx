@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 
-import { InviteDataType, UserType } from "types";
 import { supabase } from "utils";
+
+import { InviteDataType, UserType } from "types";
 
 import { useToast } from "..";
 

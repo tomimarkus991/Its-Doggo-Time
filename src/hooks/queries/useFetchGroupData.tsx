@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 
-import { GroupPageDataType } from "types";
 import { supabase } from "utils";
+
+import { GroupPageDataType } from "types";
 
 import { useToast } from "..";
 

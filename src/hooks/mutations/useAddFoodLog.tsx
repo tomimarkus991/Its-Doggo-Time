@@ -1,8 +1,11 @@
-import { useAuth } from "context";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router";
-import { FoodLogsdataType } from "types";
+
+import { useAuth } from "context";
+
 import { sortFoodLogs, supabase } from "utils";
+
+import { FoodLogsdataType } from "types";
 
 import { useToast } from "..";
 

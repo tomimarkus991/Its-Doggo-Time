@@ -3,15 +3,25 @@ import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { AvatarUpload } from "../components/Avatar";
-import { ChangeLogsView, DeleteGroupButton, EditButtons, PenButton } from "../components/Buttons";
-import { ExcrementLogsContainer, FoodLogsContainer } from "../components/Containers";
-import { HeaderAvatar, MainLayout } from "../components/Layouts";
-import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "../components/Layouts/Group";
-import { MembersLink, MyGroupsLink } from "../components/Links";
-import { useLogsView, ViewType } from "../context";
-import { useUpdateGroupname, useUpdateGroupPicture } from "../hooks/mutations";
-import { useFetchGroupData, useUser } from "../hooks/queries";
+import { useLogsView, ViewType } from "context";
+
+import { useUser, useFetchGroupData, useUpdateGroupPicture, useUpdateGroupname } from "hooks";
+
+import {
+  MainLayout,
+  HeaderAvatar,
+  AvatarUpload,
+  DeleteGroupButton,
+  EditButtons,
+  PenButton,
+  ChangeLogsView,
+  ExcrementLogsContainer,
+  FoodLogsContainer,
+  MembersLink,
+  MyGroupsLink,
+  GroupNameAndAvatar,
+  GroupNameAndAvatarMiddle,
+} from "components";
 
 interface RouteParams {
   group_id: string;
@@ -64,7 +74,7 @@ export const GroupPage = () => {
                   <Input
                     variant={"removeDefault"}
                     autoCapitalize="off"
-                    onChange={e => setGroupname(e.target.value)}
+                    onChange={(e: any) => setGroupname(e.target.value)}
                     isDisabled={!isEditable}
                     borderRadius="50"
                     fontSize="3xl"
@@ -130,7 +140,7 @@ export const GroupPage = () => {
                   <Input
                     variant={"removeDefault"}
                     autoCapitalize="off"
-                    onChange={e => setGroupname(e.target.value)}
+                    onChange={(e: any) => setGroupname(e.target.value)}
                     isDisabled={!isEditable}
                     borderRadius="50"
                     fontSize="3xl"

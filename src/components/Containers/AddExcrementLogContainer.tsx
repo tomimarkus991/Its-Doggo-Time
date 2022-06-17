@@ -1,8 +1,9 @@
 import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
-import { useAddExcrementLog } from "hooks";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+
+import { useAddExcrementLog } from "hooks";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";

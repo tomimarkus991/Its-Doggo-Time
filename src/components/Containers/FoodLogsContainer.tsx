@@ -1,7 +1,8 @@
+import { useParams } from "react-router-dom";
+
 import { useFoodLogsPlaceholder } from "hooks/placeholders";
 import { useFetchFoodLogs } from "hooks/queries";
 import { useSubscribeToFoodLogInserts } from "hooks/subcribe/useSubscribeToFoodLogInserts";
-import { useParams } from "react-router-dom";
 import { FoodLogsdataType } from "types";
 
 import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";

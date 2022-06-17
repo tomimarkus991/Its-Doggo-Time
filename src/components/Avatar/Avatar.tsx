@@ -1,9 +1,10 @@
 import { Avatar as ChakraAvatar, Box, BoxProps } from "@chakra-ui/react";
 
 import { useColors, useFetchAvatar } from "hooks";
-import { AvatarIconType } from "types";
 
 import { Skeleton } from "components";
+
+import { AvatarIconType } from "types";
 
 interface Props {
   path: string | undefined;
@@ -14,7 +15,7 @@ interface Props {
   type: "Group" | "User";
 }
 
-export const Avatar = ({ path, w, h, icon, textProps, type }) => {
+export const Avatar = ({ path, w, h, icon, textProps, type }: Props) => {
   const { defaultColor } = useColors();
 
   const { data, isLoading, isSuccess } = useFetchAvatar(

@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router";
-import { GroupType } from "types";
+
 import { supabase } from "utils";
+
+import { GroupType } from "types";
 
 import { useToast } from "..";
 import { useUser } from "../queries";
