@@ -15,8 +15,8 @@ import React, { useEffect } from "react";
 
 import { useColors } from "hooks";
 
-import { useAcceptInvite, useDeclineInvite } from "hooks/mutations";
-import { useFetchInvites } from "hooks/queries";
+import { useAcceptInvite, useDeclineInvite } from "hooks";
+import { useFetchInvites } from "hooks";
 import { useSubscribeToInviteInserts } from "hooks/subcribe";
 import { InviteDataType } from "types";
 

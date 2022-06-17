@@ -1,7 +1,7 @@
 import { Center, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 
 import useGroupsPlaceholder from "hooks/placeholders/useGroupsPlaceholder";
-import { useUser } from "hooks/queries";
+import { useUser } from "hooks";
 import { GroupType } from "types";
 
 import { CreateGroupContainerButton } from "../Buttons";

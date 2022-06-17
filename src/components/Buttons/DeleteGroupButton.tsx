@@ -2,7 +2,7 @@ import { Button, Flex } from "@chakra-ui/react";
 
 import { useHistory } from "react-router";
 
-import { useDeleteGroup } from "hooks/mutations";
+import { useDeleteGroup } from "hooks";
 import { StringOrUndefined } from "types";
 
 interface Props {

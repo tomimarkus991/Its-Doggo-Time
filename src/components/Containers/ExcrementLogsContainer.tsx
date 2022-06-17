@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import { useExcrementLogsPlaceholder } from "hooks/placeholders";
-import { useFetchExcrementLogs } from "hooks/queries";
+import { useFetchExcrementLogs } from "hooks";
 import { useSubscribeToExcrementLogInserts } from "hooks/subcribe";
 import { ExcrementLogsdataType } from "types";
 

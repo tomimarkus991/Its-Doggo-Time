@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 
 import { useLogs } from "context";
 
-import { useEditFoodLog } from "hooks/mutations";
-import { useFetchFoodLog } from "hooks/queries";
+import { useEditFoodLog } from "hooks";
+import { useFetchFoodLog } from "hooks";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";

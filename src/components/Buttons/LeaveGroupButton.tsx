@@ -4,8 +4,8 @@ import { useHistory } from "react-router";
 
 import { useAuth } from "context";
 
-import { useLeaveGroup } from "hooks/mutations";
-import { useFetchGroupData } from "hooks/queries";
+import { useLeaveGroup } from "hooks";
+import { useFetchGroupData } from "hooks";
 
 interface Props {
   group_id: string;

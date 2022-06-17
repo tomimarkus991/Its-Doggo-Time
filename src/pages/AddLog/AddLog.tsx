@@ -2,11 +2,18 @@ import { useParams } from "react-router-dom";
 
 import { useLogsView, ViewType } from "context";
 
-import { AddExcrementLogContainer, AddFoodLogContainer } from "components/Containers";
-import { HeaderAvatar, MainLayout, PageHeaderBack } from "components/Layouts";
-import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "components/Layouts/Group";
-import { ProfileAndMyGroups } from "components/Links";
-import { useFetchExcrementLogs } from "hooks/queries";
+import { useFetchExcrementLogs } from "hooks";
+
+import {
+  AddExcrementLogContainer,
+  AddFoodLogContainer,
+  GroupNameAndAvatar,
+  GroupNameAndAvatarMiddle,
+  HeaderAvatar,
+  MainLayout,
+  PageHeaderBack,
+  ProfileAndMyGroups,
+} from "components";
 
 interface RouteParams {
   group_id: string;

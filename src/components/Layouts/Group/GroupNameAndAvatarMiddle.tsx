@@ -2,7 +2,7 @@ import { Box, HStack } from "@chakra-ui/react";
 
 import { Skeleton, Name, AvatarGroup } from "components";
 
-import { useFetchGroupData } from "hooks/queries";
+import { useFetchGroupData } from "hooks";
 
 interface Props {
   group_id: string;

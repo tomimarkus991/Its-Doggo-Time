@@ -2,11 +2,11 @@ import { VStack } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 
-import { LeaveGroupButton } from "components/Buttons";
-import { MembersContainer } from "components/Containers";
-import { HeaderAvatar, MainLayout, PageHeaderBack } from "components/Layouts";
-import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "components/Layouts/Group";
-import { ProfileAndMyGroups } from "components/Links";
+import { LeaveGroupButton } from "components";
+import { MembersContainer } from "components";
+import { HeaderAvatar, MainLayout, PageHeaderBack } from "components";
+import { GroupNameAndAvatar, GroupNameAndAvatarMiddle } from "components";
+import { ProfileAndMyGroups } from "components";
 
 interface RouteParams {
   group_id: string;

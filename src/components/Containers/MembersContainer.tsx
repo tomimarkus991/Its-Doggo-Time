@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useAuth } from "context";
 
 import { useMembersPlaceholder } from "hooks/placeholders";
-import { useFetchGroupData } from "hooks/queries";
+import { useFetchGroupData } from "hooks";
 import { MemberType } from "types";
 
 import { PenButton } from "../Buttons";

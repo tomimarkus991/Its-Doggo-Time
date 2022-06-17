@@ -2,11 +2,9 @@ import { Center, Grid, Heading, Input, VStack } from "@chakra-ui/react";
 
 import React, { useState } from "react";
 
-import { ForgotPasswordAlert } from "components/Alerts";
-import { GradientButton } from "components/Buttons";
-import { BackIcon } from "components/Icons";
-import { GradientButtonText } from "components/Text";
-import { useResetPassword } from "hooks/mutations";
+import { useResetPassword } from "hooks";
+
+import { GradientButtonText, BackIcon, GradientButton, ForgotPasswordAlert } from "components";
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState<string>("");
@@ -40,7 +38,7 @@ export const ForgotPassword = () => {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e: any) => setEmail(e.target.value)}
               size="lg"
               fontSize="2xl"
               maxW={{ base: "16rem", sm: "20rem" }}

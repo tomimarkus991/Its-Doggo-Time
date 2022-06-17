@@ -3,7 +3,7 @@ import { Flex, HStack, useCheckboxGroup, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useAddFoodLog } from "hooks/mutations";
+import { useAddFoodLog } from "hooks";
 
 import { EditOrAddLogContainerButton } from "../Buttons";
 import { CheckboxCard } from "../Cards";

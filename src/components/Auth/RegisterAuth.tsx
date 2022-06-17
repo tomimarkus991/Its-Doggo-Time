@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 import { useForm } from "hooks";
 
-import { useCreateUser } from "hooks/mutations";
+import { useCreateUser } from "hooks";
 
 import SignUpAlert from "../Alerts/SignUpAlert";
 import { GradientButton } from "../Buttons";

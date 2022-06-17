@@ -4,7 +4,7 @@ import { useAuth } from "context";
 
 import { Header2 } from "components/Header";
 import { LoggedIn, LoggedOut } from "components/Home";
-import { DefaultLayout } from "components/Layouts";
+import { DefaultLayout } from "components";
 
 export const Home = () => {
   const { user } = useAuth();

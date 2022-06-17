@@ -1,20 +1,21 @@
 import { Route, Switch } from "react-router-dom";
 
-import { DefaultLayoutRoute, DefaultPrivateLayoutRoute } from "../components/Routes";
+import {
+  AddLog,
+  CreateGroup,
+  EditLog,
+  ForgotPassword,
+  GroupPage,
+  Home,
+  Login,
+  LogsSummary,
+  Members,
+  Profile,
+  Register,
+  ResetPassword,
+} from "pages";
 
-import AddLog from "./AddLog";
-import CreateGroup from "./CreateGroup";
-import EditLog from "./EditLog";
-import Error from "./Error";
-import ForgotPassword from "./ForgotPassword";
-import GroupPage from "./GroupPage";
-import Home from "./Home";
-import Login from "./Login";
-import LogsSummary from "./LogsSummary";
-import Members from "./Members";
-import Profile from "./Profile";
-import Register from "./Register";
-import ResetPassword from "./ResetPassword";
+import { DefaultLayoutRoute, DefaultPrivateLayoutRoute } from "components";
 
 export const Router = () => {
   return (
