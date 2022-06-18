@@ -6,7 +6,7 @@ import { useResetPassword } from "hooks";
 
 import { GradientButtonText, BackIcon, GradientButton, ForgotPasswordAlert } from "components";
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState<string>("");
   const { isLoading, mutate, isSuccess, isError } = useResetPassword();
 
@@ -59,3 +59,5 @@ export const ForgotPassword = () => {
     </Grid>
   );
 };
+
+export default ForgotPassword;

@@ -20,7 +20,7 @@ const SafeHydrate = ({ children }: any) => {
   return <div suppressHydrationWarning>{typeof window === "undefined" ? null : children}</div>;
 };
 
-export const MyApp = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   // useEffect(() => {
   //   if ('serviceWorker' in navigator) {
   //     window.addEventListener('load', function () {
@@ -105,3 +105,5 @@ export const MyApp = ({ Component, pageProps }: AppProps) => {
     </QueryClientProvider>
   );
 };
+
+export default App;

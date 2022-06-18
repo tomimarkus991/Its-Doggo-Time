@@ -1,1 +1,1 @@
-export * from "./EditLog";
+export { default as EditLog } from "./EditLog";

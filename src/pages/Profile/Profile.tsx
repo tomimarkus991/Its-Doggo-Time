@@ -2,17 +2,23 @@ import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
 
 import { useState } from "react";
 
-import { AvatarUpload } from "components/Avatar";
-import { EditButtons, PenButton } from "components";
-import { MyProfileContainer } from "components";
-import { Invites } from "components/Invites";
-import { HeaderAvatar, MainLayout, PageHeader } from "components";
-import { ProfileNameAndAvatar, ProfileNameAndAvatarMiddle } from "components/Profile";
-import { MyGroupsLink } from "components";
-import { useUpdateUserAvatar, useUpdateUsername } from "hooks";
-import { useUser } from "hooks";
+import { useUpdateUserAvatar, useUpdateUsername, useUser } from "hooks";
 
-export const Profile = () => {
+import {
+  ProfileNameAndAvatar,
+  ProfileNameAndAvatarMiddle,
+  MyProfileContainer,
+  Invites,
+  HeaderAvatar,
+  MainLayout,
+  PageHeader,
+  EditButtons,
+  PenButton,
+  MyGroupsLink,
+  AvatarUpload,
+} from "components";
+
+const Profile = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { data } = useUser();
   const [username, setUsername] = useState(data?.username);
@@ -43,7 +49,7 @@ export const Profile = () => {
                 <Input
                   variant={"removeDefault"}
                   autoCapitalize="off"
-                  onChange={e => setUsername(e.target.value)}
+                  onChange={(e: any) => setUsername(e.target.value)}
                   defaultValue={data?.username}
                   isDisabled={!isEditable}
                   borderRadius="50"
@@ -91,7 +97,7 @@ export const Profile = () => {
                   <Input
                     variant={"removeDefault"}
                     autoCapitalize="off"
-                    onChange={e => setUsername(e.target.value)}
+                    onChange={(e: any) => setUsername(e.target.value)}
                     defaultValue={data?.username}
                     isDisabled={!isEditable}
                     borderRadius="50"
@@ -134,3 +140,5 @@ export const Profile = () => {
     />
   );
 };
+
+export default Profile;

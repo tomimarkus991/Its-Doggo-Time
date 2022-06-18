@@ -1,1 +1,1 @@
-export * from "./CreateGroup";
+export { default as CreateGroup } from "./CreateGroup";

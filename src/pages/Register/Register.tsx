@@ -2,7 +2,7 @@ import { Heading, VStack } from "@chakra-ui/react";
 
 import { RegisterAuth } from "components";
 
-export const Register = () => {
+const Register = () => {
   return (
     <VStack zIndex={2} spacing={{ base: "10" }}>
       <Heading
@@ -16,3 +16,5 @@ export const Register = () => {
     </VStack>
   );
 };
+
+export default Register;

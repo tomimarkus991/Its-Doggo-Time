@@ -8,7 +8,7 @@ import {
   CreateGroupContainer,
 } from "components";
 
-export const CreateGroup = () => {
+const CreateGroup = () => {
   return (
     <MainLayout
       leftSide={
@@ -27,3 +27,5 @@ export const CreateGroup = () => {
     />
   );
 };
+
+export default CreateGroup;

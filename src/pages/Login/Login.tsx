@@ -2,7 +2,7 @@ import { Heading, VStack } from "@chakra-ui/react";
 
 import { LoginAuth } from "components";
 
-export const Login = () => {
+const Login = () => {
   return (
     <VStack zIndex={2} spacing={{ base: "10" }}>
       <Heading
@@ -16,3 +16,5 @@ export const Login = () => {
     </VStack>
   );
 };
+
+export default Login;

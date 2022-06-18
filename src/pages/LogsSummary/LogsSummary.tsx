@@ -1,5 +1,7 @@
 import { Center } from "@chakra-ui/react";
 
-export const LogsSummary = () => {
+const LogsSummary = () => {
   return <Center>Logs Summary</Center>;
 };
+
+export default LogsSummary;

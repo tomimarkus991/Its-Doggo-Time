@@ -2,11 +2,12 @@ import { Grid, GridItem, Box } from "@chakra-ui/react";
 
 import { useAuth } from "context";
 
-import { Header2 } from "components/Header";
-import { LoggedIn, LoggedOut } from "components/Home";
 import { DefaultLayout } from "components";
 
-export const Home = () => {
+import { Header2 } from "components/Header";
+import { LoggedIn, LoggedOut } from "components/Home";
+
+const Home = () => {
   const { user } = useAuth();
   // console.log('home user', user);
 
@@ -36,3 +37,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

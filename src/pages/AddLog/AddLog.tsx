@@ -19,7 +19,7 @@ interface RouteParams {
   group_id: string;
 }
 
-export const AddLog = () => {
+const AddLog = () => {
   const { group_id } = useParams<RouteParams>();
   const { view } = useLogsView();
   useFetchExcrementLogs(group_id);
@@ -42,3 +42,5 @@ export const AddLog = () => {
     />
   );
 };
+
+export default AddLog;

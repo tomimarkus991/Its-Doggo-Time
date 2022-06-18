@@ -27,7 +27,7 @@ interface RouteParams {
   group_id: string;
 }
 
-export const GroupPage = () => {
+const GroupPage = () => {
   const { group_id } = useParams<RouteParams>();
   const { data: user } = useUser();
   const { view } = useLogsView();
@@ -200,3 +200,5 @@ export const GroupPage = () => {
     />
   );
 };
+
+export default GroupPage;

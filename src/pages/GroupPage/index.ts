@@ -1,1 +1,1 @@
-export * from "./GroupPage";
+export { default as GroupPage } from "./GroupPage";
