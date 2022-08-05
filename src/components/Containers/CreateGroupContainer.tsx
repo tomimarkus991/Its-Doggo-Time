@@ -2,8 +2,8 @@ import { Box, IconButton, Input, VStack } from "@chakra-ui/react";
 
 import React, { useState } from "react";
 
-import { useCreateGroup } from "hooks";
-import { useUser } from "hooks";
+import { useCreateGroup, useUser } from "hooks";
+
 import { GroupType } from "types";
 
 import { AvatarUpload } from "../Avatar";
@@ -59,7 +59,7 @@ export const CreateGroupContainer = () => {
           variant={"removeDefault"}
           autoCapitalize="off"
           value={groupname}
-          onChange={e => setGroupname(e.target.value)}
+          onChange={(e: any) => setGroupname(e.target.value)}
           isRequired
           size="lg"
           fontSize="2xl"

@@ -1,11 +1,14 @@
 import { Box, Center, FlexProps } from "@chakra-ui/react";
 
+import { ReactNode } from "react";
+
 import { Skeleton } from "../Skeleton";
 
 interface Props {
   isLoading: boolean;
   button?: any;
   containerProps?: FlexProps;
+  children: ReactNode;
 }
 
 export const MainContainerLayout = ({ isLoading, children, button, containerProps }: Props) => {
