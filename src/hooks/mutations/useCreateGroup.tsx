@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { supabase } from "utils";
 
@@ -16,7 +16,7 @@ type CreateGroupType = {
 export const useCreateGroup = () => {
   const { showErrorToast } = useToast();
   const { data: user } = useUser();
-  const router = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const createGroup = async ({ groupname, group_avatar_url }: CreateGroupType) => {
@@ -73,7 +73,7 @@ export const useCreateGroup = () => {
         });
 
         // Push user to home page
-        router.push("/");
+        navigate("/");
       },
       // Refetch after error or success:
       onSettled: () => {

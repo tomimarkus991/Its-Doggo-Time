@@ -29,7 +29,7 @@ const Content = ({ children, icon, tooltip, isActive }: ContentProps) => {
       whileTap="whileTap"
       className={clsx(
         isActive ? "bg-slate-800 hover:bg-slate-900" : "hover:bg-slate-100",
-        "group flex relative justify-center items-center p-3 rounded-md cursor-pointer"
+        "group relative flex cursor-pointer items-center justify-center rounded-md p-3"
       )}
     >
       <AnimationWrapper

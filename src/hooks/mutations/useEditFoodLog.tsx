@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useAuth } from "context";
 
@@ -11,7 +11,7 @@ import { useToast } from "..";
 
 export const useEditFoodLog = (group_id: string) => {
   const { user } = useAuth();
-  const router = useHistory();
+  const navigate = useNavigate();
   const { showErrorToast } = useToast();
 
   const editFoodLog = async (logData: any, time: Date | null | undefined, log_id: string) => {
@@ -51,7 +51,7 @@ export const useEditFoodLog = (group_id: string) => {
       editFoodLog(logData, time, log_id),
     {
       onSuccess: () => {
-        router.push(`/group/${group_id}`);
+        navigate(`/group/${group_id}`);
       },
     }
   );

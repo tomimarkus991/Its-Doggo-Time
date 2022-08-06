@@ -16,9 +16,10 @@ import {
   Profile,
   Register,
   ResetPassword,
+  Error,
 } from "pages";
 
-import { DefaultLayoutRoute, DefaultPrivateLayoutRoute } from "../elements";
+import { DefaultLayoutRoute, DefaultPrivateLayoutRoute } from "components";
 
 export const Router = () => {
   const root = document.documentElement;
@@ -43,19 +44,19 @@ export const Router = () => {
 
   return (
     <Routes>
-      <Route path="/" element={Home} />
-      <DefaultLayoutRoute path="/login" element={Login} />
-      <DefaultLayoutRoute path="/register" element={Register} />
-      <DefaultLayoutRoute path="/forgot-password" element={ForgotPassword} />
-      <DefaultLayoutRoute path="/reset-password" element={ResetPassword} />
-      <DefaultPrivateLayoutRoute path="/profile" element={Profile} />
-      <DefaultPrivateLayoutRoute path="/group/create-group" element={CreateGroup} />
-      <DefaultPrivateLayoutRoute exact path="/group/:group_id" element={GroupPage} />
-      <DefaultPrivateLayoutRoute exact path="/group/:group_id/members" element={Members} />
-      <DefaultPrivateLayoutRoute exact path="/group/:group_id/add-log" element={AddLog} />
-      <DefaultPrivateLayoutRoute exact path="/group/:group_id/summary" element={LogsSummary} />
-      <DefaultPrivateLayoutRoute exact path="/group/:group_id/log/:log_id" element={EditLog} />
-      <DefaultLayoutRoute element={Error} />
+      <Route path="/" element={<Home />} />
+      <DefaultLayoutRoute path="/login" element={<Login />} />
+      <DefaultLayoutRoute path="/register" element={<Register />} />
+      <DefaultLayoutRoute path="/forgot-password" element={<ForgotPassword />} />
+      <DefaultLayoutRoute path="/reset-password" element={<ResetPassword />} />
+      <DefaultPrivateLayoutRoute path="/profile" element={<Profile />} />
+      <DefaultPrivateLayoutRoute path="/group/create-group" element={<CreateGroup />} />
+      <DefaultPrivateLayoutRoute exact path="/group/:group_id" element={<GroupPage />} />
+      <DefaultPrivateLayoutRoute exact path="/group/:group_id/members" element={<Members />} />
+      <DefaultPrivateLayoutRoute exact path="/group/:group_id/add-log" element={<AddLog />} />
+      <DefaultPrivateLayoutRoute exact path="/group/:group_id/summary" element={<LogsSummary />} />
+      <DefaultPrivateLayoutRoute exact path="/group/:group_id/log/:log_id" element={<EditLog />} />
+      <DefaultLayoutRoute element={<Error />} />
     </Routes>
   );
 };

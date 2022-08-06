@@ -14,9 +14,9 @@ export const RealButton = ({
     <button
       type={type}
       className={clsx(
-        "m-0 max-h-[4rem] font-medium tracking-wider text-center rounded-2xl border-b-[6px]",
+        "m-0 max-h-[4rem] rounded-2xl border-b-[6px] text-center font-medium tracking-wider",
         "transition-all duration-300 hover:-translate-y-[0.15rem]",
-        "active:duration-75 active:translate-y-[0.2rem]",
+        "active:translate-y-[0.2rem] active:duration-75",
         realButtonVariants[variant],
         realButtonSizes[size],
         className

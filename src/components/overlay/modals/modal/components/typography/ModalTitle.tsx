@@ -6,7 +6,7 @@ interface Props {
 
 export const ModalTitle = ({ children }: Props) => {
   return (
-    <h3 className="text-lg font-medium leading-6 text-center text-gray-700 uppercase">
+    <h3 className="text-center text-lg font-medium uppercase leading-6 text-gray-700">
       {children}
     </h3>
   );

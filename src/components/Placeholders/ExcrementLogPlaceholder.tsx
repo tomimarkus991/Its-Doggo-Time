@@ -1,6 +1,6 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
 
-import { DefaultExcrementIcon } from "../Icons";
+import { DefaultExcrementIcon } from "components";
 
 export const ExcrementLogPlaceholder = () => {
   return (

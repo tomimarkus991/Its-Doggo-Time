@@ -1,12 +1,12 @@
 import { Route } from "react-router-dom";
 
-import BasicDefaultLayout from "../Layouts/BasicDefaultLayout";
+import { BasicDefaultLayout } from "components";
 
 export const DefaultLayoutRoute = ({ component: Component, ...rest }: any) => {
   return (
     <Route
       {...rest}
-      render={props => (
+      render={(props: any) => (
         <BasicDefaultLayout>
           <Component {...props} />
         </BasicDefaultLayout>

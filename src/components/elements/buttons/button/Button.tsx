@@ -53,10 +53,10 @@ export const Button = ({
       <button
         type={type}
         className={clsx(
-          `m-0 font-medium tracking-wider text-center uppercase rounded-2xl select-none`,
+          `m-0 select-none rounded-2xl text-center font-medium uppercase tracking-wider`,
           variants[variant],
           sizes[size],
-          !isValid && "opacity-50 cursor-not-allowed",
+          !isValid && "cursor-not-allowed opacity-50",
           className,
           variant === "custom" && customColors
         )}

@@ -2,7 +2,7 @@ import { Box, HStack } from "@chakra-ui/react";
 
 import { useLogsView, ViewType } from "context";
 
-import { ExcrementViewIcon, FoodViewIcon } from "../Icons";
+import { ExcrementViewIcon, FoodViewIcon } from "components";
 
 export const ChangeLogsView = () => {
   const { setView } = useLogsView();

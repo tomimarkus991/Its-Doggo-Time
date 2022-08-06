@@ -1,17 +1,16 @@
 import { Box, IconButton, SimpleGrid } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useAuth } from "context";
 
-import { useMembersPlaceholder } from "hooks/placeholders";
 import { useFetchGroupData } from "hooks";
+
+import { PenButton, MemberCard, MainContainerLayout, CheckIcon, ProfileIcon } from "components";
+
+import { useMembersPlaceholder } from "hooks/placeholders";
 import { MemberType } from "types";
 
-import { PenButton } from "../Buttons";
-import { MemberCard } from "../Cards";
-import { CheckIcon, ProfileIcon } from "../Icons";
-import { MainContainerLayout } from "../Layouts";
 import { AddNewMemberModal } from "../Modals";
 
 interface Props {

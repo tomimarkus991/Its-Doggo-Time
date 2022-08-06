@@ -1,11 +1,10 @@
 import { Button, Flex } from "@chakra-ui/react";
 
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useAuth } from "context";
 
-import { useLeaveGroup } from "hooks";
-import { useFetchGroupData } from "hooks";
+import { useLeaveGroup, useFetchGroupData } from "hooks";
 
 interface Props {
   group_id: string;
@@ -13,12 +12,12 @@ interface Props {
 
 export const LeaveGroupButton = ({ group_id }: Props) => {
   const { user } = useAuth();
-  const router = useHistory();
+  const navigate = useNavigate();
   const { mutate, isSuccess } = useLeaveGroup(user?.id, group_id);
   const { data } = useFetchGroupData(group_id);
 
   if (isSuccess) {
-    router.push("/");
+    navigate("/");
   }
 
   return (

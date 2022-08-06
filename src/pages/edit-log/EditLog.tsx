@@ -13,12 +13,8 @@ import {
   ProfileAndMyGroups,
 } from "components";
 
-interface RouteParams {
-  group_id: string;
-}
-
 export const EditLog = () => {
-  const { group_id } = useParams<RouteParams>();
+  const { group_id } = useParams() as { group_id: string };
   const { view } = useLogsView();
 
   return (

@@ -2,8 +2,7 @@ import { VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { MembersIcon } from "../Icons";
-import { LinkLabel } from "../Text";
+import { MembersIcon, LinkLabel } from "components";
 
 interface Props {
   group_id: string;

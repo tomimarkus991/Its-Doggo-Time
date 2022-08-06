@@ -12,16 +12,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useColors } from "hooks";
+import { useColors, useInviteUser, useFetchGroupData } from "hooks";
 
-import { useInviteUser } from "hooks";
-import { useFetchGroupData } from "hooks";
-
-import { GradientButton } from "../Buttons";
-import { AddMemberIcon } from "../Icons";
-import { GradientButtonText } from "../Text";
+import { GradientButton, AddMemberIcon, GradientButtonText } from "components";
 
 interface Props {
   group_id: string;
@@ -89,7 +84,7 @@ export const AddNewMemberModal = ({ group_id }: Props) => {
               borderRadius={20}
               size="lg"
               fontSize="2xl"
-              onChange={e => setInviteReceiver(e.target.value)}
+              onChange={(e: any) => setInviteReceiver(e.target.value)}
             />
           </ModalBody>
 

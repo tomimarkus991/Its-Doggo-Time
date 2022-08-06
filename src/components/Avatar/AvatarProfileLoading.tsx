@@ -1,6 +1,6 @@
 import { Center } from "@chakra-ui/react";
 
-import { DefaultSpinner } from "../Spinners";
+import { DefaultSpinner } from "components";
 
 export const AvatarProfileLoading = () => {
   return (

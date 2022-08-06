@@ -1,13 +1,10 @@
 import { Center, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 
-import useGroupsPlaceholder from "hooks/placeholders/useGroupsPlaceholder";
-import { useUser } from "hooks";
-import { GroupType } from "types";
+import { useUser, useGroupsPlaceholder } from "hooks";
 
-import { CreateGroupContainerButton } from "../Buttons";
-import { GroupCard } from "../Cards";
-import { DogPaw } from "../Icons";
-import { MainContainerLayout } from "../Layouts";
+import { CreateGroupContainerButton, GroupCard, MainContainerLayout, DogPaw } from "components";
+
+import { GroupType } from "types";
 
 export const GroupsContainer = () => {
   const { data, isLoading } = useUser();

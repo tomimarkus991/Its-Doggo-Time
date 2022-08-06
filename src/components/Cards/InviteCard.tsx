@@ -1,9 +1,8 @@
 import { Box, Center, Text } from "@chakra-ui/react";
 
-import { InviteDataType } from "types";
+import { EditButtons, AvatarInvite } from "components";
 
-import { AvatarInvite } from "../Avatar";
-import EditButtons from "../Buttons/EditButtons";
+import { InviteDataType } from "types";
 
 interface Props {
   invite: InviteDataType;

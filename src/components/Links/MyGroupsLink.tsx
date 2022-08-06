@@ -2,8 +2,7 @@ import { VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { MyGroupsIcon } from "../Icons";
-import { LinkLabel } from "../Text";
+import { MyGroupsIcon, LinkLabel } from "components";
 
 export const MyGroupsLink = () => {
   return (

@@ -1,6 +1,10 @@
 import { SimpleGrid } from "@chakra-ui/react";
 
-export const LogGrid = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const LogGrid = ({ children }: Props) => {
   return (
     <SimpleGrid
       id="LogGrid"

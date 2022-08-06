@@ -1,8 +1,12 @@
 import { Flex, Spacer } from "@chakra-ui/react";
 
-import { DoggoIcon } from "../Icons";
+import { DoggoIcon } from "components";
 
-export const HeaderAvatar = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const HeaderAvatar = ({ children }: Props) => {
   return (
     <Flex
       id="HeaderAvatar"

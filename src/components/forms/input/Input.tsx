@@ -51,7 +51,7 @@ export const Input = ({
       )}
       {inputPrefix ? (
         <div className="relative">
-          <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <span className="text-gray-400 opacity-75 sm:text-sm">{inputPrefix}</span>
           </div>
           <input

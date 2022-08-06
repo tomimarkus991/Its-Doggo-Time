@@ -1,22 +1,21 @@
 import { useParams } from "react-router-dom";
 
-import { useFoodLogsPlaceholder } from "hooks/placeholders";
-import { useFetchFoodLogs } from "hooks";
-import { useSubscribeToFoodLogInserts } from "hooks/subcribe/useSubscribeToFoodLogInserts";
+import { useFetchFoodLogs, useFoodLogsPlaceholder, useSubscribeToFoodLogInserts } from "hooks";
+
+import {
+  AddNewLogContainerButton,
+  LogSummaryButton,
+  FoodLogCard,
+  LogGrid,
+  MainContainerLayout,
+  FoodLogPlaceholder,
+  LogEmptyPlaceholder,
+} from "components";
+
 import { FoodLogsdataType } from "types";
 
-import { AddNewLogContainerButton, LogSummaryButton } from "../Buttons";
-import { FoodLogCard } from "../Cards";
-import { LogGrid } from "../Grids";
-import { MainContainerLayout } from "../Layouts";
-import { FoodLogPlaceholder, LogEmptyPlaceholder } from "../Placeholders";
-
-interface RouteParams {
-  group_id: string;
-}
-
 export const FoodLogsContainer = () => {
-  const { group_id } = useParams<RouteParams>();
+  const { group_id } = useParams() as { group_id: string };
   const { data, isLoading } = useFetchFoodLogs(group_id);
   const { placeholders } = useFoodLogsPlaceholder(data);
 

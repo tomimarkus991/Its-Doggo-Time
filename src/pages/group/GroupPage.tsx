@@ -1,6 +1,6 @@
 import { Center, Flex, HStack, Input, VStack } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useLogsView, ViewType } from "context";
@@ -23,12 +23,8 @@ import {
   GroupNameAndAvatarMiddle,
 } from "components";
 
-interface RouteParams {
-  group_id: string;
-}
-
 export const GroupPage = () => {
-  const { group_id } = useParams<RouteParams>();
+  const { group_id } = useParams() as { group_id: string };
   const { data: user } = useUser();
   const { view } = useLogsView();
 

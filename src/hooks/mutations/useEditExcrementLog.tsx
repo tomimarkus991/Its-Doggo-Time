@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useAuth } from "context";
 
@@ -11,7 +11,7 @@ import { useToast } from "..";
 
 export const useEditExcrementLog = (group_id: string) => {
   const { user } = useAuth();
-  const router = useHistory();
+  const navigate = useNavigate();
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -60,7 +60,7 @@ export const useEditExcrementLog = (group_id: string) => {
       editExcrementLog(logData, time, log_id),
     {
       onSuccess: () => {
-        router.push(`/group/${group_id}`);
+        navigate(`/group/${group_id}`);
       },
       // Refetch after error or success:
       onSettled: () => {

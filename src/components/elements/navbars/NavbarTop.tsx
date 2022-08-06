@@ -1,5 +1,7 @@
-import { animations, AnimationWrapper } from "components";
 import { useSidebar } from "context";
+
+import { animations, AnimationWrapper } from "components";
+
 import { UserType } from "types";
 
 interface Props {
@@ -9,20 +11,20 @@ interface Props {
 export const NavbarTop = ({ user }: Props) => {
   const { setSidebarState } = useSidebar();
   return (
-    <div className="flex sticky top-0 z-[1020] items-center py-12 mb-3 w-full h-16 bg-slate-50">
-      <div className="flex flex-1 justify-between items-center px-4">
+    <div className="sticky top-0 z-[1020] mb-3 flex h-16 w-full items-center bg-slate-50 py-12">
+      <div className="flex flex-1 items-center justify-between px-4">
         <p className="text-2xl font-semibold text-gray-800">Subscriptions</p>
         <AnimationWrapper variants={animations.smallScale} keyIndex="nt-user-icon">
           <div
             role="button"
             tabIndex={0}
-            className="flex flex-row items-center cursor-pointer"
+            className="flex cursor-pointer flex-row items-center"
             onClick={() => setSidebarState("openWithOverlay")}
           >
-            {user.avatar ? (
-              <img className="w-5 h-5" alt="default pic" src={user.avatar} />
+            {user.avatar_url ? (
+              <img className="h-5 w-5" alt="default pic" src={user.avatar_url} />
             ) : (
-              <img className="w-14 h-14" alt="user" src={`/general/avatar.svg`} />
+              <img className="h-14 w-14" alt="user" src={`/general/avatar.svg`} />
             )}
           </div>
         </AnimationWrapper>

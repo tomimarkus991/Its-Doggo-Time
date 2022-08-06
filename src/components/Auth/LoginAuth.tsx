@@ -1,15 +1,13 @@
 import { Box, Flex, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
 
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import useForm, { useLogin } from "hooks";
+import { useLogin, useForm } from "hooks";
 
-import { GradientButton } from "../Buttons";
-import { ColorMode } from "../ColorMode";
-import { GradientButtonText } from "../Text";
+import { GradientButton, GradientButtonText, ColorMode } from "components";
 
 import { OAuthSection, RerouteLoginRegister } from ".";
 
@@ -20,7 +18,7 @@ export const LoginAuth = () => {
     password: "",
   });
 
-  const router = useHistory();
+  const navigate = useNavigate();
 
   const { isSuccess, isLoading, isError, mutate } = useLogin({
     email,
@@ -29,7 +27,7 @@ export const LoginAuth = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push("/");
+      navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
@@ -69,14 +67,14 @@ export const LoginAuth = () => {
             <InputRightElement width="3rem" h="100%">
               {show ? (
                 <FontAwesomeIcon
-                  icon={faEye}
+                  icon="eye"
                   onClick={() => setShow(!show)}
                   cursor="pointer"
                   color="#2A2828"
                 />
               ) : (
                 <FontAwesomeIcon
-                  icon={faEyeSlash}
+                  icon="eye-slash"
                   onClick={() => setShow(!show)}
                   cursor="pointer"
                   color="#2A2828"

@@ -1,8 +1,8 @@
 export interface UserType {
   id: string;
-  email: string;
   username: string;
-  avatar: string | null;
+  avatar_url: string;
+  groups: GroupType[];
 }
 
 export interface SelectOption {
@@ -27,13 +27,6 @@ export type AvatarIconType = React.ReactElement<any, string | React.JSXElementCo
 
 export type StringOrUndefined = string | undefined;
 export type BooleanOrUndefined = boolean | undefined;
-
-export interface UserType {
-  id: string;
-  username: string;
-  avatar_url: string;
-  groups: GroupType[];
-}
 
 export interface GroupType {
   id: string;

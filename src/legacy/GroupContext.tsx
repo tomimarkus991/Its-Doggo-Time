@@ -1,6 +1,6 @@
 import { createContext, useState, Dispatch, SetStateAction, useContext } from "react";
 
-import { GroupType, MemberType } from "../../../src/types";
+import { GroupType, MemberType } from "types";
 
 type InitialContextType = {
   groupname: string;

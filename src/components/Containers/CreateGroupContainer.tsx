@@ -1,14 +1,12 @@
 import { Box, IconButton, Input, VStack } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useCreateGroup, useUser } from "hooks";
 
-import { GroupType } from "types";
+import { MainContainerLayout, AddLogCheckboxIcon, AvatarUpload } from "components";
 
-import { AvatarUpload } from "../Avatar";
-import { AddLogCheckboxIcon } from "../Icons";
-import { MainContainerLayout } from "../Layouts";
+import { GroupType } from "types";
 
 export const CreateGroupContainer = () => {
   const [groupname, setGroupname] = useState("");

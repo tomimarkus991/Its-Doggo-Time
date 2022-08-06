@@ -2,9 +2,9 @@ import { Center } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { ExcrementLogsdataType } from "types";
+import { PeeAndPoopIcon, PeeIcon, PoopIcon } from "components";
 
-import { PeeAndPoopIcon, PeeIcon, PoopIcon } from "../Icons";
+import { ExcrementLogsdataType } from "types";
 
 import { CardDateText } from ".";
 

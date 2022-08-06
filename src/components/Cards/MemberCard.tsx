@@ -2,9 +2,8 @@ import { DeleteIcon } from "@chakra-ui/icons";
 
 import { IconButton, Text, VStack } from "@chakra-ui/react";
 
-import { useColors } from "hooks";
+import { useColors, useRemoveGroupMember } from "hooks";
 
-import { useRemoveGroupMember } from "hooks";
 import { MemberType, StringOrUndefined } from "types";
 
 import { ProfileAvatarCard } from ".";

@@ -1,5 +1,4 @@
-import { Avatar } from "../Avatar";
-import { GroupAvatarIcon } from "../Icons";
+import { GroupAvatarIcon, Avatar } from "components";
 
 interface Props {
   path: string | undefined;

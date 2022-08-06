@@ -1,11 +1,10 @@
 import { Center } from "@chakra-ui/react";
 
-import { Redirect, Route } from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 
 import { useUser } from "hooks";
 
-import DefaultLayout from "../Layouts/DefaultLayout";
-import { DefaultSpinner } from "../Spinners";
+import { DefaultLayout, DefaultSpinner } from "components";
 
 export const DefaultPrivateLayoutRoute = ({ component: Component, ...rest }: any) => {
   const { isLoading, isError } = useUser();
@@ -22,11 +21,11 @@ export const DefaultPrivateLayoutRoute = ({ component: Component, ...rest }: any
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props: any) =>
         // If Error redirect to the login page
         // Otherwise, render the page
         isError ? (
-          <Redirect to="/login" />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         ) : (
           <DefaultLayout>
             <Component {...props} />

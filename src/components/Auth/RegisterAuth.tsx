@@ -1,15 +1,11 @@
 import { Box, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
 
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 import { useForm, useCreateUser } from "hooks";
 
-import SignUpAlert from "../Alerts/SignUpAlert";
-import { GradientButton } from "../Buttons";
-import { ColorMode } from "../ColorMode";
-import { GradientButtonText } from "../Text";
+import { GradientButton, GradientButtonText, SignUpAlert, ColorMode } from "components";
 
 import { OAuthSection, RerouteLoginRegister } from ".";
 
@@ -79,14 +75,14 @@ export const RegisterAuth = () => {
               <InputRightElement id="input roigs" width="3rem" h="100%">
                 {show ? (
                   <FontAwesomeIcon
-                    icon={faEye}
+                    icon="eye"
                     onClick={() => setShow(!show)}
                     cursor="pointer"
                     color="#2A2828"
                   />
                 ) : (
                   <FontAwesomeIcon
-                    icon={faEyeSlash}
+                    icon="eye-slash"
                     onClick={() => setShow(!show)}
                     cursor="pointer"
                     color="#2A2828"

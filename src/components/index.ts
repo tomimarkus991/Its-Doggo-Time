@@ -7,7 +7,6 @@ export * from "./overlay";
 
 // doggotime
 
-export * from "./Alerts";
 export * from "./Auth";
 export * from "./Avatar";
 export * from "./Buttons";

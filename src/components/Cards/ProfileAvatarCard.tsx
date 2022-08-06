@@ -1,5 +1,5 @@
-import { Avatar } from "../Avatar";
-import { ProfileAvatarIcon } from "../Icons";
+import { ProfileAvatarIcon, Avatar } from "components";
+
 interface Props {
   src: string;
 }

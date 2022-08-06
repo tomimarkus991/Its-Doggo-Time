@@ -1,28 +1,28 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-
 import { ChakraProvider } from "@chakra-ui/react";
 
 import MomentUtils from "@date-io/moment";
 import "@fontsource/viga";
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { ThemeProvider } from "@material-ui/styles";
 import type {} from "@mui/lab/themeAugmentation";
 import "moment/locale/et";
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
+
+import {
+  AuthDetailsProvider,
+  LogsDetailsProvider,
+  LogsViewProvider,
+  SidebarProvider,
+} from "context";
+
 import { Router } from "routes";
-
-import { SidebarProvider } from "context";
-
-import { AuthDetailsProvider, LogsDetailsProvider, LogsViewProvider } from "../context";
-import "../index.css";
-import { theme } from "../../doggotime/src/styles/theme";
+import { theme } from "styles";
+import "styles/index.css";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
@@ -45,7 +45,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const materialTheme = createMuiTheme({
+const materialTheme = createTheme({
   palette: {
     primary: {
       main: "#DDCDBF",

@@ -1,4 +1,4 @@
-import { ProfileAvatarIcon } from "../Icons";
+import { ProfileAvatarIcon } from "components";
 
 import { Avatar } from ".";
 interface Props {

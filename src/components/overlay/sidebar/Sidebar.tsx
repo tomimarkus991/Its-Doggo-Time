@@ -4,9 +4,11 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { AnimationWrapper, ExpandedSidebarContent, SmallSidebarContent } from "components";
 import { useSidebar } from "context";
+
 import { useIsMobile } from "hooks";
+
+import { AnimationWrapper, ExpandedSidebarContent, SmallSidebarContent } from "components";
 
 export const Sidebar = () => {
   const { sidebarState, setSidebarState, placement } = useSidebar();
@@ -56,7 +58,7 @@ export const Sidebar = () => {
                 opacity: 0,
               }}
               className={clsx(
-                "flex fixed top-0 z-[1030] flex-col w-80 h-full bg-white",
+                "fixed top-0 z-[1030] flex h-full w-80 flex-col bg-white",
                 placement === "right" ? "right-0" : "left-0"
               )}
             >
@@ -74,7 +76,7 @@ export const Sidebar = () => {
               transition={{ duration: 0.4, ease: "linear" }}
               exit={{ opacity: 0 }}
               onClick={() => setSidebarState(isMobile ? "closed" : "small")}
-              className="absolute inset-0 z-[1029] w-full h-[100vh] bg-gray-500"
+              className="absolute inset-0 z-[1029] h-[100vh] w-full bg-gray-500"
             />
           </>
         )}
@@ -104,7 +106,7 @@ export const Sidebar = () => {
               stiffness: 300,
             },
           }}
-          className={clsx("flex flex-col w-72 h-[100vh] bg-white shadow-lg")}
+          className={clsx("flex h-[100vh] w-72 flex-col bg-white shadow-lg")}
         >
           <ExpandedSidebarContent />
         </AnimationWrapper>
@@ -128,7 +130,7 @@ export const Sidebar = () => {
                 stiffness: 150,
               },
             }}
-            className={clsx("flex sticky z-[998] flex-col w-24 h-[100vh] bg-white shadow-lg")}
+            className={clsx("sticky z-[998] flex h-[100vh] w-24 flex-col bg-white shadow-lg")}
           >
             <SmallSidebarContent />
           </AnimationWrapper>

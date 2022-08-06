@@ -2,9 +2,7 @@ import { Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import GradientButton from "../Buttons/GradientButton";
-import { DoggoIcon } from "../Icons";
-import { GradientButtonText } from "../Text";
+import { GradientButton, DoggoIcon, GradientButtonText } from "components";
 
 export const LoggedOut = () => {
   return (

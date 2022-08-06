@@ -2,9 +2,9 @@ import { Box, Flex, FormLabel } from "@chakra-ui/react";
 
 import { useUploadAvatar } from "hooks";
 
-import { StringOrUndefined } from "types";
+import { AddAvatarIcon } from "components";
 
-import { AddAvatarIcon } from "../Icons";
+import { StringOrUndefined } from "types";
 
 import { AvatarGroup, AvatarGroupLoading, AvatarProfile, AvatarProfileLoading } from ".";
 

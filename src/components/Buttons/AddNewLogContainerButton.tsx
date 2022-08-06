@@ -2,7 +2,7 @@ import { Box, IconButton } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { AddLogIcon } from "../Icons";
+import { AddLogIcon } from "components";
 
 interface Props {
   group_id: string;

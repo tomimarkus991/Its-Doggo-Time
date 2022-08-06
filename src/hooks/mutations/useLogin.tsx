@@ -7,7 +7,7 @@ import { supabase } from "utils";
 export const useLogin = ({ email, password }: { email: string; password: string }) => {
   const { showErrorToast } = useToast();
   const login = async () => {
-    const { data, error } = await supabase.auth.signIn({
+    const { data, error }: any = await supabase.auth.signIn({
       email,
       password,
     });

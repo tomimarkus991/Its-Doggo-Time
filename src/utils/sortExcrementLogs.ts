@@ -1,4 +1,4 @@
-import { ExcrementLogsdataType } from "../../../src/types";
+import { ExcrementLogsdataType } from "types";
 
 type SortLogsType = {
   oldData: any;

@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
 import { Link as RouterLink } from "react-router-dom";
 
-import { HeaderBackground, DoggoIcon } from "../Icons";
+import { HeaderBackground, DoggoIcon } from "components";
 
 export const Header = () => {
   return (

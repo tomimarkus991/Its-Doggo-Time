@@ -2,8 +2,7 @@ import { VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { ProfileIcon } from "../Icons";
-import { LinkLabel } from "../Text";
+import { ProfileIcon, LinkLabel } from "components";
 
 export const ProfileLink = () => {
   return (

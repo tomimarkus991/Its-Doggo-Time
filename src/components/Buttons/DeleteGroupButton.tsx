@@ -1,8 +1,9 @@
 import { Button, Flex } from "@chakra-ui/react";
 
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useDeleteGroup } from "hooks";
+
 import { StringOrUndefined } from "types";
 
 interface Props {
@@ -13,11 +14,11 @@ interface Props {
 }
 
 export const DeleteGroupButton = ({ user_id, group_id, creator_id, isEditable }: Props) => {
-  const router = useHistory();
+  const navigate = useNavigate();
   const { mutate, isSuccess } = useDeleteGroup(group_id);
 
   if (isSuccess) {
-    router.push("/");
+    navigate("/");
   }
 
   return (

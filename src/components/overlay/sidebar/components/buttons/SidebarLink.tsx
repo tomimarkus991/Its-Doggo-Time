@@ -4,8 +4,9 @@ import clsx from "clsx";
 import { HTMLProps, ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
-import { animations, AnimationWrapper } from "components";
 import { useSidebar } from "context";
+
+import { animations, AnimationWrapper } from "components";
 
 interface SidebarItemProps {
   icon: ReactNode;
@@ -28,7 +29,7 @@ const Content = ({ children, icon, isActive }: ContentProps) => {
       whileTap="whileTap"
       className={clsx(
         isActive ? "bg-slate-800 hover:bg-slate-900" : "hover:bg-slate-100",
-        "group flex items-center py-3 px-5 rounded-md cursor-pointer"
+        "group flex cursor-pointer items-center rounded-md py-3 px-5"
       )}
     >
       <AnimationWrapper

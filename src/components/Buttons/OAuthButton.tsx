@@ -1,11 +1,10 @@
-import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Provider } from "@supabase/gotrue-js";
 
 import { useOAuth } from "hooks";
 
 interface Props {
-  icon: IconDefinition;
+  icon: any;
   provider: Provider;
 }
 

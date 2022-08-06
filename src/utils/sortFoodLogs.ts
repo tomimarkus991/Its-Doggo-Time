@@ -1,4 +1,4 @@
-import { FoodLogsdataType } from "../../../src/types";
+import { FoodLogsdataType } from "types";
 
 type SortLogsType = {
   oldData: any;

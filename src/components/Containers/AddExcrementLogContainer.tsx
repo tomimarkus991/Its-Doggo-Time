@@ -5,17 +5,12 @@ import { useParams } from "react-router-dom";
 
 import { useAddExcrementLog } from "hooks";
 
-import { EditOrAddLogContainerButton } from "../Buttons";
-import { CheckboxCard } from "../Cards";
-import { MainContainerLayout } from "../Layouts";
+import { EditOrAddLogContainerButton, CheckboxCard, MainContainerLayout } from "components";
+
 import { DefaultTimePicker } from "../TimePicker";
 
-interface RouteParams {
-  group_id: string;
-}
-
 export const AddExcrementLogContainer = () => {
-  const { group_id } = useParams<RouteParams>();
+  const { group_id } = useParams() as { group_id: string };
 
   const [logData, setLogData] = useState<any>([]);
   const [time, setTime] = useState(new Date());

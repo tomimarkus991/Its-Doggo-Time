@@ -1,4 +1,4 @@
-import { GroupAvatarIcon } from "../Icons";
+import { GroupAvatarIcon } from "components";
 
 import { Avatar } from ".";
 

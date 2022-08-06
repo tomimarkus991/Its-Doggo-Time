@@ -13,12 +13,8 @@ import {
   ProfileAndMyGroups,
 } from "components";
 
-interface RouteParams {
-  group_id: string;
-}
-
 export const Members = () => {
-  const { group_id } = useParams<RouteParams>();
+  const { group_id } = useParams() as { group_id: string };
 
   return (
     <MainLayout

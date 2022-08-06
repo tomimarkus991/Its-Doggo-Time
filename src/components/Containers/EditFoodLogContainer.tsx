@@ -1,25 +1,18 @@
 import { Center, Flex, useCheckboxGroup, VStack } from "@chakra-ui/react";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useLogs } from "context";
 
-import { useEditFoodLog } from "hooks";
-import { useFetchFoodLog } from "hooks";
+import { useEditFoodLog, useFetchFoodLog } from "hooks";
 
-import { EditOrAddLogContainerButton } from "../Buttons";
-import { CheckboxCard } from "../Cards";
-import { MainContainerLayout } from "../Layouts";
+import { EditOrAddLogContainerButton, CheckboxCard, MainContainerLayout } from "components";
+
 import { DefaultTimePicker } from "../TimePicker";
 
-interface RouteParams {
-  group_id: string;
-  log_id: string;
-}
-
 export const EditFoodLogContainer = () => {
-  const { group_id, log_id } = useParams<RouteParams>();
+  const { group_id, log_id } = useParams() as { group_id: string; log_id: string };
 
   const { logCheckboxData: logData, setLogCheckboxData: setLogData, time, setTime } = useLogs();
 

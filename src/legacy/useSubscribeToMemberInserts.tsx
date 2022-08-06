@@ -1,9 +1,9 @@
-// @ts-nocheck
 import { useEffect } from "react";
 
-import { useGroup } from "../../../src/context";
-import { MemberType } from "../../../src/types";
-import { supabase } from "../utils";
+import { supabase } from "utils";
+
+import { useGroup } from "legacy/GroupContext";
+import { MemberType } from "types";
 
 export const useSubscribeToMemberInserts = (group_id: string) => {
   const { setMembers } = useGroup();

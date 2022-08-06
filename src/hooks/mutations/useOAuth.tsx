@@ -9,7 +9,7 @@ export const useOAuth = (provider: Provider) => {
   const { showErrorToast } = useToast();
 
   const OAuth = async () => {
-    const { data, error } = await supabase.auth.signIn({
+    const { data, error }: any = await supabase.auth.signIn({
       provider,
     });
 

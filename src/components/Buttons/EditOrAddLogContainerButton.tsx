@@ -1,6 +1,6 @@
 import { Box, IconButton } from "@chakra-ui/react";
 
-import { AddLogCheckboxIcon } from "../Icons";
+import { AddLogCheckboxIcon } from "components";
 
 interface Props {
   logData: any;

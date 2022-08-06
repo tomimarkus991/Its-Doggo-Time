@@ -1,6 +1,6 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
 
-import { DefaultFoodIcon } from "../Icons";
+import { DefaultFoodIcon } from "components";
 
 export const FoodLogPlaceholder = () => {
   return (

@@ -2,7 +2,7 @@ import { Box, IconButton } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { AddGroupIcon } from "../Icons";
+import { AddGroupIcon } from "components";
 
 interface Props {
   isAddDoggoGroupDisabled: boolean;

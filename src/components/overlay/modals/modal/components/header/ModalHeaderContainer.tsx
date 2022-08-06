@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const ModalHeaderContainer = ({ children }: Props) => {
-  return <div className="flex flex-row justify-between items-center p-4 w-full">{children}</div>;
+  return <div className="flex w-full flex-row items-center justify-between p-4">{children}</div>;
 };

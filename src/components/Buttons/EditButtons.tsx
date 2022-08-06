@@ -1,6 +1,6 @@
 import { ButtonGroup, ButtonGroupProps, IconButton } from "@chakra-ui/react";
 
-import { CheckIcon, CrossIcon } from "../Icons";
+import { CheckIcon, CrossIcon } from "components";
 
 interface Props {
   onCrossClick: () => void;

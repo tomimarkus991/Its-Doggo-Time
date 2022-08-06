@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useAuth } from "context";
 
@@ -16,7 +16,7 @@ interface AddLogType {
 
 export const useAddFoodLog = (group_id: string) => {
   const { user } = useAuth();
-  const router = useHistory();
+  const navigate = useNavigate();
   const { showErrorToast } = useToast();
   const queryClient = useQueryClient();
 
@@ -61,7 +61,7 @@ export const useAddFoodLog = (group_id: string) => {
           return sortFoodLogs({ oldData, newLog });
         });
 
-        router.push(`/group/${group_id}`);
+        navigate(`/group/${group_id}`);
 
         return { previousLogs };
       },

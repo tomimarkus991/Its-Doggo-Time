@@ -1,6 +1,6 @@
 import { createContext, useState, Dispatch, SetStateAction, useContext } from "react";
 
-import { InviteDataType } from "../../../src/types";
+import { InviteDataType } from "types";
 
 type InitialContextType = {
   username: string;

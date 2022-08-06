@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Spacer } from "@chakra-ui/react";
 
 import { Link as RouterLink } from "react-router-dom";
 
-import { HeaderBackground, HeaderBackgroundSmall } from "../Icons";
+import { HeaderBackground, HeaderBackgroundSmall } from "components";
 
 export const Header2 = () => {
   return (
