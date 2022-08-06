@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@layer base {
+  p {
+    @apply text-gray-800;
+  }
+  span {
+    @apply text-gray-800;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    @apply mr-3 w-8 h-8 fill-gray-800;
+  }
+
+  /* IE and Edge */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-styles {
+    /* @apply scrollbar-none no-scrollbar scrollbar-thumb-slate-500 scrollbar-track-gray-100 active:scrollbar-thumb-slate-600; */
+    @apply scrollbar-hide;
+  }
+  .input-error {
+    @apply border-2 border-red-300 caret-red-400 focus:outline-none focus:border-red-500;
+  }
+  .gradient-border-example {
+    @apply border-4 border-transparent border-solid border-gradient-br-light-green-white;
+  }
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  /* font-family: blakely, sans-serif;
+  font-weight: 300;
+  font-style: normal; */
+  scrollbar-width: "auto"; /* "auto" or "thin" */
+  scrollbar-color: dark; /* scroll thumb and track */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#group::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#group {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
