@@ -11,7 +11,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { BrowserRouter } from "react-router-dom";
 
 import {
   AuthDetailsProvider,
@@ -76,9 +75,7 @@ root.render(
               <LogsViewProvider>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
                   <SidebarProvider>
-                    <BrowserRouter>
-                      <Router />
-                    </BrowserRouter>
+                    <Router />
                   </SidebarProvider>
                 </MuiPickersUtilsProvider>
               </LogsViewProvider>

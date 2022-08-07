@@ -1,2 +1,2 @@
-export * from "./DefaultLayoutRoute";
-export * from "./DefaultPrivateLayoutRoute";
+export * from "./PrivateLayoutRoutes";
+export * from "./LayoutRoutes";

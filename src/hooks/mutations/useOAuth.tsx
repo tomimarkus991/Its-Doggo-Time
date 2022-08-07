@@ -7,11 +7,13 @@ import { useToast } from "..";
 
 export const useOAuth = (provider: Provider) => {
   const { showErrorToast } = useToast();
-
   const OAuth = async () => {
-    const { data, error }: any = await supabase.auth.signIn({
-      provider,
-    });
+    const { data, error }: any = await supabase.auth.signIn(
+      {
+        provider,
+      },
+      { redirectTo: window.location.origin }
+    );
 
     if (error) {
       showErrorToast({

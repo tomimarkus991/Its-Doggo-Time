@@ -34,10 +34,13 @@ export const useCreateUser = (user: User) => {
     }
 
     // sign user up
-    const { user: signUpData, error: signUpError } = await supabase.auth.signUp({
-      email: user.email,
-      password: user.password,
-    });
+    const { user: signUpData, error: signUpError } = await supabase.auth.signUp(
+      {
+        email: user.email,
+        password: user.password,
+      },
+      { redirectTo: window.location.origin }
+    );
     // when error, throw it
     if (signUpError) {
       showErrorToast({
