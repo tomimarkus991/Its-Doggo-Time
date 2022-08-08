@@ -16,17 +16,17 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@layer base {
+/* @layer base {
   p {
     @apply text-gray-800;
   }
   span {
     @apply text-gray-800;
   }
-}
+} */
 
 @layer components {
-  .sidebar-link {
+  /* .sidebar-link {
     @apply mr-3 w-8 h-8 fill-gray-800;
   }
 
@@ -48,8 +48,7 @@ input[type="number"] {
 }
 
 html,
-body,
-#__next {
+body {
   height: 100%;
   /* font-family: blakely, sans-serif;
   font-weight: 300;
