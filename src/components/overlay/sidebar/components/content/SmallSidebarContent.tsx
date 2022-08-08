@@ -11,7 +11,7 @@ export const SmallSidebarContent = () => {
     <div className="flex h-full flex-col justify-between py-6 px-3">
       <div className={clsx("flex flex-col items-center justify-center")}>
         <div className="min-h-[3.5rem] min-w-[3.5rem]">
-          <img className="h-14 w-14" src={`/icons/favicon.svg`} alt="icon" />
+          <img className="h-14 w-14" src={`/icons/favicon.png`} alt="icon" />
         </div>
         <div className="mt-6 mb-4">
           <button
