@@ -1,6 +1,6 @@
 import { Box, Flex, Input, InputGroup, InputRightElement, Text, VStack } from "@chakra-ui/react";
 
-// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -67,14 +67,16 @@ export const LoginAuth = () => {
             <InputRightElement width="3rem" h="100%">
               {show ? (
                 <FontAwesomeIcon
-                  icon="eye"
+                  // @ts-ignore
+                  icon={faEye}
                   onClick={() => setShow(!show)}
                   cursor="pointer"
                   color="#2A2828"
                 />
               ) : (
                 <FontAwesomeIcon
-                  icon="eye-slash"
+                  // @ts-ignore
+                  icon={faEyeSlash}
                   onClick={() => setShow(!show)}
                   cursor="pointer"
                   color="#2A2828"
