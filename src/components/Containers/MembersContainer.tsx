@@ -43,15 +43,30 @@ export const MembersContainer = ({ group_id }: Props) => {
         spacingY={6}
         spacingX={{ base: 10, sm: 8, sm2: 10, md: 6 }}
       >
-        {data?.profiles?.map((member: MemberType, index: number) => (
-          <MemberCard
-            key={index}
-            member={member}
-            isEditable={isEditable}
-            group_id={group_id}
-            creator_id={data?.creator_id}
-          />
-        ))}
+        {data?.profiles?.length == undefined ? (
+          <>
+            <MemberCard
+              key={1}
+              member={data?.profiles as any}
+              isEditable={isEditable}
+              group_id={group_id}
+              creator_id={data?.creator_id}
+            />
+          </>
+        ) : (
+          <>
+            {data?.profiles?.map((member: MemberType, index: number) => (
+              <MemberCard
+                key={index}
+                member={member}
+                isEditable={isEditable}
+                group_id={group_id}
+                creator_id={data?.creator_id}
+              />
+            ))}
+          </>
+        )}
+
         {placeholders?.map((_, index: number) => (
           <ProfileIcon
             key={index}

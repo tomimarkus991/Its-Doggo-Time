@@ -9,7 +9,7 @@ export const useMembersPlaceholder = (members: MemberType[] | undefined) => {
     const getPlaceholders = () => {
       const max = 6;
       if (!members) return;
-      const _placeholders = max - members.length;
+      const _placeholders = max - members.length || 5;
 
       const placeholderArray: string[] = [];
 

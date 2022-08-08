@@ -17,6 +17,7 @@ import {
   Register,
   ResetPassword,
   Error,
+  // Error,
 } from "pages";
 
 import { LayoutRoutes, PrivateLayoutRoutes } from "components";
@@ -48,15 +49,13 @@ export const Router = () => {
         <Route path="/" element={<Home />} />
         <Route element={<PrivateLayoutRoutes />}>
           <Route path="profile" element={<Profile />} />
+          <Route path="group/:group_id/members" element={<Members />} />
           <Route path="group">
             <Route path="create-group" element={<CreateGroup />} />
-            <Route path=":group_id">
-              <Route element={<GroupPage />} />
-              <Route path="members" element={<Members />} />
-              <Route path="add-log" element={<AddLog />} />
-              <Route path="summary" element={<LogsSummary />} />
-              <Route path="log/:log_id" element={<EditLog />} />
-            </Route>
+            <Route path=":group_id" element={<GroupPage />} />
+            <Route path=":group_id/add-log" element={<AddLog />} />
+            <Route path=":group_id/summary" element={<LogsSummary />} />
+            <Route path=":group_id/log:log_id" element={<EditLog />} />
           </Route>
         </Route>
         <Route element={<LayoutRoutes />}>
